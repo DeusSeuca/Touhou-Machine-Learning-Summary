@@ -101,13 +101,13 @@ namespace CardSpace
             //Console.WriteLine("加载" + typeof(T));
             _ = CardEffectStackControl.Run();
         }
-        public void Hurt(int point, Card OriginCard)
+        public void Hurt(Card OriginCard,int point )
         {
             CardPoint = Math.Max(CardPoint - point, 0);
             Command.EffectCommand.ParticlePlay(1, transform.position);
             Command.EffectCommand.AudioEffectPlay(1);
         }
-        public void Gain(int point, Card OriginCard)
+        public void Gain( Card OriginCard,int point)
         {
             CardPoint += point;
             Command.EffectCommand.ParticlePlay(0, transform.position);

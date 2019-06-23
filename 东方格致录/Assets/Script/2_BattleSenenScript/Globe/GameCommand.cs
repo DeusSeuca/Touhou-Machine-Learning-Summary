@@ -52,7 +52,6 @@ namespace Command
             CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Fire) ? RowsInfo.GetUpCardList(RegionTypes.Fire) : new List<Card>());
             CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Wind) ? RowsInfo.GetUpCardList(RegionTypes.Wind) : new List<Card>());
             CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Soil) ? RowsInfo.GetUpCardList(RegionTypes.Soil) : new List<Card>());
-            Debug.Log(CardList.Count);
             return CardList;
         }
 

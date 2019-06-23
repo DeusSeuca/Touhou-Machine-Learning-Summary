@@ -33,6 +33,10 @@ namespace Info
         public static bool IsDiscard;
         public static bool IsCardEffectCompleted;
 
+        public static List<GameObject> ArrowList=new List<GameObject>();
+        public static bool IsArrowShow;
+        public static bool IsArrowHide;
+
         public static bool IsPlayParticle;
         public static int PlayParticleRank;
         public static Vector3 PlayParticlePos;
@@ -57,6 +61,8 @@ namespace Info
         public static SingleRowInfo SelectRegion;
         //选择的单位
         //public static Vector3 FocusPoint;
+        public static Card ArrowStartCard; 
+        public static Card ArrowEndCard;
         public static bool IsWaitForSelectUnits;
         public static List<Card> SelectUnits = new List<Card>();
         //选择的坐标

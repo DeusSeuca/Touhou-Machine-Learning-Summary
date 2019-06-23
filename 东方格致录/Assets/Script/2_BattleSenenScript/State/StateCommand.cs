@@ -222,22 +222,29 @@ namespace Command
             {
                 while (Info.GlobalBattleInfo.SelectLocation < 0) { }
             });
-            Debug.Log("选择完毕");
+            //Debug.Log("选择完毕");
             RowCommand.SetRegionSelectable(false);
             GlobalBattleInfo.IsWaitForSelectLocation = false;
         }
-        public static async Task WaitForSelecUnit(List<Card> Cards, int num)
+        public static async Task WaitForSelecUnit(Card OriginCard, List<Card> Cards, int num)
         {
             //Debug.Log("选择场上数量" + Cards.Count);
             //Debug.Log("选择场上单位" + Math.Min(Cards.Count, num));
+            Info.GlobalBattleInfo.ArrowStartCard = OriginCard;
             GlobalBattleInfo.IsWaitForSelectUnits = true;
             GameCommand.GetCardList(GameEnum.LoadRangeOnBattle.All).ForEach(card => card.IsActive = true);
             Cards.ForEach(card => card.IsActive = false);
             GlobalBattleInfo.SelectUnits.Clear();
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
+                await Task.Delay(500);
+                Command.UiCommand.SetArrowShow();
+                Debug.Log("选择单位");
                 while (Info.GlobalBattleInfo.SelectUnits.Count < Math.Min(Cards.Count, num)) { }
+                await Task.Delay(1000);
+                Command.UiCommand.SetArrowDestory();
             });
+            Debug.Log("双方数量" + Info.GlobalBattleInfo.SelectUnits.Count + ":" + Math.Min(Cards.Count, num));
             Debug.Log("选择单位完毕");
             GameCommand.GetCardList(GameEnum.LoadRangeOnBattle.All).ForEach(card => card.IsActive = false);
             GlobalBattleInfo.IsWaitForSelectUnits = false;
@@ -257,8 +264,6 @@ namespace Command
             {
                 CardBoardCommand.LoadCardList(CardIds.Cast<int>().ToList());
             }
-            Debug.Log("启动");
-
             await Task.Run(async () =>
             {
                 switch (Mode)

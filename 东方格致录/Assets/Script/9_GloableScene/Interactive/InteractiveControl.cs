@@ -77,9 +77,16 @@ namespace Control
                 {
                     GlobalBattleInfo.SelectRegion = GlobalBattleInfo.PlayerFocusRegion;
                 }
-                if (GlobalBattleInfo.IsWaitForSelectUnits&& !GlobalBattleInfo.PlayerFocusCard.IsActive)
+                if (GlobalBattleInfo.IsWaitForSelectUnits && !GlobalBattleInfo.PlayerFocusCard.IsActive)
                 {
+                    print("选择了卡片");
                     GlobalBattleInfo.SelectUnits.Add(GlobalBattleInfo.PlayerFocusCard);
+                    Command.UiCommand.SetArrowShow();
+                    //Instantiate(Info.UiInfo.Arrow).GetComponent<ArrowManager>().RefreshArrow
+                    //    (
+                    //    GlobalBattleInfo.ArrowStartCard.transform,
+                    //    GlobalBattleInfo.PlayerFocusCard.transform
+                    //    );
                 }
                 if (GlobalBattleInfo.IsWaitForSelectLocation)
                 {

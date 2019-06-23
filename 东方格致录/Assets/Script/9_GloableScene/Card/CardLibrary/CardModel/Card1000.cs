@@ -22,10 +22,14 @@ public class Card1000 : Card
     [TriggerType.Deploy]
     public Func<Task> Step3 => (async () =>
     {
-        await StateCommand.WaitForSelecUnit(GameCommand.GetCardList(LoadRangeOnBattle.My_Water).Where(card => card.CardPoint > 5).ToList(), 1);
-        Info.GlobalBattleInfo.SelectUnits.ForEach(card => card.Gain(1, this));
-        await StateCommand.WaitForSelecUnit(GameCommand.GetCardList(LoadRangeOnBattle.My_Water).Where(card => card.CardPoint < 5).ToList(), 1);
-        Info.GlobalBattleInfo.SelectUnits.ForEach(card => card.Hurt(1, this));
+        await StateCommand.WaitForSelecUnit(this, GameCommand.GetCardList(LoadRangeOnBattle.My_Water).Where(card => card.CardPoint < 5).ToList(), 2);
+        Info.GlobalBattleInfo.SelectUnits.ForEach(card => card.Gain(this, 2));
+        Info.GlobalBattleInfo.SelectUnits.Clear();
+        await StateCommand.WaitForSelecUnit(this, GameCommand.GetCardList(LoadRangeOnBattle.My_Water).Where(card => card.CardPoint < 5).ToList(), 1);
+        Info.GlobalBattleInfo.SelectUnits.ForEach(card => card.Hurt(this, 2));
+        Info.GlobalBattleInfo.SelectUnits.Clear();
+
+
         //print(Info.GlobalBattleInfo.SelectUnits.Count);
         //Info.GlobalBattleInfo.SelectUnits.ForEach(x => Debug.Log("·ûºÏµÄ¿¨Æ¬idÎª" + x.CardId));
         await Task.Delay(100);

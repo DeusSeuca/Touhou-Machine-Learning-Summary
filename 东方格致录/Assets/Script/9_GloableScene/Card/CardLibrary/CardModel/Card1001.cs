@@ -23,7 +23,7 @@ public class Card1001 : Card
         await StateCommand.WaitForSelectBoardCard(GameCommand.GetCardList(OnOther: LoadRangeOnOther.My_Hand), CardBoardMode.Select, 1);
         Info.GlobalBattleInfo.PlayerPlayCard = Info.GlobalBattleInfo.SingleSelectCardOnBoard;
         await CardCommand.PlayCard();
-        await StateCommand.WaitForSelecUnit(GameCommand.GetCardList( LoadRangeOnBattle.My_All),1);
+        await StateCommand.WaitForSelecUnit(this,GameCommand.GetCardList( LoadRangeOnBattle.My_All),1);
         await CardCommand.RebackCard();
         await Task.Delay(100);
     });

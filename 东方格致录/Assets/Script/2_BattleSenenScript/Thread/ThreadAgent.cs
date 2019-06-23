@@ -10,22 +10,43 @@ namespace Info
     public class ThreadAgent : MonoBehaviour
     {
         static int num;
-        
+
         private void Update()
         {
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsCreatCard, CreatCard);
+            InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlaySound, PlaySound);
+            InvokeInMainThread(ref Info.GlobalBattleInfo.IsArrowShow, ArrowShow);
+            InvokeInMainThread(ref Info.GlobalBattleInfo.IsArrowHide, ArrowHide);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsNotifyShow, NotifyShow);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlayParticle, PlayParticle);
-            InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlaySound, PlaySound);
-            //InvokeInMainThread(ref Info.GlobalBattleInfo.IsNotifyHide, NotifyHide);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsCardBoardShow, CardBoardShow);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsCardBoardHide, CardBoardHide);
+            InvokeInMainThread(ref Info.GlobalBattleInfo.CardBoardReload, CardBoardReload);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsCreatBoardCardActual, CreatBoardCardActual);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsCreatBoardCardVitual, CreatBoardCardVitual);
-            InvokeInMainThread(ref Info.GlobalBattleInfo.CardBoardReload, CardBoardReload);
 
         }
 
+
+
+        private void ArrowShow()
+        {
+            print("触发");
+            bool IsFirst = Info.GlobalBattleInfo.ArrowList.Count == 0;
+            GameObject NewArrow = Instantiate(Info.UiInfo.Arrow);
+            NewArrow.GetComponent<ArrowManager>().RefreshArrow(
+                GlobalBattleInfo.ArrowStartCard.transform,
+                IsFirst ? Info.UiInfo.ArrowEndPoint.transform :
+                GlobalBattleInfo.PlayerFocusCard.transform
+                );
+            Info.GlobalBattleInfo.ArrowList.Add(NewArrow);
+        }
+        private void ArrowHide()
+        {
+            Info.GlobalBattleInfo.ArrowList.ForEach(Destroy);
+            Info.GlobalBattleInfo.ArrowList.Clear();
+
+        }
         private void PlaySound()
         {
             AudioSource Source = gameObject.AddComponent<AudioSource>();
@@ -47,7 +68,7 @@ namespace Info
             Info.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
             //Info.UiInfo.NoticeBoard.SetActive(true);
         }
-        
+
         //private void NotifyHide()
         //{
         //    Info.UiInfo.NoticeBoard.SetActive(false);
@@ -106,7 +127,7 @@ namespace Info
                 NewCard.GetComponent<BoardCardInfo>().Rank = i;
                 NewCard.transform.SetParent(Info.UiInfo.Constant);
                 Texture2D texture = CardStandardInfo.Icon;
-                NewCard.GetComponent<Image>().sprite =Command.UiCommand.GetBoardCardImage(Cards[i].CardId);
+                NewCard.GetComponent<Image>().sprite = Command.UiCommand.GetBoardCardImage(Cards[i].CardId);
                 Info.UiInfo.ShowCardLIstOnBoard.Add(NewCard);
             }
             Info.UiInfo.Constant.GetComponent<RectTransform>().sizeDelta = new Vector2(Cards.Count * 325 + 200, 800);

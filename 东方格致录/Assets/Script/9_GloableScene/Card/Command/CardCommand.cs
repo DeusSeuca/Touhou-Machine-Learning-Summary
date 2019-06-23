@@ -108,7 +108,7 @@ namespace Command
         }
         public static async Task PlayCard()
         {
-            print("打出卡牌");
+            //print("打出卡牌");
             Command.EffectCommand.AudioEffectPlay(0);
             GameCommand.PlayCardLimit(true);
             Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
@@ -120,8 +120,7 @@ namespace Command
         }
         public static async Task DisCard(Card card = null)
         {
-            print("丢弃卡牌");
-
+            //print("丢弃卡牌");
             Card TargetCard = card == null ? GlobalBattleInfo.PlayerPlayCard : card;
             TargetCard.IsPrePrepareToPlay = false;
             TargetCard.Row.Remove(TargetCard);
@@ -132,7 +131,7 @@ namespace Command
         }
         public static async Task Deploy()
         {
-            print("部署一个卡牌");
+            //print("部署一个卡牌");
             //Card card = RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard[0];
             //RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard.Remove(card);
             Card card = RowsInfo.GetMyCardList(RegionTypes.Uesd)[0];

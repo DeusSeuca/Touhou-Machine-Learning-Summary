@@ -22,6 +22,8 @@ namespace Command
         }
         public static void SetCardBoardTitle(string Title) => Info.UiInfo.CardBoardTitle = Title;
         public static void SetNoticeBoardTitle(string Title) => Info.UiInfo.NoticeBoardTitle = Title;
+        public static void SetArrowShow() => Info.GlobalBattleInfo.IsArrowShow=true;
+        public static void SetArrowDestory() => Info.GlobalBattleInfo.IsArrowHide = true;
 
         public static void NoticeBoardShow() => Info.GlobalBattleInfo.IsNotifyShow = true;
         public static void NoticeBoardHide() => Info.GlobalBattleInfo.IsNotifyHide = true;
