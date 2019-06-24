@@ -241,7 +241,7 @@ namespace Command
                 Command.UiCommand.SetArrowShow();
                 Debug.Log("选择单位");
                 while (Info.GlobalBattleInfo.SelectUnits.Count < Math.Min(Cards.Count, num)) { }
-                await Task.Delay(1000);
+                await Task.Delay(250);
                 Command.UiCommand.SetArrowDestory();
             });
             Debug.Log("双方数量" + Info.GlobalBattleInfo.SelectUnits.Count + ":" + Math.Min(Cards.Count, num));

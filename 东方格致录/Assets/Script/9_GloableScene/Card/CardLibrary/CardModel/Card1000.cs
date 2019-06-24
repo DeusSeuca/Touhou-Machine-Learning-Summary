@@ -23,13 +23,12 @@ public class Card1000 : Card
     public Func<Task> Step3 => (async () =>
     {
         await StateCommand.WaitForSelecUnit(this, GameCommand.GetCardList(LoadRangeOnBattle.My_Water).Where(card => card.CardPoint < 5).ToList(), 2);
-        Info.GlobalBattleInfo.SelectUnits.ForEach(card => card.Gain(this, 2));
-        Info.GlobalBattleInfo.SelectUnits.Clear();
-        await StateCommand.WaitForSelecUnit(this, GameCommand.GetCardList(LoadRangeOnBattle.My_Water).Where(card => card.CardPoint < 5).ToList(), 1);
-        Info.GlobalBattleInfo.SelectUnits.ForEach(card => card.Hurt(this, 2));
-        Info.GlobalBattleInfo.SelectUnits.Clear();
-
-
+        foreach (var item in Info.GlobalBattleInfo.SelectUnits)
+        {
+            await item.Gain(this, 2);
+        }
+        await StateCommand.WaitForSelecUnit(this, GameCommand.GetCardList(LoadRangeOnBattle.My_Water).Where(card => card.CardPoint < 6).ToList(), 1);
+        Info.GlobalBattleInfo.SelectUnits.ForEach(async card => await card.Hurt(this, 2));
         //print(Info.GlobalBattleInfo.SelectUnits.Count);
         //Info.GlobalBattleInfo.SelectUnits.ForEach(x => Debug.Log("·ûºÏµÄ¿¨Æ¬idÎª" + x.CardId));
         await Task.Delay(100);

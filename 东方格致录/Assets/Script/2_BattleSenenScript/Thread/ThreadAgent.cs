@@ -57,7 +57,7 @@ namespace Info
 
         private void PlayParticle()
         {
-            ParticleSystem TargetParticle = Info.ParticleInfo.Instance.ParticleEffect[Info.GlobalBattleInfo.PlayParticleRank];
+            ParticleSystem TargetParticle =Instantiate(Info.ParticleInfo.Instance.ParticleEffect[Info.GlobalBattleInfo.PlayParticleRank]);
             TargetParticle.transform.position = Info.GlobalBattleInfo.PlayParticlePos;
             TargetParticle.Play();
         }

@@ -101,17 +101,19 @@ namespace CardSpace
             //Console.WriteLine("加载" + typeof(T));
             _ = CardEffectStackControl.Run();
         }
-        public void Hurt(Card OriginCard,int point )
+        public async Task Hurt(Card OriginCard,int point )
         {
             CardPoint = Math.Max(CardPoint - point, 0);
             Command.EffectCommand.ParticlePlay(1, transform.position);
             Command.EffectCommand.AudioEffectPlay(1);
+           await Task.Delay(100);
         }
-        public void Gain( Card OriginCard,int point)
+        public async Task Gain( Card OriginCard,int point)
         {
             CardPoint += point;
             Command.EffectCommand.ParticlePlay(0, transform.position);
             Command.EffectCommand.AudioEffectPlay(1);
+            await Task.Delay(1000);
         }
     }
 
