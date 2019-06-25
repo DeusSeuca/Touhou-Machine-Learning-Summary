@@ -1,5 +1,6 @@
 ﻿using Control;
 using Info;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,9 @@ namespace CardSpace
         public int CardPoint;
         public Texture2D icon;
         public bool IsMove;
+        public bool IsMoveStepOver = true;
+        public float MoveSpeed=0.1f;
+
         public bool IsActive;
         public bool IsCanSee;
         public bool IsPrePrepareToPlay;
@@ -79,8 +83,8 @@ namespace CardSpace
             {
                 material.SetFloat("_IsTemp", 1);
             }
-            transform.position = new Vector3(transform.position.x, TargetPos.y, transform.position.z);
-            transform.position = Vector3.Lerp(transform.position, TargetPos, Time.deltaTime * 5);
+            //transform.position = new Vector3(transform.position.x, TargetPos.y, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, TargetPos, MoveSpeed);
             transform.rotation = Quaternion.Lerp(transform.rotation, TargetRot, Time.deltaTime * 10);
             PointText.text = CardPoint.ToString();
         }
@@ -101,19 +105,54 @@ namespace CardSpace
             //Console.WriteLine("加载" + typeof(T));
             _ = CardEffectStackControl.Run();
         }
-        public async Task Hurt(Card OriginCard,int point )
+        public async Task Hurt(int point)
         {
             CardPoint = Math.Max(CardPoint - point, 0);
             Command.EffectCommand.ParticlePlay(1, transform.position);
             Command.EffectCommand.AudioEffectPlay(1);
-           await Task.Delay(100);
+            await Task.Delay(100);
         }
-        public async Task Gain( Card OriginCard,int point)
+        public async Task Gain(int point)
         {
             CardPoint += point;
             Command.EffectCommand.ParticlePlay(0, transform.position);
             Command.EffectCommand.AudioEffectPlay(1);
             await Task.Delay(1000);
+        }
+        public async Task MoveTo(RegionTypes Region, bool IsOnPlayerPart = true, int Index = 0)
+        {
+            List<Card> OriginRow = RowsInfo.GetRow(this);
+            List<Card> TargetRow = IsOnPlayerPart ? Info.RowsInfo.GetMyCardList(Region) : Info.RowsInfo.GetOpCardList(Region);
+            OriginRow.Remove(this);
+            TargetRow.Insert(Index, this);
+            IsMoveStepOver = false;
+            await Task.Delay(1000);
+            IsMoveStepOver = true;
+
+        }
+        public async Task MoveTo(SingleRowInfo singleRowInfo, int Index = 0)
+        {
+            List<Card> OriginRow = RowsInfo.GetRow(this);
+            List<Card> TargetRow = singleRowInfo.ThisRowCard;
+            OriginRow.Remove(this);
+            TargetRow.Insert(Index, this);
+            MoveSpeed = 0.1f;
+            IsMoveStepOver = false;
+            await Task.Delay(1000);
+            IsMoveStepOver = true;
+            MoveSpeed = 0.1f;
+            Command.EffectCommand.AudioEffectPlay(1);
+
+        }
+        public async Task Deploy()
+        {
+            await MoveTo(GlobalBattleInfo.SelectRegion, GlobalBattleInfo.SelectLocation);
+            
+        }
+        [Button]
+        public async Task MoveTest(RegionTypes Region, bool IsOnPlayerPart , int Index )
+        {
+            await MoveTo(Region, IsOnPlayerPart, Index);
         }
     }
 

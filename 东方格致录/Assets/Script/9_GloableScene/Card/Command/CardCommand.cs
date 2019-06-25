@@ -129,21 +129,6 @@ namespace Command
             //await CardEffectStackControl.TriggerEffect<TriggerType.Discard>(TargetCard);
             //GlobeBattleInfo.IsCardEffectCompleted = true;
         }
-        public static async Task Deploy()
-        {
-            //print("部署一个卡牌");
-            //Card card = RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard[0];
-            //RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard.Remove(card);
-            Card card = RowsInfo.GetMyCardList(RegionTypes.Uesd)[0];
-            RowsInfo.GetMyCardList(RegionTypes.Uesd).Remove(card);
-            //Card card = GlobalBattleInfo.MyUse[0];
-            //GlobalBattleInfo.MyUse.Remove(card);
-            GlobalBattleInfo.SelectRegion.ThisRowCard.Insert(GlobalBattleInfo.SelectLocation, card);
-            GlobalBattleInfo.SelectRegion = null;
-            GlobalBattleInfo.SelectLocation = -1;
-            //部署特效
-            //print("duang");
-            //await Task.Delay(2000);
-        }
+       
     }
 }

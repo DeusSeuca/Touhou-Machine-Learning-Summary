@@ -207,6 +207,7 @@ namespace Command
         public static async Task WaitForSelectRegion()
         {
             GlobalBattleInfo.IsWaitForSelectRegion = true;
+            Info.GlobalBattleInfo.SelectRegion = null;
             await Task.Run(() =>
             {
                 while (Info.GlobalBattleInfo.SelectRegion == null) { }

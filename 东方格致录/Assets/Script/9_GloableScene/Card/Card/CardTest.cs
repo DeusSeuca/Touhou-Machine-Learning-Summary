@@ -11,13 +11,13 @@ namespace CardSpace
     {
 
         [TriggerType.Deploy]
-        public Func<Task> Step1 = (async () => {/* print("test");*/ await Task.Delay(1000); });
+        public Func<Task> Step1 => (async () => {/* print("test");*/ await Task.Delay(1000); });
         [TriggerType.Deploy]
-        public Func<Task> Step2 = (async () =>
+        public Func<Task> Step2 => (async () =>
         {
             print("等待选择位置");
             await StateCommand.WaitForSelectLocation();
-            await CardCommand.Deploy();
+            await Deploy();
             await Task.Delay(100);
         });
 

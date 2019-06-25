@@ -10,11 +10,11 @@ using static GameEnum;
 public class Card1001 : Card
 {
 
-    [TriggerType.Use]
+    [TriggerType.Deploy]
     public Func<Task> Step1 => (async () =>
     {
         await StateCommand.WaitForSelectLocation();
-        await CardCommand.Deploy();
+        await Deploy();
         await Task.Delay(100);
     });
     [TriggerType.Deploy]

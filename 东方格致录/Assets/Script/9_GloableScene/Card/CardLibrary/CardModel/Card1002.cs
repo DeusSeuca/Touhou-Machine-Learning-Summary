@@ -14,7 +14,7 @@ public class Card1002 : Card
     public Func<Task> Step2 => (async () =>
     {
         await StateCommand.WaitForSelectLocation();
-        await CardCommand.Deploy();
+        await Deploy();
         await Task.Delay(100);
     });
 }

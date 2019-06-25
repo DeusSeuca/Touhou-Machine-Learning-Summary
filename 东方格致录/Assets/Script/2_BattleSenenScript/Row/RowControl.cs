@@ -95,11 +95,11 @@ namespace Control
                 float Actual_Bias = IsSingle ? 0 : (Mathf.Min(ThisCardList.Count, 6) - 1) * 0.8f;
                 //Bias = Actual_Bias;
                 Vector3 Actual_Offset_Up = transform.up * (0.2f + i * 0.01f) * (ThisCardList[i].IsPrePrepareToPlay ? 1.1f : 1); //transform.up * (1 + i * 0.1f);//Vector3.up * (1 + i * 0.1f);
-                                                                                                                                // Vector3 Actual_Offset_Up = transform.up * i; //transform.up * (1 + i * 0.1f);//Vector3.up * (1 + i * 0.1f);
+                Vector3 MoveStepOver_Offset = ThisCardList[i].IsMoveStepOver ? Vector3.zero : Vector3.up;                                                                                                               // Vector3 Actual_Offset_Up = transform.up * i; //transform.up * (1 + i * 0.1f);//Vector3.up * (1 + i * 0.1f);
                 Vector3 Actual_Offset_Forward = ThisCardList[i].IsPrePrepareToPlay ? -transform.forward * 0.5f : Vector3.zero;
                 if (ThisCardList[i].IsAutoMove)
                 {
-                    ThisCardList[i].SetMoveTarget(transform.position + Vector3.left * (Actual_Interval * i - Actual_Bias) + Actual_Offset_Up + Actual_Offset_Forward, transform.eulerAngles);
+                    ThisCardList[i].SetMoveTarget(transform.position + Vector3.left * (Actual_Interval * i - Actual_Bias) + Actual_Offset_Up + Actual_Offset_Forward+ MoveStepOver_Offset, transform.eulerAngles);
                 }
                 else
                 {
