@@ -13,7 +13,7 @@ public class BallControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update()  
     {
         time += Time.deltaTime;
         if (time > 3)

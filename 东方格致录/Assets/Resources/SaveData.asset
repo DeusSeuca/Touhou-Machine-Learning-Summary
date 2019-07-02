@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: SaveData
   m_EditorClassIdentifier: 
   Icon: {fileID: 2800000, guid: a78bffbeb81b48ae9ec71ad7969613e5, type: 3}
-  CardNum: 3
+  CardNum: 4
   SingleCardLibrarieDatas:
   - Icon: {fileID: 2800000, guid: 5ba91949a4e0eb04f8a554cde6b48c28, type: 3}
-    CardNum: 3
-    icon: {fileID: 2800000, guid: ccc6edda60f348643a3df62b6e646144, type: 3}
+    CardNum: 4
+    icon: {fileID: 2800000, guid: 5fae9478a4ff5f2469b7d28252e2f531, type: 3}
     sectarian: 0
-    CardName: "\u5929\u5B50"
+    CardName: "\u7BAD\u5934\u541B"
     Point: 5
     CardModelInfos:
     - Icon: {fileID: 2800000, guid: 390ae3f27f8cdc84ebb98b9bd8b2f414, type: 3}
@@ -29,13 +29,17 @@ MonoBehaviour:
       sectarian: 0
       CardProperty: 0
       CardTerritory: 0
+      Introduction:
+      - "\u6211\u4F1A\u8DF3\u821E"
     - Icon: {fileID: 2800000, guid: 70925a290bec8e9448065a3dc520b8bd, type: 3}
       CardId: 1001
-      CardName: "\u5927\u80E1\u5B50"
+      CardName: "\u80E1\u5B50\u90DE"
       Point: 8
       sectarian: 0
       CardProperty: 0
       CardTerritory: 0
+      Introduction:
+      - "\u6211\u4F1A\u6447\u6446"
     - Icon: {fileID: 2800000, guid: ccc6edda60f348643a3df62b6e646144, type: 3}
       CardId: 1002
       CardName: "\u5929\u5B50"
@@ -43,3 +47,14 @@ MonoBehaviour:
       sectarian: 0
       CardProperty: 0
       CardTerritory: 0
+      Introduction:
+      - "\u6211\u4F1A\u780D\u4EBA"
+    - Icon: {fileID: 2800000, guid: 5fae9478a4ff5f2469b7d28252e2f531, type: 3}
+      CardId: 1003
+      CardName: "\u7BAD\u5934\u541B"
+      Point: 5
+      sectarian: 0
+      CardProperty: 5
+      CardTerritory: 0
+      Introduction:
+      - "\u6211\u4F1A\u6307\u793A\u65B9\u5411"

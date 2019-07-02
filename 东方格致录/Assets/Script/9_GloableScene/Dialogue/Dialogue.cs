@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using static DialgueInfo;
-using static DialogueCommand;
+using static Command.DialogueCommand;
 public class Dialogue : MonoBehaviour
 {
     //public static Dialogue Instance;

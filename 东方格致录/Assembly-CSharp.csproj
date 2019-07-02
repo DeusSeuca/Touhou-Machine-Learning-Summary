@@ -88,6 +88,7 @@
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1000.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1001.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1002.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1003.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\Test1.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Command\CardCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Library\CardInfo.cs" />

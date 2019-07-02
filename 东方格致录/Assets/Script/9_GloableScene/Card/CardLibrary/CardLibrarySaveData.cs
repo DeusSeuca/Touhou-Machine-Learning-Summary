@@ -66,7 +66,7 @@ public class CardLibrarySaveData : ScriptableObject
                     CardModelInfos = new List<CardModelInfo>();
                 }
                 int NewCardId = int.Parse($"{10}{(int)sectarian}{CardModelInfos.Count}");
-                CardLibraryCommand.CreatScript(NewCardId);
+                Command.CardLibraryCommand.CreatScript(NewCardId);
                 CardModelInfos.Add(new CardModelInfo(icon, NewCardId, CardName, Point, sectarian));
                 CardNum = CardModelInfos.Count;
             }
