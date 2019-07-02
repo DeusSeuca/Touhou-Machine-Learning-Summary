@@ -112,6 +112,7 @@
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowManager.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\CardBoard\BoardCardInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\CardBoard\CardBoardCommand.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\UI\IntroductionControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\NoticeControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\UiCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\UiInfo.cs" />

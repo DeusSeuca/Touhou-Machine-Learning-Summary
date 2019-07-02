@@ -41,6 +41,8 @@ namespace CardSpace
         public Quaternion TargetRot;
         // public Text PointText;// = transform.GetChild(0).GetChild(0).GetComponent<Text>();
         public Text PointText => transform.GetChild(0).GetChild(0).GetComponent<Text>();
+        public string CardName => CardLibrary.GetCardStandardInfo(CardId).CardName;
+        public string CardIntroduction => CardLibrary.GetCardStandardInfo(CardId).Introduction[Info.GlobalBattleInfo.LanguageRank];
         public void Init()
         {
             IsInit = true;

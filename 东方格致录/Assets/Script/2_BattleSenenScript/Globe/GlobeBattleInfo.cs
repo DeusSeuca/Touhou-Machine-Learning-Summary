@@ -25,6 +25,8 @@ namespace Info
 
 
         //操作标志位
+        public static int LanguageRank;
+
         public static bool IsCreatCard;
         public static bool IsCreatBoardCardActual;
         public static bool IsCreatBoardCardVitual;

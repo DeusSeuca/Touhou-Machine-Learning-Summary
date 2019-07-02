@@ -59,7 +59,7 @@ public class CardLibrarySaveData : ScriptableObject
         public void AddCardModely()
         {
             //卡牌添加条件，暂时为名字不为空
-            if (CardName!="")
+            if (CardName != "")
             {
                 if (CardModelInfos == null)
                 {
@@ -70,7 +70,7 @@ public class CardLibrarySaveData : ScriptableObject
                 CardModelInfos.Add(new CardModelInfo(icon, NewCardId, CardName, Point, sectarian));
                 CardNum = CardModelInfos.Count;
             }
-           
+
         }
 
         [TabGroup("卡片管理")]
@@ -97,11 +97,12 @@ public class CardLibrarySaveData : ScriptableObject
             public Sectarian sectarian;
             [VerticalGroup("Split/Meta")]
             [LabelText("部署区域")]
-            public Property CardProperty=Property.All;
+            public Property CardProperty = Property.All;
             [VerticalGroup("Split/Meta")]
             [LabelText("部署所属")]
-            public Territory CardTerritory= Territory.My;
-
+            public Territory CardTerritory = Territory.My;
+            [LabelText("卡片介绍")]
+            public string[] Introduction = new string[] { "" };
             public CardModelInfo(Texture2D icon, int cardId, string cardName, int point, Sectarian sectarian)
             {
                 Icon = icon;

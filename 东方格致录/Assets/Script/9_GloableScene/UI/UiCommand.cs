@@ -20,6 +20,18 @@ namespace Command
             }
             return Info.UiInfo.CardImage[Id];
         }
+        public static void ChangeIntroduction(CardSpace.Card card)
+        {
+            string Title = card.CardName;
+            string Text = card.CardIntroduction;
+            string Effect = "";
+            int Heigh = Text.Length / 13 * 15 + 100;
+            Info.UiInfo.IntroductionTextBackground.sizeDelta = new Vector2(300, Heigh);
+            //修改文本为富文本
+            Info.UiInfo.IntroductionTitle.text = Title;
+            Info.UiInfo.IntroductionText.text = Text;
+            Info.UiInfo.IntroductionEffect.text = Effect;
+        }
         public static void SetCardBoardTitle(string Title) => Info.UiInfo.CardBoardTitle = Title;
         public static void SetNoticeBoardTitle(string Title) => Info.UiInfo.NoticeBoardTitle = Title;
         public static void SetArrowShow() => Info.GlobalBattleInfo.IsArrowShow=true;

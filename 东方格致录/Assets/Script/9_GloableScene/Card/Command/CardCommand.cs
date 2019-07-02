@@ -7,9 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+
 namespace Command
 {
-    public class CardCommand : MonoBehaviour
+    public class CardCommand 
     {
         public static async Task<Card> CreatCard(int id)
         {
@@ -24,7 +25,7 @@ namespace Command
         }
         public static async Task ExchangeCard(bool IsPlayerWash = true)
         {
-            print("交换卡牌");
+            Debug.Log("交换卡牌");
             await WashCard();
             await DrawCard();
             CardBoardCommand.LoadCardList(RowsInfo.GetMyCardList(RegionTypes.Hand));
@@ -60,7 +61,7 @@ namespace Command
         //洗回牌库
         public static async Task WashCard(bool IsPlayerWash = true)
         {
-            print("洗回卡牌");
+            Debug.Log("洗回卡牌");
             if (IsPlayerWash)
             {
                 int MaxCardRank = Info.RowsInfo.GetMyCardList(RegionTypes.Deck).Count;
@@ -95,12 +96,12 @@ namespace Command
         }
         public static async Task MoveCard()
         {
-            print("移动卡牌");
+            Debug.Log("移动卡牌");
 
             Card TargetCard = GlobalBattleInfo.TargetCard;
             List<Card> OriginRow = RowsInfo.GetRow(TargetCard);
             List<Card> TargetRow = GlobalBattleInfo.SelectRegion.ThisRowCard;
-            print("移动卡牌从" + OriginRow.Count + "到" + TargetRow.Count);
+            Debug.Log("移动卡牌从" + OriginRow.Count + "到" + TargetRow.Count);
             OriginRow.Remove(TargetCard);
             TargetRow.Insert(GlobalBattleInfo.SelectLocation, TargetCard);
             //GlobalBattleInfo.SelectLocation

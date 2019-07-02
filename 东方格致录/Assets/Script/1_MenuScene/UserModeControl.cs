@@ -1,19 +1,24 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UserModeControl : MonoBehaviour
+namespace Control
 {
-    public static bool IsJoinRoom = false;
-    void Update()
+
+
+    public class UserModeControl : MonoBehaviour
     {
-        if (IsJoinRoom)
+        public static bool IsJoinRoom = false;
+        void Update()
         {
-            SceneManager.LoadSceneAsync(2);
-            IsJoinRoom = false;
+            if (IsJoinRoom)
+            {
+                SceneManager.LoadSceneAsync(2);
+                IsJoinRoom = false;
+            }
         }
-    }
-    public void JoinRoom()
-    {
-        Command.NetCommand.JoinRoom();
+        public void JoinRoom()
+        {
+            Command.NetCommand.JoinRoom();
+        }
     }
 }

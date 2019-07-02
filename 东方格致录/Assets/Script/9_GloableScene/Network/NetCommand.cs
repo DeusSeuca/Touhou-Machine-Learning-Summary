@@ -26,7 +26,7 @@ namespace Command
             Info.AllPlayerInfo.Player2Info = data.ToObject<NetInfoModel.PlayerInfo>();
             Debug.Log(Info.AllPlayerInfo.Player1Info.ToJson());
             Debug.Log(Info.AllPlayerInfo.Player2Info.ToJson());
-            UserModeControl.IsJoinRoom = true;
+            Control.UserModeControl.IsJoinRoom = true;
         }
         public static string Register(string name, string password)
         {

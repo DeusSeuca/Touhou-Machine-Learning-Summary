@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 namespace Command
 {
-    public class RowCommand : MonoBehaviour
+    public class RowCommand 
     {
         public static void SetRegionSelectable(bool CanBeSelected)
         {

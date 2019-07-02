@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Command
 {
-    public class EffectCommand : MonoBehaviour
+    public class EffectCommand
     {
         public static void AudioEffectPlay(int Rank)
         {
