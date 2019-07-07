@@ -53,11 +53,13 @@ namespace Command
         }
         public static void ReSetPassState()
         {
-            if (Info.GlobalBattleInfo.IsPlayer1 ^ Info.GlobalBattleInfo.IsMyTurn)
-            {
-                MyPass.SetActive(false);
-                OpPass.SetActive(false);
-            }
+            Info.GlobalBattleInfo.IsPlayer1Pass = false;
+            Info.GlobalBattleInfo.IsPlayer2Pass = false;
+            //if (Info.GlobalBattleInfo.IsPlayer1 ^ Info.GlobalBattleInfo.IsMyTurn)
+            //{
+            //    MyPass.SetActive(false);
+            //    OpPass.SetActive(false);
+            //}
         }
     }
 }

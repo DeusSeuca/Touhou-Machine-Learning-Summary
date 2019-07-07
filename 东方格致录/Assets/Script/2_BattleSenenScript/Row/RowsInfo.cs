@@ -15,7 +15,7 @@ namespace Info
         public Dictionary<RegionName_Battle, SingleRowInfo> SingleBattleInfos = new Dictionary<RegionName_Battle, SingleRowInfo>();
         public Dictionary<RegionName_Other, SingleRowInfo> SingleOtherInfos = new Dictionary<RegionName_Other, SingleRowInfo>();
         void Awake() => Init();
-        public  void Init()
+        public void Init()
         {
             Instance = this;
             GlobalCardList.Clear();
@@ -83,6 +83,10 @@ namespace Info
                 }
             }
             return new Vector2(RankX, RankY);
+        }
+        public static Card GetCard((int, int) TargetLocation)
+        {
+            return TargetLocation.Item1 == -1 ? null : GlobalCardList[(int)TargetLocation.Item1][(int)TargetLocation.Item2];
         }
         public static List<Card> GetRow(Card TargetCard)
         {

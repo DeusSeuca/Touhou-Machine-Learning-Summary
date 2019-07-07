@@ -13,11 +13,14 @@ namespace Info
 
         private void Update()
         {
+            
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsCreatCard, CreatCard);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlaySound, PlaySound);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsArrowShow, ArrowShow);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsArrowHide, ArrowHide);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsNotifyShow, NotifyShow);
+            //InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlayer1Pass, IsPlayer1Pass);
+            //InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlayer2Pass, IsPlayer2Pass);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlayParticle, PlayParticle);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsCardBoardShow, CardBoardShow);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsCardBoardHide, CardBoardHide);
@@ -27,7 +30,16 @@ namespace Info
 
         }
 
+        
+        private void IsPlayer1Pass()
+        {
+            Info.UiInfo.Instance.MyPass.SetActive(true);
+        }
+        private void IsPlayer2Pass()
+        {
+            Info.UiInfo.Instance.MyPass.SetActive(true);
 
+        }
 
         private void ArrowShow()
         {

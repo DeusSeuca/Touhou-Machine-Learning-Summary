@@ -39,6 +39,7 @@ namespace Command
 
         public static async Task DrawCard(bool IsPlayerDraw = true, bool ActiveBlackList = false)
         {
+            Debug.Log("开始抽卡");
             EffectCommand.AudioEffectPlay(0);
             Card TargetCard = IsPlayerDraw ? RowsInfo.GetMyCardList(RegionTypes.Deck)[0] : RowsInfo.GetOpCardList(RegionTypes.Deck)[0];
             TargetCard.IsCanSee = IsPlayerDraw;

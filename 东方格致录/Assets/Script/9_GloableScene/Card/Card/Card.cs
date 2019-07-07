@@ -48,6 +48,7 @@ namespace CardSpace
             IsInit = true;
             PointText.text = CardPoint.ToString();
         }
+        
         public void SetMoveTarget(Vector3 TargetPosition, Vector3 TargetEulers)
         {
             TargetPos = TargetPosition;

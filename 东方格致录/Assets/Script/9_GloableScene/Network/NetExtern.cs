@@ -1,15 +1,21 @@
 ﻿using NetworkCommsDotNet.Connections;
 using Newtonsoft.Json;
+//using Newtonsoft.Json;
+using UnityEngine;
 
 public static class NetExtern
 {
     public static string ToJson(this object target)
     {
         return JsonConvert.SerializeObject(target);
+        //return JsonUtility.ToJson(target);
     }
     public static T ToObject<T>(this string Data)
     {
+        Debug.Log(Data);
         return JsonConvert.DeserializeObject<T>(Data);
+        //Debug.Log(Data);
+        //return JsonUtility.FromJson<T>(Data);
     }
     public static void SendMessge(this Connection con, string Tag, object Info)
     {

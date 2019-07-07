@@ -348,9 +348,6 @@
     <Reference Include="NetworkCommsDotNet">
       <HintPath>E:/东方格致录/东方格致录/Assets/Plugins/NetworkCommsDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>E:/东方格致录/东方格致录/Assets/Plugins/Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Sirenix.OdinInspector.Attributes">
       <HintPath>E:/东方格致录/东方格致录/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.dll</HintPath>
     </Reference>
@@ -383,6 +380,9 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>E:/东方格致录/东方格致录/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>E:/东方格致录/东方格致录/Assets/UnityPackages/JsonNet-Lite/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

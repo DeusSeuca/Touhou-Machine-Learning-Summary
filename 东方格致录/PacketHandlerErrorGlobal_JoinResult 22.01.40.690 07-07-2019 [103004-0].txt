@@ -1,0 +1,8 @@
+Base Exception Type: System.InvalidCastException: Specified cast is not valid.
+  at Command.NetCommand.JoinResult (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.String data) [0x0001e] in E:\东方格致录\东方格致录\Assets\Script\9_GloableScene\Network\NetCommand.cs:86 
+  at NetworkCommsDotNet.Tools.PacketTypeHandlerDelegateWrapper`1[incomingObjectType].Process (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.Object obj) [0x00001] in <048db0d4e7f74e70bc2ce38396e48955>:0 
+  at NetworkCommsDotNet.NetworkComms.TriggerGlobalPacketHandlers (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.Object returnObject, System.Boolean ignoreUnknownPacketTypeOverride) [0x0017b] in <048db0d4e7f74e70bc2ce38396e48955>:0 
+
+Stack Trace:   at Command.NetCommand.JoinResult (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.String data) [0x0001e] in E:\东方格致录\东方格致录\Assets\Script\9_GloableScene\Network\NetCommand.cs:86 
+  at NetworkCommsDotNet.Tools.PacketTypeHandlerDelegateWrapper`1[incomingObjectType].Process (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.Object obj) [0x00001] in <048db0d4e7f74e70bc2ce38396e48955>:0 
+  at NetworkCommsDotNet.NetworkComms.TriggerGlobalPacketHandlers (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.Object returnObject, System.Boolean ignoreUnknownPacketTypeOverride) [0x0017b] in <048db0d4e7f74e70bc2ce38396e48955>:0 

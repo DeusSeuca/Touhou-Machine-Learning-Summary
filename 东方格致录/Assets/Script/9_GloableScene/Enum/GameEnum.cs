@@ -40,4 +40,9 @@ public class GameEnum
         Op_Grave = 0x1000_0000,
 
     }
+    public enum NetAcyncType
+    {
+        FocusCard,
+
+    }
 }

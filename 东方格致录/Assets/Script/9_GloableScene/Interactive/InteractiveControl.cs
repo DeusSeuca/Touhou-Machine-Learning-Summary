@@ -33,6 +33,7 @@ namespace Control
                     if (Infos[i].transform.GetComponent<Card>() != null)
                     {
                         GlobalBattleInfo.PlayerFocusCard = Infos[i].transform.GetComponent<Card>();
+                        Command.NetCommand.AsyncInfo( GameEnum.NetAcyncType.FocusCard);
                         break;
                     }
                     GlobalBattleInfo.PlayerFocusCard = null;

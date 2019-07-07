@@ -20,7 +20,7 @@ namespace Info
         public static bool IsCardBoardShow;
         public static bool IsCardBoardHide;
         public static bool CardBoardReload;
-
+        public static int RoomID;
         public static Card SingleSelectCardOnBoard => TargetCardList[SelectBoardCardIds[0]];
 
 
@@ -77,7 +77,7 @@ namespace Info
         public static bool IsFinishSelectBoardCard;
         public static int ExChangeableCardNum = 0;
         public static bool IsMyTurn = true;
-        public static bool IsPVE = true;
+        public static bool IsPVP = true;
         public static bool IsRevertRows => IsMyTurn ^ IsPlayer1;
 
         public static int CreatCardId;

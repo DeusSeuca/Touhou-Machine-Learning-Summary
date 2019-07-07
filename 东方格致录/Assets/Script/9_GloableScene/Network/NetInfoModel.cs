@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[Serializable]
 public class NetInfoModel : MonoBehaviour
 {
     public class PlayerInfo
@@ -30,17 +31,25 @@ public class NetInfoModel : MonoBehaviour
         }
 
     }
+    [Serializable]
     public class GeneralCommand
     {
         public object[] Datas;
+        public GeneralCommand()
+        {
+        }
         public GeneralCommand(params object[] Datas)
         {
             this.Datas = Datas;
         }
     }
+    [Serializable]
     public class GeneralCommand<T>
     {
         public T[] Datas;
+        public GeneralCommand()
+        {
+        }
         public GeneralCommand(params T[] Datas)
         {
             this.Datas = Datas;

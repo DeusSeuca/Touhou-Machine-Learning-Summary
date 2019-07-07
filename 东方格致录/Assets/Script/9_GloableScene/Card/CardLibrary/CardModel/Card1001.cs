@@ -20,7 +20,6 @@ public class Card1001 : Card
     [TriggerType.Deploy]
     public Func<Task> Step2 => (async () =>
     {
-        
         //await StateCommand.WaitForSelectBoardCard(GameCommand.GetCardList(OnOther: LoadRangeOnOther.My_Hand), CardBoardMode.Select, 1);
         //Info.GlobalBattleInfo.PlayerPlayCard = Info.GlobalBattleInfo.SingleSelectCardOnBoard;
         //await CardCommand.PlayCard();
