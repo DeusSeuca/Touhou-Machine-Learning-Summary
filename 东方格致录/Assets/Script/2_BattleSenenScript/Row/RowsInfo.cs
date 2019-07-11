@@ -24,17 +24,31 @@ namespace Info
                 GlobalCardList.Add(new List<Card>());
             }
         }
-
+        /// <summary>
+        /// 获取上方玩家手牌卡组
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static List<Card> GetUpCardList(RegionTypes type)
         {
             //print("获得上方卡组");
             return GlobalCardList[(int)type + (GlobalBattleInfo.IsPlayer1 ? 9 : 0)];
         }
+        /// <summary>
+        /// 获取下方玩家手牌卡组
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static List<Card> GetDownCardList(RegionTypes type)
         {
             //print("获得下方卡组");
             return GlobalCardList[(int)type + (GlobalBattleInfo.IsPlayer1 ? 0 : 9)];
         }
+        /// <summary>
+        /// 获取相对于当前回合的我方卡组
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static List<Card> GetMyCardList(RegionTypes type)
         {
             //print("获得我方卡组");
@@ -48,6 +62,11 @@ namespace Info
                 return GetUpCardList(type);
             }
         }
+        /// <summary>
+        /// 获取相对于当前回合的敌方卡组
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static List<Card> GetOpCardList(RegionTypes type)
         {
             if (GlobalBattleInfo.IsMyTurn)

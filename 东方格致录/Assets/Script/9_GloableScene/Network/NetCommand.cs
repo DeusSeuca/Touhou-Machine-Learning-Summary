@@ -35,9 +35,17 @@ namespace Command
                 {
                     case NetAcyncType.FocusCard:
                         {
-                            Debug.Log("同步焦点卡片为" + Info.GlobalBattleInfo.PlayerFocusCard.Location);
+                            //Debug.Log("同步焦点卡片为" + Info.GlobalBattleInfo.PlayerFocusCard.Location);
                             Vector2 TargetCardLocation = Info.GlobalBattleInfo.PlayerFocusCard != null ? Info.GlobalBattleInfo.PlayerFocusCard.Location : new Vector2(-1, -1);
-                            Client.SendMessge("AsyncInfo",new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y));
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y));
+                            break;
+                        }
+
+                    case NetAcyncType.PlayCard:
+                        {
+                            Vector2 TargetCardLocation = Info.GlobalBattleInfo.PlayerPlayCard.Location ;
+                            Debug.Log("同步焦点卡片为" + TargetCardLocation);
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y));
                             break;
                         }
                     default:
@@ -56,13 +64,17 @@ namespace Command
             {
                 case 0:
                     {
-                        Debug.Log("同步焦点");
-
                         int X = int.Parse(ReceiveInfo[2].ToString());
                         int Y = int.Parse(ReceiveInfo[3].ToString());
-                        Debug.Log("同步焦点为" + X+" "+Y);
-
-                        Info.GlobalBattleInfo.OpponentFocusCard = Info.RowsInfo.GetCard((X,Y));
+                        Info.GlobalBattleInfo.OpponentFocusCard = Info.RowsInfo.GetCard((X, Y));
+                        break;
+                    }
+                case 1:
+                    {
+                        int X = int.Parse(ReceiveInfo[2].ToString());
+                        int Y = int.Parse(ReceiveInfo[3].ToString());
+                        Info.GlobalBattleInfo.PlayerPlayCard = Info.RowsInfo.GetCard((X, Y));
+                        _=Command.CardCommand.PlayCard();
                         break;
                     }
                 default:
@@ -100,6 +112,7 @@ namespace Command
             Info.GlobalBattleInfo.RoomID = int.Parse(ReceiveInfo[0].ToString());
             Debug.LogError("房间号为" + Info.GlobalBattleInfo.RoomID);
             Info.GlobalBattleInfo.IsPlayer1 = (bool)ReceiveInfo[1];
+            Info.GlobalBattleInfo.IsMyTurn = (bool)ReceiveInfo[1];
             Debug.LogError(Info.GlobalBattleInfo.IsPlayer1);
 
 

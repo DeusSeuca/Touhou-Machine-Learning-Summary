@@ -126,21 +126,12 @@ namespace Command
         {
             await Task.Run(async () =>
             {
-                Debug.Log("此处正常1");
                 GlobalBattleInfo.IsPlayer1Pass = false;
                 GlobalBattleInfo.IsPlayer2Pass = false;
-                Debug.Log("此处正常2");
-
                 UiCommand.ReSetPassState();
-                Debug.Log("此处正常3");
-
                 UiCommand.SetNoticeBoardTitle($"第{num + 1}小局开始");
-                Debug.Log("此处正常4");
-
                 UiCommand.NoticeBoardShow();
-                Debug.Log("此处正常");
                 await Task.Delay(2000);
-                // UiCommand.NoticeBoardHide();
                 switch (num)
                 {
                     case (0):

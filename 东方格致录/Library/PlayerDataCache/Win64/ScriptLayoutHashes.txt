@@ -104,6 +104,7 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 63d7b9b64a11859f416d72ba9a3c3fec Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.ScreenSpaceReflections
 38bcb4d3f9a1812fd650f92e87a4cf64 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessProfile
 e82c0521cdfe8cb6a168ef7208a98d4a Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.Vignette
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TempTest
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.NetClient
 71bb6a6b6c8f052f948db64c7dd3ca4f Sirenix.Utilities.dll:Sirenix.Utilities.ProjectPathFinder
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -237,6 +238,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestCreatCard
 6d3d943fe1c42386cf5aad60ec77d8b8 Assembly-CSharp.dll:Info.UiInfo
 07aef7f4e1adde99b184fbc04fb2d9b1 Assembly-CSharp.dll:.Card1002
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.CardControl
 13a57819ec032fd3b6fd786922663231 Assembly-CSharp.dll:.CardLibrary
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 34b96d96e6be7264ba2020c2c365bdb1 Assembly-CSharp.dll:Info.RowsInfo
@@ -254,4 +256,3 @@ a23952fef361e674b32b3c4a7342847d Assembly-CSharp.dll:Info.SoundInfo
 61e65facf6a71d8a23125fc9a0dbc0c9 Assembly-CSharp.dll:Control.InteractiveControl
 710f81b2a006a0f0c66a21a5410e959c Sirenix.Serialization.Config.dll:Sirenix.Serialization.GlobalSerializationConfig
 b0e4c71a43b73801cc58222627f6b983 Assembly-CSharp.dll:.CardInfo
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TempTest

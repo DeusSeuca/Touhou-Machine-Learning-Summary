@@ -43,6 +43,6 @@ public class GameEnum
     public enum NetAcyncType
     {
         FocusCard,
-
+        PlayCard,
     }
 }

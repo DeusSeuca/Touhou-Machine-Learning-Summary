@@ -41,18 +41,18 @@ namespace Command
         {
             Debug.Log("开始抽卡");
             EffectCommand.AudioEffectPlay(0);
-            Card TargetCard = IsPlayerDraw ? RowsInfo.GetMyCardList(RegionTypes.Deck)[0] : RowsInfo.GetOpCardList(RegionTypes.Deck)[0];
+            Card TargetCard = IsPlayerDraw ? RowsInfo.GetDownCardList(RegionTypes.Deck)[0] : RowsInfo.GetUpCardList(RegionTypes.Deck)[0];
             TargetCard.IsCanSee = IsPlayerDraw;
             if (IsPlayerDraw)
             {
-                RowsInfo.GetMyCardList(RegionTypes.Deck).Remove(TargetCard);
-                RowsInfo.GetMyCardList(RegionTypes.Hand).Add(TargetCard);
+                RowsInfo.GetDownCardList(RegionTypes.Deck).Remove(TargetCard);
+                RowsInfo.GetDownCardList(RegionTypes.Hand).Add(TargetCard);
 
             }
             else
             {
-                RowsInfo.GetOpCardList(RegionTypes.Deck).Remove(TargetCard);
-                RowsInfo.GetOpCardList(RegionTypes.Hand).Add(TargetCard);
+                RowsInfo.GetUpCardList(RegionTypes.Deck).Remove(TargetCard);
+                RowsInfo.GetUpCardList(RegionTypes.Hand).Add(TargetCard);
 
 
             }
@@ -115,10 +115,19 @@ namespace Command
             GameCommand.PlayCardLimit(true);
             Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
             TargetCard.IsPrePrepareToPlay = false;
-            RowsInfo.GetMyCardList(RegionTypes.Hand).Remove(TargetCard);
-            RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
+            if (Info.GlobalBattleInfo.IsMyTurn)
+            {
+                RowsInfo.GetMyCardList(RegionTypes.Hand).Remove(TargetCard);
+                RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
+                Command.NetCommand.AsyncInfo(GameEnum.NetAcyncType.PlayCard);
+            }
+            else
+            {
+                RowsInfo.GetOpCardList(RegionTypes.Hand).Remove(TargetCard);
+                RowsInfo.GetOpCardList(RegionTypes.Uesd).Add(TargetCard);
+            }
             GlobalBattleInfo.PlayerPlayCard = null;
-            TargetCard.Trigger<TriggerType.Deploy>();
+            TargetCard.Trigger<TriggerType.PlayCard>();
         }
         public static async Task DisCard(Card card = null)
         {

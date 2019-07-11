@@ -78,7 +78,7 @@ namespace Info
         public static int ExChangeableCardNum = 0;
         public static bool IsMyTurn = true;
         public static bool IsPVP = true;
-        public static bool IsRevertRows => IsMyTurn ^ IsPlayer1;
+        //public static bool IsRevertRows => IsMyTurn ^ IsPlayer1;
 
         public static int CreatCardId;
 

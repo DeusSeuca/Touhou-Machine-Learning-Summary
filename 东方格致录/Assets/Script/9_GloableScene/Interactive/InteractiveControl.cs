@@ -28,16 +28,16 @@ namespace Control
             RaycastHit[] Infos = Physics.RaycastAll(ray);
             if (Infos.Length > 0)
             {
-                for (int i = 0; i < Infos.Length; i++)
-                {
-                    if (Infos[i].transform.GetComponent<Card>() != null)
-                    {
-                        GlobalBattleInfo.PlayerFocusCard = Infos[i].transform.GetComponent<Card>();
-                        Command.NetCommand.AsyncInfo( GameEnum.NetAcyncType.FocusCard);
-                        break;
-                    }
-                    GlobalBattleInfo.PlayerFocusCard = null;
-                }
+                //for (int i = 0; i < Infos.Length; i++)
+                //{
+                //    if (Infos[i].transform.GetComponent<Card>() != null)
+                //    {
+                //        GlobalBattleInfo.PlayerFocusCard = Infos[i].transform.GetComponent<Card>();
+                //        break;
+                //    }
+                //    GlobalBattleInfo.PlayerFocusCard = null;
+                //}
+                //Command.NetCommand.AsyncInfo(GameEnum.NetAcyncType.FocusCard);
                 for (int i = 0; i < Infos.Length; i++)
                 {
                     if (Infos[i].transform.GetComponent<SingleRowInfo>() != null)
