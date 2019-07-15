@@ -1,0 +1,17 @@
+Base Exception Type: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+  at System.ThrowHelper.ThrowArgumentOutOfRangeException (System.ExceptionArgument argument, System.ExceptionResource resource) [0x00029] in <d7ac571ca2d04b2f981d0d886fa067cf>:0 
+  at System.ThrowHelper.ThrowArgumentOutOfRangeException () [0x00000] in <d7ac571ca2d04b2f981d0d886fa067cf>:0 
+  at System.Collections.Generic.List`1[T].get_Item (System.Int32 index) [0x00009] in <d7ac571ca2d04b2f981d0d886fa067cf>:0 
+  at Info.RowsInfo.GetCard (System.ValueTuple`2[T1,T2] TargetLocation) [0x00001] in E:\东方格致录\东方格致录\Assets\Script\2_BattleSenenScript\Row\RowsInfo.cs:108 
+  at Command.NetCommand.AsyncInfoRequir (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.String Data) [0x00057] in E:\东方格致录\东方格致录\Assets\Script\9_GloableScene\Network\NetCommand.cs:69 
+  at NetworkCommsDotNet.Tools.PacketTypeHandlerDelegateWrapper`1[incomingObjectType].Process (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.Object obj) [0x00001] in <048db0d4e7f74e70bc2ce38396e48955>:0 
+  at NetworkCommsDotNet.NetworkComms.TriggerGlobalPacketHandlers (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.Object returnObject, System.Boolean ignoreUnknownPacketTypeOverride) [0x0017b] in <048db0d4e7f74e70bc2ce38396e48955>:0 
+
+Stack Trace:   at System.ThrowHelper.ThrowArgumentOutOfRangeException (System.ExceptionArgument argument, System.ExceptionResource resource) [0x00029] in <d7ac571ca2d04b2f981d0d886fa067cf>:0 
+  at System.ThrowHelper.ThrowArgumentOutOfRangeException () [0x00000] in <d7ac571ca2d04b2f981d0d886fa067cf>:0 
+  at System.Collections.Generic.List`1[T].get_Item (System.Int32 index) [0x00009] in <d7ac571ca2d04b2f981d0d886fa067cf>:0 
+  at Info.RowsInfo.GetCard (System.ValueTuple`2[T1,T2] TargetLocation) [0x00001] in E:\东方格致录\东方格致录\Assets\Script\2_BattleSenenScript\Row\RowsInfo.cs:108 
+  at Command.NetCommand.AsyncInfoRequir (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.String Data) [0x00057] in E:\东方格致录\东方格致录\Assets\Script\9_GloableScene\Network\NetCommand.cs:69 
+  at NetworkCommsDotNet.Tools.PacketTypeHandlerDelegateWrapper`1[incomingObjectType].Process (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.Object obj) [0x00001] in <048db0d4e7f74e70bc2ce38396e48955>:0 
+  at NetworkCommsDotNet.NetworkComms.TriggerGlobalPacketHandlers (NetworkCommsDotNet.PacketHeader packetHeader, NetworkCommsDotNet.Connections.Connection connection, System.Object returnObject, System.Boolean ignoreUnknownPacketTypeOverride) [0x0017b] in <048db0d4e7f74e70bc2ce38396e48955>:0 

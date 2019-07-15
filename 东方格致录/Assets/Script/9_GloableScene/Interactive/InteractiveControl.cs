@@ -16,6 +16,7 @@ namespace Control
         void Update()
         {
             GetFocusTarget();
+
             MouseEvent();
             KeyBoardEvent();
         }
@@ -28,16 +29,6 @@ namespace Control
             RaycastHit[] Infos = Physics.RaycastAll(ray);
             if (Infos.Length > 0)
             {
-                //for (int i = 0; i < Infos.Length; i++)
-                //{
-                //    if (Infos[i].transform.GetComponent<Card>() != null)
-                //    {
-                //        GlobalBattleInfo.PlayerFocusCard = Infos[i].transform.GetComponent<Card>();
-                //        break;
-                //    }
-                //    GlobalBattleInfo.PlayerFocusCard = null;
-                //}
-                //Command.NetCommand.AsyncInfo(GameEnum.NetAcyncType.FocusCard);
                 for (int i = 0; i < Infos.Length; i++)
                 {
                     if (Infos[i].transform.GetComponent<SingleRowInfo>() != null)
@@ -52,23 +43,28 @@ namespace Control
         }
         private void KeyBoardEvent()
         {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                PassPressTime += Time.deltaTime;
-                if (PassPressTime > 2)
+           
+                if (Input.GetKey(KeyCode.Space)&& Info.GlobalBattleInfo.IsMyTurn)
                 {
-                    UiCommand.SetCurrentPass();
+                    PassPressTime += Time.deltaTime;
+                    if (PassPressTime > 2)
+                    {
+                        UiCommand.SetCurrentPass();
+                        PassPressTime = 0;
+                    }
+                }
+                if (Input.GetKeyUp(KeyCode.Space) && Info.GlobalBattleInfo.IsMyTurn)
+                {
                     PassPressTime = 0;
                 }
-            }
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                PassPressTime = 0;
+                _ = Command.StateCommand.Surrender();
             }
         }
         private void MouseEvent()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && Info.GlobalBattleInfo.IsMyTurn)
             {
                 if (GlobalBattleInfo.PlayerFocusCard != null && GlobalBattleInfo.PlayerFocusCard.IsPrePrepareToPlay)
                 {
@@ -100,7 +96,7 @@ namespace Control
                 }
                 // print($"所在行为{GlobalBattleInfo.PlayerFocusCard.Row}，所在坐标为{GlobalBattleInfo.PlayerFocusCard.Location}");
             }
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && Info.GlobalBattleInfo.IsMyTurn)
             {
                 LayerMask mask = 1 << LayerMask.NameToLayer("Default");
                 if (Physics.Raycast(ray, out RaycastHit HitInfo, 100, mask))
@@ -108,7 +104,7 @@ namespace Control
                     GlobalBattleInfo.DragToPoint = HitInfo.point;
                 }
             }
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && Info.GlobalBattleInfo.IsMyTurn)
             {
                 if (GlobalBattleInfo.PlayerPlayCard != null)
                 {

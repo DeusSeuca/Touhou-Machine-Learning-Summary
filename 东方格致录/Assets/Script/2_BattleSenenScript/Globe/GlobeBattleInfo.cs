@@ -91,6 +91,7 @@ namespace Info
         public static (int MyScore, int OpScore) ShowScore => IsPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);
         public static bool IsPlayer1Pass;
         public static bool IsPlayer2Pass;
+        internal static bool IsBattleEnd;
 
         /// <summary>
         /// 当前操作者是否pass

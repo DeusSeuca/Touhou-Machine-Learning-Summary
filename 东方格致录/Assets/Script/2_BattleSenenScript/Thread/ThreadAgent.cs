@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Info
@@ -19,6 +20,8 @@ namespace Info
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsArrowShow, ArrowShow);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsArrowHide, ArrowHide);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsNotifyShow, NotifyShow);
+            InvokeInMainThread(ref Info.GlobalBattleInfo.IsBattleEnd, IsBattleEnd);
+
             //InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlayer1Pass, IsPlayer1Pass);
             //InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlayer2Pass, IsPlayer2Pass);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlayParticle, PlayParticle);
@@ -30,7 +33,11 @@ namespace Info
 
         }
 
-        
+        private void IsBattleEnd()
+        {
+            SceneManager.LoadSceneAsync(1);
+        }
+
         private void IsPlayer1Pass()
         {
             Info.UiInfo.Instance.MyPass.SetActive(true);
@@ -38,7 +45,6 @@ namespace Info
         private void IsPlayer2Pass()
         {
             Info.UiInfo.Instance.MyPass.SetActive(true);
-
         }
 
         private void ArrowShow()

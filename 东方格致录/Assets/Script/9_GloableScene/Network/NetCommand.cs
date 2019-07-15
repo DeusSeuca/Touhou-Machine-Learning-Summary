@@ -25,11 +25,14 @@ namespace Command
             Bind("JoinResult", JoinResult);
             //Bind("PlayerJudge", PlayerJudge);
             Bind("AsyncInfoRequir", AsyncInfoRequir);
+            Bind("SurrenderRequir", SurrenderRequir);
         }
+
+
 
         public static void AsyncInfo(NetAcyncType AcyncType)
         {
-            if (Info.GlobalBattleInfo.IsPVP)
+            if (Info.GlobalBattleInfo.IsPVP && (Info.GlobalBattleInfo.IsMyTurn|| AcyncType== NetAcyncType.FocusCard))
             {
                 switch (AcyncType)
                 {
@@ -43,7 +46,7 @@ namespace Command
 
                     case NetAcyncType.PlayCard:
                         {
-                            Vector2 TargetCardLocation = Info.GlobalBattleInfo.PlayerPlayCard.Location ;
+                            Vector2 TargetCardLocation = Info.GlobalBattleInfo.PlayerPlayCard.Location;
                             Debug.Log("同步焦点卡片为" + TargetCardLocation);
                             Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y));
                             break;
@@ -51,14 +54,13 @@ namespace Command
                     default:
                         break;
                 }
-
-
             }
         }
-        private static void AsyncInfoRequir(PacketHeader packetHeader, Connection connection, string Data)
+        public static void AsyncInfoRequir(PacketHeader packetHeader, Connection connection, string Data)
         {
             object[] ReceiveInfo = Data.ToObject<GeneralCommand>().Datas;
             Debug.Log("收到信息" + Data);
+            Debug.Log("收到信息1：" + ReceiveInfo[0].ToString());
             int Type = int.Parse(ReceiveInfo[0].ToString());
             switch (Type)
             {
@@ -71,10 +73,11 @@ namespace Command
                     }
                 case 1:
                     {
+                        Debug.Log("触发卡牌同步");
                         int X = int.Parse(ReceiveInfo[2].ToString());
                         int Y = int.Parse(ReceiveInfo[3].ToString());
                         Info.GlobalBattleInfo.PlayerPlayCard = Info.RowsInfo.GetCard((X, Y));
-                        _=Command.CardCommand.PlayCard();
+                        _ = Command.CardCommand.PlayCard();
                         break;
                     }
                 default:
@@ -105,6 +108,14 @@ namespace Command
             // Info.AllPlayerInfo.OpponentInfo = Result.Item2;
             Control.UserModeControl.IsJoinRoom = true;
         }
+        public static void Surrender()
+        {
+            Client.SendMessge("Surrender", null);
+        }
+        public static void SurrenderRequir(PacketHeader packetHeader, Connection connection, string data)
+        {
+            _ = Command.StateCommand.BattleEnd(true,true);
+        }
         private static void InitBattleInfo(PacketHeader packetHeader, Connection connection, string data)
         {
             Debug.Log("接收到加入结果:" + data);
@@ -114,36 +125,7 @@ namespace Command
             Info.GlobalBattleInfo.IsPlayer1 = (bool)ReceiveInfo[1];
             Info.GlobalBattleInfo.IsMyTurn = (bool)ReceiveInfo[1];
             Debug.LogError(Info.GlobalBattleInfo.IsPlayer1);
-
-
-            //Debug.Log(Info.AllPlayerInfo.Player1Info.ToJson());
-            //Debug.Log(Info.AllPlayerInfo.Player2Info.ToJson());
-            //Control.UserModeControl.IsJoinRoom = true;
         }
-        //private static void PlayerJudge(PacketHeader packetHeader, Connection connection, string data)
-        //{
-        //    Info.GlobalBattleInfo.IsPlayer1 = (data == "1");
-        //    Debug.LogError(Info.GlobalBattleInfo.IsPlayer1);
-        //}
-        //[Obsolete]
-        //public static async Task<string> JoinRoomAsync()
-        //{
-        //    NetInfoModel.PlayerInfo playerInfo = Info.AllPlayerInfo.Player1Info;
-        //    string Msg = "";
-        //    await Task.Run(() =>
-        //     {
-        //         try
-        //         {
-        //             Msg = Client.SendReceiveMessge("Join", "JoinResult", new NetInfoModel.GeneralCommand(playerInfo), 5);
-        //         }
-        //         catch (Exception)
-        //         {
-        //             Msg = "连接超时";
-        //         }
-        //     });
-        //    return Msg;
-        //}
-
     }
 }
 

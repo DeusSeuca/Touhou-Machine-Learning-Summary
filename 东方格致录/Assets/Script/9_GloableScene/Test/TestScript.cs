@@ -24,8 +24,8 @@ namespace Test
         {
             if (Input.GetMouseButtonDown(4))
             {
-                
-                Debug.Log("目标区域单位为"+GameCommand.GetCardList(LoadRangeOnBattle.My_Water).Count);
+
+                //Debug.Log("目标区域单位为"+GameCommand.GetCardList(LoadRangeOnBattle.My_Water).Count);
 
                 //List<Card> Cards = GameCommand.GetCardList(LoadRangeOnBattle.My_Water);
                 //Debug.Log("选择场上数量" + Cards.Count);
@@ -38,7 +38,7 @@ namespace Test
                 //{害怕
                 //    while (Info.GlobalBattleInfo.SelectUnits.Count < Math.Min(Cards.Count, num)) { }
                 //});
-                Debug.Log("选择单位完毕");
+                // Debug.Log("选择单位完毕");
                 //GameCommand.GetCardList(GameEnum.LoadRangeOnBattle.My_Water).ForEach(card => card.IsTemp = false);
                 //GlobalBattleInfo.IsWaitForSelectUnits = false;
 
@@ -47,8 +47,9 @@ namespace Test
             if (Input.GetMouseButtonDown(3))
             {
                 //CardCommand.DrawCard();
-
-                //Card b = a.ThisRowCard[0];
+                Task.Run(() => {
+                    Command.NetCommand.AsyncInfoRequir(null, null, "{\"Datas\":[1,9,1,0]}");
+                }).Wait();
                 //a.ThisRowCard.Remove(b);
                 //Destroy(b.gameObject);
             }

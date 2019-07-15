@@ -10,14 +10,14 @@ using static GameEnum;
 public class Card1001 : Card
 {
 
-    [TriggerType.Deploy]
+    [TriggerType.PlayCard]
     public Func<Task> Step1 => (async () =>
     {
         await StateCommand.WaitForSelectLocation();
         await Deploy();
         await Task.Delay(100);
     });
-    [TriggerType.Deploy]
+    [TriggerType.PlayCard]
     public Func<Task> Step2 => (async () =>
     {
         //await StateCommand.WaitForSelectBoardCard(GameCommand.GetCardList(OnOther: LoadRangeOnOther.My_Hand), CardBoardMode.Select, 1);
