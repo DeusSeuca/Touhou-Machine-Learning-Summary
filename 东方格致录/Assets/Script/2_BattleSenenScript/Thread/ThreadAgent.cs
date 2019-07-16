@@ -19,8 +19,8 @@ namespace Info
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlaySound, PlaySound);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsArrowShow, ArrowShow);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsArrowHide, ArrowHide);
-            InvokeInMainThread(ref Info.GlobalBattleInfo.IsNotifyShow, NotifyShow);
-            InvokeInMainThread(ref Info.GlobalBattleInfo.IsBattleEnd, IsBattleEnd);
+            //InvokeInMainThread(ref Info.GlobalBattleInfo.IsNotifyShow, NotifyShow);
+            //InvokeInMainThread(ref Info.GlobalBattleInfo.IsBattleEnd, IsBattleEnd);
 
             //InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlayer1Pass, IsPlayer1Pass);
             //InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlayer2Pass, IsPlayer2Pass);
@@ -38,14 +38,14 @@ namespace Info
             SceneManager.LoadSceneAsync(1);
         }
 
-        private void IsPlayer1Pass()
-        {
-            Info.UiInfo.Instance.MyPass.SetActive(true);
-        }
-        private void IsPlayer2Pass()
-        {
-            Info.UiInfo.Instance.MyPass.SetActive(true);
-        }
+        //private void IsPlayer1Pass()
+        //{
+        //    Info.UiInfo.Instance.MyPass.SetActive(true);
+        //}
+        //private void IsPlayer2Pass()
+        //{
+        //    Info.UiInfo.Instance.MyPass.SetActive(true);
+        //}
 
         private void ArrowShow()
         {
@@ -80,12 +80,12 @@ namespace Info
             TargetParticle.Play();
         }
 
-        private void NotifyShow()
-        {
-            Info.UiInfo.NoticeBoard.GetComponent<Text>().text = Info.UiInfo.NoticeBoardTitle;
-            Info.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
-            //Info.UiInfo.NoticeBoard.SetActive(true);
-        }
+        //private void NotifyShow()
+        //{
+        //    Info.UiInfo.NoticeBoard.GetComponent<Text>().text = Info.UiInfo.NoticeBoardTitle;
+        //    Info.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
+        //    //Info.UiInfo.NoticeBoard.SetActive(true);
+        //}
 
         //private void NotifyHide()
         //{

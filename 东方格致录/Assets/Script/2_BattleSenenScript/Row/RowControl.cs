@@ -30,6 +30,7 @@ namespace Control
         {
             if (SingleInfo.TempCard == null && SingleInfo.CanBeSelected && GlobalBattleInfo.PlayerFocusRegion == SingleInfo)
             {
+                print(SingleInfo.TempCard);
                 _=CreatTempCard();
             }
             if (SingleInfo.TempCard != null && SingleInfo.Rank != SingleInfo.ThisRowCard.IndexOf(SingleInfo.TempCard))
@@ -45,8 +46,9 @@ namespace Control
         public async Task CreatTempCard()
         {
             //print("创建临时卡片"+ RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard[0].CardId);
-
-            SingleInfo.TempCard = await CardCommand.CreatCard(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard[0].CardId);
+            SingleInfo.TempCard = CardCommand.CreatCardMain(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard[0].CardId);
+            //SingleInfo.TempCard = await CardCommand.CreatCard(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard[0].CardId);
+            print("临时卡片为" + SingleInfo.TempCard);
             SingleInfo.TempCard.IsActive = true;
             SingleInfo.TempCard.IsCanSee = true;
             SingleInfo.ThisRowCard.Insert(SingleInfo.Rank, SingleInfo.TempCard);

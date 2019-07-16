@@ -60,7 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Test.cs" />
+    <Compile Include="Assets\MainThread.cs" />
+    <Compile Include="Assets\NewBehaviourScript.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/东方格致录/Test/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

@@ -34,7 +34,6 @@ namespace Info
         public static bool IsDestoryBoardCard;
         public static bool IsDiscard;
         public static bool IsCardEffectCompleted;
-
         public static List<GameObject> ArrowList=new List<GameObject>();
         public static bool IsArrowShow;
         public static bool IsArrowHide;
@@ -92,6 +91,7 @@ namespace Info
         public static bool IsPlayer1Pass;
         public static bool IsPlayer2Pass;
         internal static bool IsBattleEnd;
+        internal static int CreatCardRank;
 
         /// <summary>
         /// 当前操作者是否pass

@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class NoticeControl : MonoBehaviour
 {
-    public GameObject[] NotcreTex;
+    public GameObject[] NoticeTex;
+    public GameObject NoticeModel;
     public float Aplha = 0;
     Animator Anim;
     void Start() => Anim = GetComponent<Animator>();
-    void Update() => NotcreTex.ForEach(x => x.GetComponent<Image>().material.SetFloat("_Value", Aplha));
+    void Update() => NoticeTex.ForEach(x => x.GetComponent<Image>().material.SetFloat("_Value", Aplha));
     [Button]
     public void AnimPlay()
     {

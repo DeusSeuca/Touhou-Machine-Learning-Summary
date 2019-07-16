@@ -110,7 +110,7 @@ namespace Command
         }
         public static void Surrender()
         {
-            Client.SendMessge("Surrender", null);
+            Client.SendMessge("Surrender", Info.GlobalBattleInfo.RoomID);
         }
         public static void SurrenderRequir(PacketHeader packetHeader, Connection connection, string data)
         {

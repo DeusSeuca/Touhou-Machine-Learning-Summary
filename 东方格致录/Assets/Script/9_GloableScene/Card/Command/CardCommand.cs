@@ -10,19 +10,60 @@ using UnityEngine;
 
 namespace Command
 {
-    public class CardCommand 
+    public class CardCommand
     {
+        public static Card CreatCardMain(int id)
+        {
+            GameObject NewCard;
+            NewCard = GameObject.Instantiate(CardLibrary.Instance.Card_Model);
+            NewCard.name = "Card" + Info.GlobalBattleInfo.CreatCardRank++;
+            var CardStandardInfo = CardLibrary.GetCardStandardInfo(id);
+            NewCard.AddComponent(Type.GetType("Card" + id));
+            Card NewCardScript = NewCard.GetComponent<Card>();
+            NewCardScript.CardId = CardStandardInfo.CardId;
+            NewCardScript.CardPoint = CardStandardInfo.Point;
+            NewCardScript.icon = CardStandardInfo.Icon;
+            NewCardScript.CardProperty = CardStandardInfo.CardProperty;
+            NewCardScript.CardTerritory = CardStandardInfo.CardTerritory;
+            NewCardScript.GetComponent<Renderer>().material.SetTexture("_Front", NewCardScript.icon);
+            NewCardScript.Init();
+            //print("异步生成卡牌");
+            return NewCardScript;
+        }
         public static async Task<Card> CreatCard(int id)
         {
-            Info.GlobalBattleInfo.TargetCardID = id;
-            Info.GlobalBattleInfo.IsCreatCard = true;
-
-            await Task.Run(() => { while (Info.GlobalBattleInfo.CreatedCard == null) { } });
-            Card NewCard = Info.GlobalBattleInfo.CreatedCard;
-            Info.GlobalBattleInfo.CreatedCard = null;
+            GameObject NewCard;
+            Card NewCardScript = null;
+            MainThread.Run(() =>
+            {
+                NewCard = GameObject.Instantiate(CardLibrary.Instance.Card_Model);
+                NewCard.name = "Card" + Info.GlobalBattleInfo.CreatCardRank++;
+                var CardStandardInfo = CardLibrary.GetCardStandardInfo(id);
+                NewCard.AddComponent(Type.GetType("Card" + id));
+                Card card = NewCard.GetComponent<Card>();
+                card.CardId = CardStandardInfo.CardId;
+                card.CardPoint = CardStandardInfo.Point;
+                card.icon = CardStandardInfo.Icon;
+                card.CardProperty = CardStandardInfo.CardProperty;
+                card.CardTerritory = CardStandardInfo.CardTerritory;
+                card.GetComponent<Renderer>().material.SetTexture("_Front", card.icon);
+                card.Init();
+                NewCardScript = card;
+            });
+            await Task.Run(() => { while (NewCardScript == null) { } });
             //print("异步生成卡牌");
-            return NewCard;
+            return NewCardScript;
         }
+        //public static async Task<Card> CreatCard(int id)
+        //{
+        //    Info.GlobalBattleInfo.TargetCardID = id;
+        //    Info.GlobalBattleInfo.IsCreatCard = true;
+        //    await Task.Run(() => { while (Info.GlobalBattleInfo.CreatedCard == null) { } });
+        //    Card NewCard = Info.GlobalBattleInfo.CreatedCard;
+        //    Info.GlobalBattleInfo.CreatedCard = null;
+        //    //print("异步生成卡牌");
+        //    return NewCard;
+        //}
         public static async Task ExchangeCard(bool IsPlayerWash = true)
         {
             Debug.Log("交换卡牌");
@@ -39,7 +80,6 @@ namespace Command
 
         public static async Task DrawCard(bool IsPlayerDraw = true, bool ActiveBlackList = false)
         {
-            Debug.Log("开始抽卡");
             EffectCommand.AudioEffectPlay(0);
             Card TargetCard = IsPlayerDraw ? RowsInfo.GetDownCardList(RegionTypes.Deck)[0] : RowsInfo.GetUpCardList(RegionTypes.Deck)[0];
             TargetCard.IsCanSee = IsPlayerDraw;
@@ -146,6 +186,6 @@ namespace Command
             //await CardEffectStackControl.TriggerEffect<TriggerType.Discard>(TargetCard);
             //GlobeBattleInfo.IsCardEffectCompleted = true;
         }
-       
+
     }
 }

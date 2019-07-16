@@ -16,10 +16,6 @@ namespace Info
         public Card TempCard;
         public RowControl Control => GetComponent<RowControl>();
         public Color color;
-        //public void Init()
-        //{
-        //    ThisRowCard = RowsInfo.GetCardList(region.ToAmend());
-        //}
     }
     
 }

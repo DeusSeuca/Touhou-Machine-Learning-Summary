@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 namespace Command
 {
     public class UiCommand : MonoBehaviour
@@ -37,7 +39,17 @@ namespace Command
         public static void SetArrowShow() => Info.GlobalBattleInfo.IsArrowShow=true;
         public static void SetArrowDestory() => Info.GlobalBattleInfo.IsArrowHide = true;
 
-        public static void NoticeBoardShow() => Info.GlobalBattleInfo.IsNotifyShow = true;
+        public static void NoticeBoardShow()
+        {
+            //Info.GlobalBattleInfo.IsNotifyShow = true;
+            MainThread.Run(() =>
+            {
+                Info.UiInfo.NoticeBoard.GetComponent<Text>().text = Info.UiInfo.NoticeBoardTitle;
+                Info.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
+            });
+           
+        }
+
         public static void NoticeBoardHide() => Info.GlobalBattleInfo.IsNotifyHide = true;
         public static void SetCardBoardMode(GameEnum.CardBoardMode CardBoardMode) => Info.GlobalBattleInfo.CardBoardMode = CardBoardMode;
         public static void SetCurrentPass()

@@ -14,7 +14,7 @@ namespace Command
     {
         public static async Task BattleStart()
         {
-            //Info.GlobalBattleInfo.IsPVP = false;
+            Info.GlobalBattleInfo.IsPVP = false;
             if (!Info.GlobalBattleInfo.IsPVP)
             {
                 Info.AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 0, new List<int> { 1000, 1001, 1002, 1001, 1000, 1002, 1000, 1001, 1000, 1001, 1001, 1000, 1002 }) });
@@ -23,7 +23,6 @@ namespace Command
             RowCommand.SetRegionSelectable(false);
             await Task.Run(async () =>
             {
-                Debug.Log("1");
                 //await Task.Delay(500);
                 UiCommand.SetNoticeBoardTitle("对战开始");
                 UiCommand.NoticeBoardShow();
@@ -51,9 +50,11 @@ namespace Command
                 UiCommand.SetNoticeBoardTitle($"对战终止\n{GlobalBattleInfo.ShowScore.MyScore}:{GlobalBattleInfo.ShowScore.OpScore}");
                 UiCommand.NoticeBoardShow();
                 await Task.Delay(2000);
-                //UiCommand.NoticeBoardHide();
-                await Task.Delay(500);
-                Info.GlobalBattleInfo.IsBattleEnd = true;
+                MainThread.Run(() =>
+                {
+                    SceneManager.LoadSceneAsync(1);
+                });
+                //Info.GlobalBattleInfo.IsBattleEnd = true;
             });
         }
         public static async Task TurnStart()
@@ -293,6 +294,7 @@ namespace Command
         }
         public static async Task Surrender()
         {
+            Debug.Log("投降");
             await Task.Run(async () =>
             {
                 NetCommand.Surrender();
