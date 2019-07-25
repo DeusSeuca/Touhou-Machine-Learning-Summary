@@ -1,5 +1,4 @@
 ﻿using CardSpace;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +33,7 @@ namespace Info
         public static bool IsDestoryBoardCard;
         public static bool IsDiscard;
         public static bool IsCardEffectCompleted;
-        public static List<GameObject> ArrowList=new List<GameObject>();
+        public static List<GameObject> ArrowList = new List<GameObject>();
         public static bool IsArrowShow;
         public static bool IsArrowHide;
 
@@ -46,8 +45,8 @@ namespace Info
         public static int PlaySoundRank;
 
 
-        public static GameEnum.CardBoardMode CardBoardMode;
-        public static bool IsNotifyShow;
+        public static CardBoardMode CardBoardMode;
+        //public static bool IsNotifyShow;
         public static bool IsNotifyHide;
         public static List<int> Player1BlackCardList;
         public static List<int> Player2BlackCardList;
@@ -62,7 +61,7 @@ namespace Info
         public static SingleRowInfo SelectRegion;
         //选择的单位
         //public static Vector3 FocusPoint;
-        public static Card ArrowStartCard; 
+        public static Card ArrowStartCard;
         public static Card ArrowEndCard;
         public static bool IsWaitForSelectUnits;
         public static List<Card> SelectUnits = new List<Card>();
@@ -76,8 +75,7 @@ namespace Info
         public static bool IsFinishSelectBoardCard;
         public static int ExChangeableCardNum = 0;
         public static bool IsMyTurn = true;
-        public static bool IsPVP = true;
-        //public static bool IsRevertRows => IsMyTurn ^ IsPlayer1;
+        public static bool IsPVP = false;
 
         public static int CreatCardId;
 
@@ -90,6 +88,8 @@ namespace Info
         public static (int MyScore, int OpScore) ShowScore => IsPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);
         public static bool IsPlayer1Pass;
         public static bool IsPlayer2Pass;
+
+
         internal static bool IsBattleEnd;
         internal static int CreatCardRank;
 

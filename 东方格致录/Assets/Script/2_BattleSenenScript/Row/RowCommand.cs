@@ -1,12 +1,9 @@
 ﻿using CardSpace;
 using Info;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 namespace Command
 {
-    public class RowCommand 
+    public class RowCommand
     {
         public static void SetRegionSelectable(bool CanBeSelected)
         {

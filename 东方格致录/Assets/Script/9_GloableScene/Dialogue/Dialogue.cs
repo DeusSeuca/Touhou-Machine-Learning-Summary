@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using UnityEngine;
-using static DialgueInfo;
 using static Command.DialogueCommand;
+using static DialgueInfo;
 public class Dialogue : MonoBehaviour
 {
     //public static Dialogue Instance;
@@ -21,8 +18,8 @@ public class Dialogue : MonoBehaviour
         await say("你好啊,灵梦", lmB, false);
         await say("你好啊", lmA);
         await say("你有钱吗", lmB, false);
-        await say("没有呢。。。", lmA,FaceNum:1);
-        await say("...我也是", lmB, false, FaceNum:1);
+        await say("没有呢。。。", lmA, FaceNum: 1);
+        await say("...我也是", lmB, false, FaceNum: 1);
     }
     [Dial(1, 2)]
     public async Task Dia_1_2()

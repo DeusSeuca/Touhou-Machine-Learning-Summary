@@ -34,15 +34,15 @@ public enum RegionName_Other
 }
 public enum RegionTypes
 {
-   Leader,
-   Hand,
-   Uesd,
-   Deck,
-   Grave,
-   Water,
-   Fire,
-   Wind,
-   Soil,
+    Leader,
+    Hand,
+    Uesd,
+    Deck,
+    Grave,
+    Water,
+    Fire,
+    Wind,
+    Soil,
 }
 public enum Orientation
 {

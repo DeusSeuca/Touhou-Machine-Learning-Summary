@@ -1,13 +1,11 @@
 ﻿using Command;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 namespace Control
 {
     public class StateControl : MonoBehaviour
     {
-        
+
         bool IsLastPlay1Pass = false;
         bool IsLastPlay2Pass = false;
         void Start()

@@ -1,12 +1,6 @@
 ﻿using CardSpace;
 using Info;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using UnityEngine;
-using static GameEnum;
 
 namespace Command
 {
@@ -41,7 +35,7 @@ namespace Command
             RowsInfo.GetRegionCardList(RegionName_Other.My_Hand).ThisRowCard.ForEach(card => card.IsLimit = IsLimit);
         }
         //待扩展
-        public static List<Card> GetCardList(LoadRangeOnBattle OnBattle= LoadRangeOnBattle.None, LoadRangeOnOther OnOther= LoadRangeOnOther.None)
+        public static List<Card> GetCardList(LoadRangeOnBattle OnBattle = LoadRangeOnBattle.None, LoadRangeOnOther OnOther = LoadRangeOnOther.None)
         {
             List<Card> CardList = new List<Card>();
             CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.My_Water) ? RowsInfo.GetDownCardList(RegionTypes.Water) : new List<Card>());

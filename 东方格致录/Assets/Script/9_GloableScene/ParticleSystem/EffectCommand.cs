@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 namespace Command
 {
     public class EffectCommand
@@ -16,7 +14,7 @@ namespace Command
             Info.GlobalBattleInfo.PlayParticlePos = Position;
             Info.GlobalBattleInfo.IsPlayParticle = true;
         }
-        
+
     }
 }
 

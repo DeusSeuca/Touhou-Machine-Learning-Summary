@@ -10,6 +10,9 @@ namespace Info
     {
         [ShowInInspector]
         public static List<List<Card>> GlobalCardList = new List<List<Card>>();
+        public static List<SingleRowInfo> SingleRowInfos = new List<SingleRowInfo>();
+        public static SingleRowInfo SelectSingleRowInfos(int RowRank) => SingleRowInfos.First(infos => infos.ThisRowCard == GlobalCardList[RowRank]);
+
         public static RowsInfo Instance;
 
         public Dictionary<RegionName_Battle, SingleRowInfo> SingleBattleInfos = new Dictionary<RegionName_Battle, SingleRowInfo>();
@@ -29,65 +32,29 @@ namespace Info
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static List<Card> GetUpCardList(RegionTypes type)
-        {
-            //print("获得上方卡组");
-            return GlobalCardList[(int)type + (GlobalBattleInfo.IsPlayer1 ? 9 : 0)];
-        }
+        public static List<Card> GetUpCardList(RegionTypes type) => GlobalCardList[(int)type + (GlobalBattleInfo.IsPlayer1 ? 9 : 0)];
         /// <summary>
         /// 获取下方玩家手牌卡组
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static List<Card> GetDownCardList(RegionTypes type)
-        {
-            //print("获得下方卡组");
-            return GlobalCardList[(int)type + (GlobalBattleInfo.IsPlayer1 ? 0 : 9)];
-        }
+        public static List<Card> GetDownCardList(RegionTypes type) => GlobalCardList[(int)type + (GlobalBattleInfo.IsPlayer1 ? 0 : 9)];
         /// <summary>
         /// 获取相对于当前回合的我方卡组
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static List<Card> GetMyCardList(RegionTypes type)
-        {
-            //print("获得我方卡组");
-
-            if (GlobalBattleInfo.IsMyTurn)
-            {
-                return GetDownCardList(type);
-            }
-            else
-            {
-                return GetUpCardList(type);
-            }
-        }
+        public static List<Card> GetMyCardList(RegionTypes type) => GlobalBattleInfo.IsMyTurn ? GetDownCardList(type) : GetUpCardList(type);
         /// <summary>
         /// 获取相对于当前回合的敌方卡组
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static List<Card> GetOpCardList(RegionTypes type)
-        {
-            if (GlobalBattleInfo.IsMyTurn)
-            {
-                return GetUpCardList(type);
-            }
-            else
-            {
-                return GetDownCardList(type);
-            }
-        }
+        public static List<Card> GetOpCardList(RegionTypes type) => GlobalBattleInfo.IsMyTurn ? GetUpCardList(type) : GetDownCardList(type);
 
-        public static SingleRowInfo GetRegionCardList(RegionName_Battle region)
-        {
-            return Instance.SingleBattleInfos[region];
-        }
+        public static SingleRowInfo GetRegionCardList(RegionName_Battle region) => Instance.SingleBattleInfos[region];
 
-        public static SingleRowInfo GetRegionCardList(RegionName_Other region)
-        {
-            return Instance.SingleOtherInfos[region];
-        }
+        public static SingleRowInfo GetRegionCardList(RegionName_Other region) => Instance.SingleOtherInfos[region];
 
         public static Vector2 GetLocation(Card TargetCard)
         {

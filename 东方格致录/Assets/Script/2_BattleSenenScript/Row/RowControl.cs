@@ -1,9 +1,7 @@
 ﻿using CardSpace;
 using Command;
 using Info;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 namespace Control
@@ -31,7 +29,7 @@ namespace Control
             if (SingleInfo.TempCard == null && SingleInfo.CanBeSelected && GlobalBattleInfo.PlayerFocusRegion == SingleInfo)
             {
                 print(SingleInfo.TempCard);
-                _=CreatTempCard();
+                _ = CreatTempCard();
             }
             if (SingleInfo.TempCard != null && SingleInfo.Rank != SingleInfo.ThisRowCard.IndexOf(SingleInfo.TempCard))
             {
@@ -101,7 +99,7 @@ namespace Control
                 Vector3 Actual_Offset_Forward = ThisCardList[i].IsPrePrepareToPlay ? -transform.forward * 0.5f : Vector3.zero;
                 if (ThisCardList[i].IsAutoMove)
                 {
-                    ThisCardList[i].SetMoveTarget(transform.position + Vector3.left * (Actual_Interval * i - Actual_Bias) + Actual_Offset_Up + Actual_Offset_Forward+ MoveStepOver_Offset, transform.eulerAngles);
+                    ThisCardList[i].SetMoveTarget(transform.position + Vector3.left * (Actual_Interval * i - Actual_Bias) + Actual_Offset_Up + Actual_Offset_Forward + MoveStepOver_Offset, transform.eulerAngles);
                 }
                 else
                 {

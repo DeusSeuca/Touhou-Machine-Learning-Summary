@@ -1,8 +1,6 @@
 ﻿using CardSpace;
-using Control;
 using Info;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -155,7 +153,7 @@ namespace Command
             GameCommand.PlayCardLimit(true);
             Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
             TargetCard.IsPrePrepareToPlay = false;
-            Command.NetCommand.AsyncInfo(GameEnum.NetAcyncType.PlayCard);
+            Command.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
             TargetCard.IsCanSee = true;
             Debug.LogError("移除卡牌");
             RowsInfo.GetMyCardList(RegionTypes.Hand).Remove(TargetCard);

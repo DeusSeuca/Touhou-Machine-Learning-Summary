@@ -1,9 +1,7 @@
 ﻿using NetworkCommsDotNet;
 using NetworkCommsDotNet.Connections;
-using System;
-using System.Threading.Tasks;
 using UnityEngine;
-using static GameEnum;
+using UnityEngine.SceneManagement;
 using static NetInfoModel;
 using static NetworkCommsDotNet.NetworkComms;
 
@@ -32,7 +30,7 @@ namespace Command
 
         public static void AsyncInfo(NetAcyncType AcyncType)
         {
-            if (Info.GlobalBattleInfo.IsPVP && (Info.GlobalBattleInfo.IsMyTurn|| AcyncType== NetAcyncType.FocusCard))
+            if (Info.GlobalBattleInfo.IsPVP && (Info.GlobalBattleInfo.IsMyTurn || AcyncType == NetAcyncType.FocusCard))
             {
                 switch (AcyncType)
                 {
@@ -49,6 +47,22 @@ namespace Command
                             Vector2 TargetCardLocation = Info.GlobalBattleInfo.PlayerPlayCard.Location;
                             Debug.Log("同步焦点卡片为" + TargetCardLocation);
                             Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y));
+                            break;
+                        }
+
+                    case NetAcyncType.FocusRegion:
+                        {
+                            int RowRank = Info.GlobalBattleInfo.SelectRegion.RowRank;
+                            Debug.Log("同步焦点区域为" + RowRank);
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, (int)RowRank));
+                            break;
+                        }
+
+                    case NetAcyncType.FocusLocation:
+                        {
+                            int RowRank = Info.GlobalBattleInfo.SelectLocation;
+                            Debug.Log("同步焦点区域为" + RowRank);
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, (int)RowRank));
                             break;
                         }
                     default:
@@ -80,6 +94,14 @@ namespace Command
                         _ = Command.CardCommand.PlayCard();
                         break;
                     }
+                case 2:
+                    {
+                        Debug.Log("触发区域同步");
+                        int RowRank = int.Parse(ReceiveInfo[2].ToString());
+                        Info.GlobalBattleInfo.SelectRegion = Info.RowsInfo.SelectSingleRowInfos(RowRank);
+                        _ = Command.CardCommand.PlayCard();
+                        break;
+                    }
                 default:
                     break;
             }
@@ -98,15 +120,24 @@ namespace Command
         public static void JoinRoom()
         {
             Debug.Log(Info.AllPlayerInfo.UserInfo.ToJson());
+            Info.GlobalBattleInfo.IsPVP = true;
             Client.SendMessge("Join", Info.AllPlayerInfo.UserInfo);
+            Debug.Log("发送完毕");
+
         }
         private static void JoinResult(PacketHeader packetHeader, Connection connection, string data)
         {
             Debug.Log("接收到加入结果:" + data);
-            Info.AllPlayerInfo.OpponentInfo = data.ToObject<PlayerInfo>();
-            // var Result= data.ToObject<(int, NetInfoModel.PlayerInfo)>();
-            // Info.AllPlayerInfo.OpponentInfo = Result.Item2;
-            Control.UserModeControl.IsJoinRoom = true;
+           
+            MainThread.Run(() =>
+            {
+                Debug.Log("yaya");
+                Info.AllPlayerInfo.OpponentInfo = data.ToObject<PlayerInfo>();
+                Info.GlobalBattleInfo.IsPVP = true;
+                SceneManager.LoadSceneAsync(2);
+                Debug.Log("ya");
+
+            });
         }
         public static void Surrender()
         {
@@ -114,7 +145,7 @@ namespace Command
         }
         public static void SurrenderRequir(PacketHeader packetHeader, Connection connection, string data)
         {
-            _ = Command.StateCommand.BattleEnd(true,true);
+            _ = Command.StateCommand.BattleEnd(true, true);
         }
         private static void InitBattleInfo(PacketHeader packetHeader, Connection connection, string data)
         {

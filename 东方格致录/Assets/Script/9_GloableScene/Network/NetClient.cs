@@ -1,12 +1,8 @@
-﻿using Command;
-using NetworkCommsDotNet;
+﻿using NetworkCommsDotNet;
 using NetworkCommsDotNet.Connections;
 using NetworkCommsDotNet.Connections.TCP;
-using System.Collections;
-using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
-using static NetworkCommsDotNet.NetworkComms;
 
 public class NetClient : MonoBehaviour
 {

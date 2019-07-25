@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialgueInfo : MonoBehaviour
 {
     public static DialgueInfo DialgueInfos;
+    void Awake() => DialgueInfos = this;
     public GameObject Left;
     public GameObject Right;
     public Text Text;
@@ -27,16 +26,5 @@ public class DialgueInfo : MonoBehaviour
             this.step = step;
             this.rank = rank;
         }
-    }
-    // Start is called before the first frame update
-    void Awake()
-    {
-        DialgueInfos = this;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PointControl : MonoBehaviour
@@ -23,7 +21,7 @@ public class PointControl : MonoBehaviour
             DownShowPoint = Info.PointInfo.TotalDownPoint;
 
             MyPoint.text = $"<color=yellow>{DownShowPoint}</color>";
-            MyPoint.transform.localScale = Vector3.one* 1.5f;
+            MyPoint.transform.localScale = Vector3.one * 1.5f;
             Invoke("Reset", 1);
         }
         if (UpShowPoint != Info.PointInfo.TotalUpPoint)

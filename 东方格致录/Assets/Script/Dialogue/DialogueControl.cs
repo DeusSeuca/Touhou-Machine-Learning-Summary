@@ -1,6 +1,4 @@
 ﻿using Command;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueControl : MonoBehaviour
@@ -10,7 +8,7 @@ public class DialogueControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) )
+        if (Input.GetMouseButtonDown(0))
         {
             if (!DialogueUI.activeSelf)
             {
@@ -21,7 +19,7 @@ public class DialogueControl : MonoBehaviour
             {
                 DialgueInfo.DialgueInfos.IsNext = true;
             }
-           
+
         }
     }
 }

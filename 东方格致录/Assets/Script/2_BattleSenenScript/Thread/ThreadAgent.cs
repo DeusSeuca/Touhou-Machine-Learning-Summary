@@ -14,7 +14,7 @@ namespace Info
 
         private void Update()
         {
-            
+
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsCreatCard, CreatCard);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsPlaySound, PlaySound);
             InvokeInMainThread(ref Info.GlobalBattleInfo.IsArrowShow, ArrowShow);
@@ -75,7 +75,7 @@ namespace Info
 
         private void PlayParticle()
         {
-            ParticleSystem TargetParticle =Instantiate(Info.ParticleInfo.Instance.ParticleEffect[Info.GlobalBattleInfo.PlayParticleRank]);
+            ParticleSystem TargetParticle = Instantiate(Info.ParticleInfo.Instance.ParticleEffect[Info.GlobalBattleInfo.PlayParticleRank]);
             TargetParticle.transform.position = Info.GlobalBattleInfo.PlayParticlePos;
             TargetParticle.Play();
         }

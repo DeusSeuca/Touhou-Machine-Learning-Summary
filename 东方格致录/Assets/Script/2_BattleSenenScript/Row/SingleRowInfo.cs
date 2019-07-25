@@ -9,7 +9,8 @@ namespace Info
     {
         public RegionTypes region;
         public Belong belong;
-        public List<Card> ThisRowCard=> belong== Belong.My? RowsInfo.GetDownCardList(region): RowsInfo.GetUpCardList(region);
+        public List<Card> ThisRowCard => belong == Belong.My ? RowsInfo.GetDownCardList(region) : RowsInfo.GetUpCardList(region);
+        public int RowRank => RowsInfo.GlobalCardList.IndexOf(ThisRowCard);
         //public List<Card> ShowCardList;
         public bool CanBeSelected;
         public int Rank => this.JudgeRank(GlobalBattleInfo.FocusPoint);
@@ -17,7 +18,7 @@ namespace Info
         public RowControl Control => GetComponent<RowControl>();
         public Color color;
     }
-    
+
 }
 static partial class RowInfoExtend
 {

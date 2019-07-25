@@ -1,8 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using System.Linq;
 namespace Info
 {
     public class PointInfo

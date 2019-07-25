@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 namespace Command
 {
-    public class AiCommand 
+    public class AiCommand
     {
         static Random rand = new Random("gezi".GetHashCode());
         public static void Init()
@@ -12,7 +12,7 @@ namespace Command
 
         public static int GetRandom(int Min, int Max)
         {
-            
+
             return rand.Next(Min, Max);
         }
 

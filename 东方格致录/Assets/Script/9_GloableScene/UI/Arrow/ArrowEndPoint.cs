@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ArrowEndPoint : MonoBehaviour
 {
@@ -8,8 +6,8 @@ public class ArrowEndPoint : MonoBehaviour
     public float Distance;
     static Ray SceneRay;
     public Vector3 v1;
-    public Vector3 v2 ;
-    public float v3 ;
+    public Vector3 v2;
+    public float v3;
 
     // Start is called before the first frame update
     void Start()

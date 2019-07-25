@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class IntroductionControl : MonoBehaviour
 {
@@ -14,7 +12,7 @@ public class IntroductionControl : MonoBehaviour
 
         Bias = new Vector3(IsRight ? 0.1f : -0.1f, IsDown ? 0.1f : -0.1f);
         transform.position = Camera.main.ViewportToScreenPoint(ViewportPoint + Bias);
-        if (Info.GlobalBattleInfo.PlayerFocusCard != null&& Info.GlobalBattleInfo.PlayerFocusCard.IsCanSee)
+        if (Info.GlobalBattleInfo.PlayerFocusCard != null && Info.GlobalBattleInfo.PlayerFocusCard.IsCanSee)
         {
             Cd = Mathf.Min(0.25f, Cd + Time.deltaTime);
         }
@@ -22,7 +20,7 @@ public class IntroductionControl : MonoBehaviour
         {
             Cd = 0;
         }
-        if (Cd==0.25f)
+        if (Cd == 0.25f)
         {
             Command.UiCommand.ChangeIntroduction(Info.GlobalBattleInfo.PlayerFocusCard);
             transform.GetChild(0).gameObject.SetActive(true);

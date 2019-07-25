@@ -2,7 +2,6 @@
 using Info;
 using Sirenix.OdinInspector;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +20,7 @@ namespace CardSpace
         public Texture2D icon;
         public bool IsMove;
         public bool IsMoveStepOver = true;
-        public float MoveSpeed=0.1f;
+        public float MoveSpeed = 0.1f;
 
         public bool IsActive;
         public bool IsCanSee;
@@ -48,7 +47,7 @@ namespace CardSpace
             IsInit = true;
             PointText.text = CardPoint.ToString();
         }
-        
+
         public void SetMoveTarget(Vector3 TargetPosition, Vector3 TargetEulers)
         {
             TargetPos = TargetPosition;
@@ -150,10 +149,10 @@ namespace CardSpace
         public async Task Deploy()
         {
             await MoveTo(GlobalBattleInfo.SelectRegion, GlobalBattleInfo.SelectLocation);
-            
+
         }
         [Button]
-        public async Task MoveTest(RegionTypes Region, bool IsOnPlayerPart , int Index )
+        public async Task MoveTest(RegionTypes Region, bool IsOnPlayerPart, int Index)
         {
             await MoveTo(Region, IsOnPlayerPart, Index);
         }

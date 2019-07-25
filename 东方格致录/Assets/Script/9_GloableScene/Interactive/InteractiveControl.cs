@@ -1,11 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Command;
 using Info;
-using Command;
-using System.Threading.Tasks;
-using System;
-using CardSpace;
+using UnityEngine;
 
 namespace Control
 {
@@ -43,20 +38,20 @@ namespace Control
         }
         private void KeyBoardEvent()
         {
-           
-                if (Input.GetKey(KeyCode.Space)&& Info.GlobalBattleInfo.IsMyTurn)
+
+            if (Input.GetKey(KeyCode.Space) && Info.GlobalBattleInfo.IsMyTurn)
+            {
+                PassPressTime += Time.deltaTime;
+                if (PassPressTime > 2)
                 {
-                    PassPressTime += Time.deltaTime;
-                    if (PassPressTime > 2)
-                    {
-                        UiCommand.SetCurrentPass();
-                        PassPressTime = 0;
-                    }
-                }
-                if (Input.GetKeyUp(KeyCode.Space) && Info.GlobalBattleInfo.IsMyTurn)
-                {
+                    UiCommand.SetCurrentPass();
                     PassPressTime = 0;
                 }
+            }
+            if (Input.GetKeyUp(KeyCode.Space) && Info.GlobalBattleInfo.IsMyTurn)
+            {
+                PassPressTime = 0;
+            }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 _ = Command.StateCommand.Surrender();

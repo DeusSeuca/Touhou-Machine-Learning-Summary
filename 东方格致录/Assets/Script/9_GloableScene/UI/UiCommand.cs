@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Command
@@ -36,22 +34,19 @@ namespace Command
         }
         public static void SetCardBoardTitle(string Title) => Info.UiInfo.CardBoardTitle = Title;
         public static void SetNoticeBoardTitle(string Title) => Info.UiInfo.NoticeBoardTitle = Title;
-        public static void SetArrowShow() => Info.GlobalBattleInfo.IsArrowShow=true;
+        public static void SetArrowShow() => Info.GlobalBattleInfo.IsArrowShow = true;
         public static void SetArrowDestory() => Info.GlobalBattleInfo.IsArrowHide = true;
 
         public static void NoticeBoardShow()
         {
-            //Info.GlobalBattleInfo.IsNotifyShow = true;
             MainThread.Run(() =>
             {
                 Info.UiInfo.NoticeBoard.GetComponent<Text>().text = Info.UiInfo.NoticeBoardTitle;
                 Info.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
             });
-           
-        }
 
-        public static void NoticeBoardHide() => Info.GlobalBattleInfo.IsNotifyHide = true;
-        public static void SetCardBoardMode(GameEnum.CardBoardMode CardBoardMode) => Info.GlobalBattleInfo.CardBoardMode = CardBoardMode;
+        }
+        public static void SetCardBoardMode(CardBoardMode CardBoardMode) => Info.GlobalBattleInfo.CardBoardMode = CardBoardMode;
         public static void SetCurrentPass()
         {
             if (Info.GlobalBattleInfo.IsPlayer1 ^ Info.GlobalBattleInfo.IsMyTurn)
@@ -67,11 +62,6 @@ namespace Command
         {
             Info.GlobalBattleInfo.IsPlayer1Pass = false;
             Info.GlobalBattleInfo.IsPlayer2Pass = false;
-            //if (Info.GlobalBattleInfo.IsPlayer1 ^ Info.GlobalBattleInfo.IsMyTurn)
-            //{
-            //    MyPass.SetActive(false);
-            //    OpPass.SetActive(false);
-            //}
         }
     }
 }
