@@ -7,13 +7,6 @@ public class PointControl : MonoBehaviour
     public int UpShowPoint = 0;
     public Text MyPoint;
     public Text OpPoint;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (DownShowPoint != Info.PointInfo.TotalDownPoint)
@@ -27,7 +20,6 @@ public class PointControl : MonoBehaviour
         if (UpShowPoint != Info.PointInfo.TotalUpPoint)
         {
             UpShowPoint = Info.PointInfo.TotalUpPoint;
-
             OpPoint.text = $"<color=yellow>{UpShowPoint}</color>";
             OpPoint.transform.localScale = Vector3.one * 1.5f;
             Invoke("Reset", 1);

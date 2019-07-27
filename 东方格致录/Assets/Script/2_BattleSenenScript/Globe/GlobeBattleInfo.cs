@@ -16,38 +16,14 @@ namespace Info
         public static List<int> TargetCardIDList;
         public static List<Card> TargetCardList;
         public static bool IsSelectCardOver;
-        public static bool IsCardBoardShow;
-        public static bool IsCardBoardHide;
-        public static bool CardBoardReload;
         public static int RoomID;
         public static Card SingleSelectCardOnBoard => TargetCardList[SelectBoardCardIds[0]];
-
-
         //操作标志位
         public static int LanguageRank;
-
-        public static bool IsCreatCard;
-        public static bool IsCreatBoardCardActual;
-        public static bool IsCreatBoardCardVitual;
-        public static bool IsDestoryCard;
-        public static bool IsDestoryBoardCard;
-        public static bool IsDiscard;
         public static bool IsCardEffectCompleted;
         public static List<GameObject> ArrowList = new List<GameObject>();
-        public static bool IsArrowShow;
-        public static bool IsArrowHide;
-
-        public static bool IsPlayParticle;
-        public static int PlayParticleRank;
-        public static Vector3 PlayParticlePos;
-
-        public static bool IsPlaySound;
-        public static int PlaySoundRank;
-
 
         public static CardBoardMode CardBoardMode;
-        //public static bool IsNotifyShow;
-        public static bool IsNotifyHide;
         public static List<int> Player1BlackCardList;
         public static List<int> Player2BlackCardList;
 
@@ -60,7 +36,6 @@ namespace Info
         public static bool IsWaitForSelectRegion;
         public static SingleRowInfo SelectRegion;
         //选择的单位
-        //public static Vector3 FocusPoint;
         public static Card ArrowStartCard;
         public static Card ArrowEndCard;
         public static bool IsWaitForSelectUnits;
@@ -77,13 +52,7 @@ namespace Info
         public static bool IsMyTurn = true;
         public static bool IsPVP = false;
 
-        public static int CreatCardId;
-
-        /// <summary>
-        /// 当前玩家是否玩家1
-        /// </summary>
         public static bool IsPlayer1 = true;
-
         public static (int P1Score, int P2Score) PlayerScore;
         public static (int MyScore, int OpScore) ShowScore => IsPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);
         public static bool IsPlayer1Pass;

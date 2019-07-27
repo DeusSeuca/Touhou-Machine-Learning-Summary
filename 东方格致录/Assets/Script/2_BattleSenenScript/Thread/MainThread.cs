@@ -18,7 +18,6 @@ public class MainThread : MonoBehaviour
         Task.Run(() =>
         {
             while (TargetAction != null) { }
-            //print("装载函数");
             TargetAction = RunAction;
         });
     }

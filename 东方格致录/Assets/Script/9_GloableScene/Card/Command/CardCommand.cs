@@ -9,25 +9,7 @@ using UnityEngine;
 namespace Command
 {
     public class CardCommand
-    {
-        public static Card CreatCardMain(int id)
-        {
-            GameObject NewCard;
-            NewCard = GameObject.Instantiate(CardLibrary.Instance.Card_Model);
-            NewCard.name = "Card" + Info.GlobalBattleInfo.CreatCardRank++;
-            var CardStandardInfo = CardLibrary.GetCardStandardInfo(id);
-            NewCard.AddComponent(Type.GetType("Card" + id));
-            Card NewCardScript = NewCard.GetComponent<Card>();
-            NewCardScript.CardId = CardStandardInfo.CardId;
-            NewCardScript.CardPoint = CardStandardInfo.Point;
-            NewCardScript.icon = CardStandardInfo.Icon;
-            NewCardScript.CardProperty = CardStandardInfo.CardProperty;
-            NewCardScript.CardTerritory = CardStandardInfo.CardTerritory;
-            NewCardScript.GetComponent<Renderer>().material.SetTexture("_Front", NewCardScript.icon);
-            NewCardScript.Init();
-            //print("异步生成卡牌");
-            return NewCardScript;
-        }
+    {      
         public static async Task<Card> CreatCard(int id)
         {
             GameObject NewCard;
@@ -49,19 +31,8 @@ namespace Command
                 NewCardScript = card;
             });
             await Task.Run(() => { while (NewCardScript == null) { } });
-            //print("异步生成卡牌");
             return NewCardScript;
-        }
-        //public static async Task<Card> CreatCard(int id)
-        //{
-        //    Info.GlobalBattleInfo.TargetCardID = id;
-        //    Info.GlobalBattleInfo.IsCreatCard = true;
-        //    await Task.Run(() => { while (Info.GlobalBattleInfo.CreatedCard == null) { } });
-        //    Card NewCard = Info.GlobalBattleInfo.CreatedCard;
-        //    Info.GlobalBattleInfo.CreatedCard = null;
-        //    //print("异步生成卡牌");
-        //    return NewCard;
-        //}
+        }      
         public static async Task ExchangeCard(bool IsPlayerWash = true)
         {
             Debug.Log("交换卡牌");
@@ -85,14 +56,11 @@ namespace Command
             {
                 RowsInfo.GetDownCardList(RegionTypes.Deck).Remove(TargetCard);
                 RowsInfo.GetDownCardList(RegionTypes.Hand).Add(TargetCard);
-
             }
             else
             {
                 RowsInfo.GetUpCardList(RegionTypes.Deck).Remove(TargetCard);
                 RowsInfo.GetUpCardList(RegionTypes.Hand).Add(TargetCard);
-
-
             }
             await OrderCard();
             await Task.Delay(100);
@@ -117,11 +85,7 @@ namespace Command
                 //int CardRank = AiCommand.GetRandom(0, MaxCardRank);
                 //GlobalBattleInfo.SelectLocation = CardRank;
                 //GlobalBattleInfo.SelectRegion = RowsInfo.GetRegionCardList(RegionName_Other.My_Hand);
-
                 //await MoveCard();
-
-
-
             }
             await Task.Delay(500);
         }
@@ -135,8 +99,6 @@ namespace Command
         }
         public static async Task MoveCard()
         {
-            Debug.Log("移动卡牌");
-
             Card TargetCard = GlobalBattleInfo.TargetCard;
             List<Card> OriginRow = RowsInfo.GetRow(TargetCard);
             List<Card> TargetRow = GlobalBattleInfo.SelectRegion.ThisRowCard;
@@ -159,31 +121,16 @@ namespace Command
             RowsInfo.GetMyCardList(RegionTypes.Hand).Remove(TargetCard);
             Debug.LogError("加入卡牌");
             RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
-            //if (Info.GlobalBattleInfo.IsMyTurn)
-            //{
-            //    Command.NetCommand.AsyncInfo(GameEnum.NetAcyncType.PlayCard);
-            //    RowsInfo.GetMyCardList(RegionTypes.Hand).Remove(TargetCard);
-            //    RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
-            //}
-            //else
-            //{
-            //    RowsInfo.GetOpCardList(RegionTypes.Hand).Remove(TargetCard);
-            //    RowsInfo.GetOpCardList(RegionTypes.Uesd).Add(TargetCard);
-            //}
             GlobalBattleInfo.PlayerPlayCard = null;
             TargetCard.Trigger<TriggerType.PlayCard>();
         }
         public static async Task DisCard(Card card = null)
         {
-            //print("丢弃卡牌");
             Card TargetCard = card == null ? GlobalBattleInfo.PlayerPlayCard : card;
             TargetCard.IsPrePrepareToPlay = false;
             TargetCard.Row.Remove(TargetCard);
             RowsInfo.GetMyCardList(RegionTypes.Grave).Add(TargetCard);
             TargetCard.Trigger<TriggerType.Discard>();
-            //await CardEffectStackControl.TriggerEffect<TriggerType.Discard>(TargetCard);
-            //GlobeBattleInfo.IsCardEffectCompleted = true;
         }
-
     }
 }

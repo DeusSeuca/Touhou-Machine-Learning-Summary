@@ -50,10 +50,5 @@ namespace Control
                 StateCommand.SetPassState(!Info.GlobalBattleInfo.IsPlayer1, Info.GlobalBattleInfo.IsPlayer2Pass);
             }
         }
-        //public async Task PlayerSurrender()
-        //{
-        //    await StateCommand.Surrender();
-        //}
     }
-
 }

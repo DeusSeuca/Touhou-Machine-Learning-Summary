@@ -12,8 +12,6 @@ namespace Control
         public float Range;
         public bool IsMyHandRegion;
         public bool IsSingle;
-
-
         void Awake()
         {
             SingleInfo = GetComponent<SingleRowInfo>();
@@ -39,14 +37,10 @@ namespace Control
             {
                 DestoryTempCard();
             }
-
         }
         public async Task CreatTempCard()
         {
-            //print("创建临时卡片"+ RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard[0].CardId);
-            SingleInfo.TempCard = CardCommand.CreatCardMain(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard[0].CardId);
-            //SingleInfo.TempCard = await CardCommand.CreatCard(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard[0].CardId);
-            print("临时卡片为" + SingleInfo.TempCard);
+            SingleInfo.TempCard =await CardCommand.CreatCard(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard[0].CardId);
             SingleInfo.TempCard.IsActive = true;
             SingleInfo.TempCard.IsCanSee = true;
             SingleInfo.ThisRowCard.Insert(SingleInfo.Rank, SingleInfo.TempCard);

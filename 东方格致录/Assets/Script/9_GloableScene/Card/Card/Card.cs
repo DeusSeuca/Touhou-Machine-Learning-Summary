@@ -92,19 +92,11 @@ namespace CardSpace
         }
         public void Trigger<T>()
         {
-            //Debug.Log(name + "触发" + typeof(T));
             List<Func<Task>> Steps = new List<Func<Task>>();
-            //List<PropertyInfo> tasks = GetType().GetProperties().Where(x => x.GetCustomAttributes(true)[0].GetType() == typeof(T)).ToList();
-            //GetType().GetProperties().ForEach(Debug.Log);
-            //GetType().GetProperties().ForEach(x => Debug.Log("有标签的" + x.GetCustomAttributes(true)[0].GetType()));
-            //Debug.Log("结束" );
-            //Debug.Log("类型为" + typeof(T));
             List<PropertyInfo> tasks = GetType().GetProperties().Where(x =>
                 x.GetCustomAttributes(true).Count() > 0 && x.GetCustomAttributes(true)[0].GetType() == typeof(T)).ToList();
-            //Debug.Log(name + "数量为" + tasks.Count);
             tasks.Reverse();
             tasks.Select(x => x.GetValue(this)).Cast<Func<Task>>().ToList().ForEach(CardEffectStackControl.TaskStack.Push);
-            //Console.WriteLine("加载" + typeof(T));
             _ = CardEffectStackControl.Run();
         }
         public async Task Hurt(int point)

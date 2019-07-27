@@ -11,13 +11,9 @@ namespace Control
         void Update()
         {
             GetFocusTarget();
-
             MouseEvent();
             KeyBoardEvent();
         }
-
-
-
         private void GetFocusTarget()
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -71,25 +67,17 @@ namespace Control
                 }
                 if (GlobalBattleInfo.IsWaitForSelectUnits && !GlobalBattleInfo.PlayerFocusCard.IsActive)
                 {
-                    print("选择了卡片");
                     GlobalBattleInfo.SelectUnits.Add(GlobalBattleInfo.PlayerFocusCard);
                     Command.UiCommand.SetArrowShow();
-                    //Instantiate(Info.UiInfo.Arrow).GetComponent<ArrowManager>().RefreshArrow
-                    //    (
-                    //    GlobalBattleInfo.ArrowStartCard.transform,
-                    //    GlobalBattleInfo.PlayerFocusCard.transform
-                    //    );
                 }
                 if (GlobalBattleInfo.IsWaitForSelectLocation)
                 {
                     if (GlobalBattleInfo.PlayerFocusRegion != null && GlobalBattleInfo.PlayerFocusRegion.CanBeSelected)
                     {
-                        //print("选择位置" + GlobalBattleInfo.PlayerFocusRegion.Rank);
                         GlobalBattleInfo.SelectRegion = GlobalBattleInfo.PlayerFocusRegion;
                         GlobalBattleInfo.SelectLocation = GlobalBattleInfo.PlayerFocusRegion.Rank;
                     }
                 }
-                // print($"所在行为{GlobalBattleInfo.PlayerFocusCard.Row}，所在坐标为{GlobalBattleInfo.PlayerFocusCard.Location}");
             }
             if (Input.GetMouseButton(0) && Info.GlobalBattleInfo.IsMyTurn)
             {
@@ -107,7 +95,6 @@ namespace Control
                     {
                         if (GlobalBattleInfo.PlayerFocusRegion.name == "我方_墓地")
                         {
-                            print("出发丢弃卡牌");
                             _ = CardCommand.DisCard();
                         }
                         else if (GlobalBattleInfo.PlayerFocusRegion.name == "我方_手牌")

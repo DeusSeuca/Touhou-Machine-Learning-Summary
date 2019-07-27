@@ -1,10 +1,13 @@
 ﻿
 using CardSpace;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 public static class Extern
 {
+    public static string ToJson(this object target) => JsonConvert.SerializeObject(target);
+    public static T ToObject<T>(this string Data) => JsonConvert.DeserializeObject<T>(Data);
     public static int GetRowRank(this List<Card> CardList)
     {
         return Info.RowsInfo.GlobalCardList.IndexOf(CardList);

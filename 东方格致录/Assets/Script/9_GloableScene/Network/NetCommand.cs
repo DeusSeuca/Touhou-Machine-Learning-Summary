@@ -19,15 +19,10 @@ namespace Command
             Client = NetClient;
             Debug.Log("登录服务器");
             Bind("InitBattleInfo", InitBattleInfo);
-
             Bind("JoinResult", JoinResult);
-            //Bind("PlayerJudge", PlayerJudge);
             Bind("AsyncInfoRequir", AsyncInfoRequir);
             Bind("SurrenderRequir", SurrenderRequir);
         }
-
-
-
         public static void AsyncInfo(NetAcyncType AcyncType)
         {
             if (Info.GlobalBattleInfo.IsPVP && (Info.GlobalBattleInfo.IsMyTurn || AcyncType == NetAcyncType.FocusCard))
@@ -36,7 +31,6 @@ namespace Command
                 {
                     case NetAcyncType.FocusCard:
                         {
-                            //Debug.Log("同步焦点卡片为" + Info.GlobalBattleInfo.PlayerFocusCard.Location);
                             Vector2 TargetCardLocation = Info.GlobalBattleInfo.PlayerFocusCard != null ? Info.GlobalBattleInfo.PlayerFocusCard.Location : new Vector2(-1, -1);
                             Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y));
                             break;
@@ -105,7 +99,6 @@ namespace Command
                 default:
                     break;
             }
-
         }
         public static string Register(string name, string password)
         {
@@ -123,21 +116,12 @@ namespace Command
             Info.GlobalBattleInfo.IsPVP = true;
             Client.SendMessge("Join", Info.AllPlayerInfo.UserInfo);
             Debug.Log("发送完毕");
-
         }
         private static void JoinResult(PacketHeader packetHeader, Connection connection, string data)
         {
-            Debug.Log("接收到加入结果:" + data);
-           
-            MainThread.Run(() =>
-            {
-                Debug.Log("yaya");
-                Info.AllPlayerInfo.OpponentInfo = data.ToObject<PlayerInfo>();
-                Info.GlobalBattleInfo.IsPVP = true;
-                SceneManager.LoadSceneAsync(2);
-                Debug.Log("ya");
-
-            });
+            Info.AllPlayerInfo.OpponentInfo = data.ToObject<PlayerInfo>();
+            Info.GlobalBattleInfo.IsPVP = true;
+            MainThread.Run(() =>{SceneManager.LoadSceneAsync(2);});
         }
         public static void Surrender()
         {

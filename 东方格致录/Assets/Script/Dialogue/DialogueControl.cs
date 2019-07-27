@@ -4,8 +4,6 @@ using UnityEngine;
 public class DialogueControl : MonoBehaviour
 {
     public GameObject DialogueUI;
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -19,7 +17,6 @@ public class DialogueControl : MonoBehaviour
             {
                 DialgueInfo.DialgueInfos.IsNext = true;
             }
-
         }
     }
 }

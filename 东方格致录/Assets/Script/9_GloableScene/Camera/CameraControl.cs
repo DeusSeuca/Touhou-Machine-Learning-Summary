@@ -6,10 +6,7 @@ namespace Control
         public Vector3 DefaultView;
         float OffsetX = 0;
         float OffsetY = 0;
-        void Start()
-        {
-            DefaultView = transform.eulerAngles;
-        }
+        void Start() => DefaultView = transform.eulerAngles;
         void Update()
         {
             if (Input.GetMouseButton(1))

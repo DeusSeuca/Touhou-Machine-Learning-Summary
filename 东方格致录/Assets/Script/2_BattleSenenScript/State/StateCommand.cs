@@ -91,7 +91,7 @@ namespace Command
                 {
                     case (0):
                         {
-                            Info.GlobalBattleInfo.ExChangeableCardNum += 0;
+                            Info.GlobalBattleInfo.ExChangeableCardNum += 3;
                             Info.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.GlobalBattleInfo.ExChangeableCardNum;
                             for (int i = 0; i < 5; i++)
                             {
@@ -262,7 +262,6 @@ namespace Command
                         break;
                 }
             });
-            //Debug.Log("关闭");
             UiCommand.SetCardBoardHide();
             GlobalBattleInfo.IsWaitForSelectBoardCard = false;
         }

@@ -4,8 +4,7 @@ using static Command.DialogueCommand;
 using static DialgueInfo;
 public class Dialogue : MonoBehaviour
 {
-    //public static Dialogue Instance;
-    public static Dialogue Instance;//=> Instance ?? new Dialogue();
+    public static Dialogue Instance;
     Chara lmA = Chara.灵梦A;
     Chara lmB = Chara.灵梦B;
     private void Awake()
@@ -28,8 +27,6 @@ public class Dialogue : MonoBehaviour
         voice(2);
         await say("好啊", lmA);
     }
-
-
 }
 
 

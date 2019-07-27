@@ -11,14 +11,12 @@ namespace Info
         public Belong belong;
         public List<Card> ThisRowCard => belong == Belong.My ? RowsInfo.GetDownCardList(region) : RowsInfo.GetUpCardList(region);
         public int RowRank => RowsInfo.GlobalCardList.IndexOf(ThisRowCard);
-        //public List<Card> ShowCardList;
         public bool CanBeSelected;
         public int Rank => this.JudgeRank(GlobalBattleInfo.FocusPoint);
         public Card TempCard;
         public RowControl Control => GetComponent<RowControl>();
         public Color color;
     }
-
 }
 static partial class RowInfoExtend
 {

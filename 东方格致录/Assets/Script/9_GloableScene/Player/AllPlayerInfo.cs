@@ -1,6 +1,5 @@
 ﻿using Sirenix.OdinInspector;
 using static NetInfoModel;
-
 namespace Info
 {
     /// <summary>
@@ -14,12 +13,6 @@ namespace Info
         //对手的用户信息
         [ShowInInspector]
         public static PlayerInfo OpponentInfo;
-        //开房者信息
-        //[ShowInInspector]
-        //public static PlayerInfo Player1Info=>Info.GlobalBattleInfo.IsPlayer1? UserInfo: OpponentInfo;
-        ////加入者信息
-        //[ShowInInspector]
-        //public static PlayerInfo Player2Info => !Info.GlobalBattleInfo.IsPlayer1 ? UserInfo : OpponentInfo;
     }
 }
 

@@ -7,11 +7,6 @@ using UnityEngine;
 [Obsolete()]
 public class Test1 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
     [Button("创建")]
     private void NewMethod()
     {
@@ -37,14 +32,5 @@ public class Test1 : MonoBehaviour
             //CardBoardControl.Instance.LoadCardList(new List<int> { 1002, 1002 });
             await Task.Delay(2000);
         }).Wait();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-
-
-        }
     }
 }

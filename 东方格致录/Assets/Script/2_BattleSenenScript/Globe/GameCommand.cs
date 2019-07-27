@@ -25,11 +25,7 @@ namespace Command
         {
 
         }
-
-        /// <summary>
-        /// 限制手牌被打出
-        /// </summary>
-        /// <param name="IsOpen"></param>
+        // 限制手牌被打出
         public static void PlayCardLimit(bool IsLimit)
         {
             RowsInfo.GetRegionCardList(RegionName_Other.My_Hand).ThisRowCard.ForEach(card => card.IsLimit = IsLimit);

@@ -5,16 +5,12 @@ namespace Command
 {
     public class DialogueCommand
     {
-
         public static void play(int v1, int v2)
         {
-            Debug.Log("yaya");
             foreach (var methond in typeof(Dialogue).GetMethods())
             {
                 foreach (Dial info in methond.GetCustomAttributes(typeof(Dial), false))
                 {
-                    Debug.Log("one");
-
                     if (info.step == v1 && info.rank == v2)
                     {
                         methond.Invoke(Dialogue.Instance, new object[] { });
