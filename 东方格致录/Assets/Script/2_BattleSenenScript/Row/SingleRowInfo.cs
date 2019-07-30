@@ -7,16 +7,25 @@ namespace Info
 {
     public class SingleRowInfo : MonoBehaviour
     {
-        public RegionTypes region;
-        public Belong belong;
-        public List<Card> ThisRowCard => belong == Belong.My ? RowsInfo.GetDownCardList(region) : RowsInfo.GetUpCardList(region);
-        public int RowRank => RowsInfo.GlobalCardList.IndexOf(ThisRowCard);
-        public bool CanBeSelected;
-        public int Rank => this.JudgeRank(GlobalBattleInfo.FocusPoint);
-        public Card TempCard;
-        public RowControl Control => GetComponent<RowControl>();
         public Color color;
+        public Card TempCard;
+        public Belong belong;
+        public RegionTypes region;
+        public bool CanBeSelected;
+        public RowControl Control => GetComponent<RowControl>();
+        public Material CardMaterial => transform.GetComponent<Renderer>().material;
+        public int RowRank => RowsInfo.GlobalCardList.IndexOf(ThisRowCards);
+        public int Location => this.JudgeRank(GlobalBattleInfo.FocusPoint);
+        public List<Card> ThisRowCards => belong == Belong.My ? RowsInfo.GetDownCardList(region) : RowsInfo.GetUpCardList(region);
+        private void Awake() => Info.RowsInfo.SingleRowInfos.Add(this);
+        public  void SetRegionSelectable(bool CanBeSelected)
+        {
+            this.CanBeSelected = CanBeSelected;
+            CardMaterial.SetColor("_GlossColor",CanBeSelected ?color : Color.black);
+
+        }
     }
+   
 }
 static partial class RowInfoExtend
 {
@@ -24,7 +33,7 @@ static partial class RowInfoExtend
     {
         int Rank = 0;
         float posx = -(point.x - SingleInfo.transform.position.x);
-        int UniteNum = SingleInfo.ThisRowCard.Where(card => !card.IsActive).Count();
+        int UniteNum = SingleInfo.ThisRowCards.Where(card => !card.IsActive).Count();
         for (int i = 0; i < UniteNum; i++)
         {
             if (posx > i * 1.6 - (UniteNum - 1) * 0.8)

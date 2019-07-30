@@ -8,10 +8,10 @@ namespace Info
 {
     public class RowsInfo : SerializedMonoBehaviour
     {
-        [ShowInInspector]
+        [ShowInInspector]//需要重构移除
         public static List<List<Card>> GlobalCardList = new List<List<Card>>();
         public static List<SingleRowInfo> SingleRowInfos = new List<SingleRowInfo>();
-        public static SingleRowInfo SelectSingleRowInfos(int RowRank) => SingleRowInfos.First(infos => infos.ThisRowCard == GlobalCardList[RowRank]);
+        public static SingleRowInfo GetSingleRowInfoById(int Id) => SingleRowInfos.First(infos => infos.ThisRowCards == GlobalCardList[Id]);
 
         public static RowsInfo Instance;
 
@@ -51,6 +51,7 @@ namespace Info
         /// <param name="type"></param>
         /// <returns></returns>
         public static List<Card> GetOpCardList(RegionTypes type) => GlobalBattleInfo.IsMyTurn ? GetUpCardList(type) : GetDownCardList(type);
+        public static SingleRowInfo GetSingleRowInfo(RegionTypes type, bool InMyTerritory) => SingleRowInfos.First(SingleRow => SingleRow.ThisRowCards.Equals(InMyTerritory ? GetMyCardList(type) : GetDownCardList(type)));
 
         public static SingleRowInfo GetRegionCardList(RegionName_Battle region) => Instance.SingleBattleInfos[region];
 

@@ -10,8 +10,11 @@ public class Card1000 : Card
     [TriggerType.PlayCard]
     public Func<Task> Step2 => (async () =>
     {
+        print("等待选择位置");
         await StateCommand.WaitForSelectLocation();
+        print("开始部署");
         await Deploy();
+        print("部署完成");
         await Task.Delay(100);
     });
 }

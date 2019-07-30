@@ -127,7 +127,7 @@ namespace CardSpace
         public async Task MoveTo(SingleRowInfo singleRowInfo, int Index = 0)
         {
             List<Card> OriginRow = RowsInfo.GetRow(this);
-            List<Card> TargetRow = singleRowInfo.ThisRowCard;
+            List<Card> TargetRow = singleRowInfo.ThisRowCards;
             OriginRow.Remove(this);
             TargetRow.Insert(Index, this);
             MoveSpeed = 0.1f;
@@ -140,6 +140,7 @@ namespace CardSpace
         }
         public async Task Deploy()
         {
+            Debug.Log("开始部署");
             await MoveTo(GlobalBattleInfo.SelectRegion, GlobalBattleInfo.SelectLocation);
 
         }

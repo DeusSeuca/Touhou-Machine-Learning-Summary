@@ -75,7 +75,7 @@ namespace Control
                     if (GlobalBattleInfo.PlayerFocusRegion != null && GlobalBattleInfo.PlayerFocusRegion.CanBeSelected)
                     {
                         GlobalBattleInfo.SelectRegion = GlobalBattleInfo.PlayerFocusRegion;
-                        GlobalBattleInfo.SelectLocation = GlobalBattleInfo.PlayerFocusRegion.Rank;
+                        GlobalBattleInfo.SelectLocation = GlobalBattleInfo.PlayerFocusRegion.Location;
                     }
                 }
             }

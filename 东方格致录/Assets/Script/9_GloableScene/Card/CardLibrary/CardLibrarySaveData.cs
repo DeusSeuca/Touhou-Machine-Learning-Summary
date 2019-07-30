@@ -14,10 +14,7 @@ public class CardLibrarySaveData : ScriptableObject
     [LabelText("牌库卡牌数量")]
     public int CardNum;
     public List<SingleCardLibrary> SingleCardLibrarieDatas;
-    public void Init()
-    {
-        CardNum = SingleCardLibrarieDatas.Select(Cards => Cards.CardNum).Sum();
-    }
+    public void Init() => CardNum = SingleCardLibrarieDatas.Select(Cards => Cards.CardNum).Sum();
     [Button("添加势力")]
     public void AddSingleCardLibrary()
     {
@@ -69,12 +66,9 @@ public class CardLibrarySaveData : ScriptableObject
                 CardModelInfos.Add(new CardModelInfo(icon, NewCardId, CardName, Point, sectarian));
                 CardNum = CardModelInfos.Count;
             }
-
         }
-
         [TabGroup("卡片管理")]
         public List<CardModelInfo> CardModelInfos;
-
         [Serializable]
         public class CardModelInfo
         {
@@ -110,13 +104,8 @@ public class CardLibrarySaveData : ScriptableObject
                 Point = point;
                 this.sectarian = sectarian;
             }
-
             [Button("打开脚本")]
-            public void OpenCardScript()
-            {
-                string NewPath = Application.dataPath + $@"\Script\9_GloableScene\Card\CardLibrary\CardModel\Card{CardId}.cs";
-                Process.Start(NewPath);
-            }
+            public void OpenCardScript() => Process.Start(Application.dataPath + $@"\Script\9_GloableScene\Card\CardLibrary\CardModel\Card{CardId}.cs");
         }
     }
 }

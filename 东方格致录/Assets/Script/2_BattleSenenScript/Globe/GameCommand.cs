@@ -12,12 +12,12 @@ namespace Command
         }
         public static void PlayCardToRegion()
         {
-            if (GlobalBattleInfo.PlayerFocusRegion.ThisRowCard.Count < 5)
+            if (GlobalBattleInfo.PlayerFocusRegion.ThisRowCards.Count < 5)
             {
                 Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
                 TargetCard.IsPrePrepareToPlay = false;
                 //RowsInfo.Instance.SingleOtherInfos[RegionName_Other.My_Hand].ThisRowCard.Remove(TargetCard);
-                GlobalBattleInfo.PlayerFocusRegion.ThisRowCard.Add(TargetCard);
+                GlobalBattleInfo.PlayerFocusRegion.ThisRowCards.Add(TargetCard);
                 GlobalBattleInfo.IsCardEffectCompleted = true;
             }
         }
@@ -28,7 +28,7 @@ namespace Command
         // 限制手牌被打出
         public static void PlayCardLimit(bool IsLimit)
         {
-            RowsInfo.GetRegionCardList(RegionName_Other.My_Hand).ThisRowCard.ForEach(card => card.IsLimit = IsLimit);
+            RowsInfo.GetRegionCardList(RegionName_Other.My_Hand).ThisRowCards.ForEach(card => card.IsLimit = IsLimit);
         }
         //待扩展
         public static List<Card> GetCardList(LoadRangeOnBattle OnBattle = LoadRangeOnBattle.None, LoadRangeOnOther OnOther = LoadRangeOnOther.None)

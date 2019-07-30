@@ -18,7 +18,7 @@ namespace Command
                 Info.AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 0, new List<int> { 1000, 1001, 1002, 1001, 1000, 1002, 1000, 1001, 1000, 1001, 1001, 1000, 1002 }) });
                 Info.AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 0, new List<int> { 1001, 1001, 1000, 1000, 1001, 1001, 1000, 1000, 1001, 1001, 1001, 1000, 1002 }) });
             }
-            RowCommand.SetRegionSelectable(false);
+            RowCommand.SetAllRegionSelectable(false);
             await Task.Run(async () =>
             {
                 //await Task.Delay(500);
@@ -91,7 +91,7 @@ namespace Command
                 {
                     case (0):
                         {
-                            Info.GlobalBattleInfo.ExChangeableCardNum += 3;
+                            Info.GlobalBattleInfo.ExChangeableCardNum += 0;
                             Info.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.GlobalBattleInfo.ExChangeableCardNum;
                             for (int i = 0; i < 5; i++)
                             {
@@ -184,20 +184,23 @@ namespace Command
             {
                 while (Info.GlobalBattleInfo.SelectRegion == null) { }
             });
-            Command.NetCommand.AsyncInfo(NetAcyncType.FocusRegion);
+            NetCommand.AsyncInfo(NetAcyncType.FocusRegion);
             GlobalBattleInfo.IsWaitForSelectRegion = false;
         }
         public static async Task WaitForSelectLocation()
         {
             GlobalBattleInfo.IsWaitForSelectLocation = true;
-            RowCommand.SetRegionSelectable(true);
+            Debug.Log("开始进入部署位置");
+            RowCommand.SetAllRegionSelectable(true);
             GlobalBattleInfo.SelectLocation = -1;
+            Debug.Log("开始进入部署位置");
             await Task.Run(() =>
             {
                 while (Info.GlobalBattleInfo.SelectLocation < 0) { }
             });
-            //Debug.Log("选择完毕");
-            RowCommand.SetRegionSelectable(false);
+            Debug.Log("选择部署位置完毕");
+            NetCommand.AsyncInfo(NetAcyncType.FocusLocation);
+            RowCommand.SetAllRegionSelectable(false);
             GlobalBattleInfo.IsWaitForSelectLocation = false;
         }
         public static async Task WaitForSelecUnit(Card OriginCard, List<Card> Cards, int num)
@@ -212,11 +215,11 @@ namespace Command
             await Task.Run(async () =>
             {
                 await Task.Delay(500);
-                Command.UiCommand.SetArrowShow();
+                UiCommand.SetArrowShow();
                 Debug.Log("选择单位");
                 while (Info.GlobalBattleInfo.SelectUnits.Count < Math.Min(Cards.Count, num)) { }
                 await Task.Delay(250);
-                Command.UiCommand.SetArrowDestory();
+                UiCommand.SetArrowDestory();
             });
             //Debug.Log("双方数量" + Info.GlobalBattleInfo.SelectUnits.Count + ":" + Math.Min(Cards.Count, num));
             //Debug.Log("选择单位完毕");
@@ -225,7 +228,6 @@ namespace Command
         }
         public static async Task WaitForSelectBoardCard<T>(List<T> CardIds, CardBoardMode Mode = CardBoardMode.Select, int num = 1)
         {
-
             GlobalBattleInfo.SelectBoardCardIds = new List<int>();
             GlobalBattleInfo.IsWaitForSelectBoardCard = true;
             UiCommand.SetCardBoardShow();

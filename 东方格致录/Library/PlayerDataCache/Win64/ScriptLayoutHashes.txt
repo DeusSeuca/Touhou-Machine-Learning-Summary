@@ -7,7 +7,6 @@ Assets/Scenes/1_Menu.unity
 Assets/Scenes/2_BattleScene.unity
 SceneListEnd?
 a1f19ad47d3094e235f21b74dfc423a8 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessLayer
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:Info.ThreadAgent
 726fcf7961cbb4108aa5be5e55b8c8bf Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.ColorGrading
 b13de7a0a457cb8e026d4237dc1b5797 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.LensDistortion
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
@@ -104,7 +103,6 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 63d7b9b64a11859f416d72ba9a3c3fec Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.ScreenSpaceReflections
 38bcb4d3f9a1812fd650f92e87a4cf64 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessProfile
 e82c0521cdfe8cb6a168ef7208a98d4a Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.Vignette
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TempTest
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.NetClient
 71bb6a6b6c8f052f948db64c7dd3ca4f Sirenix.Utilities.dll:Sirenix.Utilities.ProjectPathFinder
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -147,6 +145,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 07d9a608b6a34b26463cd2b7097d3652 Assembly-CSharp.dll:Info.ParticleInfo
 07aef7f4e1adde99b184fbc04fb2d9b1 Assembly-CSharp.dll:CardSpace.Card
 61b9d9b6f4b6a222dfea8b131b3d3227 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.ChromaticAberration
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestTask
 3e345838d555e3f0f0a651f8c577cd84 Unity.RenderPipelines.Lightweight.Runtime.dll:UnityEngine.Experimental.Rendering.LightweightPipeline.LightweightRenderPipelineAsset
 07aef7f4e1adde99b184fbc04fb2d9b1 Assembly-CSharp.dll:.Card1001
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
@@ -163,7 +162,6 @@ a53651ee3996fbba20dfe0fce02f0b23 Unity.Postprocessing.Runtime.dll:UnityEngine.Re
 4d51d5ccf37d2089bdfe827617b784ff Unity.RenderPipelines.Core.Runtime.dll:UnityEngine.Experimental.Rendering.VolumeProfile
 71bb6a6b6c8f052f948db64c7dd3ca4f Sirenix.Utilities.dll:Sirenix.Utilities.ProjectPathFinder
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Dialogue
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BallControl
 6adf0680d8d7e110dab1c5470b12851b Sirenix.Utilities.Editor.dll:Sirenix.Utilities.Editor.InstanceCreatorWindow
 f050e4ebd311386367bb1906f9218b01 Unity.RenderPipelines.Lightweight.Runtime.dll:UnityEngine.Experimental.Rendering.LightweightPipeline.LWRPAdditionalLightData
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -207,7 +205,6 @@ a46792d288ced0feff736060aa84bb80 Sirenix.OdinInspector.Editor.dll:Sirenix.OdinIn
 32d86e072c9cd4c796169058073b6b89 Sirenix.OdinInspector.Editor.dll:Sirenix.Utilities.Editor.SerializationDebuggerWindow
 37b27c9951af7a4313cb8f2ea2d59c28 Sirenix.OdinInspector.Editor.dll:Sirenix.OdinInspector.Editor.SirenixPreferencesWindow
 dc269aef04d4eb084444fd0b51ab208e Sirenix.OdinInspector.Editor.dll:Sirenix.OdinInspector.Editor.StaticInspectorWindow
-07aef7f4e1adde99b184fbc04fb2d9b1 Assembly-CSharp.dll:CardSpace.CardTest
 aa82b3ce4c0c9b227036c0337315c5d3 Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
 e51c09a4cc447f11db225afcd8e3e490 Unity.TextMeshPro.dll:TMPro.TMP_Settings
 cf96e5f7b3d069bab453925bd41be04e UnityEngine.TestRunner.dll:UnityEngine.TestTools.EnumerableSetUpTearDownCommandState
@@ -235,17 +232,15 @@ a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:Control.UserModeControl
 34b96d96e6be7264ba2020c2c365bdb1 Assembly-CSharp.dll:Info.AllPlayerInfo
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TestCreatCard
 6d3d943fe1c42386cf5aad60ec77d8b8 Assembly-CSharp.dll:Info.UiInfo
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MainThread
 07aef7f4e1adde99b184fbc04fb2d9b1 Assembly-CSharp.dll:.Card1002
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.CardControl
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:Control.CardControl
 13a57819ec032fd3b6fd786922663231 Assembly-CSharp.dll:.CardLibrary
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 34b96d96e6be7264ba2020c2c365bdb1 Assembly-CSharp.dll:Info.RowsInfo
 07aef7f4e1adde99b184fbc04fb2d9b1 Assembly-CSharp.dll:.Card1003
-297ddcb9da5799f5c89673a0b60df532 Assembly-CSharp.dll:.Floow
-7dc9777094280f201a53fd50810a9907 Assembly-CSharp.dll:Info.SingleRowInfo
+6751c7fe6ea2ca4f18b2757d77662dbb Assembly-CSharp.dll:Info.SingleRowInfo
 d5630f96bd5a6a6eed7e1754c3fb8703 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessVolume
 d0987ce3e9092dbe0fa30d73f333fffa Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.Grain
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro

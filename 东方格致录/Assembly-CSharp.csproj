@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scenes\TestTask.cs" />
     <Compile Include="Assets\Script\0_LoginSceen\UserLoginControl.cs" />
     <Compile Include="Assets\Script\1_MenuScene\UserModeControl.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Ai\AiCommand.cs" />

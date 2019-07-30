@@ -101,7 +101,7 @@ namespace Command
         {
             Card TargetCard = GlobalBattleInfo.TargetCard;
             List<Card> OriginRow = RowsInfo.GetRow(TargetCard);
-            List<Card> TargetRow = GlobalBattleInfo.SelectRegion.ThisRowCard;
+            List<Card> TargetRow = GlobalBattleInfo.SelectRegion.ThisRowCards;
             Debug.Log("移动卡牌从" + OriginRow.Count + "到" + TargetRow.Count);
             OriginRow.Remove(TargetCard);
             TargetRow.Insert(GlobalBattleInfo.SelectLocation, TargetCard);

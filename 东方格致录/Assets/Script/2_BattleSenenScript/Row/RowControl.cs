@@ -18,8 +18,8 @@ namespace Control
         }
         void Update()
         {
-            ControlCardPosition(SingleInfo.ThisRowCard);
-            RefreshHandCard(SingleInfo.ThisRowCard);
+            ControlCardPosition(SingleInfo.ThisRowCards);
+            RefreshHandCard(SingleInfo.ThisRowCards);
             TempCardControk();
         }
         public void TempCardControk()
@@ -29,7 +29,7 @@ namespace Control
                 print(SingleInfo.TempCard);
                 _ = CreatTempCard();
             }
-            if (SingleInfo.TempCard != null && SingleInfo.Rank != SingleInfo.ThisRowCard.IndexOf(SingleInfo.TempCard))
+            if (SingleInfo.TempCard != null && SingleInfo.Location != SingleInfo.ThisRowCards.IndexOf(SingleInfo.TempCard))
             {
                 ChangeTempCard();
             }
@@ -40,22 +40,22 @@ namespace Control
         }
         public async Task CreatTempCard()
         {
-            SingleInfo.TempCard =await CardCommand.CreatCard(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCard[0].CardId);
+            SingleInfo.TempCard =await CardCommand.CreatCard(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCards[0].CardId);
             SingleInfo.TempCard.IsActive = true;
             SingleInfo.TempCard.IsCanSee = true;
-            SingleInfo.ThisRowCard.Insert(SingleInfo.Rank, SingleInfo.TempCard);
+            SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
             SingleInfo.TempCard.Init();
         }
         public void DestoryTempCard()
         {
-            SingleInfo.ThisRowCard.Remove(SingleInfo.TempCard);
+            SingleInfo.ThisRowCards.Remove(SingleInfo.TempCard);
             Destroy(SingleInfo.TempCard.gameObject);
             SingleInfo.TempCard = null;
         }
         public void ChangeTempCard()
         {
-            SingleInfo.ThisRowCard.Remove(SingleInfo.TempCard);
-            SingleInfo.ThisRowCard.Insert(SingleInfo.Rank, SingleInfo.TempCard);
+            SingleInfo.ThisRowCards.Remove(SingleInfo.TempCard);
+            SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
         }
         public void SetSelectable(bool Seleceable)
         {
