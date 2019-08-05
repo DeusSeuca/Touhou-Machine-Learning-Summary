@@ -15,10 +15,12 @@ namespace Command
         }
         public static void ParticlePlay(int Rank, Vector3 Position)
         {
-            MainThread.Run(() =>{
+            MainThread.Run(() =>
+            {
                 ParticleSystem TargetParticle = GameObject.Instantiate(Info.ParticleInfo.Instance.ParticleEffect[Rank]);
                 TargetParticle.transform.position = Position;
                 TargetParticle.Play();
+                GameObject.Destroy(TargetParticle,2);
             });
         }
     }

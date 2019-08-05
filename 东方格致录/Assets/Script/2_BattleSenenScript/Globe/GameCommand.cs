@@ -34,14 +34,14 @@ namespace Command
         public static List<Card> GetCardList(LoadRangeOnBattle OnBattle = LoadRangeOnBattle.None, LoadRangeOnOther OnOther = LoadRangeOnOther.None)
         {
             List<Card> CardList = new List<Card>();
-            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.My_Water) ? RowsInfo.GetDownCardList(RegionTypes.Water) : new List<Card>());
-            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.My_Fire) ? RowsInfo.GetDownCardList(RegionTypes.Fire) : new List<Card>());
-            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.My_Wind) ? RowsInfo.GetDownCardList(RegionTypes.Wind) : new List<Card>());
-            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.My_Soil) ? RowsInfo.GetDownCardList(RegionTypes.Soil) : new List<Card>());
-            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Water) ? RowsInfo.GetUpCardList(RegionTypes.Water) : new List<Card>());
-            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Fire) ? RowsInfo.GetUpCardList(RegionTypes.Fire) : new List<Card>());
-            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Wind) ? RowsInfo.GetUpCardList(RegionTypes.Wind) : new List<Card>());
-            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Soil) ? RowsInfo.GetUpCardList(RegionTypes.Soil) : new List<Card>());
+            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.My_Water) ? RowsInfo.GetMyCardList(RegionTypes.Water) : new List<Card>());
+            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.My_Fire) ? RowsInfo.GetMyCardList(RegionTypes.Fire) : new List<Card>());
+            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.My_Wind) ? RowsInfo.GetMyCardList(RegionTypes.Wind) : new List<Card>());
+            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.My_Soil) ? RowsInfo.GetMyCardList(RegionTypes.Soil) : new List<Card>());
+            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Water) ? RowsInfo.GetOpCardList(RegionTypes.Water) : new List<Card>());
+            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Fire) ? RowsInfo.GetOpCardList(RegionTypes.Fire) : new List<Card>());
+            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Wind) ? RowsInfo.GetOpCardList(RegionTypes.Wind) : new List<Card>());
+            CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Soil) ? RowsInfo.GetOpCardList(RegionTypes.Soil) : new List<Card>());
             return CardList;
         }
 

@@ -57,7 +57,7 @@ namespace Info
 
         public static SingleRowInfo GetRegionCardList(RegionName_Other region) => Instance.SingleOtherInfos[region];
 
-        public static Vector2 GetLocation(Card TargetCard)
+        public static NetInfoModel.Location GetLocation(Card TargetCard)
         {
             int RankX = -1;
             int RankY = -1;
@@ -69,11 +69,11 @@ namespace Info
                     RankY = GlobalCardList[i].IndexOf(TargetCard);
                 }
             }
-            return new Vector2(RankX, RankY);
+            return new NetInfoModel.Location( RankX, RankY);
         }
-        public static Card GetCard((int, int) TargetLocation)
+        public static Card GetCard(int x,int y)
         {
-            return TargetLocation.Item1 == -1 ? null : GlobalCardList[(int)TargetLocation.Item1][(int)TargetLocation.Item2];
+            return x == -1 ? null : GlobalCardList[x][y];
         }
         public static List<Card> GetRow(Card TargetCard)
         {

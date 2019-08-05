@@ -40,6 +40,7 @@ namespace Control
                 PassPressTime += Time.deltaTime;
                 if (PassPressTime > 2)
                 {
+                    NetCommand.AsyncInfo(NetAcyncType.Pass);
                     UiCommand.SetCurrentPass();
                     PassPressTime = 0;
                 }
@@ -65,7 +66,7 @@ namespace Control
                 {
                     GlobalBattleInfo.SelectRegion = GlobalBattleInfo.PlayerFocusRegion;
                 }
-                if (GlobalBattleInfo.IsWaitForSelectUnits && !GlobalBattleInfo.PlayerFocusCard.IsActive)
+                if (GlobalBattleInfo.IsWaitForSelectUnits && GlobalBattleInfo.PlayerFocusCard!=null && !GlobalBattleInfo.PlayerFocusCard.IsGray)
                 {
                     GlobalBattleInfo.SelectUnits.Add(GlobalBattleInfo.PlayerFocusCard);
                     Command.UiCommand.SetArrowShow();

@@ -15,7 +15,14 @@ namespace Command
                 Info.UiInfo.CardBoard.transform.GetChild(1).GetComponent<Text>().text = Info.UiInfo.CardBoardTitle;
             });
         }
-        public static void SetCardBoardHide() => MainThread.Run(() => Info.UiInfo.CardBoard.SetActive(false));
+        public static void SetCardBoardHide()
+        {
+            MainThread.Run(() =>
+            {
+                Info.UiInfo.CardBoard.SetActive(false);
+            });
+        }
+
         public static void CardBoardReload() => Command.CardBoardCommand.CreatBoardCardActual();
         public static Sprite GetBoardCardImage(int Id)
         {

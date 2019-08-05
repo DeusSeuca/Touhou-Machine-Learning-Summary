@@ -10,9 +10,9 @@ namespace Info
     public class GlobalBattleInfo
     {
         //网络同步信息
-        public static int TargetCardID;
+        //public static int TargetCardID;
         public static Card TargetCard;
-        public static Card CreatedCard;
+        //public static Card CreatedCard;
         public static List<int> TargetCardIDList;
         public static List<Card> TargetCardList;
         public static bool IsSelectCardOver;
@@ -39,7 +39,7 @@ namespace Info
         public static Card ArrowStartCard;
         public static Card ArrowEndCard;
         public static bool IsWaitForSelectUnits;
-        public static List<Card> SelectUnits = new List<Card>();
+        public static List<Card> SelectUnits = new List<Card>();//玩家选择的单位
         //选择的坐标
         public static Vector3 FocusPoint;
         public static bool IsWaitForSelectLocation;
@@ -65,7 +65,7 @@ namespace Info
         /// <summary>
         /// 当前操作者是否pass
         /// </summary>
-        public static bool IsCurrectPass => IsPlayer1 ? IsPlayer1Pass : IsPlayer2Pass;
+        public static bool IsCurrectPass => IsPlayer1 ^ IsMyTurn ? IsPlayer2Pass : IsPlayer1Pass ;
         /// <summary>
         /// 是否双方皆pass
         /// </summary>

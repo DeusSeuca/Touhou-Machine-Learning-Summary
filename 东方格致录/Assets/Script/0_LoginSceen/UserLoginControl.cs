@@ -11,6 +11,7 @@ namespace Control
         void Start()
         {
             Command.NetCommand.Init(NetClient.Client);
+            UserLogin();//自动登录
         }
         public void UserRegister()
         {

@@ -4,4 +4,7 @@
     PlayCard,
     FocusRegion,
     FocusLocation,
+    SelectUnites,
+    Pass,
+    Surrender
 }

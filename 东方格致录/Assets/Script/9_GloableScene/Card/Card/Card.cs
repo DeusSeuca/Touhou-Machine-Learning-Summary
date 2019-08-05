@@ -22,7 +22,7 @@ namespace CardSpace
         public bool IsMoveStepOver = true;
         public float MoveSpeed = 0.1f;
 
-        public bool IsActive;
+        public bool IsGray;
         public bool IsCanSee;
         public bool IsPrePrepareToPlay;
         bool IsInit;
@@ -35,7 +35,7 @@ namespace CardSpace
         public bool IsLimit = true;
         public bool IsAutoMove => this != GlobalBattleInfo.PlayerPlayCard;
         public List<Card> Row => RowsInfo.GetRow(this);
-        public Vector2 Location => RowsInfo.GetLocation(this);
+        public NetInfoModel.Location Location => RowsInfo.GetLocation(this);
         public Vector3 TargetPos;
         public Quaternion TargetRot;
         // public Text PointText;// = transform.GetChild(0).GetChild(0).GetComponent<Text>();
@@ -77,7 +77,7 @@ namespace CardSpace
             {
                 material.SetFloat("_IsFocus", 0);
             }
-            if (IsActive)
+            if (IsGray)
             {
                 material.SetFloat("_IsTemp", 0);
             }
@@ -101,9 +101,16 @@ namespace CardSpace
         }
         public async Task Hurt(int point)
         {
+            Debug.Log("卡在这步？1");
             CardPoint = Math.Max(CardPoint - point, 0);
-            Command.EffectCommand.ParticlePlay(1, transform.position);
+            Debug.Log("卡在这步？2");
+            MainThread.Run(() =>
+            {
+                Command.EffectCommand.ParticlePlay(1, transform.position);
+            });
+            Debug.Log("卡在这步？3");
             Command.EffectCommand.AudioEffectPlay(1);
+            Debug.Log("卡在这步？4");
             await Task.Delay(100);
         }
         public async Task Gain(int point)

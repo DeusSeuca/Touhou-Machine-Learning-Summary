@@ -12,6 +12,7 @@ namespace Control
         public float Range;
         public bool IsMyHandRegion;
         public bool IsSingle;
+        public bool HasTempCard;
         void Awake()
         {
             SingleInfo = GetComponent<SingleRowInfo>();
@@ -24,9 +25,10 @@ namespace Control
         }
         public void TempCardControk()
         {
-            if (SingleInfo.TempCard == null && SingleInfo.CanBeSelected && GlobalBattleInfo.PlayerFocusRegion == SingleInfo)
+            if (SingleInfo.TempCard == null && SingleInfo.CanBeSelected && GlobalBattleInfo.PlayerFocusRegion == SingleInfo && !HasTempCard)
             {
-                print(SingleInfo.TempCard);
+                HasTempCard = true;
+                //print(SingleInfo.TempCard);
                 _ = CreatTempCard();
             }
             if (SingleInfo.TempCard != null && SingleInfo.Location != SingleInfo.ThisRowCards.IndexOf(SingleInfo.TempCard))
@@ -36,12 +38,13 @@ namespace Control
             if (SingleInfo.TempCard != null && (!SingleInfo.CanBeSelected || GlobalBattleInfo.PlayerFocusRegion != SingleInfo))
             {
                 DestoryTempCard();
+                HasTempCard = false;
             }
         }
         public async Task CreatTempCard()
         {
-            SingleInfo.TempCard =await CardCommand.CreatCard(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCards[0].CardId);
-            SingleInfo.TempCard.IsActive = true;
+            SingleInfo.TempCard = await CardCommand.CreatCard(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCards[0].CardId);
+            SingleInfo.TempCard.IsGray = true;
             SingleInfo.TempCard.IsCanSee = true;
             SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
             SingleInfo.TempCard.Init();
@@ -57,11 +60,11 @@ namespace Control
             SingleInfo.ThisRowCards.Remove(SingleInfo.TempCard);
             SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
         }
-        public void SetSelectable(bool Seleceable)
-        {
-            SingleInfo.CanBeSelected = Seleceable;
-            transform.GetComponent<Renderer>().material.SetColor("_GlossColor", SingleInfo.CanBeSelected ? SingleInfo.color : Color.black);
-        }
+        //public void SetSelectable(bool Seleceable)
+        //{
+        //    SingleInfo.CanBeSelected = Seleceable;
+        //    transform.GetComponent<Renderer>().material.SetColor("_GlossColor", SingleInfo.CanBeSelected ? SingleInfo.color : Color.black);
+        //}
         void RefreshHandCard(List<Card> ThisCardList)
         {
             if (IsMyHandRegion)

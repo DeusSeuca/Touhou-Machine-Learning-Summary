@@ -22,11 +22,11 @@ namespace Control
             await StateCommand.BattleStart();
             for (int i = 0; i < 3; i++)
             {
-                print("小局开始");
+                //print("小局开始");
                 await StateCommand.RoundStart(i);
                 while (true)
                 {
-                    print("回合开始");
+                    //print("回合开始");
                     await StateCommand.TurnStart();
                     await StateCommand.WaitForPlayerOperation();
                     await StateCommand.TurnEnd();

@@ -1,24 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class MainThread : MonoBehaviour
 {
-    static Action TargetAction;
+    static Queue<Action> TargetAction = new Queue<Action>();
+    public static void Run(Action RunAction) => TargetAction.Enqueue(RunAction);
     void Update()
     {
-        if (TargetAction != null)
+        if (TargetAction.Count > 0)
         {
-            TargetAction();
-            TargetAction = null;
+            for (int i = 0; i < TargetAction.Count; i++)
+            {
+                TargetAction.Dequeue()();
+            }
         }
-    }
-    public static void Run(Action RunAction)
-    {
-        Task.Run(() =>
-        {
-            while (TargetAction != null) { }
-            TargetAction = RunAction;
-        });
     }
 }

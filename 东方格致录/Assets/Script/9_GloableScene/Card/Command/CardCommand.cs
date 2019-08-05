@@ -110,16 +110,13 @@ namespace Command
         }
         public static async Task PlayCard()
         {
-            Debug.Log("打出卡牌");
             Command.EffectCommand.AudioEffectPlay(0);
             GameCommand.PlayCardLimit(true);
             Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
             TargetCard.IsPrePrepareToPlay = false;
             Command.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
             TargetCard.IsCanSee = true;
-            Debug.LogError("移除卡牌");
             RowsInfo.GetMyCardList(RegionTypes.Hand).Remove(TargetCard);
-            Debug.LogError("加入卡牌");
             RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
             GlobalBattleInfo.PlayerPlayCard = null;
             TargetCard.Trigger<TriggerType.PlayCard>();

@@ -3,6 +3,8 @@ using Info;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
+
 namespace Control
 {
     public class CardEffectStackControl
@@ -19,6 +21,7 @@ namespace Control
                     await TaskStack.Pop()();
                 }
                 IsRuning = false;
+                Debug.LogWarning("效果执行完毕");
                 GlobalBattleInfo.IsCardEffectCompleted = true;
             }
         }

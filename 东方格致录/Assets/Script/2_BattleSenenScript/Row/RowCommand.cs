@@ -14,7 +14,7 @@ namespace Command
                 List<SingleRowInfo> TargetSingleRow = new List<SingleRowInfo>();
                 Card DeployCard = RowsInfo.GetMyCardList(RegionTypes.Uesd)[0];
                 bool IsMyTerritory = (DeployCard.CardTerritory == Territory.My);
-                switch (RowsInfo.GetMyCardList(RegionTypes.Uesd)[0].CardProperty)
+                switch (DeployCard.CardProperty)
                 {
                     case Property.Water:
                         {
