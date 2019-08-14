@@ -3,17 +3,6 @@
 public class BoardCardInfo : MonoBehaviour
 {
     public int Rank;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void OnMouseClick()
     {
         if (Info.GlobalBattleInfo.SelectBoardCardIds.Contains(Rank))

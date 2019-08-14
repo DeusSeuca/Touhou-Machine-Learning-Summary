@@ -75,6 +75,10 @@ namespace Info
         {
             return x == -1 ? null : GlobalCardList[x][y];
         }
+        public static Card GetCard(NetInfoModel.Location Locat)
+        {
+            return Locat.x == -1 ? null : GlobalCardList[Locat.x][Locat.y];
+        }
         public static List<Card> GetRow(Card TargetCard)
         {
             List<Card> TargetCardList = null;

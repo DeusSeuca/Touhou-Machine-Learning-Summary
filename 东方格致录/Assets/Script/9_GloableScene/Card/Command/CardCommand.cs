@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using static NetInfoModel;
 
 namespace Command
 {
@@ -33,20 +34,20 @@ namespace Command
             await Task.Run(() => { while (NewCardScript == null) { } });
             return NewCardScript;
         }      
-        public static async Task ExchangeCard(bool IsPlayerWash = true)
+        public static async Task ExchangeCard(Card TargetCard, bool IsPlayerExchange = true,int RandomRank=0)
         {
             Debug.Log("交换卡牌");
-            await WashCard();
-            await DrawCard();
-            CardBoardCommand.LoadCardList(RowsInfo.GetMyCardList(RegionTypes.Hand));
-            //UiCommand.CardBoardReload();
+            await WashCard(TargetCard, IsPlayerExchange, RandomRank);
+            await DrawCard(IsPlayerExchange,true);
+            if (IsPlayerExchange)
+            {
+                CardBoardCommand.LoadCardList(RowsInfo.GetMyCardList(RegionTypes.Hand));
+            }
         }
-
         internal static Task RebackCard()
         {
             throw new NotImplementedException();
         }
-
         public static async Task DrawCard(bool IsPlayerDraw = true, bool ActiveBlackList = false)
         {
             EffectCommand.AudioEffectPlay(0);
@@ -66,26 +67,24 @@ namespace Command
             await Task.Delay(100);
         }
         //洗回牌库
-        public static async Task WashCard(bool IsPlayerWash = true)
+       
+        public static async Task WashCard(Card TargetCard, bool IsPlayerWash = true, int InsertRank = 0)
         {
             Debug.Log("洗回卡牌");
             if (IsPlayerWash)
             {
-                int MaxCardRank = Info.RowsInfo.GetMyCardList(RegionTypes.Deck).Count;
-                int CardRank = AiCommand.GetRandom(0, MaxCardRank);
-                GlobalBattleInfo.SelectLocation = CardRank;
-                GlobalBattleInfo.SelectRegion = RowsInfo.GetRegionCardList(RegionName_Other.My_Deck);
-                GlobalBattleInfo.TargetCard = GlobalBattleInfo.SingleSelectCardOnBoard;
-                GlobalBattleInfo.TargetCard.IsCanSee = false;
-                await MoveCard();
+                GlobalBattleInfo.TargetCard = TargetCard;
+                int MaxCardRank = Info.RowsInfo.GetDownCardList(RegionTypes.Deck).Count;
+                GlobalBattleInfo.RandomRank = AiCommand.GetRandom(0, MaxCardRank);
+                NetCommand.AsyncInfo(NetAcyncType.ExchangeCard);
+                RowsInfo.GetDownCardList(RegionTypes.Hand).Remove(TargetCard);
+                RowsInfo.GetDownCardList(RegionTypes.Deck).Insert(GlobalBattleInfo.RandomRank, TargetCard);
+                TargetCard.IsCanSee = false;
             }
             else
             {
-                //int MaxCardRank = Info.RowsInfo.GetDownCardList(RegionTypes.Hand).Count;
-                //int CardRank = AiCommand.GetRandom(0, MaxCardRank);
-                //GlobalBattleInfo.SelectLocation = CardRank;
-                //GlobalBattleInfo.SelectRegion = RowsInfo.GetRegionCardList(RegionName_Other.My_Hand);
-                //await MoveCard();
+                RowsInfo.GetUpCardList(RegionTypes.Hand).Remove(TargetCard);
+                RowsInfo.GetUpCardList(RegionTypes.Deck).Insert(InsertRank, TargetCard);
             }
             await Task.Delay(500);
         }
@@ -96,18 +95,7 @@ namespace Command
             RowsInfo.GlobalCardList[10] = RowsInfo.GlobalCardList[10].OrderBy(card => card.CardPoint).ToList();
             RowsInfo.GlobalCardList[12] = RowsInfo.GlobalCardList[12].OrderBy(card => card.CardPoint).ToList();
 
-        }
-        public static async Task MoveCard()
-        {
-            Card TargetCard = GlobalBattleInfo.TargetCard;
-            List<Card> OriginRow = RowsInfo.GetRow(TargetCard);
-            List<Card> TargetRow = GlobalBattleInfo.SelectRegion.ThisRowCards;
-            Debug.Log("移动卡牌从" + OriginRow.Count + "到" + TargetRow.Count);
-            OriginRow.Remove(TargetCard);
-            TargetRow.Insert(GlobalBattleInfo.SelectLocation, TargetCard);
-            //GlobalBattleInfo.SelectLocation
-            //GlobalBattleInfo.SelectRegion = RowsInfo.GetRegionCardList(RegionName_Other.My_Hand);
-        }
+        }      
         public static async Task PlayCard()
         {
             Command.EffectCommand.AudioEffectPlay(0);

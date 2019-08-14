@@ -10,14 +10,12 @@ namespace Info
     public class GlobalBattleInfo
     {
         //网络同步信息
-        //public static int TargetCardID;
         public static Card TargetCard;
-        //public static Card CreatedCard;
+        public static int RandomRank;
         public static List<int> TargetCardIDList;
         public static List<Card> TargetCardList;
         public static bool IsSelectCardOver;
         public static int RoomID;
-        public static Card SingleSelectCardOnBoard => TargetCardList[SelectBoardCardIds[0]];
         //操作标志位
         public static int LanguageRank;
         public static bool IsCardEffectCompleted;
@@ -45,7 +43,6 @@ namespace Info
         public static bool IsWaitForSelectLocation;
         public static int SelectLocation = -1;
         //选择的卡牌面板卡片
-        public static bool IsWaitForSelectBoardCard;
         public static List<int> SelectBoardCardIds;
         public static bool IsFinishSelectBoardCard;
         public static int ExChangeableCardNum = 0;
@@ -62,13 +59,7 @@ namespace Info
         internal static bool IsBattleEnd;
         internal static int CreatCardRank;
 
-        /// <summary>
-        /// 当前操作者是否pass
-        /// </summary>
         public static bool IsCurrectPass => IsPlayer1 ^ IsMyTurn ? IsPlayer2Pass : IsPlayer1Pass ;
-        /// <summary>
-        /// 是否双方皆pass
-        /// </summary>
         public static bool IsBoothPass => IsPlayer1Pass && IsPlayer2Pass;
     };
 }

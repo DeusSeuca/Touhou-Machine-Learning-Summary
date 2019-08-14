@@ -65,7 +65,7 @@ namespace Command
         }
         public static void AsyncInfo(NetAcyncType AcyncType)
         {
-            if (Info.GlobalBattleInfo.IsPVP && (Info.GlobalBattleInfo.IsMyTurn || AcyncType == NetAcyncType.FocusCard))
+            if (Info.GlobalBattleInfo.IsPVP && (Info.GlobalBattleInfo.IsMyTurn || AcyncType == NetAcyncType.FocusCard || AcyncType == NetAcyncType.ExchangeCard))
             {
                 switch (AcyncType)
                 {
@@ -97,7 +97,6 @@ namespace Command
                             Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, RowRank, LocationRank));
                             break;
                         }
-
                     case NetAcyncType.SelectUnites:
                         {
                             List<Location> Locations = Info.GlobalBattleInfo.SelectUnits.Select(unite => unite.Location).ToList();
@@ -106,7 +105,14 @@ namespace Command
                             Debug.LogError("选择单位完成");
                             break;
                         }
-
+                    case NetAcyncType.ExchangeCard:
+                        {
+                            Debug.Log("触发交换卡牌信息");
+                            Location Locat = Info.GlobalBattleInfo.TargetCard.Location;
+                            int RandomRank = Info.GlobalBattleInfo.RandomRank;
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, Locat.ToJson(), RandomRank));
+                            break;
+                        }
                     case NetAcyncType.Pass:
                         {
                             Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID));
@@ -114,6 +120,7 @@ namespace Command
                         }
                     case NetAcyncType.Surrender:
                         break;
+                    
                     default:
                         break;
                 }
@@ -185,6 +192,16 @@ namespace Command
                     }
                 case NetAcyncType.Surrender:
                     break;
+                case NetAcyncType.ExchangeCard:
+                    {
+                        Debug.Log("交换卡牌信息");
+                        Debug.Log("收到信息" + Data);
+
+                        Location Locat = ReceiveInfo[2].ToString().ToObject<Location>();
+                        int RandomRank = int.Parse(ReceiveInfo[3].ToString());
+                        _ = Command.CardCommand.ExchangeCard(Info.RowsInfo.GetCard(Locat), false, RandomRank);
+                        break;
+                    }
                 default:
                     break;
             }

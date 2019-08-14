@@ -5,6 +5,7 @@
     FocusRegion,
     FocusLocation,
     SelectUnites,
+    ExchangeCard,
     Pass,
     Surrender
 }

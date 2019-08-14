@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 public class Card0 : Card
 {
-    [TriggerType.Deploy]
+    [TriggerType.PlayCard]
     public Func<Task> Step1 => (async () => { print("test"); await Task.Delay(1000); });
-    [TriggerType.Deploy]
+    [TriggerType.PlayCard]
     public Func<Task> Step2 => (async () =>
     {
         await StateCommand.WaitForSelectLocation();
