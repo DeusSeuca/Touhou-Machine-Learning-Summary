@@ -58,10 +58,10 @@ namespace Control
         {
             if (Input.GetMouseButtonDown(0) && Info.GlobalBattleInfo.IsMyTurn)
             {
-                if (GlobalBattleInfo.PlayerFocusCard != null && GlobalBattleInfo.PlayerFocusCard.IsPrePrepareToPlay)
-                {
-                    GlobalBattleInfo.PlayerPlayCard = GlobalBattleInfo.PlayerFocusCard;
-                }
+                //if (GlobalBattleInfo.PlayerFocusCard != null && GlobalBattleInfo.PlayerFocusCard.IsPrePrepareToPlay)
+                //{
+                //    GlobalBattleInfo.PlayerPlayCard = GlobalBattleInfo.PlayerFocusCard;
+                //}
                 if (GlobalBattleInfo.IsWaitForSelectRegion)
                 {
                     GlobalBattleInfo.SelectRegion = GlobalBattleInfo.PlayerFocusRegion;
@@ -88,31 +88,32 @@ namespace Control
                     GlobalBattleInfo.DragToPoint = HitInfo.point;
                 }
             }
-            if (Input.GetMouseButtonUp(0) && Info.GlobalBattleInfo.IsMyTurn)
-            {
-                if (GlobalBattleInfo.PlayerPlayCard != null)
-                {
-                    if (GlobalBattleInfo.PlayerFocusRegion != null)
-                    {
-                        if (GlobalBattleInfo.PlayerFocusRegion.name == "我方_墓地")
-                        {
-                            _ = CardCommand.DisCard();
-                        }
-                        else if (GlobalBattleInfo.PlayerFocusRegion.name == "我方_手牌")
-                        {
-                            GlobalBattleInfo.PlayerPlayCard = null;
-                        }
-                        else
-                        {
-                            _ = CardCommand.PlayCard();
-                        }
-                    }
-                    else
-                    {
-                        _ = CardCommand.PlayCard();
-                    }
-                }
-            }
+            //判断松手时的位置
+            //if (Input.GetMouseButtonUp(0) && Info.GlobalBattleInfo.IsMyTurn)
+            //{
+            //    if (GlobalBattleInfo.PlayerPlayCard != null)
+            //    {
+            //        if (GlobalBattleInfo.PlayerFocusRegion != null)
+            //        {
+            //            if (GlobalBattleInfo.PlayerFocusRegion.name == "我方_墓地")
+            //            {
+            //                _ = CardCommand.DisCard();
+            //            }
+            //            else if (GlobalBattleInfo.PlayerFocusRegion.name == "我方_手牌")
+            //            {
+            //                GlobalBattleInfo.PlayerPlayCard = null;
+            //            }
+            //            else
+            //            {
+            //                _ = CardCommand.PlayCard();
+            //            }
+            //        }
+            //        else
+            //        {
+            //            _ = CardCommand.PlayCard();
+            //        }
+            //    }
+            //}
         }
     }
 }

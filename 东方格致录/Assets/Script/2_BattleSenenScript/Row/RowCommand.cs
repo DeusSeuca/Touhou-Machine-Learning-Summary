@@ -2,10 +2,49 @@
 using Info;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using UnityEngine;
+
 namespace Command
 {
     public class RowCommand
     {
+        public static async Task CreatTempCard(SingleRowInfo SingleInfo)
+        {
+            SingleInfo.TempCard = await CardCommand.CreatCard(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCards[0].CardId);
+            SingleInfo.TempCard.IsGray = true;
+            SingleInfo.TempCard.IsCanSee = true;
+            SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
+            SingleInfo.TempCard.Init();
+        }
+        public static void DestoryTempCard(SingleRowInfo SingleInfo)
+        {
+            SingleInfo.ThisRowCards.Remove(SingleInfo.TempCard);
+            GameObject.Destroy(SingleInfo.TempCard.gameObject);
+            SingleInfo.TempCard = null;
+        }
+        public static void ChangeTempCard(SingleRowInfo SingleInfo)
+        {
+            SingleInfo.ThisRowCards.Remove(SingleInfo.TempCard);
+            SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
+        }
+        public static void  RefreshHandCard(List<Card> ThisCardList, bool IsMyHandRegion)
+        {
+            if (IsMyHandRegion)
+            {
+                foreach (var item in ThisCardList)
+                {
+                    if (GlobalBattleInfo.PlayerFocusCard != null && item == GlobalBattleInfo.PlayerFocusCard && item.IsLimit == false)
+                    {
+                        item.IsPrePrepareToPlay = true;
+                    }
+                    else
+                    {
+                        item.IsPrePrepareToPlay = false;
+                    }
+                }
+            }
+        }
         public static void SetAllRegionSelectable(bool CanBeSelected)
         {
             //singleRow.CanBeSelected = CanBeSelected;
@@ -51,58 +90,76 @@ namespace Command
                 RowsInfo.Instance.SingleBattleInfos.Values.ToList().ForEach(row => row.SetRegionSelectable(false));
             }
         }
-       
-            
-        //public static void SetRegionSelectable(SingleRowInfo singleRow, bool CanBeSelected)
-        //{
-        //    singleRow.CanBeSelected = CanBeSelected;
+        /// <summary>
+        /// <para>返回符合条件的卡片集合</para>
+        /// <para>卡片所属:my/op</para>
+        /// <para>卡片位置:lead/hand/battle/grave/use </para>
+        /// <para>卡片区域：wind/fire/wind/soil</para>
+        /// <para>卡片标签：fairy/spell...</para>
+        /// <para>"卡片点数：>x/=x..</para>
+        /// <para>卡片最大最小：min3/max1</para>
+        /// </summary>
+        public static List<Card> GetCardList(string FilterText)
+        {
+            string[] Features = FilterText.Split('&');
+            List<Card> TargetCardList = new List<Card>();
+            RowsInfo.GlobalCardList.ForEach(TargetCardList.AddRange);
+            Debug.Log("总卡牌数量为" + TargetCardList.Count);
 
-        //}
+            Features.ForEach(Feature => Filter(TargetCardList, Feature));
+            Debug.Log("检索到卡牌数量为" + TargetCardList.Count);
+            return TargetCardList;
+        }
+        private static List<Card> Filter(List<Card> cards, string Feature)
+        {
+            if (Feature == "my")
+            {
+                Debug.Log("检索条件：友方");
+                return cards.Where(card => card.CardTerritory == Territory.My).ToList();
+            }
+            else if (Feature == "op")
+            {
+                Debug.Log("检索条件：敌方");
+                return cards.Where(card => card.CardTerritory == Territory.Op).ToList();
+            }
+            else if (Feature.Contains("max"))
+            {
+                int num = int.Parse(Feature.Replace("max", ""));
+                Debug.Log($"检索条件：最大{num}个");
+                return cards.OrderBy(card => card.CardPoint).Take(num).ToList();
+            }
+            else if (Feature.Contains("min"))
+            {
+                int num = int.Parse(Feature.Replace("min", ""));
+                Debug.Log($"检索条件：最小{num}个");
+                return cards.OrderByDescending(card => card.CardPoint).Take(num).ToList();
+            }
+            else if (Feature.Contains("<"))
+            {
+                int Point = int.Parse(Feature.Replace("<", ""));
+                Debug.Log($"检索条件：小于{Point}的单位");
+                return cards.Where(card => card.CardPoint < Point).ToList();
+            }
+            else if (Feature.Contains(">"))
+            {
+                int Point = int.Parse(Feature.Replace(">", ""));
+                Debug.Log($"检索条件：大于{Point}的单位");
+                return cards.Where(card => card.CardPoint > Point).ToList();
+            }
+            else if (Feature.Contains("="))
+            {
+                int Point = int.Parse(Feature.Replace("=", ""));
+                Debug.Log($"检索条件：等于{Point}的单位");
+                return cards.Where(card => card.CardPoint == Point).ToList();
+            }
+            else
+            {
+                Debug.Log($"检索条件：包含标签{Feature}的单位");
+                return cards.Where(card => card.tag.Contains(Feature)).ToList();
+            }
+        }
+
     }
-    //[System.Obsolete("什么破垃圾代码")]
-    //public static void SetRegionSelectable(bool CanBeSelected)
-    //{
-
-    //    if (CanBeSelected)
-    //    {
-    //        Card DeployCard = RowsInfo.GetMyCardList(RegionTypes.Uesd)[0];
-    //        bool IsMyTerritory = (DeployCard.CardTerritory == Territory.My);
-    //        switch (RowsInfo.GetMyCardList(RegionTypes.Uesd)[0].CardProperty)
-    //        {
-    //            case Property.Water:
-    //                {
-
-    //                    //SetRowShow(IsMyTerritory ? RegionName_Battle.My_Water : RegionName_Battle.Op_Water);
-    //                    break;
-    //                }
-    //            case Property.Fire:
-    //                {
-    //                    SetRowShow(IsMyTerritory ? RegionName_Battle.My_Fire : RegionName_Battle.Op_Fire);
-    //                    break;
-    //                }
-    //            case Property.Wind:
-    //                {
-    //                    SetRowShow(IsMyTerritory ? RegionName_Battle.My_Wind : RegionName_Battle.Op_Wind);
-    //                    break;
-    //                }
-    //            case Property.Soil:
-    //                {
-    //                    SetRowShow(IsMyTerritory ? RegionName_Battle.My_Soil : RegionName_Battle.Op_Soil);
-    //                    break;
-    //                }
-    //            case Property.None:
-    //                break;
-    //            default:
-    //                break;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        RowsInfo.Instance.SingleBattleInfos.Values.ToList().ForEach(row => row.Control.SetSelectable(false));
-    //    }
-    //}
-    //[System.Obsolete("过时啦")]
-    //private static void SetRowShow(RegionName_Battle row) => RowsInfo.GetRegionCardList(row).Control.SetSelectable(true);
 }
 
 

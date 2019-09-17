@@ -52,9 +52,9 @@ namespace Info
         /// <returns></returns>
         public static List<Card> GetOpCardList(RegionTypes type) => GlobalBattleInfo.IsMyTurn ? GetUpCardList(type) : GetDownCardList(type);
         public static SingleRowInfo GetSingleRowInfo(RegionTypes type, bool InMyTerritory) => SingleRowInfos.First(SingleRow => SingleRow.ThisRowCards.Equals(InMyTerritory ? GetMyCardList(type) : GetDownCardList(type)));
-
+        [System.Obsolete("重构预定")]
         public static SingleRowInfo GetRegionCardList(RegionName_Battle region) => Instance.SingleBattleInfos[region];
-
+        [System.Obsolete("重构预定")]
         public static SingleRowInfo GetRegionCardList(RegionName_Other region) => Instance.SingleOtherInfos[region];
 
         public static NetInfoModel.Location GetLocation(Card TargetCard)

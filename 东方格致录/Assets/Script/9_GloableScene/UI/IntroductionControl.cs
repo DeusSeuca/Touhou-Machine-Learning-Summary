@@ -2,9 +2,9 @@
 
 public class IntroductionControl : MonoBehaviour
 {
-    public Vector3 ViewportPoint => Camera.main.ScreenToViewportPoint(Input.mousePosition);
-    public Vector3 Bias;
     float Cd;
+    public Vector3 Bias;
+    public Vector3 ViewportPoint => Camera.main.ScreenToViewportPoint(Input.mousePosition);
     public bool IsRight => ViewportPoint.x < 0.5;
     public bool IsDown => ViewportPoint.y < 0.5;
     void Update()

@@ -95,16 +95,30 @@ namespace Command
             RowsInfo.GlobalCardList[10] = RowsInfo.GlobalCardList[10].OrderBy(card => card.CardPoint).ToList();
             RowsInfo.GlobalCardList[12] = RowsInfo.GlobalCardList[12].OrderBy(card => card.CardPoint).ToList();
 
-        }      
+        }
+        [System.Obsolete("待废弃")]
         public static async Task PlayCard()
         {
             Command.EffectCommand.AudioEffectPlay(0);
-            GameCommand.PlayCardLimit(true);
+            GameCommand.SetPlayCardLimit(true);
             Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
             TargetCard.IsPrePrepareToPlay = false;
             Command.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
             TargetCard.IsCanSee = true;
             RowsInfo.GetMyCardList(RegionTypes.Hand).Remove(TargetCard);
+            RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
+            GlobalBattleInfo.PlayerPlayCard = null;
+            TargetCard.Trigger<TriggerType.PlayCard>();
+        }
+        public static async Task PlayCard(bool IsAnsy)
+        {
+            Command.EffectCommand.AudioEffectPlay(0);
+            GameCommand.SetPlayCardLimit(true);
+            Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
+            TargetCard.IsPrePrepareToPlay = false;
+            Command.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
+            TargetCard.IsCanSee = true;
+            RowsInfo.GetRow(TargetCard).Remove(TargetCard);
             RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
             GlobalBattleInfo.PlayerPlayCard = null;
             TargetCard.Trigger<TriggerType.PlayCard>();

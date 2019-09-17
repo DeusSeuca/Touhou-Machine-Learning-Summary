@@ -20,6 +20,9 @@ namespace CardSpace
         public Texture2D icon;
         public bool IsMove;
         public bool IsMoveStepOver = true;
+        public bool IsAvailable=true;
+        public bool IsLocked=true;
+        public bool IsCover = true;
         public float MoveSpeed = 0.1f;
 
         public bool IsGray;
@@ -58,7 +61,6 @@ namespace CardSpace
                 transform.rotation = TargetRot;
                 IsInit = false;
             }
-
         }
         public void RefreshState()
         {
@@ -101,19 +103,15 @@ namespace CardSpace
         }
         public async Task Hurt(int point)
         {
-            Debug.Log("卡在这步？1");
             CardPoint = Math.Max(CardPoint - point, 0);
-            Debug.Log("卡在这步？2");
             MainThread.Run(() =>
             {
                 Command.EffectCommand.ParticlePlay(1, transform.position);
             });
-            Debug.Log("卡在这步？3");
             Command.EffectCommand.AudioEffectPlay(1);
-            Debug.Log("卡在这步？4");
             await Task.Delay(100);
         }
-        public async Task Gain(int point)
+        public async Task Boost(int point)
         {
             CardPoint += point;
             Command.EffectCommand.ParticlePlay(0, transform.position);
@@ -129,7 +127,6 @@ namespace CardSpace
             IsMoveStepOver = false;
             await Task.Delay(1000);
             IsMoveStepOver = true;
-
         }
         public async Task MoveTo(SingleRowInfo singleRowInfo, int Index = 0)
         {
@@ -143,7 +140,6 @@ namespace CardSpace
             IsMoveStepOver = true;
             MoveSpeed = 0.1f;
             Command.EffectCommand.AudioEffectPlay(1);
-
         }
         public async Task Deploy()
         {

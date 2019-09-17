@@ -11,10 +11,5 @@ public class NoticeControl : MonoBehaviour
     void Start() => Anim = GetComponent<Animator>();
     void Update() => NoticeTex.ForEach(x => x.GetComponent<Image>().material.SetFloat("_Value", Aplha));
     [Button]
-    public void AnimPlay()
-    {
-        Anim.SetTrigger("Play");
-
-
-    }
+    public void AnimPlay() => Anim.SetTrigger("Play");
 }

@@ -26,11 +26,16 @@ namespace Command
 
         }
         // 限制手牌被打出
-        public static void PlayCardLimit(bool IsLimit)
+        [System.Obsolete("请使用新的api")]
+        public static void SetPlayCardLimit(bool IsLimit)
         {
             RowsInfo.GetRegionCardList(RegionName_Other.My_Hand).ThisRowCards.ForEach(card => card.IsLimit = IsLimit);
+            RowsInfo.GetRegionCardList(RegionName_Other.My_Leader).ThisRowCards.ForEach(card => card.IsLimit = IsLimit);
+            //RowCommand.GetCardList("my&hand").ForEach(card => card.IsLimit = IsLimit);
+            //RowCommand.GetCardList("my&lead").ForEach(card => card.IsLimit = IsLimit);
         }
         //待扩展
+        [System.Obsolete("已过期，请使用RowCommand.GetCardList")]
         public static List<Card> GetCardList(LoadRangeOnBattle OnBattle = LoadRangeOnBattle.None, LoadRangeOnOther OnOther = LoadRangeOnOther.None)
         {
             List<Card> CardList = new List<Card>();
@@ -44,7 +49,7 @@ namespace Command
             CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Soil) ? RowsInfo.GetOpCardList(RegionTypes.Soil) : new List<Card>());
             return CardList;
         }
-
+        
     }
 }
 

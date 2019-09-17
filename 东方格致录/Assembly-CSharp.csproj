@@ -60,7 +60,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scenes\TestTask.cs" />
     <Compile Include="Assets\Script\0_LoginSceen\UserLoginControl.cs" />
     <Compile Include="Assets\Script\1_MenuScene\UserModeControl.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Ai\AiCommand.cs" />
@@ -78,6 +77,7 @@
     <Compile Include="Assets\Script\2_BattleSenenScript\State\StateCommand.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\State\StateControl.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Thread\MainThread.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Audio\AudioInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Camera\CameraControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Card\Card.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Card\CardControl.cs" />
@@ -90,6 +90,7 @@
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1001.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1002.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1003.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1004.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1030.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1031.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card10310.cs" />
@@ -106,6 +107,8 @@
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1037.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1038.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1039.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModelInfo.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\SingleCardLibrary.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\Test1.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Command\CardCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Library\CardInfo.cs" />
@@ -116,6 +119,7 @@
     <Compile Include="Assets\Script\9_GloableScene\Enum\LoadRangeOnBattle.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\LoadRangeOnOther.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\NetAcyncType.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Enum\Sectarian.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Interactive\InteractiveControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Network\NetClient.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Network\NetCommand.cs" />
@@ -124,8 +128,8 @@
     <Compile Include="Assets\Script\9_GloableScene\ParticleSystem\EffectCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\ParticleSystem\ParticleInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Player\AllPlayerInfo.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Sound\SoundInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Test\TestScript.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Test\TestTask.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowEndPoint.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowManager.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\CardBoard\BoardCardInfo.cs" />

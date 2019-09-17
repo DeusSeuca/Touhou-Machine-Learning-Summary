@@ -20,7 +20,7 @@ namespace Control
         void Update()
         {
             ControlCardPosition(SingleInfo.ThisRowCards);
-            RefreshHandCard(SingleInfo.ThisRowCards);
+            Command.RowCommand.RefreshHandCard(SingleInfo.ThisRowCards,IsMyHandRegion);
             TempCardControk();
         }
         public void TempCardControk()
@@ -29,59 +29,19 @@ namespace Control
             {
                 HasTempCard = true;
                 //print(SingleInfo.TempCard);
-                _ = CreatTempCard();
+                _ =Command.RowCommand.CreatTempCard(SingleInfo);
             }
             if (SingleInfo.TempCard != null && SingleInfo.Location != SingleInfo.ThisRowCards.IndexOf(SingleInfo.TempCard))
             {
-                ChangeTempCard();
+                RowCommand.ChangeTempCard(SingleInfo);
             }
             if (SingleInfo.TempCard != null && (!SingleInfo.CanBeSelected || GlobalBattleInfo.PlayerFocusRegion != SingleInfo))
             {
-                DestoryTempCard();
+                RowCommand.DestoryTempCard(SingleInfo);
                 HasTempCard = false;
             }
         }
-        public async Task CreatTempCard()
-        {
-            SingleInfo.TempCard = await CardCommand.CreatCard(RowsInfo.GetRegionCardList(RegionName_Other.My_Uesd).ThisRowCards[0].CardId);
-            SingleInfo.TempCard.IsGray = true;
-            SingleInfo.TempCard.IsCanSee = true;
-            SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
-            SingleInfo.TempCard.Init();
-        }
-        public void DestoryTempCard()
-        {
-            SingleInfo.ThisRowCards.Remove(SingleInfo.TempCard);
-            Destroy(SingleInfo.TempCard.gameObject);
-            SingleInfo.TempCard = null;
-        }
-        public void ChangeTempCard()
-        {
-            SingleInfo.ThisRowCards.Remove(SingleInfo.TempCard);
-            SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
-        }
-        //public void SetSelectable(bool Seleceable)
-        //{
-        //    SingleInfo.CanBeSelected = Seleceable;
-        //    transform.GetComponent<Renderer>().material.SetColor("_GlossColor", SingleInfo.CanBeSelected ? SingleInfo.color : Color.black);
-        //}
-        void RefreshHandCard(List<Card> ThisCardList)
-        {
-            if (IsMyHandRegion)
-            {
-                foreach (var item in ThisCardList)
-                {
-                    if (GlobalBattleInfo.PlayerFocusCard != null && item == GlobalBattleInfo.PlayerFocusCard && item.IsLimit == false)
-                    {
-                        item.IsPrePrepareToPlay = true;
-                    }
-                    else
-                    {
-                        item.IsPrePrepareToPlay = false;
-                    }
-                }
-            }
-        }
+        
         void ControlCardPosition(List<Card> ThisCardList)
         {
             int Num = ThisCardList.Count;

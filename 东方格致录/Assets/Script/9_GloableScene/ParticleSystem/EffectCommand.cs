@@ -7,8 +7,8 @@ namespace Command
         {
             MainThread.Run(() =>
             {
-                AudioSource Source = Info.SoundInfo.Instance.gameObject.AddComponent<AudioSource>();
-                Source.clip = Info.SoundInfo.Instance.Clips[Rank];
+                AudioSource Source = Info.AudioInfo.Instance.gameObject.AddComponent<AudioSource>();
+                Source.clip = Info.AudioInfo.Instance.Clips[Rank];
                 Source.Play();
                 GameObject.Destroy(Source, Source.clip.length);
             });

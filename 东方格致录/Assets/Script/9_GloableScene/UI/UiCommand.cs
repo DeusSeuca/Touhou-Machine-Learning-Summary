@@ -79,6 +79,7 @@ namespace Command
                 Info.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
             });
         }
+        public  void CardBoardClose() => Info.GlobalBattleInfo.IsSelectCardOver = true;
         public static void SetCardBoardMode(CardBoardMode CardBoardMode) => Info.GlobalBattleInfo.CardBoardMode = CardBoardMode;
         public static void SetCurrentPass()
         {

@@ -7,7 +7,7 @@ using UnityEngine;
 public class Card1000 : Card
 {
     [TriggerType.PlayCard]
-    public Func<Task> Step1 => (async () => { print("test"); await Task.Delay(1000); });
+    public Func<Task> Step1 => (async () => { print("test");IsCanSee = false; await Task.Delay(1000); });
     [TriggerType.PlayCard]
     public Func<Task> Step2 => (async () =>
     {

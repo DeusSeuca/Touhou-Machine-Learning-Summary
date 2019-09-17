@@ -25,7 +25,7 @@
 //    {
 //        //print(Mathf.Lerp(_paramAngleZ.Value, FaceRank == 0 ? 30 : -30, Time.deltaTime));
 //        //
-//        num = Mathf.Lerp(num, (FaceRank == 0) ? -30 : 30, Time.deltaTime*2) ;
+//        num = Mathf.Lerp(num, (FaceRank == 0) ? -30 : 30, Time.deltaTime * 2);
 //        _paramAngleZ.Value = num;
 //    }
 //}

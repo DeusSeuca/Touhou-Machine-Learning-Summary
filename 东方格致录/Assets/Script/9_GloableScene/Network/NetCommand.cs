@@ -1,4 +1,4 @@
-﻿using NetworkCommsDotNet;
+using NetworkCommsDotNet;
 using NetworkCommsDotNet.Connections;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +63,7 @@ namespace Command
             Info.GlobalBattleInfo.IsMyTurn = (bool)ReceiveInfo[1];
             //Debug.LogError(Info.GlobalBattleInfo.IsPlayer1);
         }
+        [System.Obsolete("待废弃")]
         public static void AsyncInfo(NetAcyncType AcyncType)
         {
             if (Info.GlobalBattleInfo.IsPVP && (Info.GlobalBattleInfo.IsMyTurn || AcyncType == NetAcyncType.FocusCard || AcyncType == NetAcyncType.ExchangeCard))
@@ -126,7 +127,68 @@ namespace Command
                 }
             }
         }
+        public static void AsyncInfo(NetAcyncType AcyncType,bool IsAsync=true)
+        {
+            if (Info.GlobalBattleInfo.IsPVP && (Info.GlobalBattleInfo.IsMyTurn || AcyncType == NetAcyncType.FocusCard || AcyncType == NetAcyncType.ExchangeCard))
+            {
+                switch (AcyncType)
+                {
+                    case NetAcyncType.FocusCard:
+                        {
+                            Location TargetCardLocation = Info.GlobalBattleInfo.PlayerFocusCard != null ? Info.GlobalBattleInfo.PlayerFocusCard.Location : new Location(-1, -1);
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y));
+                            break;
+                        }
+                    case NetAcyncType.PlayCard:
+                        {
+                            Location TargetCardLocation = Info.GlobalBattleInfo.PlayerPlayCard.Location;
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y));
+                            break;
+                        }
+                    case NetAcyncType.FocusRegion:
+                        {
+                            int RowRank = Info.GlobalBattleInfo.SelectRegion.RowRank;
+                            Debug.Log("同步焦点区域为" + RowRank);
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, (int)RowRank));
+                            break;
+                        }
+                    case NetAcyncType.FocusLocation:
+                        {
+                            int RowRank = Info.GlobalBattleInfo.SelectRegion.RowRank;
+                            int LocationRank = Info.GlobalBattleInfo.SelectLocation;
+                            Debug.Log("同步焦点区域为" + RowRank);
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, RowRank, LocationRank));
+                            break;
+                        }
+                    case NetAcyncType.SelectUnites:
+                        {
+                            List<Location> Locations = Info.GlobalBattleInfo.SelectUnits.Select(unite => unite.Location).ToList();
+                            Debug.LogError("发出的指令为：" + new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, Locations).ToJson());
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, Locations.ToJson()));
+                            Debug.LogError("选择单位完成");
+                            break;
+                        }
+                    case NetAcyncType.ExchangeCard:
+                        {
+                            Debug.Log("触发交换卡牌信息");
+                            Location Locat = Info.GlobalBattleInfo.TargetCard.Location;
+                            int RandomRank = Info.GlobalBattleInfo.RandomRank;
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID, Locat.ToJson(), RandomRank));
+                            break;
+                        }
+                    case NetAcyncType.Pass:
+                        {
+                            Client.SendMessge("AsyncInfo", new GeneralCommand(AcyncType, Info.GlobalBattleInfo.RoomID));
+                            break;
+                        }
+                    case NetAcyncType.Surrender:
+                        break;
 
+                    default:
+                        break;
+                }
+            }
+        }
 
         public static void AsyncInfoRequir(PacketHeader packetHeader, Connection connection, string Data)
         {

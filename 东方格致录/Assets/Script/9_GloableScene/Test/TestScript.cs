@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -23,16 +24,7 @@ namespace Test
             }
             if (Input.GetMouseButtonDown(3))
             {
-                Task.Run(async () =>
-                {
-                    for (int i = 0; i < Info.GlobalBattleInfo.SelectUnits.Count; i++)
-                    {
-                        Debug.Log("卡在这步？");
-                        await Info.GlobalBattleInfo.SelectUnits[i].Hurt(1);
-                        Debug.Log("卡在这步？");
-
-                    }
-                }).Wait();
+               
                 //string Data = "{\"Datas\":[4,0,[{\"x\":5,\"y\":0}]]}";
 
                 //Command.NetCommand.AsyncInfoRequir(null, null, "{ \"Datas\":[4,9,[{\"x\":5,\"y\":0}]]}");
@@ -48,6 +40,12 @@ namespace Test
                 //    Command.NetCommand.AsyncInfoRequir(null, null, "{\"Datas\":[1,9,1,0]}");
                 //}).Wait();
             }
+            
+        }
+        [Button]
+        private void Filter(string Text)
+        {
+            Command.RowCommand.GetCardList(Text);
         }
     }
 
