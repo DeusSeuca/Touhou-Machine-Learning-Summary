@@ -1,4 +1,5 @@
 ﻿using Control;
+using GameEnum;
 using Info;
 using Sirenix.OdinInspector;
 using System;
@@ -6,13 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Thread;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace CardSpace
 {
-    public enum Property { Water, Fire, Wind, Soil, None, All }
-    public enum Territory { My, Op }
     public class Card : MonoBehaviour
     {
         public int CardId;
@@ -31,26 +31,24 @@ namespace CardSpace
         bool IsInit;
         public Property CardProperty;
         public Territory CardTerritory;
-        //public Card yaya;
         /// <summary>
         /// 限制卡牌被打出
         /// </summary>
         public bool IsLimit = true;
         public bool IsAutoMove => this != GlobalBattleInfo.PlayerPlayCard;
         public List<Card> Row => RowsInfo.GetRow(this);
-        public NetInfoModel.Location Location => RowsInfo.GetLocation(this);
+        public Network.NetInfoModel.Location Location => RowsInfo.GetLocation(this);
         public Vector3 TargetPos;
         public Quaternion TargetRot;
         // public Text PointText;// = transform.GetChild(0).GetChild(0).GetComponent<Text>();
         public Text PointText => transform.GetChild(0).GetChild(0).GetComponent<Text>();
-        public string CardName => CardLibrary.GetCardStandardInfo(CardId).CardName;
-        public string CardIntroduction => CardLibrary.GetCardStandardInfo(CardId).Introduction[Info.GlobalBattleInfo.LanguageRank];
+        public string CardName => CardLibraryCommand.GetCardStandardInfo(CardId).cardName;
+        public string CardIntroduction => CardLibraryCommand.GetCardStandardInfo(CardId).describe;
         public void Init()
         {
             IsInit = true;
             PointText.text = CardPoint.ToString();
         }
-
         public void SetMoveTarget(Vector3 TargetPosition, Vector3 TargetEulers)
         {
             TargetPos = TargetPosition;

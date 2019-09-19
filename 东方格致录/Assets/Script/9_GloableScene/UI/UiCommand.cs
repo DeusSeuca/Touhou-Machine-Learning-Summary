@@ -28,8 +28,8 @@ namespace Command
         {
             if (!Info.UiInfo.CardImage.ContainsKey(Id))
             {
-                var CardStandardInfo = CardLibrary.GetCardStandardInfo(Id);
-                Texture2D texture = CardStandardInfo.Icon;
+                var CardStandardInfo = global::CardLibraryCommand.GetCardStandardInfo(Id);
+                Texture2D texture = CardStandardInfo.icon;
                 Info.UiInfo.CardImage.Add(Id, Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero));
             }
             return Info.UiInfo.CardImage[Id];

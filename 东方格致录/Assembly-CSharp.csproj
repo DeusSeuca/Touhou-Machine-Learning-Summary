@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{FEC33BC4-281D-B675-6936-96A9CF414013}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -65,57 +66,43 @@
     <Compile Include="Assets\Script\2_BattleSenenScript\Ai\AiCommand.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardEffectStack.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\TriggerType.cs" />
+    <Compile Include="Assets\Script\2_BattleSenenScript\GameSystem\GameSystem.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Globe\GameCommand.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Globe\GlobeBattleInfo.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Point\PointControl.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Point\PointInfo.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Enum\Orientation.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Enum\RegionName_Battle.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Enum\RegionName_Other.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Enum\RegionTypes.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Row\RowCommand.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Row\RowControl.cs" />
-    <Compile Include="Assets\Script\2_BattleSenenScript\Row\RowEnum.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Enum\Belong.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Row\RowsInfo.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Row\SingleRowInfo.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\State\StateCommand.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\State\StateControl.cs" />
-    <Compile Include="Assets\Script\2_BattleSenenScript\Thread\MainThread.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Audio\AudioInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Camera\CameraControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Card\Card.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Card\CardControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardDeck.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardLibrary.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardLibraryCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardLibrarySaveData.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardMenu.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card0.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1000.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1001.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1002.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1003.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1004.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1030.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1031.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card10310.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card10311.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card10312.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card10313.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card10314.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card10315.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1032.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1033.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1034.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1035.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1036.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1037.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1038.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModel\Card1039.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\CardModelInfo.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\SingleCardLibrary.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardLibrary\Test1.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Enum\Property.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Enum\Territory.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Command\CardCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Library\CardInfo.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\Library\CardLibrary.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Card\Library\CardLibraryCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Dialogue\Dialogue.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Dialogue\DialogueCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\CardBoardMode.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Enum\CardLevel.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\LoadRangeOnBattle.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\LoadRangeOnOther.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\NetAcyncType.cs" />
@@ -130,6 +117,7 @@
     <Compile Include="Assets\Script\9_GloableScene\Player\AllPlayerInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Test\TestScript.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Test\TestTask.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Thread\MainThread.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowEndPoint.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowManager.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\CardBoard\BoardCardInfo.cs" />
@@ -138,10 +126,10 @@
     <Compile Include="Assets\Script\9_GloableScene\UI\NoticeControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\UiCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\UiInfo.cs" />
-    <Compile Include="Assets\Script\Dialogue\DialgueInfo.cs" />
-    <Compile Include="Assets\Script\Dialogue\DialogueControl.cs" />
-    <Compile Include="Assets\Script\Dialogue\Live2d.cs" />
-    <Compile Include="Assets\Script\Extern\Extern.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Dialogue\DialgueInfo.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Dialogue\DialogueControl.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Dialogue\Live2d.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Extern\Extern.cs" />
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>E:/东方格致录/东方格致录/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
@@ -775,6 +763,10 @@
       <Project>{97BC5290-2538-FAA3-F77D-C32D876E8798}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -1,4 +1,5 @@
 ﻿using CardSpace;
+using GameEnum;
 using Info;
 using System.Collections.Generic;
 
@@ -6,17 +7,12 @@ namespace Command
 {
     public class GameCommand
     {
-        public static void InitDeck()
-        {
-
-        }
         public static void PlayCardToRegion()
         {
             if (GlobalBattleInfo.PlayerFocusRegion.ThisRowCards.Count < 5)
             {
                 Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
                 TargetCard.IsPrePrepareToPlay = false;
-                //RowsInfo.Instance.SingleOtherInfos[RegionName_Other.My_Hand].ThisRowCard.Remove(TargetCard);
                 GlobalBattleInfo.PlayerFocusRegion.ThisRowCards.Add(TargetCard);
                 GlobalBattleInfo.IsCardEffectCompleted = true;
             }
@@ -26,7 +22,7 @@ namespace Command
 
         }
         // 限制手牌被打出
-        [System.Obsolete("请使用新的api")]
+        [System.Obsolete("已过期，请使用RowCommand.GetCardList")]
         public static void SetPlayCardLimit(bool IsLimit)
         {
             RowsInfo.GetRegionCardList(RegionName_Other.My_Hand).ThisRowCards.ForEach(card => card.IsLimit = IsLimit);

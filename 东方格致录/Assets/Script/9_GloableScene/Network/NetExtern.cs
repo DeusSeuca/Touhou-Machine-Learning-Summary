@@ -1,16 +1,18 @@
 ﻿using NetworkCommsDotNet.Connections;
-
-public static class NetExtern
+namespace Network
 {
-    public static void SendMessge(this Connection con, string Tag, object data)
+    public static class NetExtern
     {
-        if (Info.GlobalBattleInfo.IsPVP)
+        public static void SendMessge(this Connection con, string Tag, object data)
         {
-            con.SendObject(Tag, data.ToJson());
+            if (Info.GlobalBattleInfo.IsPVP)
+            {
+                con.SendObject(Tag, data.ToJson());
+            }
         }
-    }
-    public static string SendReceiveMessge(this Connection con, string SengTag, string ReceiveTag, object Info, int LimitTime = 5)
-    {
-        return con.SendReceiveObject<string, string>(SengTag, ReceiveTag, LimitTime * 1000, Info.ToJson());
+        public static string SendReceiveMessge(this Connection con, string SengTag, string ReceiveTag, object Info, int LimitTime = 5)
+        {
+            return con.SendReceiveObject<string, string>(SengTag, ReceiveTag, LimitTime * 1000, Info.ToJson());
+        }
     }
 }

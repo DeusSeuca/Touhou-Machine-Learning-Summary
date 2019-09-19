@@ -1,4 +1,5 @@
 ﻿using CardSpace;
+using GameEnum;
 using System.Collections.Generic;
 using UnityEngine;
 

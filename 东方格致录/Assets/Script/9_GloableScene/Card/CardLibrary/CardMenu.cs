@@ -25,23 +25,23 @@ public class CardMenu : OdinMenuEditorWindow
         tree.DefaultMenuStyle.IconSize = 48.00f;
         tree.Config.DrawSearchToolbar = true;
         tree.Add("卡牌列表", SaveData);
-        if (SaveData.SingleCardLibrarieDatas != null)
+        if (SaveData.cardLibrarieList != null)
         {
-            foreach (var SingleLibrary in SaveData.SingleCardLibrarieDatas)
+            foreach (var SingleLibrary in SaveData.cardLibrarieList)
             {
                 tree.Add($@"卡牌列表/{SingleLibrary.sectarian}", SingleLibrary);
                 if (SingleLibrary.CardModelInfos != null)
                 {
                     foreach (var CardModel in SingleLibrary.CardModelInfos)
                     {
-                        tree.Add($@"卡牌列表/{SingleLibrary.sectarian}/{CardModel.CardName}", CardModel);
+                        tree.Add($@"卡牌列表/{SingleLibrary.sectarian}/{CardModel.cardName}", CardModel);
                     }
                 }
             }
         }
         tree.EnumerateTree().AddIcons<CardLibrarySaveData>(x => x.Icon);
-        tree.EnumerateTree().AddIcons<SingleCardLibrary>(x => x.Icon);
-        tree.EnumerateTree().AddIcons<CardModelInfo>(x => x.Icon);
+        tree.EnumerateTree().AddIcons<CardLibrary>(x => x.sectarianIcon);
+        tree.EnumerateTree().AddIcons<CardModelInfo>(x => x.icon);
         return tree;
     }
     //protected override OdinMenuTree BuildMenuTree()

@@ -14,9 +14,14 @@ public partial class CardLibrarySaveData : ScriptableObject
     [ShowInInspector]
     public static  List<CardModelInfo> cards;
     [System.Obsolete("已废弃")]
-    public List<SingleCardLibrary> SingleCardLibrarieDatas;
+    public List<CardLibrary> cardLibrarieList;
     [System.Obsolete("已废弃")]
-    public void Init() => LibraryCardCount = SingleCardLibrarieDatas.Select(Cards => Cards.CardNum).Sum();
+    public void Init()
+    {
+        cardLibrarieList.Add(new CardLibrary());
+        LibraryCardCount = cardLibrarieList.Select(Cards => Cards.cardNum).Sum();
+    }
+
     [HorizontalGroup("Button", 155, LabelWidth = 70)]
     [Button("载入卡牌数据从csv表格")]
     public void Load() => Command.CardLibraryCommand.LoadFromCsv();
@@ -27,10 +32,10 @@ public partial class CardLibrarySaveData : ScriptableObject
     [Button("添加势力")]
     public void AddSingleCardLibrary()
     {
-        if (SingleCardLibrarieDatas == null)
+        if (cardLibrarieList == null)
         {
-            SingleCardLibrarieDatas = new List<SingleCardLibrary>();
+            cardLibrarieList = new List<CardLibrary>();
         }
-        SingleCardLibrarieDatas.Add(new SingleCardLibrary());
+        cardLibrarieList.Add(new CardLibrary());
     }
 }

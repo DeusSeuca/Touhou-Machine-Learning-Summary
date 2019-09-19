@@ -1,11 +1,14 @@
 ﻿using CardSpace;
+using GameEnum;
 using Info;
+using Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Thread;
 using UnityEngine;
-using static NetInfoModel;
+using static Network.NetInfoModel;
 
 namespace Command
 {
@@ -17,16 +20,16 @@ namespace Command
             Card NewCardScript = null;
             MainThread.Run(() =>
             {
-                NewCard = GameObject.Instantiate(CardLibrary.Instance.Card_Model);
+                NewCard = GameObject.Instantiate(global::CardLibraryCommand.Instance.Card_Model);
                 NewCard.name = "Card" + Info.GlobalBattleInfo.CreatCardRank++;
-                var CardStandardInfo = CardLibrary.GetCardStandardInfo(id);
+                var CardStandardInfo = global::CardLibraryCommand.GetCardStandardInfo(id);
                 NewCard.AddComponent(Type.GetType("Card" + id));
                 Card card = NewCard.GetComponent<Card>();
-                card.CardId = CardStandardInfo.CardId;
-                card.CardPoint = CardStandardInfo.Point;
-                card.icon = CardStandardInfo.Icon;
-                card.CardProperty = CardStandardInfo.CardProperty;
-                card.CardTerritory = CardStandardInfo.CardTerritory;
+                card.CardId = CardStandardInfo.cardId;
+                card.CardPoint = CardStandardInfo.point;
+                card.icon = CardStandardInfo.icon;
+                card.CardProperty = CardStandardInfo.cardProperty;
+                card.CardTerritory = CardStandardInfo.cardTerritory;
                 card.GetComponent<Renderer>().material.SetTexture("_Front", card.icon);
                 card.Init();
                 NewCardScript = card;
@@ -76,7 +79,7 @@ namespace Command
                 GlobalBattleInfo.TargetCard = TargetCard;
                 int MaxCardRank = Info.RowsInfo.GetDownCardList(RegionTypes.Deck).Count;
                 GlobalBattleInfo.RandomRank = AiCommand.GetRandom(0, MaxCardRank);
-                NetCommand.AsyncInfo(NetAcyncType.ExchangeCard);
+                Network.NetCommand.AsyncInfo(NetAcyncType.ExchangeCard);
                 RowsInfo.GetDownCardList(RegionTypes.Hand).Remove(TargetCard);
                 RowsInfo.GetDownCardList(RegionTypes.Deck).Insert(GlobalBattleInfo.RandomRank, TargetCard);
                 TargetCard.IsCanSee = false;
@@ -103,7 +106,7 @@ namespace Command
             GameCommand.SetPlayCardLimit(true);
             Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
             TargetCard.IsPrePrepareToPlay = false;
-            Command.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
+            NetCommand.AsyncInfo(NetAcyncType.PlayCard);
             TargetCard.IsCanSee = true;
             RowsInfo.GetMyCardList(RegionTypes.Hand).Remove(TargetCard);
             RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
@@ -116,7 +119,7 @@ namespace Command
             GameCommand.SetPlayCardLimit(true);
             Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
             TargetCard.IsPrePrepareToPlay = false;
-            Command.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
+            NetCommand.AsyncInfo(NetAcyncType.PlayCard);
             TargetCard.IsCanSee = true;
             RowsInfo.GetRow(TargetCard).Remove(TargetCard);
             RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);

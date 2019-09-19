@@ -8,12 +8,10 @@ public class BoardCardInfo : MonoBehaviour
         if (Info.GlobalBattleInfo.SelectBoardCardIds.Contains(Rank))
         {
             Info.GlobalBattleInfo.SelectBoardCardIds.Remove(Rank);
-            print("移除了一张牌");
         }
         else
         {
             Info.GlobalBattleInfo.SelectBoardCardIds.Add(Rank);
-            //print("加入了一张牌");
         }
     }
 }

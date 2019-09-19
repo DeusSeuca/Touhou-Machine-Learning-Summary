@@ -1,4 +1,5 @@
 ﻿using CardSpace;
+using GameEnum;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace Info
         [System.Obsolete("重构预定")]
         public static SingleRowInfo GetRegionCardList(RegionName_Other region) => Instance.SingleOtherInfos[region];
 
-        public static NetInfoModel.Location GetLocation(Card TargetCard)
+        public static Network.NetInfoModel.Location GetLocation(Card TargetCard)
         {
             int RankX = -1;
             int RankY = -1;
@@ -69,13 +70,13 @@ namespace Info
                     RankY = GlobalCardList[i].IndexOf(TargetCard);
                 }
             }
-            return new NetInfoModel.Location( RankX, RankY);
+            return new Network.NetInfoModel.Location( RankX, RankY);
         }
         public static Card GetCard(int x,int y)
         {
             return x == -1 ? null : GlobalCardList[x][y];
         }
-        public static Card GetCard(NetInfoModel.Location Locat)
+        public static Card GetCard(Network.NetInfoModel.Location Locat)
         {
             return Locat.x == -1 ? null : GlobalCardList[Locat.x][Locat.y];
         }

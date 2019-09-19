@@ -5,14 +5,9 @@ namespace Control
 {
     public class StateControl : MonoBehaviour
     {
-
         bool IsLastPlay1Pass = false;
         bool IsLastPlay2Pass = false;
-        void Start()
-        {
-            _ = BattleProcess();
-            //PlayerSurrender().Catch();
-        }
+        void Start() => _ = BattleProcess();//PlayerSurrender().Catch();
         private void Update()
         {
             CheckPassState();
@@ -22,11 +17,9 @@ namespace Control
             await StateCommand.BattleStart();
             for (int i = 0; i < 3; i++)
             {
-                //print("小局开始");
                 await StateCommand.RoundStart(i);
                 while (true)
                 {
-                    //print("回合开始");
                     await StateCommand.TurnStart();
                     await StateCommand.WaitForPlayerOperation();
                     await StateCommand.TurnEnd();

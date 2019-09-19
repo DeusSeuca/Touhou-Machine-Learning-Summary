@@ -1,4 +1,6 @@
+using GameEnum;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,7 +24,7 @@ namespace Command
         }
         public static void GetCardInfo(int id)
         {
-
+            
         }
         public static void ClearCardLibrary(int id)
         {
@@ -30,25 +32,14 @@ namespace Command
         }
         public static void LoadFromCsv()
         {
-            CardLibrarySaveData.cards = new System.Collections.Generic.List<CardModelInfo>();
-            Debug.Log(CsvData[1]);
+            CardLibrarySaveData.cards = new List<CardModelInfo>();
             //TextAsset binAsset = Resources.Load("csv", typeof(TextAsset)) as TextAsset;
             //var s = Resources.Load("CardData.csv").ToJson();
             string Language = "Ch";
-
             for (int i = 1; i < CsvData.Length; i++)
             {
-                //Texture2D tex = new Texture2D().LoadImage(File.ReadAllBytes(GetCsvData<string>(i, "ImageUrl") + ".png"));
                 Texture2D tex = Resources.Load<Texture2D>("CardTex\\" + GetCsvData<string>(i, "ImageUrl"));
-                Debug.Log("CardTex\\" + GetCsvData<string>(i, "ImageUrl"));
                 CardLibrarySaveData.cards.Add(
-                    //new CardModelInfo(
-                    //    new Texture2D(4, 10),
-                    //    GetCsvData<int>(i, "Id"),
-                    //    GetCsvData<string>(i, "Name-" + Language),
-                    //    GetCsvData<int>(i, "Point"),
-                    //    GetCsvData<Sectarian>(i, "Camp")
-                    //    ));
                     new CardModelInfo(
                         GetCsvData<int>(i, "Id"),
                         GetCsvData<string>(i, "Name-" + Language),
@@ -61,7 +52,6 @@ namespace Command
                         tex
                     ));
             }
-            //Debug.Log(text);
         }
 
         private static T GetCsvData<T>(int i, string item)

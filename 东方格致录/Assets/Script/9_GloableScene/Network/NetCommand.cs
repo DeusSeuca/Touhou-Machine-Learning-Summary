@@ -4,11 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static NetInfoModel;
-using static NetworkCommsDotNet.NetworkComms;
+using Network;
 
-namespace Command
+using static NetworkCommsDotNet.NetworkComms;
+using static Network.NetInfoModel;
+using GameEnum;
+using Thread;
+
+namespace Network
 {
+
     public class NetCommand
     {
         static Connection Client;
@@ -51,6 +56,7 @@ namespace Command
         }
         public static void SurrenderRequir(PacketHeader packetHeader, Connection connection, string data)
         {
+
             _ = Command.StateCommand.BattleEnd(true, true);
         }
         private static void InitBattleInfo(PacketHeader packetHeader, Connection connection, string data)
@@ -121,13 +127,13 @@ namespace Command
                         }
                     case NetAcyncType.Surrender:
                         break;
-                    
+
                     default:
                         break;
                 }
             }
         }
-        public static void AsyncInfo(NetAcyncType AcyncType,bool IsAsync=true)
+        public static void AsyncInfo(NetAcyncType AcyncType, bool IsAsync = true)
         {
             if (Info.GlobalBattleInfo.IsPVP && (Info.GlobalBattleInfo.IsMyTurn || AcyncType == NetAcyncType.FocusCard || AcyncType == NetAcyncType.ExchangeCard))
             {
@@ -214,7 +220,7 @@ namespace Command
                         int Y = int.Parse(ReceiveInfo[3].ToString());
                         Info.GlobalBattleInfo.PlayerPlayCard = Info.RowsInfo.GetCard(X, Y);
                         //_ = Command.CardCommand.PlayCard();
-                        CardCommand.PlayCard().Wait();
+                        Command.CardCommand.PlayCard().Wait();
                         break;
                     }
                 case NetAcyncType.FocusRegion:
@@ -249,7 +255,7 @@ namespace Command
 
                 case NetAcyncType.Pass:
                     {
-                        UiCommand.SetCurrentPass();
+                        Command.UiCommand.SetCurrentPass();
                         break;
                     }
                 case NetAcyncType.Surrender:
@@ -259,9 +265,9 @@ namespace Command
                         Debug.Log("交换卡牌信息");
                         Debug.Log("收到信息" + Data);
 
-                        Location Locat = ReceiveInfo[2].ToString().ToObject<Location>();
+                        Location location = ReceiveInfo[2].ToString().ToObject<Location>();
                         int RandomRank = int.Parse(ReceiveInfo[3].ToString());
-                        _ = Command.CardCommand.ExchangeCard(Info.RowsInfo.GetCard(Locat), false, RandomRank);
+                        _ = Command.CardCommand.ExchangeCard(Info.RowsInfo.GetCard(location), false, RandomRank);
                         break;
                     }
                 default:
@@ -270,4 +276,3 @@ namespace Command
         }
     }
 }
-

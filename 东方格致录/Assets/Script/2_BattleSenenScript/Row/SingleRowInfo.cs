@@ -1,7 +1,9 @@
 ﻿using CardSpace;
 using Control;
+using GameEnum;
 using System.Collections.Generic;
 using System.Linq;
+using Thread;
 using UnityEngine;
 namespace Info
 {

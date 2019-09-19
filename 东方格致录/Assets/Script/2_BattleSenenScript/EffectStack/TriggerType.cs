@@ -1,7 +1,6 @@
 ﻿using System;
 
-
-public class TriggerType
+namespace TriggerType
 {
     public class PlayCard : Attribute { }
     public class Use : Attribute { }
@@ -14,4 +13,8 @@ public class TriggerType
     public class TurnStart : Attribute { }
     public class CountDown : Attribute { }
 }
+//public class TriggerType
+//{
+    
+//}
 

@@ -17,7 +17,6 @@ namespace Control
         public static async Task TriggerCardList<T>(List<Card> Cards)
         {
             Cards.ForEach(card => card.Trigger<T>());
-
         }
         public void Trigger<T>()
         {
@@ -26,7 +25,7 @@ namespace Control
                 x.GetCustomAttributes(true).Count() > 0 && x.GetCustomAttributes(true)[0].GetType() == typeof(T)).ToList();
             tasks.Reverse();
             tasks.Select(x => x.GetValue(this)).Cast<Func<Task>>().ToList().ForEach(CardEffectStackControl.TaskStack.Push);
-            _ = CardEffectStackControl.Run();
+            _ = Run();
         }
         public static async Task Run()
         {
@@ -43,9 +42,4 @@ namespace Control
             }
         }
     }
-    public  static class Extern
-    {
-
-    }
-        
 }

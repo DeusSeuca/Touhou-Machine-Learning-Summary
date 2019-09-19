@@ -1,5 +1,6 @@
 using CardSpace;
 using Command;
+using GameEnum;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -20,6 +21,9 @@ public class Card1000 : Card
     public Func<Task> Step3 => (async () =>
     {
         await StateCommand.WaitForSelecUnit(this,GameCommand.GetCardList( LoadRangeOnBattle.My_All),2);
+        await StateCommand.WaitForSelecUnit(this,RowCommand.GetCardList("my||battle||>3"),2);
+        await StateCommand.WaitForSelecUnit(this,RowCommand.GetCardList("").hasTag("¾«Áé").lessPoint(5), 2);
+
         for (int i = 0; i < Info.GlobalBattleInfo.SelectUnits.Count; i++)
         {
             await Info.GlobalBattleInfo.SelectUnits[i].Hurt(1);

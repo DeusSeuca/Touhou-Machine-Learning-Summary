@@ -12,7 +12,6 @@ namespace 内容测试
         static string[] datas;
         static void Main(string[] args)
         {
-
             //string language = "Ch";
             datas = File.ReadAllLines(@"E:\东方格致录\东方格致录\Assets\Resources\CardData.csv", Encoding.Default);
             datas.ToList().ForEach(Console.WriteLine);

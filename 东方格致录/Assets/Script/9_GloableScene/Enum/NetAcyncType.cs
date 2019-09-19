@@ -1,11 +1,14 @@
-﻿public enum NetAcyncType
+﻿namespace GameEnum
 {
-    FocusCard,
-    PlayCard,
-    FocusRegion,
-    FocusLocation,
-    SelectUnites,
-    ExchangeCard,
-    Pass,
-    Surrender
+    public enum NetAcyncType
+    {
+        FocusCard,
+        PlayCard,
+        FocusRegion,
+        FocusLocation,
+        SelectUnites,
+        ExchangeCard,
+        Pass,
+        Surrender
+    }
 }

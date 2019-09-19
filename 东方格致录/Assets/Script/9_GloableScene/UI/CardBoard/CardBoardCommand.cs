@@ -32,11 +32,11 @@ namespace Command
                 List<Card> Cards = Info.GlobalBattleInfo.TargetCardList;
                 for (int i = 0; i < Cards.Count; i++)
                 {
-                    var CardStandardInfo = CardLibrary.GetCardStandardInfo(Cards[i].CardId);
+                    var CardStandardInfo = global::CardLibraryCommand.GetCardStandardInfo(Cards[i].CardId);
                     GameObject NewCard = GameObject.Instantiate(Info.UiInfo.CardModel);
                     NewCard.GetComponent<BoardCardInfo>().Rank = i;
                     NewCard.transform.SetParent(Info.UiInfo.Constant);
-                    Texture2D texture = CardStandardInfo.Icon;
+                    Texture2D texture = CardStandardInfo.icon;
                     NewCard.GetComponent<Image>().sprite = Command.UiCommand.GetBoardCardImage(Cards[i].CardId);
                     Info.UiInfo.ShowCardLIstOnBoard.Add(NewCard);
                 }
@@ -51,11 +51,11 @@ namespace Command
                 List<int> CardIds = Info.GlobalBattleInfo.TargetCardIDList;
                 for (int i = 0; i < CardIds.Count; i++)
                 {
-                    var CardStandardInfo = CardLibrary.GetCardStandardInfo(CardIds[i]);
+                    var CardStandardInfo = global::CardLibraryCommand.GetCardStandardInfo(CardIds[i]);
                     GameObject NewCard = GameObject.Instantiate(Info.UiInfo.CardModel);
                     NewCard.GetComponent<BoardCardInfo>().Rank = i;
                     NewCard.transform.SetParent(Info.UiInfo.Constant);
-                    Texture2D texture = CardStandardInfo.Icon;
+                    Texture2D texture = CardStandardInfo.icon;
                     NewCard.GetComponent<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
                     Info.UiInfo.ShowCardLIstOnBoard.Add(NewCard);
                 }
