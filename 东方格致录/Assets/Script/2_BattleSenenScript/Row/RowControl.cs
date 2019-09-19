@@ -2,7 +2,6 @@
 using Command;
 using Info;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 namespace Control
 {
@@ -20,7 +19,7 @@ namespace Control
         void Update()
         {
             ControlCardPosition(SingleInfo.ThisRowCards);
-            Command.RowCommand.RefreshHandCard(SingleInfo.ThisRowCards,IsMyHandRegion);
+            Command.RowCommand.RefreshHandCard(SingleInfo.ThisRowCards, IsMyHandRegion);
             TempCardControk();
         }
         public void TempCardControk()
@@ -29,7 +28,7 @@ namespace Control
             {
                 HasTempCard = true;
                 //print(SingleInfo.TempCard);
-                _ =Command.RowCommand.CreatTempCard(SingleInfo);
+                _ = Command.RowCommand.CreatTempCard(SingleInfo);
             }
             if (SingleInfo.TempCard != null && SingleInfo.Location != SingleInfo.ThisRowCards.IndexOf(SingleInfo.TempCard))
             {
@@ -41,7 +40,7 @@ namespace Control
                 HasTempCard = false;
             }
         }
-        
+
         void ControlCardPosition(List<Card> ThisCardList)
         {
             int Num = ThisCardList.Count;

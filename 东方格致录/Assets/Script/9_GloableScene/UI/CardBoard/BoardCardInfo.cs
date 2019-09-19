@@ -1,17 +1,18 @@
-﻿using UnityEngine;
-
-public class BoardCardInfo : MonoBehaviour
+﻿namespace GameUI
 {
-    public int Rank;
-    public void OnMouseClick()
+    public class BoardCardInfo
     {
-        if (Info.GlobalBattleInfo.SelectBoardCardIds.Contains(Rank))
+        public int Rank;
+        public void OnMouseClick()
         {
-            Info.GlobalBattleInfo.SelectBoardCardIds.Remove(Rank);
-        }
-        else
-        {
-            Info.GlobalBattleInfo.SelectBoardCardIds.Add(Rank);
+            if (Info.GlobalBattleInfo.SelectBoardCardIds.Contains(Rank))
+            {
+                Info.GlobalBattleInfo.SelectBoardCardIds.Remove(Rank);
+            }
+            else
+            {
+                Info.GlobalBattleInfo.SelectBoardCardIds.Add(Rank);
+            }
         }
     }
 }

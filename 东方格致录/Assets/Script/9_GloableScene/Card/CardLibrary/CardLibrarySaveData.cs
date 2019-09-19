@@ -5,14 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SaveData", menuName = "CreatCardDataAsset")]
 public partial class CardLibrarySaveData : ScriptableObject
 {
-    
+
     [LabelText("牌库图标")]
     public Texture2D Icon;
     [ShowInInspector]
     [LabelText("牌库卡牌数量")]
     public int LibraryCardCount;
     [ShowInInspector]
-    public static  List<CardModelInfo> cards;
+    public static List<CardModelInfo> cards;
     [System.Obsolete("已废弃")]
     public List<CardLibrary> cardLibrarieList;
     [System.Obsolete("已废弃")]

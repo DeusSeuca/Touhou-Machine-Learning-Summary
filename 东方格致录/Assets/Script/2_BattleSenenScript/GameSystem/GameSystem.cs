@@ -1,12 +1,16 @@
-﻿using UnityEngine;
-using System.Collections;
-using CardSpace;
-
-public class GameSystem : MonoBehaviour
+﻿using CardSpace;
+using UnityEngine;
+namespace Command
 {
-    public static void Hurt(Card card,int Point)
+    namespace GameSystem
     {
-        
+        public class PointSystem : MonoBehaviour
+        {
+            public static void Hurt(Card card, int Point)
+            {
+                //Command.GameSystem
+            }
+        }
     }
-
 }
+

@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static CardLibrarySaveData;
-using static CardLibraryCommand;
 
 public class CardLibraryCommand : SerializedMonoBehaviour
 {
@@ -18,7 +16,7 @@ public class CardLibraryCommand : SerializedMonoBehaviour
         Instance = this;
         SaveData = Resources.Load<CardLibrarySaveData>("SaveData");
     }
-  
+
     private void AddComponent(string ClassName)
     {
         gameObject.AddComponent(Type.GetType(ClassName));

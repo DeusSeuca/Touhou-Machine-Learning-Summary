@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEnum;
+using System;
 using System.Threading.Tasks;
 namespace Command
 {
@@ -12,7 +13,7 @@ namespace Command
         {
             if (Info.GlobalBattleInfo.IsPlayer1Pass || Info.GlobalBattleInfo.IsPlayer2Pass)
             {
-                UiCommand.SetCurrentPass();
+                Command.GameUI.UiCommand.SetCurrentPass();
             }
             else
             {

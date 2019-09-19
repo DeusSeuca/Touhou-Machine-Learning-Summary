@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using static NetInfoModel;
 namespace Info
 {
     /// <summary>

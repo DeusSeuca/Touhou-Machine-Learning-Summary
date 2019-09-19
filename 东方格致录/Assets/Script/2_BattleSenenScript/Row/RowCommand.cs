@@ -28,7 +28,7 @@ namespace Command
             SingleInfo.ThisRowCards.Remove(SingleInfo.TempCard);
             SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
         }
-        public static void  RefreshHandCard(List<Card> ThisCardList, bool IsMyHandRegion)
+        public static void RefreshHandCard(List<Card> ThisCardList, bool IsMyHandRegion)
         {
             if (IsMyHandRegion)
             {

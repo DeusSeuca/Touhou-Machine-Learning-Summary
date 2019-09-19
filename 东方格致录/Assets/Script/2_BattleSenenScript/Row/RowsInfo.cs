@@ -3,7 +3,6 @@ using GameEnum;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Info
 {
@@ -70,9 +69,9 @@ namespace Info
                     RankY = GlobalCardList[i].IndexOf(TargetCard);
                 }
             }
-            return new Network.NetInfoModel.Location( RankX, RankY);
+            return new Network.NetInfoModel.Location(RankX, RankY);
         }
-        public static Card GetCard(int x,int y)
+        public static Card GetCard(int x, int y)
         {
             return x == -1 ? null : GlobalCardList[x][y];
         }

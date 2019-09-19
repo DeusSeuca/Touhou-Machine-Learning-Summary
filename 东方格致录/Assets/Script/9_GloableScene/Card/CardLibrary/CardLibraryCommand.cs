@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
 namespace Command
 {
@@ -24,7 +23,7 @@ namespace Command
         }
         public static void GetCardInfo(int id)
         {
-            
+
         }
         public static void ClearCardLibrary(int id)
         {

@@ -60,7 +60,7 @@ namespace Info
         internal static bool IsBattleEnd;
         internal static int CreatCardRank;
 
-        public static bool IsCurrectPass => IsPlayer1 ^ IsMyTurn ? IsPlayer2Pass : IsPlayer1Pass ;
+        public static bool IsCurrectPass => IsPlayer1 ^ IsMyTurn ? IsPlayer2Pass : IsPlayer1Pass;
         public static bool IsBoothPass => IsPlayer1Pass && IsPlayer2Pass;
     };
 }

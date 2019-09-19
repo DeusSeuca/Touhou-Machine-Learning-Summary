@@ -45,7 +45,7 @@ namespace Command
             CardList.AddRange(OnBattle.Contain(LoadRangeOnBattle.Op_Soil) ? RowsInfo.GetOpCardList(RegionTypes.Soil) : new List<Card>());
             return CardList;
         }
-        
+
     }
 }
 

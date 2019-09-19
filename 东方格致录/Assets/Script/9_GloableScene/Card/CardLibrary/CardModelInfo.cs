@@ -1,4 +1,3 @@
-using CardSpace;
 using GameEnum;
 using Sirenix.OdinInspector;
 using System;
@@ -38,7 +37,7 @@ public class CardModelInfo
     public string tag = "";
     [LabelText("卡片介绍")]
     public string describe = "";
-    public CardModelInfo( int cardId, string cardName, string describe, string tag, Sectarian sectarian, CardLevel level, int point,int ramification, Texture2D icon)
+    public CardModelInfo(int cardId, string cardName, string describe, string tag, Sectarian sectarian, CardLevel level, int point, int ramification, Texture2D icon)
     {
         this.icon = icon;
         this.cardId = cardId;

@@ -17,8 +17,8 @@ namespace Command
             {
                 //Info.AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 0, new List<int> { 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 10310, 10311, 10311, 10311, 10312, 10312, 10312, 10313, 10313, 10313, 10314, 10314, 10314}) });
                 //Info.AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 0, new List<int> { 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 10310, 10311, 10311, 10311, 10312, 10312, 10312, 10313, 10313, 10313, 10314, 10314, 10314})});
-                Info.AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1000, new List<int> { 1000,1000,1001,1001,1002,1002,1003,1003, 1000, 1000, 1001, 1001, 1002, 1002, 1003, 1003 }) });
-                Info.AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1000, new List<int> { 1000, 1000, 1001, 1001, 1002, 1002, 1003, 1003, 1000, 1000, 1001, 1001, 1002, 1002, 1003, 1003 })});
+                Info.AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1000, new List<int> { 1000, 1000, 1001, 1001, 1002, 1002, 1003, 1003, 1000, 1000, 1001, 1001, 1002, 1002, 1003, 1003 }) });
+                Info.AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1000, new List<int> { 1000, 1000, 1001, 1001, 1002, 1002, 1003, 1003, 1000, 1000, 1001, 1001, 1002, 1002, 1003, 1003 }) });
             }
             RowCommand.SetAllRegionSelectable(false);
             await Task.Run(async () =>

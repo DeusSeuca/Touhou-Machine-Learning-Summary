@@ -1,5 +1,4 @@
-﻿using Command;
-using Info;
+﻿using Info;
 using UnityEngine;
 
 namespace Control
@@ -66,7 +65,7 @@ namespace Control
                 {
                     GlobalBattleInfo.SelectRegion = GlobalBattleInfo.PlayerFocusRegion;
                 }
-                if (GlobalBattleInfo.IsWaitForSelectUnits && GlobalBattleInfo.PlayerFocusCard!=null && !GlobalBattleInfo.PlayerFocusCard.IsGray)
+                if (GlobalBattleInfo.IsWaitForSelectUnits && GlobalBattleInfo.PlayerFocusCard != null && !GlobalBattleInfo.PlayerFocusCard.IsGray)
                 {
                     GlobalBattleInfo.SelectUnits.Add(GlobalBattleInfo.PlayerFocusCard);
                     Command.UiCommand.SetArrowShow();

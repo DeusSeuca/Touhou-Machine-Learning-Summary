@@ -20,7 +20,7 @@ namespace Command
                 ParticleSystem TargetParticle = GameObject.Instantiate(Info.ParticleInfo.Instance.ParticleEffect[Rank]);
                 TargetParticle.transform.position = Position;
                 TargetParticle.Play();
-                GameObject.Destroy(TargetParticle,2);
+                GameObject.Destroy(TargetParticle, 2);
             });
         }
     }

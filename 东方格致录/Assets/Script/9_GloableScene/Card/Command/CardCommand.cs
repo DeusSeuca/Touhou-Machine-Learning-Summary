@@ -1,19 +1,16 @@
 ﻿using CardSpace;
 using GameEnum;
 using Info;
-using Network;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Thread;
 using UnityEngine;
-using static Network.NetInfoModel;
 
 namespace Command
 {
     public class CardCommand
-    {      
+    {
         public static async Task<Card> CreatCard(int id)
         {
             GameObject NewCard;
@@ -36,12 +33,12 @@ namespace Command
             });
             await Task.Run(() => { while (NewCardScript == null) { } });
             return NewCardScript;
-        }      
-        public static async Task ExchangeCard(Card TargetCard, bool IsPlayerExchange = true,int RandomRank=0)
+        }
+        public static async Task ExchangeCard(Card TargetCard, bool IsPlayerExchange = true, int RandomRank = 0)
         {
             Debug.Log("交换卡牌");
             await WashCard(TargetCard, IsPlayerExchange, RandomRank);
-            await DrawCard(IsPlayerExchange,true);
+            await DrawCard(IsPlayerExchange, true);
             if (IsPlayerExchange)
             {
                 CardBoardCommand.LoadCardList(RowsInfo.GetMyCardList(RegionTypes.Hand));
@@ -70,7 +67,7 @@ namespace Command
             await Task.Delay(100);
         }
         //洗回牌库
-       
+
         public static async Task WashCard(Card TargetCard, bool IsPlayerWash = true, int InsertRank = 0)
         {
             Debug.Log("洗回卡牌");

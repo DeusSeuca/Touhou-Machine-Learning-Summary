@@ -24,7 +24,7 @@ namespace Control
             {
                 Info.GlobalBattleInfo.PlayerPlayCard = ThisCard;
             }
-            
+
         }
         private void OnMouseUp()
         {
@@ -48,7 +48,7 @@ namespace Control
                 _ = Command.CardCommand.PlayCard(true);
             }
         }
-       
+
     }
 }
 

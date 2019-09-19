@@ -14,7 +14,7 @@ namespace Info
         public Belong belong;
         public RegionTypes region;
         public bool CanBeSelected;
-        public RowControl Control ;
+        public RowControl Control;
         public Material CardMaterial;
         public int RowRank => RowsInfo.GlobalCardList.IndexOf(ThisRowCards);
         public int Location => this.JudgeRank(GlobalBattleInfo.FocusPoint);
@@ -23,10 +23,10 @@ namespace Info
         {
             RowsInfo.SingleRowInfos.Add(this);
             Control = GetComponent<RowControl>();
-            CardMaterial= transform.GetComponent<Renderer>().material;
+            CardMaterial = transform.GetComponent<Renderer>().material;
         }
 
-        public  void SetRegionSelectable(bool CanBeSelected)
+        public void SetRegionSelectable(bool CanBeSelected)
         {
             this.CanBeSelected = CanBeSelected;
             MainThread.Run(() =>
@@ -36,7 +36,7 @@ namespace Info
 
         }
     }
-   
+
 }
 static partial class RowInfoExtend
 {

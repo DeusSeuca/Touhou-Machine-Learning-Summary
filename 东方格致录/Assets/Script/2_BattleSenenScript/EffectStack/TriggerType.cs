@@ -15,6 +15,6 @@ namespace TriggerType
 }
 //public class TriggerType
 //{
-    
+
 //}
 

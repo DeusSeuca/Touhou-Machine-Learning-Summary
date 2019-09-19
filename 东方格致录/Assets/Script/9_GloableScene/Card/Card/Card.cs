@@ -20,8 +20,8 @@ namespace CardSpace
         public Texture2D icon;
         public bool IsMove;
         public bool IsMoveStepOver = true;
-        public bool IsAvailable=true;
-        public bool IsLocked=true;
+        public bool IsAvailable = true;
+        public bool IsLocked = true;
         public bool IsCover = true;
         public float MoveSpeed = 0.1f;
 

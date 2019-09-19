@@ -1,10 +1,6 @@
 ﻿using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Sockets;
 using System.Threading.Tasks;
 using UnityEngine;
-using static NetInfoModel;
 
 namespace Test
 {
@@ -24,7 +20,7 @@ namespace Test
             }
             if (Input.GetMouseButtonDown(3))
             {
-               
+
                 //string Data = "{\"Datas\":[4,0,[{\"x\":5,\"y\":0}]]}";
 
                 //Command.NetCommand.AsyncInfoRequir(null, null, "{ \"Datas\":[4,9,[{\"x\":5,\"y\":0}]]}");
@@ -40,7 +36,7 @@ namespace Test
                 //    Command.NetCommand.AsyncInfoRequir(null, null, "{\"Datas\":[1,9,1,0]}");
                 //}).Wait();
             }
-            
+
         }
         [Button]
         private void Filter(string Text)

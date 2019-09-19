@@ -11,7 +11,7 @@ public static class Extern
     public static T ToObject<T>(this string Data) => JsonConvert.DeserializeObject<T>(Data);
     public static bool Contain(this LoadRangeOnBattle a, LoadRangeOnBattle b) => (a & b) > 0;
     public static int GetRowRank(this List<Card> CardList) => Info.RowsInfo.GlobalCardList.IndexOf(CardList);
-    public static void Trigger<T>(this List<Card> CardList) where T:Attribute   => CardList.ForEach(card => card.Trigger<T>());
+    public static void Trigger<T>(this List<Card> CardList) where T : Attribute => CardList.ForEach(card => card.Trigger<T>());
     //待修正
     public static List<Card> hasTag(this List<Card> CardList, params string[] tags) => null;
     //待修正

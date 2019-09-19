@@ -116,7 +116,6 @@
     <Compile Include="Assets\Script\9_GloableScene\ParticleSystem\ParticleInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Player\AllPlayerInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Test\TestScript.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Test\TestTask.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Thread\MainThread.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowEndPoint.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowManager.cs" />
