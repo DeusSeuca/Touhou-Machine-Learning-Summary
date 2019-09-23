@@ -1,6 +1,8 @@
-﻿namespace GameUI
+﻿using UnityEngine;
+
+namespace GameUI
 {
-    public class BoardCardInfo
+    public class BoardCardInfo: MonoBehaviour
     {
         public int Rank;
         public void OnMouseClick()

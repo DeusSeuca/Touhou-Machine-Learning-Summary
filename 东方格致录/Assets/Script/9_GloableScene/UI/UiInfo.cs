@@ -21,8 +21,8 @@ namespace Info
             public GameObject CardIntroductionModel;
             private void Awake() => Instance = this;
 
-            public static string CardBoardTitle { get; set; }
-            public static string NoticeBoardTitle { get; set; }
+            public static string CardBoardTitle = "";
+            public static string NoticeBoardTitle = "";
 
             public static List<GameObject> ShowCardLIstOnBoard = new List<GameObject>();
             public static Dictionary<int, Sprite> CardImage = new Dictionary<int, Sprite>();

@@ -1,4 +1,4 @@
 ﻿namespace GameEnum
 {
-    public enum Territory { My, Op }
+    public enum Territory { My, Op, All }
 }

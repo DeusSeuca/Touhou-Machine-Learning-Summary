@@ -10,12 +10,12 @@ namespace Control
         public Text Password;
         void Start()
         {
-            Network.NetCommand.Init(Network.NetClient.Client);
+            Command.Network.NetCommand.Init(Network.NetClient.Client);
             UserLogin();//自动登录
         }
         public void UserRegister()
         {
-            GeneralCommand<int> msg = Network.NetCommand.Register(UserName.text, Password.text).ToObject<GeneralCommand<int>>();
+            GeneralCommand<int> msg = Command.Network.NetCommand.Register(UserName.text, Password.text).ToObject<GeneralCommand<int>>();
             if (msg.Datas[0] == 1)
             {
                 print("注册成功");
@@ -27,7 +27,7 @@ namespace Control
         }
         public void UserLogin()
         {
-            GeneralCommand<string> msg = Network.NetCommand.Login(UserName.text, Password.text).ToObject<GeneralCommand<string>>();
+            GeneralCommand<string> msg = Command.Network.NetCommand.Login(UserName.text, Password.text).ToObject<GeneralCommand<string>>();
             Info.AllPlayerInfo.UserInfo = msg.Datas[1].ToObject<PlayerInfo>();
             SceneManager.LoadSceneAsync(1);
         }

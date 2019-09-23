@@ -33,7 +33,7 @@ namespace Command
             {
                 if (!Info.GameUI.UiInfo.CardImage.ContainsKey(Id))
                 {
-                    var CardStandardInfo = global::CardLibraryCommand.GetCardStandardInfo(Id);
+                    var CardStandardInfo = Command.CardLibraryCommand.GetCardStandardInfo(Id);
                     Texture2D texture = CardStandardInfo.icon;
                     Info.GameUI.UiInfo.CardImage.Add(Id, Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero));
                 }

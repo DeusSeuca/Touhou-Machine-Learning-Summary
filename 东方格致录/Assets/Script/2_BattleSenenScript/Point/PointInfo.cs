@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using GameEnum;
+using System.Linq;
 namespace Info
 {
     public class PointInfo

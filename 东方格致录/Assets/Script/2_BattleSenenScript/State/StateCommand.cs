@@ -1,9 +1,12 @@
 ﻿using CardSpace;
+using GameEnum;
 using Info;
+using Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Thread;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,15 +20,15 @@ namespace Command
             {
                 //Info.AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 0, new List<int> { 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 10310, 10311, 10311, 10311, 10312, 10312, 10312, 10313, 10313, 10313, 10314, 10314, 10314}) });
                 //Info.AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 0, new List<int> { 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 10310, 10311, 10311, 10311, 10312, 10312, 10312, 10313, 10313, 10313, 10314, 10314, 10314})});
-                Info.AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1000, new List<int> { 1000, 1000, 1001, 1001, 1002, 1002, 1003, 1003, 1000, 1000, 1001, 1001, 1002, 1002, 1003, 1003 }) });
-                Info.AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1000, new List<int> { 1000, 1000, 1001, 1001, 1002, 1002, 1003, 1003, 1000, 1000, 1001, 1001, 1002, 1002, 1003, 1003 }) });
+                Info.AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1, new List<int> { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }) });
+                Info.AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1, new List<int> { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }) });
             }
             RowCommand.SetAllRegionSelectable(false);
             await Task.Run(async () =>
             {
                 //await Task.Delay(500);
-                UiCommand.SetNoticeBoardTitle("对战开始");
-                UiCommand.NoticeBoardShow();
+                GameUI.UiCommand.SetNoticeBoardTitle("对战开始");
+                GameUI.UiCommand.NoticeBoardShow();
                 await Task.Delay(000);
                 //初始化领袖卡
                 Card MyLeaderCard = await CardCommand.CreatCard(Info.AllPlayerInfo.UserInfo.UseDeck.LeaderId);
@@ -57,8 +60,8 @@ namespace Command
             //Debug.Log("回合结束");
             await Task.Run(async () =>
             {
-                UiCommand.SetNoticeBoardTitle($"对战终止\n{GlobalBattleInfo.ShowScore.MyScore}:{GlobalBattleInfo.ShowScore.OpScore}");
-                UiCommand.NoticeBoardShow();
+                GameUI.UiCommand.SetNoticeBoardTitle($"对战终止\n{GlobalBattleInfo.ShowScore.MyScore}:{GlobalBattleInfo.ShowScore.OpScore}");
+                GameUI.UiCommand.NoticeBoardShow();
                 await Task.Delay(2000);
                 MainThread.Run(() =>
                 {
@@ -71,16 +74,16 @@ namespace Command
         {
             await Task.Run(async () =>
             {
-                UiCommand.ReSetPassState();
-                UiCommand.SetNoticeBoardTitle($"第{num + 1}小局开始");
-                UiCommand.NoticeBoardShow();
+                GameUI.UiCommand.ReSetPassState();
+                GameUI.UiCommand.SetNoticeBoardTitle($"第{num + 1}小局开始");
+                GameUI.UiCommand.NoticeBoardShow();
                 await Task.Delay(2000);
                 switch (num)
                 {
                     case (0):
                         {
                             Info.GlobalBattleInfo.ExChangeableCardNum += 3;
-                            Info.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.GlobalBattleInfo.ExChangeableCardNum;
+                            Info.GameUI.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.GlobalBattleInfo.ExChangeableCardNum;
                             for (int i = 0; i < 10; i++)
                             {
                                 await CardCommand.DrawCard();
@@ -94,7 +97,7 @@ namespace Command
                     case (1):
                         {
                             Info.GlobalBattleInfo.ExChangeableCardNum += 1;
-                            Info.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.GlobalBattleInfo.ExChangeableCardNum;
+                            Info.GameUI.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.GlobalBattleInfo.ExChangeableCardNum;
                             await CardCommand.DrawCard();
                             await CardCommand.DrawCard(false);
                             break;
@@ -102,7 +105,7 @@ namespace Command
                     case (2):
                         {
                             Info.GlobalBattleInfo.ExChangeableCardNum += 1;
-                            Info.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.GlobalBattleInfo.ExChangeableCardNum;
+                            Info.GameUI.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.GlobalBattleInfo.ExChangeableCardNum;
                             await CardCommand.DrawCard();
                             await CardCommand.DrawCard(false);
                             break;
@@ -118,8 +121,8 @@ namespace Command
         {
             await Task.Run(async () =>
             {
-                UiCommand.SetNoticeBoardTitle($"第{num + 1}小局结束\n{PointInfo.TotalDownPoint}:{PointInfo.TotalUpPoint}\n{((PointInfo.TotalDownPoint > PointInfo.TotalUpPoint) ? "Win" : "Lose")}");
-                UiCommand.NoticeBoardShow();
+                GameUI.UiCommand.SetNoticeBoardTitle($"第{num + 1}小局结束\n{PointInfo.TotalDownPoint}:{PointInfo.TotalUpPoint}\n{((PointInfo.TotalDownPoint > PointInfo.TotalUpPoint) ? "Win" : "Lose")}");
+                GameUI.UiCommand.NoticeBoardShow();
                 await Task.Delay(2000);
                 int result = 0;
                 if (PointInfo.TotalPlayer1Point > PointInfo.TotalPlayer2Point)
@@ -139,8 +142,8 @@ namespace Command
         {
             await Task.Run(async () =>
             {
-                UiCommand.SetNoticeBoardTitle((GlobalBattleInfo.IsMyTurn ? "我方" : "敌方") + "回合开始");
-                UiCommand.NoticeBoardShow();
+                GameUI.UiCommand.SetNoticeBoardTitle((GlobalBattleInfo.IsMyTurn ? "我方" : "敌方") + "回合开始");
+                GameUI.UiCommand.NoticeBoardShow();
                 await Task.Delay(000);
                 GlobalBattleInfo.IsCardEffectCompleted = false;
                 GameCommand.SetPlayCardLimit(!GlobalBattleInfo.IsMyTurn);
@@ -151,8 +154,8 @@ namespace Command
         {
             await Task.Run(async () =>
             {
-                UiCommand.SetNoticeBoardTitle((GlobalBattleInfo.IsMyTurn ? "我方" : "敌方") + "回合结束");
-                UiCommand.NoticeBoardShow();
+                GameUI.UiCommand.SetNoticeBoardTitle((GlobalBattleInfo.IsMyTurn ? "我方" : "敌方") + "回合结束");
+                GameUI.UiCommand.NoticeBoardShow();
                 await Task.Delay(000);
                 GameCommand.SetPlayCardLimit(true);
                 await Task.Delay(000);
@@ -197,7 +200,7 @@ namespace Command
             {
                 while (Info.GlobalBattleInfo.SelectRegion == null) { }
             });
-            NetCommand.AsyncInfo(NetAcyncType.FocusRegion);
+            Command.Network.NetCommand.AsyncInfo(NetAcyncType.FocusRegion);
             GlobalBattleInfo.IsWaitForSelectRegion = false;
         }
         public static async Task WaitForSelectLocation()
@@ -212,7 +215,7 @@ namespace Command
                 while (Info.GlobalBattleInfo.SelectLocation < 0) { }
             });
             // Debug.Log("选择部署位置完毕");
-            NetCommand.AsyncInfo(NetAcyncType.FocusLocation);
+            Network.NetCommand.AsyncInfo(NetAcyncType.FocusLocation);
             RowCommand.SetAllRegionSelectable(false);
             GlobalBattleInfo.IsWaitForSelectLocation = false;
         }
@@ -228,12 +231,12 @@ namespace Command
             await Task.Run(async () =>
             {
                 await Task.Delay(500);
-                UiCommand.SetArrowShow();
+                GameUI.UiCommand.SetArrowShow();
                 while (Info.GlobalBattleInfo.SelectUnits.Count < Math.Min(Cards.Count, num)) { }
                 Debug.Log("选择单位完毕" + Math.Min(Cards.Count, num));
-                NetCommand.AsyncInfo(NetAcyncType.SelectUnites);
+                Command.Network.NetCommand.AsyncInfo(GameEnum.NetAcyncType.SelectUnites);
                 await Task.Delay(250);
-                UiCommand.SetArrowDestory();
+                GameUI.UiCommand.SetArrowDestory();
             });
             //Debug.Log("双方数量" + Info.GlobalBattleInfo.SelectUnits.Count + ":" + Math.Min(Cards.Count, num));
             //Debug.Log("选择单位完毕");
@@ -245,14 +248,14 @@ namespace Command
         {
             GlobalBattleInfo.SelectBoardCardIds = new List<int>();
             //GlobalBattleInfo.IsWaitForSelectBoardCard = true;
-            UiCommand.SetCardBoardShow();
+            GameUI.UiCommand.SetCardBoardShow();
             if (typeof(T) == typeof(Card))
             {
-                CardBoardCommand.LoadCardList(CardIds.Cast<Card>().ToList());
+                GameUI.CardBoardCommand.LoadCardList(CardIds.Cast<Card>().ToList());
             }
             else
             {
-                CardBoardCommand.LoadCardList(CardIds.Cast<int>().ToList());
+                GameUI.CardBoardCommand.LoadCardList(CardIds.Cast<int>().ToList());
             }
             Debug.Log("进入选择模式");
             await Task.Run(async () =>
@@ -272,7 +275,7 @@ namespace Command
                                     await CardCommand.ExchangeCard(CardLists[GlobalBattleInfo.SelectBoardCardIds[0]]);
                                     Info.GlobalBattleInfo.ExChangeableCardNum--;
                                     Info.GlobalBattleInfo.SelectBoardCardIds.Clear();
-                                    UiCommand.SetCardBoardTitle("剩余抽卡次数为" + Info.GlobalBattleInfo.ExChangeableCardNum);
+                                    GameUI.UiCommand.SetCardBoardTitle("剩余抽卡次数为" + Info.GlobalBattleInfo.ExChangeableCardNum);
                                 }
                             }
                             Info.GlobalBattleInfo.IsSelectCardOver = false;
@@ -284,7 +287,7 @@ namespace Command
                         break;
                 }
             });
-            UiCommand.SetCardBoardHide();
+            GameUI.UiCommand.SetCardBoardHide();
             //GlobalBattleInfo.IsWaitForSelectBoardCard = false;
         }
         public static void SetPassState(bool IsPlayer1, bool IsActive)
@@ -292,12 +295,12 @@ namespace Command
             if (IsPlayer1)
             {
                 Debug.Log("我方pass啦" + IsActive);
-                Info.UiInfo.Instance.MyPass.SetActive(IsActive);
+                Info.GameUI.UiInfo.Instance.MyPass.SetActive(IsActive);
             }
             else
             {
                 Debug.Log("敌方pass啦" + IsActive);
-                Info.UiInfo.Instance.OpPass.SetActive(IsActive);
+                Info.GameUI.UiInfo.Instance.OpPass.SetActive(IsActive);
             }
         }
         public static async Task Surrender()
@@ -305,7 +308,7 @@ namespace Command
             Debug.Log("投降");
             await Task.Run(async () =>
             {
-                NetCommand.Surrender();
+                Command.Network.NetCommand.Surrender();
                 await BattleEnd(true, false);
             });
         }

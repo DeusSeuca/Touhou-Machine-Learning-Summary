@@ -17,5 +17,3 @@ E:\东方格致录\单元测试\obj\Debug\单元测试.dll
 E:\东方格致录\单元测试\obj\Debug\单元测试.pdb
 E:\东方格致录\单元测试\bin\Debug\Assembly-CSharp.dll
 E:\东方格致录\单元测试\bin\Debug\Assembly-CSharp.pdb
-E:\东方格致录\单元测试\bin\Debug\单元测试.dll.CodeAnalysisLog.xml
-E:\东方格致录\单元测试\bin\Debug\单元测试.dll.lastcodeanalysissucceeded

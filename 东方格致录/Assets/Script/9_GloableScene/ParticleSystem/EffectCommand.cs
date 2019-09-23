@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Thread;
+using UnityEngine;
 namespace Command
 {
     public class EffectCommand

@@ -255,7 +255,7 @@ namespace Command
 
                     case NetAcyncType.Pass:
                         {
-                            Command.UiCommand.SetCurrentPass();
+                            GameUI.UiCommand.SetCurrentPass();
                             break;
                         }
                     case NetAcyncType.Surrender:
