@@ -2,9 +2,9 @@ Win64
 PlayerPath?
 E:/东方格致录/windows/东方格致录.exe
 SceneListBegin?
-Assets/Scenes/2_BattleScene.unity
 Assets/Scenes/0_Login.unity
 Assets/Scenes/1_Menu.unity
+Assets/Scenes/2_BattleScene.unity
 SceneListEnd?
 a1f19ad47d3094e235f21b74dfc423a8 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessLayer
 726fcf7961cbb4108aa5be5e55b8c8bf Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.ColorGrading

@@ -6,6 +6,7 @@ namespace Test
 {
     public class TestScript : MonoBehaviour
     {
+        public int num;
         void Update()
         {
             if (Input.GetMouseButtonDown(4))
@@ -39,9 +40,11 @@ namespace Test
 
         }
         [Button]
-        private void Filter(string Text)
+        private void Filter(string[] Text)
         {
-            Command.RowCommand.GetCardList(Text);
+            //num = Info.AgainstInfo.AllCardList.Count;
+            num = Info.AgainstInfo.AllCardList.hasTag(Text).Count;
+            //Command.RowCommand.GetCardList(Text);
         }
     }
 

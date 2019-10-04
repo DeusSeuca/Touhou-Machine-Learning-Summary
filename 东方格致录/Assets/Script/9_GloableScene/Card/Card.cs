@@ -1,4 +1,5 @@
 ﻿using Control;
+using GameAttribute;
 using GameEnum;
 using Info;
 using Sirenix.OdinInspector;
@@ -29,13 +30,16 @@ namespace CardSpace
         public bool IsCanSee;
         public bool IsPrePrepareToPlay;
         bool IsInit;
-        public Property CardProperty;
+        public Property property;
+        //生效范围
         public Territory CardTerritory;
+        //所属人
+        public Belong belong;
         /// <summary>
         /// 限制卡牌被打出
         /// </summary>
         public bool IsLimit = true;
-        public bool IsAutoMove => this != GlobalBattleInfo.PlayerPlayCard;
+        public bool IsAutoMove => this != AgainstInfo.PlayerPlayCard;
         public List<Card> Row => RowsInfo.GetRow(this);
         public Network.NetInfoModel.Location Location => RowsInfo.GetLocation(this);
         public Vector3 TargetPos;
@@ -63,12 +67,12 @@ namespace CardSpace
         public void RefreshState()
         {
             Material material = GetComponent<Renderer>().material;
-            if (GlobalBattleInfo.PlayerFocusCard == this)
+            if (AgainstInfo.PlayerFocusCard == this)
             {
                 material.SetFloat("_IsFocus", 1);
                 material.SetFloat("_IsRed", 0);
             }
-            else if (GlobalBattleInfo.OpponentFocusCard == this)
+            else if (AgainstInfo.OpponentFocusCard == this)
             {
                 material.SetFloat("_IsFocus", 1);
                 material.SetFloat("_IsRed", 1);
@@ -142,7 +146,7 @@ namespace CardSpace
         public async Task Deploy()
         {
             Debug.Log("开始部署");
-            await MoveTo(GlobalBattleInfo.SelectRegion, GlobalBattleInfo.SelectLocation);
+            await MoveTo(AgainstInfo.SelectRegion, AgainstInfo.SelectLocation);
 
         }
         [Button]
@@ -150,6 +154,24 @@ namespace CardSpace
         {
             await MoveTo(Region, IsOnPlayerPart, Index);
         }
+
+        public int this[GameEnum.CardField property]
+        {
+            get
+            {
+                var s = GetType().GetFields().Where(field =>
+                {
+                  Attribute attribute=  field.GetCustomAttribute(typeof(CardProperty));
+                  return  attribute != null && ((CardProperty)attribute).cardProperty == property;
+                }).ToList();
+                return s .Count()==0? 0: (int)s[0].GetValue(this);
+            }
+            set
+            {
+                GetType().GetFields().First(field => ((GameAttribute.CardProperty)field.GetCustomAttribute(typeof(GameAttribute.CardProperty))).cardProperty == property).SetValue(this, value);
+            }
+        }
+
     }
 
 }

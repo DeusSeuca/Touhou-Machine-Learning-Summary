@@ -27,17 +27,24 @@ namespace 内容测试
         //}
         static void Main(string[] args)
         {
+            //List<string> data = new List<string>() { "格子", "精灵" };
+            //var tag = "精灵，矮人";
+            //var s = tag.Split('，');
+            //Console.WriteLine(tag.Split('，').Any(x=> data.Contains(x)));
+            //while (true)
+            //{
 
-
+            //}
             string language = "Ch";
-            datas = File.ReadAllLines(@"E:\东方格致录\东方格致录\Assets\Resources\CardData.csv", Encoding.GetEncoding("gb2312"));
+            datas = File.ReadAllLines(@"E:\东方格致录\东方格致录\Assets\Resources\CardData\CardData.01.csv", Encoding.GetEncoding("gb2312"));
             datas.ToList().ForEach(Console.WriteLine);
             for (int i = 1; i < datas.Length; i++)
             {
-                GetItem(i, $"Name-{language}").ToShow("名字：");
+                //GetItem(i, $"Name-{language}").ToShow("名字：");
                 GetItem(i, $"Describe-{language}").ToShow("描述：");
-                GetItem(i, "Point", true).ToShow("数值：");
-                ((Sectarian)GetItem(i, "Camp", true)).ToShow("阵营：");
+                GetItem(i, $"Tag-{language}").ToShow("描述：");
+                //GetItem(i, "Point", true).ToShow("数值：");
+                //((Sectarian)GetItem(i, "Camp", true)).ToShow("阵营：");
                 Console.WriteLine();
             }
 

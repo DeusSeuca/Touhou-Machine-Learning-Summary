@@ -12,12 +12,12 @@ namespace Command
         {
             public static void LoadCardList(List<int> CardsIds)
             {
-                Info.GlobalBattleInfo.TargetCardIDList = CardsIds;
+                Info.AgainstInfo.TargetCardIDList = CardsIds;
                 CreatBoardCardVitual();
             }
             public static void LoadCardList(List<Card> CardsIds)
             {
-                Info.GlobalBattleInfo.TargetCardList = CardsIds;
+                Info.AgainstInfo.TargetCardList = CardsIds;
                 CreatBoardCardActual();
             }
             public void Replace(int num, Card card)
@@ -30,7 +30,7 @@ namespace Command
                 {
                     Info.GameUI.UiInfo.CardBoard.transform.GetChild(1).GetComponent<Text>().text = Info.GameUI.UiInfo.CardBoardTitle;
                     Info.GameUI.UiInfo.ShowCardLIstOnBoard.ForEach(GameObject.Destroy);
-                    List<Card> Cards = Info.GlobalBattleInfo.TargetCardList;
+                    List<Card> Cards = Info.AgainstInfo.TargetCardList;
                     for (int i = 0; i < Cards.Count; i++)
                     {
                         var CardStandardInfo = Command.CardLibraryCommand.GetCardStandardInfo(Cards[i].CardId);
@@ -50,7 +50,7 @@ namespace Command
                 {
                     Info.GameUI.UiInfo.CardBoard.transform.GetChild(1).GetComponent<Text>().text = Info.GameUI.UiInfo.CardBoardTitle;
                     Info.GameUI.UiInfo.ShowCardLIstOnBoard.ForEach(GameObject.Destroy);
-                    List<int> CardIds = Info.GlobalBattleInfo.TargetCardIDList;
+                    List<int> CardIds = Info.AgainstInfo.TargetCardIDList;
                     for (int i = 0; i < CardIds.Count; i++)
                     {
                         var CardStandardInfo = Command.CardLibraryCommand.GetCardStandardInfo(CardIds[i]);

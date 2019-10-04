@@ -9,14 +9,14 @@ namespace Control
         Card ThisCard => GetComponent<Card>();
         private void OnMouseEnter()
         {
-            Info.GlobalBattleInfo.PlayerFocusCard = ThisCard;
+            Info.AgainstInfo.PlayerFocusCard = ThisCard;
             Command.Network.NetCommand.AsyncInfo(NetAcyncType.FocusCard);
         }
         private void OnMouseExit()
         {
-            if (Info.GlobalBattleInfo.PlayerFocusCard == ThisCard)
+            if (Info.AgainstInfo.PlayerFocusCard == ThisCard)
             {
-                Info.GlobalBattleInfo.PlayerFocusCard = null;
+                Info.AgainstInfo.PlayerFocusCard = null;
                 NetCommand.AsyncInfo(NetAcyncType.FocusCard);
             }
         }
@@ -24,33 +24,36 @@ namespace Control
         {
             if (ThisCard.IsPrePrepareToPlay)
             {
-                Info.GlobalBattleInfo.PlayerPlayCard = ThisCard;
+                Info.AgainstInfo.PlayerPlayCard = ThisCard;
             }
 
         }
         private void OnMouseUp()
         {
-            if (Info.GlobalBattleInfo.PlayerFocusRegion != null)
+            if (Info.AgainstInfo.PlayerPlayCard!=null)
             {
-                if (Info.GlobalBattleInfo.PlayerFocusRegion.name == "我方_墓地")
+                if (Info.AgainstInfo.PlayerFocusRegion != null )
                 {
-                    _ = Command.CardCommand.DisCard();
-                }
-                else if (Info.GlobalBattleInfo.PlayerFocusRegion.name == "我方_手牌")
-                {
-                    Info.GlobalBattleInfo.PlayerPlayCard = null;
+                    if (Info.AgainstInfo.PlayerFocusRegion.name == "我方_墓地")
+                    {
+                        print(name + "进入墓地");
+                        _ = Command.CardCommand.DisCard(GetComponent<Card>());
+                    }
+                    else if (Info.AgainstInfo.PlayerFocusRegion.name == "我方_领袖" || Info.AgainstInfo.PlayerFocusRegion.name == "我方_手牌")
+                    {
+                        Info.AgainstInfo.PlayerPlayCard = null;
+                    }
+                    else
+                    {
+                        _ = Command.CardCommand.PlayCard(true);
+                    }
                 }
                 else
                 {
                     _ = Command.CardCommand.PlayCard(true);
                 }
             }
-            else
-            {
-                _ = Command.CardCommand.PlayCard(true);
-            }
         }
-
     }
 }
 

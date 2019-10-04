@@ -10,6 +10,13 @@ namespace Command
             {
                 //Command.GameSystem
             }
+            public static void DisCard(Card card)
+            {
+                //触发丢弃卡牌前
+                Command.CardCommand.DisCard(card);
+                card.Trigger<TriggerType.WhenDiscard>();
+                //触发丢弃卡牌后
+            }
         }
     }
 }

@@ -25,7 +25,6 @@ public class PointControl : MonoBehaviour
             Invoke("Reset", 1);
         }
     }
-
     private void Reset()
     {
         MyPoint.transform.localScale = Vector3.one;

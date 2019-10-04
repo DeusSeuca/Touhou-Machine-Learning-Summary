@@ -3,6 +3,8 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
+using UnityEngine;
+
 public class CardMenu : OdinMenuEditorWindow
 {
     [MenuItem("Tools/卡组编辑器")]
@@ -12,7 +14,7 @@ public class CardMenu : OdinMenuEditorWindow
         window.position = GUIHelper.GetEditorWindowRect().AlignCenter(700, 700);
     }
     //会导致画面闪烁
-    private void OnInspectorUpdate() => ForceMenuTreeRebuild();
+   // private void OnInspectorUpdate() => ForceMenuTreeRebuild();
     protected override OdinMenuTree BuildMenuTree()
     {
 
@@ -21,7 +23,8 @@ public class CardMenu : OdinMenuEditorWindow
         tree.DefaultMenuStyle.Height = 60;
         tree.DefaultMenuStyle.IconSize = 48.00f;
         tree.Config.DrawSearchToolbar = true;
-        Command.CardLibraryCommand.LoadFromCsv();
+        //Command.CardLibraryCommand.LoadFromCsv();
+        Debug.Log(SaveData);
         SaveData.cardLibrarieList.Clear();
         SaveData.cardLibrarieList.Add(new CardLibrary(GameEnum.Sectarian.Neutral));
         SaveData.cardLibrarieList.Add(new CardLibrary(GameEnum.Sectarian.Buddhism));

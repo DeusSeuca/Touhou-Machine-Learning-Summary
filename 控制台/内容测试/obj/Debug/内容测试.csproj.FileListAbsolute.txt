@@ -1,5 +1,4 @@
 E:\东方格致录\控制台\内容测试\obj\Debug\内容测试.csprojAssemblyReference.cache
-E:\东方格致录\控制台\内容测试\obj\Debug\内容测试.csproj.CoreCompileInputs.cache
 E:\东方格致录\控制台\内容测试\bin\Debug\内容测试.exe.config
 E:\东方格致录\控制台\内容测试\bin\Debug\内容测试.exe
 E:\东方格致录\控制台\内容测试\bin\Debug\内容测试.pdb

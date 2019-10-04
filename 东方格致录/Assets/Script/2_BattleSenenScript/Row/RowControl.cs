@@ -24,7 +24,7 @@ namespace Control
         }
         public void TempCardControk()
         {
-            if (SingleInfo.TempCard == null && SingleInfo.CanBeSelected && GlobalBattleInfo.PlayerFocusRegion == SingleInfo && !HasTempCard)
+            if (SingleInfo.TempCard == null && SingleInfo.CanBeSelected && AgainstInfo.PlayerFocusRegion == SingleInfo && !HasTempCard)
             {
                 HasTempCard = true;
                 //print(SingleInfo.TempCard);
@@ -34,7 +34,7 @@ namespace Control
             {
                 RowCommand.ChangeTempCard(SingleInfo);
             }
-            if (SingleInfo.TempCard != null && (!SingleInfo.CanBeSelected || GlobalBattleInfo.PlayerFocusRegion != SingleInfo))
+            if (SingleInfo.TempCard != null && (!SingleInfo.CanBeSelected || AgainstInfo.PlayerFocusRegion != SingleInfo))
             {
                 RowCommand.DestoryTempCard(SingleInfo);
                 HasTempCard = false;
@@ -59,7 +59,7 @@ namespace Control
                 }
                 else
                 {
-                    ThisCardList[i].SetMoveTarget(GlobalBattleInfo.DragToPoint, Vector3.zero);
+                    ThisCardList[i].SetMoveTarget(AgainstInfo.DragToPoint, Vector3.zero);
                 }
                 ThisCardList[i].RefreshState();
             }

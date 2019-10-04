@@ -13,8 +13,3 @@ namespace TriggerType
     public class TurnStart : Attribute { }
     public class CountDown : Attribute { }
 }
-//public class TriggerType
-//{
-
-//}
-

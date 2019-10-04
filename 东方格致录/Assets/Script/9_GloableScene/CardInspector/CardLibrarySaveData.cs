@@ -13,7 +13,7 @@ public partial class CardLibrarySaveData : ScriptableObject
     [LabelText("牌库卡牌数量")]
     public int LibraryCardCount;
     //[ShowInInspector]
-    public  List<CardModelInfo> cards;
+    public  List<CardModelInfo> cards=new List<CardModelInfo>();
     public List<CardLibrary> cardLibrarieList=new List<CardLibrary>();
     [HorizontalGroup("Button", 155, LabelWidth = 70)]
     [Button("载入卡牌数据从csv表格")]

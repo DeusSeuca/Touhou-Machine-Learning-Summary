@@ -24,18 +24,18 @@ namespace Control
                 {
                     if (Infos[i].transform.GetComponent<SingleRowInfo>() != null)
                     {
-                        GlobalBattleInfo.PlayerFocusRegion = Infos[i].transform.GetComponent<SingleRowInfo>();
-                        GlobalBattleInfo.FocusPoint = Infos[i].point;
+                        AgainstInfo.PlayerFocusRegion = Infos[i].transform.GetComponent<SingleRowInfo>();
+                        AgainstInfo.FocusPoint = Infos[i].point;
                         break;
                     }
-                    GlobalBattleInfo.PlayerFocusRegion = null;
+                    AgainstInfo.PlayerFocusRegion = null;
                 }
             }
         }
         private void KeyBoardEvent()
         {
 
-            if (Input.GetKey(KeyCode.Space) && Info.GlobalBattleInfo.IsMyTurn)
+            if (Input.GetKey(KeyCode.Space) && Info.AgainstInfo.IsMyTurn)
             {
                 PassPressTime += Time.deltaTime;
                 if (PassPressTime > 2)
@@ -45,7 +45,7 @@ namespace Control
                     PassPressTime = 0;
                 }
             }
-            if (Input.GetKeyUp(KeyCode.Space) && Info.GlobalBattleInfo.IsMyTurn)
+            if (Input.GetKeyUp(KeyCode.Space) && Info.AgainstInfo.IsMyTurn)
             {
                 PassPressTime = 0;
             }
@@ -56,64 +56,38 @@ namespace Control
         }
         private void MouseEvent()
         {
-            if (Input.GetMouseButtonDown(0) && Info.GlobalBattleInfo.IsMyTurn)
+            if (Input.GetMouseButtonDown(0) && Info.AgainstInfo.IsMyTurn)
             {
                 //if (GlobalBattleInfo.PlayerFocusCard != null && GlobalBattleInfo.PlayerFocusCard.IsPrePrepareToPlay)
                 //{
                 //    GlobalBattleInfo.PlayerPlayCard = GlobalBattleInfo.PlayerFocusCard;
                 //}
-                if (GlobalBattleInfo.IsWaitForSelectRegion)
+                if (AgainstInfo.IsWaitForSelectRegion)
                 {
-                    GlobalBattleInfo.SelectRegion = GlobalBattleInfo.PlayerFocusRegion;
+                    AgainstInfo.SelectRegion = AgainstInfo.PlayerFocusRegion;
                 }
-                if (GlobalBattleInfo.IsWaitForSelectUnits && GlobalBattleInfo.PlayerFocusCard != null && !GlobalBattleInfo.PlayerFocusCard.IsGray)
+                if (AgainstInfo.IsWaitForSelectUnits && AgainstInfo.PlayerFocusCard != null && !AgainstInfo.PlayerFocusCard.IsGray)
                 {
-                    GlobalBattleInfo.SelectUnits.Add(GlobalBattleInfo.PlayerFocusCard);
+                    AgainstInfo.SelectUnits.Add(AgainstInfo.PlayerFocusCard);
                     Command.GameUI.UiCommand.SetArrowShow();
                 }
-                if (GlobalBattleInfo.IsWaitForSelectLocation)
+                if (AgainstInfo.IsWaitForSelectLocation)
                 {
-                    if (GlobalBattleInfo.PlayerFocusRegion != null && GlobalBattleInfo.PlayerFocusRegion.CanBeSelected)
+                    if (AgainstInfo.PlayerFocusRegion != null && AgainstInfo.PlayerFocusRegion.CanBeSelected)
                     {
-                        GlobalBattleInfo.SelectRegion = GlobalBattleInfo.PlayerFocusRegion;
-                        GlobalBattleInfo.SelectLocation = GlobalBattleInfo.PlayerFocusRegion.Location;
+                        AgainstInfo.SelectRegion = AgainstInfo.PlayerFocusRegion;
+                        AgainstInfo.SelectLocation = AgainstInfo.PlayerFocusRegion.Location;
                     }
                 }
             }
-            if (Input.GetMouseButton(0) && Info.GlobalBattleInfo.IsMyTurn)
+            if (Input.GetMouseButton(0) && Info.AgainstInfo.IsMyTurn)
             {
                 LayerMask mask = 1 << LayerMask.NameToLayer("Default");
                 if (Physics.Raycast(ray, out RaycastHit HitInfo, 100, mask))
                 {
-                    GlobalBattleInfo.DragToPoint = HitInfo.point;
+                    AgainstInfo.DragToPoint = HitInfo.point;
                 }
             }
-            //判断松手时的位置
-            //if (Input.GetMouseButtonUp(0) && Info.GlobalBattleInfo.IsMyTurn)
-            //{
-            //    if (GlobalBattleInfo.PlayerPlayCard != null)
-            //    {
-            //        if (GlobalBattleInfo.PlayerFocusRegion != null)
-            //        {
-            //            if (GlobalBattleInfo.PlayerFocusRegion.name == "我方_墓地")
-            //            {
-            //                _ = CardCommand.DisCard();
-            //            }
-            //            else if (GlobalBattleInfo.PlayerFocusRegion.name == "我方_手牌")
-            //            {
-            //                GlobalBattleInfo.PlayerPlayCard = null;
-            //            }
-            //            else
-            //            {
-            //                _ = CardCommand.PlayCard();
-            //            }
-            //        }
-            //        else
-            //        {
-            //            _ = CardCommand.PlayCard();
-            //        }
-            //    }
-            //}
         }
     }
 }

@@ -10,10 +10,10 @@ namespace Command
 {
     public class CardLibraryCommand
     {
-        public static CardLibrarySaveData GetLibrarySaveData() => Resources.Load<CardLibrarySaveData>("SaveData");
+        public static CardLibrarySaveData GetLibrarySaveData() => Resources.Load<CardLibrarySaveData>("CardData\\SaveData");
 
 
-        static string[] CsvData => File.ReadAllLines("Assets\\Resources\\CardData.csv", Encoding.GetEncoding("gb2312"));
+        static string[] CsvData => File.ReadAllLines("Assets\\Resources\\CardData\\CardData.01.csv", Encoding.GetEncoding("gb2312"));
         public static void CreatScript(int cardId)
         {
             string targetPath = Application.dataPath + $@"\Script\9_GloableScene\CardSpace\Card{cardId}.cs";
@@ -41,7 +41,7 @@ namespace Command
                 Texture2D tex = Resources.Load<Texture2D>("CardTex\\" + GetCsvData<string>(i, "ImageUrl"));
                 Command.CardLibraryCommand.GetLibrarySaveData().cards.Add(
                     new CardModelInfo(
-                        GetCsvData<int>(i, "Id"),
+                        GetCsvData<int>(i, "Id")+1000,
                         GetCsvData<string>(i, "Name-" + Language),
                         GetCsvData<string>(i, "Describe-" + Language),
                         GetCsvData<string>(i, "Tag-" + Language),

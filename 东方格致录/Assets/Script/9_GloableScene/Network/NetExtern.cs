@@ -5,7 +5,7 @@ namespace Network
     {
         public static void SendMessge(this Connection con, string Tag, object data)
         {
-            if (Info.GlobalBattleInfo.IsPVP)
+            if (Info.AgainstInfo.IsPVP)
             {
                 con.SendObject(Tag, data.ToJson());
             }

@@ -11,6 +11,8 @@ namespace Command
 {
     public class CardCommand
     {
+         static int CreatCardRank;//卡牌创建时的自增命名
+
         public static async Task<Card> CreatCard(int id)
         {
             GameObject NewCard;
@@ -18,14 +20,14 @@ namespace Command
             MainThread.Run(() =>
             {
                 NewCard = GameObject.Instantiate(Info.CardInfo.cardModel);
-                NewCard.name = "Card" + Info.GlobalBattleInfo.CreatCardRank++;
+                NewCard.name = "Card" + CreatCardRank++;
                 var CardStandardInfo = CardLibraryCommand.GetCardStandardInfo(id);
                 NewCard.AddComponent(Type.GetType("CardSpace.Card" + id));
                 Card card = NewCard.GetComponent<Card>();
                 card.CardId = CardStandardInfo.cardId;
                 card.CardPoint = CardStandardInfo.point;
                 card.icon = CardStandardInfo.icon;
-                card.CardProperty = CardStandardInfo.cardProperty;
+                card.property = CardStandardInfo.cardProperty;
                 card.CardTerritory = CardStandardInfo.cardTerritory;
                 card.GetComponent<Renderer>().material.SetTexture("_Front", card.icon);
                 card.Init();
@@ -50,6 +52,7 @@ namespace Command
         }
         public static async Task DrawCard(bool IsPlayerDraw = true, bool ActiveBlackList = false)
         {
+            Debug.Log("抽卡");
             EffectCommand.AudioEffectPlay(0);
             Card TargetCard = IsPlayerDraw ? RowsInfo.GetDownCardList(RegionTypes.Deck)[0] : RowsInfo.GetUpCardList(RegionTypes.Deck)[0];
             TargetCard.IsCanSee = IsPlayerDraw;
@@ -73,12 +76,12 @@ namespace Command
             Debug.Log("洗回卡牌");
             if (IsPlayerWash)
             {
-                GlobalBattleInfo.TargetCard = TargetCard;
+                AgainstInfo.TargetCard = TargetCard;
                 int MaxCardRank = Info.RowsInfo.GetDownCardList(RegionTypes.Deck).Count;
-                GlobalBattleInfo.RandomRank = AiCommand.GetRandom(0, MaxCardRank);
+                AgainstInfo.RandomRank = AiCommand.GetRandom(0, MaxCardRank);
                 Network.NetCommand.AsyncInfo(NetAcyncType.ExchangeCard);
                 RowsInfo.GetDownCardList(RegionTypes.Hand).Remove(TargetCard);
-                RowsInfo.GetDownCardList(RegionTypes.Deck).Insert(GlobalBattleInfo.RandomRank, TargetCard);
+                RowsInfo.GetDownCardList(RegionTypes.Deck).Insert(AgainstInfo.RandomRank, TargetCard);
                 TargetCard.IsCanSee = false;
             }
             else
@@ -96,40 +99,67 @@ namespace Command
             RowsInfo.GlobalCardList[12] = RowsInfo.GlobalCardList[12].OrderBy(card => card.CardPoint).ToList();
 
         }
-        [System.Obsolete("待废弃")]
-        public static async Task PlayCard()
-        {
-            Command.EffectCommand.AudioEffectPlay(0);
-            GameCommand.SetPlayCardLimit(true);
-            Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
-            TargetCard.IsPrePrepareToPlay = false;
-            Network.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
-            TargetCard.IsCanSee = true;
-            RowsInfo.GetMyCardList(RegionTypes.Hand).Remove(TargetCard);
-            RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
-            GlobalBattleInfo.PlayerPlayCard = null;
-            TargetCard.Trigger<TriggerType.PlayCard>();
-        }
+        //[System.Obsolete("待废弃")]
+        //public static async Task PlayCard()
+        //{
+        //    Debug.Log("打出一张牌1");
+        //    Command.EffectCommand.AudioEffectPlay(0);
+        //    GameCommand.SetPlayCardLimit(true);
+        //    Card TargetCard = AgainstInfo.PlayerPlayCard;
+        //    TargetCard.IsPrePrepareToPlay = false;
+        //    Network.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
+        //    TargetCard.IsCanSee = true;
+        //    RowsInfo.GetMyCardList(RegionTypes.Hand).Remove(TargetCard);
+        //    RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
+        //    AgainstInfo.PlayerPlayCard = null;
+        //    TargetCard.Trigger<TriggerType.PlayCard>();
+        //}
         public static async Task PlayCard(bool IsAnsy)
         {
+            Debug.Log("打出一张牌2");
             Command.EffectCommand.AudioEffectPlay(0);
             GameCommand.SetPlayCardLimit(true);
-            Card TargetCard = GlobalBattleInfo.PlayerPlayCard;
+            Card TargetCard = AgainstInfo.PlayerPlayCard;
             TargetCard.IsPrePrepareToPlay = false;
             Network.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
             TargetCard.IsCanSee = true;
             RowsInfo.GetRow(TargetCard).Remove(TargetCard);
             RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
-            GlobalBattleInfo.PlayerPlayCard = null;
+            AgainstInfo.PlayerPlayCard = null;
             TargetCard.Trigger<TriggerType.PlayCard>();
         }
-        public static async Task DisCard(Card card = null)
+        //废弃
+        //public static async Task DisCard(Card card = null)
+        //{
+        //    Card TargetCard = card == null ? AgainstInfo.PlayerPlayCard : card;
+        //    TargetCard.IsPrePrepareToPlay = false;
+        //    TargetCard.Row.Remove(TargetCard);
+        //    RowsInfo.GetMyCardList(RegionTypes.Grave).Add(TargetCard);
+        //    TargetCard.Trigger<TriggerType.Discard>();
+        //}
+        public static async Task DisCard(Card card)
         {
-            Card TargetCard = card == null ? GlobalBattleInfo.PlayerPlayCard : card;
-            TargetCard.IsPrePrepareToPlay = false;
-            TargetCard.Row.Remove(TargetCard);
-            RowsInfo.GetMyCardList(RegionTypes.Grave).Add(TargetCard);
-            TargetCard.Trigger<TriggerType.Discard>();
+            //Card TargetCard = card == null ? AgainstInfo.PlayerPlayCard : card;
+            card.IsPrePrepareToPlay = false;
+            card.IsCanSee = false;
+            card.Row.Remove(card);
+            RowsInfo.GetMyCardList(RegionTypes.Grave).Add(card);
+            card.Trigger<TriggerType.Discard>();
+        }
+        //强行移过来的
+        public static void PlayCardToRegion()
+        {
+            if (AgainstInfo.PlayerFocusRegion.ThisRowCards.Count < 5)
+            {
+                Card TargetCard = AgainstInfo.PlayerPlayCard;
+                TargetCard.IsPrePrepareToPlay = false;
+                AgainstInfo.PlayerFocusRegion.ThisRowCards.Add(TargetCard);
+                AgainstInfo.IsCardEffectCompleted = true;
+            }
+        }
+        //强行移过来的
+        public static void PlayCardToGraveyard()
+        {
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Control
                     await StateCommand.TurnStart();
                     await StateCommand.WaitForPlayerOperation();
                     await StateCommand.TurnEnd();
-                    if (Info.GlobalBattleInfo.IsBoothPass) { break; }
+                    if (Info.AgainstInfo.IsBoothPass) { break; }
                 }
                 await StateCommand.RoundEnd(i);
             }
@@ -32,15 +32,15 @@ namespace Control
         private void CheckPassState()
         {
             //当pass状态发生改变时
-            if (IsLastPlay1Pass ^ Info.GlobalBattleInfo.IsPlayer1Pass)
+            if (IsLastPlay1Pass ^ Info.AgainstInfo.IsPlayer1Pass)
             {
-                IsLastPlay1Pass = Info.GlobalBattleInfo.IsPlayer1Pass;
-                StateCommand.SetPassState(Info.GlobalBattleInfo.IsPlayer1, Info.GlobalBattleInfo.IsPlayer1Pass);
+                IsLastPlay1Pass = Info.AgainstInfo.IsPlayer1Pass;
+                StateCommand.SetPassState(Info.AgainstInfo.IsPlayer1, Info.AgainstInfo.IsPlayer1Pass);
             }
-            if (IsLastPlay2Pass ^ Info.GlobalBattleInfo.IsPlayer2Pass)
+            if (IsLastPlay2Pass ^ Info.AgainstInfo.IsPlayer2Pass)
             {
-                IsLastPlay2Pass = Info.GlobalBattleInfo.IsPlayer2Pass;
-                StateCommand.SetPassState(!Info.GlobalBattleInfo.IsPlayer1, Info.GlobalBattleInfo.IsPlayer2Pass);
+                IsLastPlay2Pass = Info.AgainstInfo.IsPlayer2Pass;
+                StateCommand.SetPassState(!Info.AgainstInfo.IsPlayer1, Info.AgainstInfo.IsPlayer2Pass);
             }
         }
     }

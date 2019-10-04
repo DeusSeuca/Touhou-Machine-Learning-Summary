@@ -11,7 +11,7 @@ namespace Command
         //临时的ai操作
         public static async Task TempOperationAsync()
         {
-            if (Info.GlobalBattleInfo.IsPlayer1Pass || Info.GlobalBattleInfo.IsPlayer2Pass)
+            if (Info.AgainstInfo.IsPlayer1Pass || Info.AgainstInfo.IsPlayer2Pass)
             {
                 Command.GameUI.UiCommand.SetCurrentPass();
             }

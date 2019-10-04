@@ -57,14 +57,14 @@ namespace Command
             {
                 MainThread.Run(() =>
                 {
-                    bool IsFirst = Info.GlobalBattleInfo.ArrowList.Count == 0;
+                    bool IsFirst = Info.AgainstInfo.ArrowList.Count == 0;
                     GameObject NewArrow = Instantiate(Info.GameUI.UiInfo.Arrow);
                     NewArrow.GetComponent<ArrowManager>().RefreshArrow(
-                        Info.GlobalBattleInfo.ArrowStartCard.transform,
+                        Info.AgainstInfo.ArrowStartCard.transform,
                         IsFirst ? Info.GameUI.UiInfo.ArrowEndPoint.transform :
-                        Info.GlobalBattleInfo.PlayerFocusCard.transform
+                        Info.AgainstInfo.PlayerFocusCard.transform
                         );
-                    Info.GlobalBattleInfo.ArrowList.Add(NewArrow);
+                    Info.AgainstInfo.ArrowList.Add(NewArrow);
                 });
             }
 
@@ -72,8 +72,8 @@ namespace Command
             {
                 MainThread.Run(() =>
                 {
-                    Info.GlobalBattleInfo.ArrowList.ForEach(Destroy);
-                    Info.GlobalBattleInfo.ArrowList.Clear();
+                    Info.AgainstInfo.ArrowList.ForEach(Destroy);
+                    Info.AgainstInfo.ArrowList.Clear();
                 });
             }
             public static void NoticeBoardShow()
@@ -84,23 +84,23 @@ namespace Command
                     Info.GameUI.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
                 });
             }
-            public void CardBoardClose() => Info.GlobalBattleInfo.IsSelectCardOver = true;
-            public static void SetCardBoardMode(CardBoardMode CardBoardMode) => Info.GlobalBattleInfo.CardBoardMode = CardBoardMode;
+            public void CardBoardClose() => Info.AgainstInfo.IsSelectCardOver = true;
+            public static void SetCardBoardMode(CardBoardMode CardBoardMode) => Info.AgainstInfo.CardBoardMode = CardBoardMode;
             public static void SetCurrentPass()
             {
-                if (Info.GlobalBattleInfo.IsPlayer1 ^ Info.GlobalBattleInfo.IsMyTurn)
+                if (Info.AgainstInfo.IsPlayer1 ^ Info.AgainstInfo.IsMyTurn)
                 {
-                    Info.GlobalBattleInfo.IsPlayer2Pass = true;
+                    Info.AgainstInfo.IsPlayer2Pass = true;
                 }
                 else
                 {
-                    Info.GlobalBattleInfo.IsPlayer1Pass = true;
+                    Info.AgainstInfo.IsPlayer1Pass = true;
                 }
             }
             public static void ReSetPassState()
             {
-                Info.GlobalBattleInfo.IsPlayer1Pass = false;
-                Info.GlobalBattleInfo.IsPlayer2Pass = false;
+                Info.AgainstInfo.IsPlayer1Pass = false;
+                Info.AgainstInfo.IsPlayer2Pass = false;
             }
         }
     }

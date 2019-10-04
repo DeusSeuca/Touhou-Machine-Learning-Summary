@@ -38,7 +38,7 @@ namespace Control
                 }
                 IsRuning = false;
                 Debug.LogWarning("效果执行完毕");
-                GlobalBattleInfo.IsCardEffectCompleted = true;
+                AgainstInfo.IsCardEffectCompleted = true;
             }
         }
     }
