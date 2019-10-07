@@ -9,12 +9,7 @@ namespace Command
     {
         
         // 限制手牌被打出
-        [System.Obsolete("以后跟allcardlist统一api")]
-        public static void SetPlayCardLimit(bool IsLimit)
-        {
-            Info.RowsInfo.GetDownCardList(RegionTypes.Hand).ForEach(card => card.IsLimit = IsLimit);
-            Info.RowsInfo.GetDownCardList(RegionTypes.Leader).ForEach(card => card.IsLimit = IsLimit);
-        }
+       
         //待扩展
         //[System.Obsolete("已过期，请使用RowCommand.GetCardList")]
         //public static List<Card> GetCardList(LoadRangeOnBattle OnBattle = LoadRangeOnBattle.None, LoadRangeOnOther OnOther = LoadRangeOnOther.None)

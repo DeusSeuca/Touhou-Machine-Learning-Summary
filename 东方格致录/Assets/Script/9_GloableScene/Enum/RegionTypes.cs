@@ -11,5 +11,7 @@
         Fire,
         Wind,
         Soil,
+        battle,
+
     }
 }

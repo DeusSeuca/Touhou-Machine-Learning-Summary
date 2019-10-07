@@ -2,16 +2,16 @@
 {
     public enum RegionName_Other
     {
-        My_Leader,
-        My_Hand,
-        My_Uesd,
-        My_Deck,
-        My_Grave,
-        Op_Leader,
-        Op_Hand,
-        Op_Uesd,
-        Op_Deck,
-        Op_Grave,
+        Down_Leader,
+        Down_Hand,
+        Down_Uesd,
+        Down_Deck,
+        Down_Grave,
+        Up_Leader,
+        Up_Hand,
+        Up_Uesd,
+        Up_Deck,
+        Up_Grave,
     }
 
 

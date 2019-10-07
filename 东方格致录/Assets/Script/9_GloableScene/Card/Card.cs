@@ -33,18 +33,19 @@ namespace CardSpace
         public Property property;
         //生效范围
         public Territory CardTerritory;
-        //所属人
-        public Belong belong;
+        //改为p1 p2防歧义
+        //public Belong belong;
         /// <summary>
         /// 限制卡牌被打出
         /// </summary>
         public bool IsLimit = true;
         public bool IsAutoMove => this != AgainstInfo.PlayerPlayCard;
         public List<Card> Row => RowsInfo.GetRow(this);
+        //public SingleRowInfo Region => RowsInfo.GetRow(this);
         public Network.NetInfoModel.Location Location => RowsInfo.GetLocation(this);
         public Vector3 TargetPos;
         public Quaternion TargetRot;
-        // public Text PointText;// = transform.GetChild(0).GetChild(0).GetComponent<Text>();
+
         public Text PointText => transform.GetChild(0).GetChild(0).GetComponent<Text>();
         public string CardName => Command.CardLibraryCommand.GetCardStandardInfo(CardId).cardName;
         public string CardIntroduction => Command.CardLibraryCommand.GetCardStandardInfo(CardId).describe;
@@ -89,7 +90,6 @@ namespace CardSpace
             {
                 material.SetFloat("_IsTemp", 1);
             }
-            //transform.position = new Vector3(transform.position.x, TargetPos.y, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, TargetPos, MoveSpeed);
             transform.rotation = Quaternion.Lerp(transform.rotation, TargetRot, Time.deltaTime * 10);
             PointText.text = CardPoint.ToString();
@@ -155,7 +155,7 @@ namespace CardSpace
             await MoveTo(Region, IsOnPlayerPart, Index);
         }
 
-        public int this[GameEnum.CardField property]
+        public int this[CardField property]
         {
             get
             {
@@ -168,7 +168,7 @@ namespace CardSpace
             }
             set
             {
-                GetType().GetFields().First(field => ((GameAttribute.CardProperty)field.GetCustomAttribute(typeof(GameAttribute.CardProperty))).cardProperty == property).SetValue(this, value);
+                GetType().GetFields().First(field => ((CardProperty)field.GetCustomAttribute(typeof(CardProperty))).cardProperty == property).SetValue(this, value);
             }
         }
 

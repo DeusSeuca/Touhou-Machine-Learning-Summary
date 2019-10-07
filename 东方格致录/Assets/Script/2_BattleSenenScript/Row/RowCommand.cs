@@ -46,7 +46,20 @@ namespace Command
                 }
             }
         }
+        [System.Obsolete("以后跟allcardlist统一api")]
+        public static void SetPlayCardLimit(bool IsLimit)
+        {
+            //Info.AgainstInfo.AllRows.At( Orientation.Down).InRogin(RegionTypes.Leader, RegionTypes.Hand).ForEach(card => card.IsLimit = IsLimit);
+            //Info.AgainstInfo.AllCardList.
+            Info.RowsInfo.GetDownCardList(RegionTypes.Hand).ForEach(card => card.IsLimit = IsLimit);
+            Info.RowsInfo.GetDownCardList(RegionTypes.Leader).ForEach(card => card.IsLimit = IsLimit);
+        }
+        /// <summary>
+        /// 根据使用的卡片显示可部署区域
+        /// </summary>
+        /// <param name="CanBeSelected"></param>
         [System.Obsolete("需要优化下")]
+        
         public static void SetAllRegionSelectable(bool CanBeSelected)
         {
             //singleRow.CanBeSelected = CanBeSelected;
@@ -65,23 +78,29 @@ namespace Command
                     case Property.Fire:
                         {
                             TargetSingleRow.Add(Info.RowsInfo.GetSingleRowInfo(RegionTypes.Fire, IsMyTerritory));
-
                             break;
                         }
                     case Property.Wind:
                         {
                             TargetSingleRow.Add(Info.RowsInfo.GetSingleRowInfo(RegionTypes.Wind, IsMyTerritory));
-
                             break;
                         }
                     case Property.Soil:
                         {
                             TargetSingleRow.Add(Info.RowsInfo.GetSingleRowInfo(RegionTypes.Soil, IsMyTerritory));
-
+                            break;
+                        }
+                    case Property.All:
+                        {
+                            TargetSingleRow.Add(Info.RowsInfo.GetSingleRowInfo(RegionTypes.Water, IsMyTerritory));
+                            TargetSingleRow.Add(Info.RowsInfo.GetSingleRowInfo(RegionTypes.Fire, IsMyTerritory));
+                            TargetSingleRow.Add(Info.RowsInfo.GetSingleRowInfo(RegionTypes.Wind, IsMyTerritory));
+                            TargetSingleRow.Add(Info.RowsInfo.GetSingleRowInfo(RegionTypes.Soil, IsMyTerritory));
                             break;
                         }
                     case Property.None:
                         break;
+
                     default:
                         break;
                 }
@@ -89,7 +108,8 @@ namespace Command
             }
             else
             {
-                RowsInfo.Instance.SingleBattleInfos.Values.ToList().ForEach(row => row.SetRegionSelectable(false));
+                Debug.Log("全部清空");
+                RowsInfo.Instance.singleBattleInfos.Values.ToList().ForEach(row => row.SetRegionSelectable(false));
             }
         }
         /// <summary>

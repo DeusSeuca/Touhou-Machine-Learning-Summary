@@ -1,4 +1,6 @@
-﻿using Sirenix.OdinInspector;
+﻿using GameEnum;
+using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -39,11 +41,17 @@ namespace Test
             }
 
         }
+        public List<CardSpace.Card> Cards1;
+        public List<CardSpace.Card> Cards2;
+        public List<CardSpace.Card> Cards3;
         [Button]
-        private void Filter(string[] Text)
+        private void Filter(Orientation orientation,int lessPoint)
         {
+            Cards1 = Info.AgainstInfo.AllCardList.At(orientation);
+            Cards2 = Info.AgainstInfo.AllCardList.lessPoint(lessPoint);
+            Cards3 = Info.AgainstInfo.AllCardList.At(orientation).lessPoint(lessPoint);
             //num = Info.AgainstInfo.AllCardList.Count;
-            num = Info.AgainstInfo.AllCardList.hasTag(Text).Count;
+            //num = Info.AgainstInfo.AllCardList.hasTag(Text).Count;
             //Command.RowCommand.GetCardList(Text);
         }
     }

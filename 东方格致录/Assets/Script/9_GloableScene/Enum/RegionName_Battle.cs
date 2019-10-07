@@ -2,13 +2,13 @@
 {
     public enum RegionName_Battle
     {
-        My_Water,
-        My_Fire,
-        My_Wind,
-        My_Soil,
-        Op_Water,
-        Op_Fire,
-        Op_Wind,
-        Op_Soil,
+        Down_Water,
+        Down_Fire,
+        Down_Wind,
+        Down_Soil,
+        Up_Water,
+        Up_Fire,
+        Up_Wind,
+        Up_Soil,
     }
 }

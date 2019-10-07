@@ -128,7 +128,7 @@
     <Compile Include="Assets\Script\9_GloableScene\Enum\Sectarian.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\Territory.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Extension\CardListExtension.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Extension\Extern.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Extension\Extension.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Extension\RowInfoExtension.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Interactive\InteractiveControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Network\NetClient.cs" />

@@ -51,7 +51,8 @@ namespace Info
         public static bool IsMyTurn = true;
         public static bool IsPVP = false;
 
-        public static List<Card> AllCardList => RowsInfo.GlobalCardList.SelectMany(x => x).ToList();
+        public static List<Card> AllCardList => RowsInfo.globalCardList.SelectMany(x => x).ToList();
+        public static List<SingleRowInfo> AllRows => RowsInfo.singleRowInfos;
 
         public static bool IsPlayer1 = true;
         public static (int P1Score, int P2Score) PlayerScore;

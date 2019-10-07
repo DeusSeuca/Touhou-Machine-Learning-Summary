@@ -38,7 +38,7 @@ namespace Command
         }
         public static async Task ExchangeCard(Card TargetCard, bool IsPlayerExchange = true, int RandomRank = 0)
         {
-            Debug.Log("交换卡牌");
+            //Debug.Log("交换卡牌");
             await WashCard(TargetCard, IsPlayerExchange, RandomRank);
             await DrawCard(IsPlayerExchange, true);
             if (IsPlayerExchange)
@@ -52,7 +52,7 @@ namespace Command
         }
         public static async Task DrawCard(bool IsPlayerDraw = true, bool ActiveBlackList = false)
         {
-            Debug.Log("抽卡");
+            //Debug.Log("抽卡");
             EffectCommand.AudioEffectPlay(0);
             Card TargetCard = IsPlayerDraw ? RowsInfo.GetDownCardList(RegionTypes.Deck)[0] : RowsInfo.GetUpCardList(RegionTypes.Deck)[0];
             TargetCard.IsCanSee = IsPlayerDraw;
@@ -93,10 +93,10 @@ namespace Command
         }
         public static async Task OrderCard(bool IsPlayerWash = true)
         {
-            RowsInfo.GlobalCardList[1] = RowsInfo.GlobalCardList[1].OrderBy(card => card.CardPoint).ToList();
-            RowsInfo.GlobalCardList[3] = RowsInfo.GlobalCardList[3].OrderBy(card => card.CardPoint).ToList();
-            RowsInfo.GlobalCardList[10] = RowsInfo.GlobalCardList[10].OrderBy(card => card.CardPoint).ToList();
-            RowsInfo.GlobalCardList[12] = RowsInfo.GlobalCardList[12].OrderBy(card => card.CardPoint).ToList();
+            RowsInfo.globalCardList[1] = RowsInfo.globalCardList[1].OrderBy(card => card.CardPoint).ToList();
+            RowsInfo.globalCardList[3] = RowsInfo.globalCardList[3].OrderBy(card => card.CardPoint).ToList();
+            RowsInfo.globalCardList[10] = RowsInfo.globalCardList[10].OrderBy(card => card.CardPoint).ToList();
+            RowsInfo.globalCardList[12] = RowsInfo.globalCardList[12].OrderBy(card => card.CardPoint).ToList();
 
         }
         //[System.Obsolete("待废弃")]
@@ -118,7 +118,7 @@ namespace Command
         {
             Debug.Log("打出一张牌2");
             Command.EffectCommand.AudioEffectPlay(0);
-            GameCommand.SetPlayCardLimit(true);
+            RowCommand.SetPlayCardLimit(true);
             Card TargetCard = AgainstInfo.PlayerPlayCard;
             TargetCard.IsPrePrepareToPlay = false;
             Network.NetCommand.AsyncInfo(NetAcyncType.PlayCard);

@@ -146,7 +146,7 @@ namespace Command
                 GameUI.UiCommand.NoticeBoardShow();
                 await Task.Delay(000);
                 AgainstInfo.IsCardEffectCompleted = false;
-                GameCommand.SetPlayCardLimit(!AgainstInfo.IsMyTurn);
+                RowCommand.SetPlayCardLimit(!AgainstInfo.IsMyTurn);
                 await Task.Delay(000);
             });
         }
@@ -157,7 +157,7 @@ namespace Command
                 GameUI.UiCommand.SetNoticeBoardTitle((AgainstInfo.IsMyTurn ? "我方" : "敌方") + "回合结束");
                 GameUI.UiCommand.NoticeBoardShow();
                 await Task.Delay(000);
-                GameCommand.SetPlayCardLimit(true);
+                RowCommand.SetPlayCardLimit(true);
                 await Task.Delay(000);
                 AgainstInfo.IsMyTurn = !AgainstInfo.IsMyTurn;
             });
