@@ -207,9 +207,9 @@ namespace Command
         public static async Task WaitForSelectLocation(Card card)
         {
             AgainstInfo.IsWaitForSelectLocation = true;
-            //Debug.Log("开始进入部署位置");
+            Debug.Log("等待选择部署位置");
             //RowCommand.SetAllRegionSelectable(true);
-            RowCommand.SetAllRegionSelectable((RegionTypes)(card.property+5));
+            RowCommand.SetAllRegionSelectable((RegionTypes)(card.property+5), card.territory);
             AgainstInfo.SelectLocation = -1;
             // Debug.Log("开始进入部署位置");
             await Task.Run(() =>

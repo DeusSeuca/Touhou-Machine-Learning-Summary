@@ -57,13 +57,14 @@ namespace Command
        
         public static void SetAllRegionSelectable(RegionTypes region, Territory territory = Territory.All)
         {
+            Debug.Log(region);
             if (region == RegionTypes.None)
             {
                 Info.AgainstInfo.AllRegionList.InRogin(RegionTypes.Battle).ForEach(row => row.SetRegionSelectable(false));
             }
             else
             {
-                Info.AgainstInfo.AllRegionList.InRogin(region).ForEach(row => row.SetRegionSelectable(false));
+                Info.AgainstInfo.AllRegionList.InRogin(region).ForEach(row => row.SetRegionSelectable(true));
             }
         }
     }

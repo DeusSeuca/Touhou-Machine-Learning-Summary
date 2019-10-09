@@ -21,14 +21,19 @@ public static class CardListExtension
     }
     public static List<Card> At(this List<Card> cardList, Orientation orientation)
     {
-        return orientation switch
+        switch (orientation)
         {
-            Orientation.Up => cardList.Where(card => RowsInfo.globalCardList.Skip(AgainstInfo.IsPlayer1 ? 9 : 0).Take(8).SelectMany(x => x).Contains(card)).ToList(),
-            Orientation.Down => cardList.Where(card => RowsInfo.globalCardList.Skip(AgainstInfo.IsPlayer1 ? 0 : 9).Take(8).SelectMany(x => x).Contains(card)).ToList(),
-            Orientation.My => AgainstInfo.IsMyTurn ? cardList.At(Orientation.Down) : cardList.At(Orientation.Up),
-            Orientation.Op => AgainstInfo.IsMyTurn ? cardList.At(Orientation.Up) : cardList.At(Orientation.Down),
-            _ => null,
-        };
+            case GameEnum.Orientation.Up:
+                return cardList.Where(card => RowsInfo.globalCardList.Skip(AgainstInfo.IsPlayer1 ? 9 : 0).Take(8).SelectMany(x => x).Contains(card)).ToList();
+            case GameEnum.Orientation.Down:
+                return cardList.Where(card => RowsInfo.globalCardList.Skip(AgainstInfo.IsPlayer1 ? 0 : 9).Take(8).SelectMany(x => x).Contains(card)).ToList();
+            case GameEnum.Orientation.My:
+                return AgainstInfo.IsMyTurn ? cardList.At(Orientation.Down) : cardList.At(Orientation.Up);
+            case GameEnum.Orientation.Op:
+                return AgainstInfo.IsMyTurn ? cardList.At(Orientation.Up) : cardList.At(Orientation.Down);
+            default:
+                return null;
+        }
     }
 
     //public static List<Card> Belong(this List<Card> cardList, GameEnum.Belong belong) => cardList.Where(card => card.belong == belong).ToList();

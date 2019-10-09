@@ -32,9 +32,8 @@ namespace CardSpace
         bool IsInit;
         public Region property;
         //生效范围
-        public Territory CardTerritory;
-        //改为p1 p2防歧义
-        //public Belong belong;
+        public Territory territory;
+        
         /// <summary>
         /// 限制卡牌被打出
         /// </summary>

@@ -18,7 +18,7 @@ namespace Info
         public int Location => this.JudgeRank(AgainstInfo.FocusPoint);
         public Material CardMaterial => transform.GetComponent<Renderer>().material;
 
-        public List<Card> ThisRowCards => orientation == Orientation.My ? RowsInfo.GetDownCardList(region) : RowsInfo.GetUpCardList(region);
+        public List<Card> ThisRowCards => orientation == Orientation.Down ? RowsInfo.GetDownCardList(region) : RowsInfo.GetUpCardList(region);
         private void Awake()
         {
             RowsInfo.singleRowInfos.Add(this);
