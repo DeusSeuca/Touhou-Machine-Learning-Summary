@@ -10,21 +10,19 @@ namespace Info
     {
         public Color color;
         public Card TempCard;
-        //使用 Orientation 代替 Belong
-        public Belong belong;
+
         public Orientation orientation;
         public RegionTypes region;
         public bool CanBeSelected;
-        public RowControl Control;
-        public Material CardMaterial;
         public int RowRank => RowsInfo.globalCardList.IndexOf(ThisRowCards);
         public int Location => this.JudgeRank(AgainstInfo.FocusPoint);
-        public List<Card> ThisRowCards => belong == Belong.My ? RowsInfo.GetDownCardList(region) : RowsInfo.GetUpCardList(region);
+        public Material CardMaterial => transform.GetComponent<Renderer>().material;
+
+        public List<Card> ThisRowCards => orientation == Orientation.My ? RowsInfo.GetDownCardList(region) : RowsInfo.GetUpCardList(region);
         private void Awake()
         {
             RowsInfo.singleRowInfos.Add(this);
-            Control = GetComponent<RowControl>();
-            CardMaterial = transform.GetComponent<Renderer>().material;
+            //CardMaterial = transform.GetComponent<Renderer>().material;
         }
 
         public void SetRegionSelectable(bool CanBeSelected)

@@ -16,7 +16,7 @@ namespace Test
                 Task.Run(() =>
                 {
                     print("等待选择位置");
-                    Command.StateCommand.WaitForSelectLocation().Wait();
+                    Command.StateCommand.WaitForSelectLocation(new CardSpace.Card()).Wait();
                     print("开始部署");
                     //Command.NetCommand.AsyncInfoRequir(null, null, "{\"Datas\":[3,9,1,0]}");
                 }).Wait();
@@ -48,8 +48,8 @@ namespace Test
         private void Filter(Orientation orientation,int lessPoint)
         {
             Cards1 = Info.AgainstInfo.AllCardList.At(orientation);
-            Cards2 = Info.AgainstInfo.AllCardList.lessPoint(lessPoint);
-            Cards3 = Info.AgainstInfo.AllCardList.At(orientation).lessPoint(lessPoint);
+            Cards2 = Info.AgainstInfo.AllCardList.LessPoint(lessPoint);
+            Cards3 = Info.AgainstInfo.AllCardList.At(orientation).LessPoint(lessPoint);
             //num = Info.AgainstInfo.AllCardList.Count;
             //num = Info.AgainstInfo.AllCardList.hasTag(Text).Count;
             //Command.RowCommand.GetCardList(Text);

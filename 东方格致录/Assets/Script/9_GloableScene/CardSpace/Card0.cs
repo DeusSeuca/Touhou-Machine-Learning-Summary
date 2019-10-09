@@ -11,11 +11,9 @@ namespace CardSpace
         [TriggerType.PlayCard]
         public Func<Task> Step2 => async () =>
         {
-            await StateCommand.WaitForSelectLocation();
+            await StateCommand.WaitForSelectLocation(this);
             await Deploy();
             await Task.Delay(100);
         };
     }
 }
-
-

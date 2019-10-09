@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 namespace Command
 {
-    public class CardLibraryCommand
+    public static class CardLibraryCommand
     {
         public static CardLibrarySaveData GetLibrarySaveData() => Resources.Load<CardLibrarySaveData>("CardData\\SaveData");
 
@@ -34,12 +34,12 @@ namespace Command
         {
             //TextAsset binAsset = Resources.Load("csv", typeof(TextAsset)) as TextAsset;
             //var s = Resources.Load("CardData.csv").ToJson();
-            Command.CardLibraryCommand.GetLibrarySaveData().cards = new List<CardModelInfo>();
+            GetLibrarySaveData().cards = new List<CardModelInfo>();
             string Language = "Ch";
             for (int i = 1; i < CsvData.Length; i++)
             {
                 Texture2D tex = Resources.Load<Texture2D>("CardTex\\" + GetCsvData<string>(i, "ImageUrl"));
-                Command.CardLibraryCommand.GetLibrarySaveData().cards.Add(
+                GetLibrarySaveData().cards.Add(
                     new CardModelInfo(
                         GetCsvData<int>(i, "Id")+1000,
                         GetCsvData<string>(i, "Name-" + Language),
@@ -47,7 +47,7 @@ namespace Command
                         GetCsvData<string>(i, "Tag-" + Language),
                         GetCsvData<Sectarian>(i, "Camp"),
                         GetCsvData<CardLevel>(i, "Level"),
-                        GetCsvData<Property>(i, "Property"),
+                        GetCsvData<Region>(i, "Region"),
                         GetCsvData<Territory>(i, "Territory"),
                         GetCsvData<int>(i, "Point"),
                         GetCsvData<int>(i, "RamificationRank"),

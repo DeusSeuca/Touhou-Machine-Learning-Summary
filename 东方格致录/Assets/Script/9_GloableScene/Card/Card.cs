@@ -30,7 +30,7 @@ namespace CardSpace
         public bool IsCanSee;
         public bool IsPrePrepareToPlay;
         bool IsInit;
-        public Property property;
+        public Region property;
         //生效范围
         public Territory CardTerritory;
         //改为p1 p2防歧义
@@ -98,7 +98,7 @@ namespace CardSpace
         {
             List<Func<Task>> Steps = new List<Func<Task>>();
             List<PropertyInfo> tasks = GetType().GetProperties().Where(x =>
-                x.GetCustomAttributes(true).Count() > 0 && x.GetCustomAttributes(true)[0].GetType() == typeof(T)).ToList();
+                x.GetCustomAttributes(true).Any() && x.GetCustomAttributes(true)[0].GetType() == typeof(T)).ToList();
             tasks.Reverse();
             tasks.Select(x => x.GetValue(this)).Cast<Func<Task>>().ToList().ForEach(CardEffectStackControl.TaskStack.Push);
             _ = CardEffectStackControl.Run();

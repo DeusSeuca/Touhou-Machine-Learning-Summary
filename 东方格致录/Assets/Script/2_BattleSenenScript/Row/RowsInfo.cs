@@ -15,8 +15,8 @@ namespace Info
 
         public static RowsInfo Instance;
 
-        public Dictionary<RegionName_Battle, SingleRowInfo> singleBattleInfos = new Dictionary<RegionName_Battle, SingleRowInfo>();
-        public Dictionary<RegionName_Other, SingleRowInfo> singleOtherInfos = new Dictionary<RegionName_Other, SingleRowInfo>();
+       // public Dictionary<RegionName_Battle, SingleRowInfo> singleBattleInfos = new Dictionary<RegionName_Battle, SingleRowInfo>();
+        //public Dictionary<RegionName_Other, SingleRowInfo> singleOtherInfos = new Dictionary<RegionName_Other, SingleRowInfo>();
         void Awake() => Init();
         public void Init()
         {
@@ -51,7 +51,7 @@ namespace Info
         /// <param name="type"></param>
         /// <returns></returns>
         public static List<Card> GetOpCardList(RegionTypes type) => AgainstInfo.IsMyTurn ? GetUpCardList(type) : GetDownCardList(type);
-        public static SingleRowInfo GetSingleRowInfo(RegionTypes type, bool InMyTerritory) => singleRowInfos.First(SingleRow => SingleRow.ThisRowCards.Equals(InMyTerritory ? GetMyCardList(type) : GetDownCardList(type)));
+        public static SingleRowInfo GetSingleRowInfo(RegionTypes type, bool InMyTerritory) => singleRowInfos.First(SingleRow => SingleRow.ThisRowCards.Equals(InMyTerritory ? GetMyCardList(type) : GetOpCardList(type)));
         public static Network.NetInfoModel.Location GetLocation(Card TargetCard)
         {
             int RankX = -1;

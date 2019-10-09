@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 
 namespace Command
 {
-    public class StateCommand
+    public static class StateCommand
     {
         public static async Task BattleStart()
         {
@@ -23,7 +23,8 @@ namespace Command
                 Info.AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1001, new List<int> { 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015 }) });
                 Info.AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1001, new List<int> { 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015 }) });
             }
-            RowCommand.SetAllRegionSelectable(false);
+            //RowCommand.SetAllRegionSelectable(false);
+            RowCommand.SetAllRegionSelectable( RegionTypes.None);
             await Task.Run(async () =>
             {
                 //await Task.Delay(500);
@@ -203,11 +204,12 @@ namespace Command
             Command.Network.NetCommand.AsyncInfo(NetAcyncType.FocusRegion);
             AgainstInfo.IsWaitForSelectRegion = false;
         }
-        public static async Task WaitForSelectLocation()
+        public static async Task WaitForSelectLocation(Card card)
         {
             AgainstInfo.IsWaitForSelectLocation = true;
             //Debug.Log("开始进入部署位置");
-            RowCommand.SetAllRegionSelectable(true);
+            //RowCommand.SetAllRegionSelectable(true);
+            RowCommand.SetAllRegionSelectable((RegionTypes)(card.property+5));
             AgainstInfo.SelectLocation = -1;
             // Debug.Log("开始进入部署位置");
             await Task.Run(() =>
@@ -216,7 +218,8 @@ namespace Command
             });
             // Debug.Log("选择部署位置完毕");
             Network.NetCommand.AsyncInfo(NetAcyncType.FocusLocation);
-            RowCommand.SetAllRegionSelectable(false);
+            RowCommand.SetAllRegionSelectable( RegionTypes.None);
+            //RowCommand.SetAllRegionSelectable(false);
             AgainstInfo.IsWaitForSelectLocation = false;
         }
         public static async Task WaitForSelecUnit(Card OriginCard, List<Card> Cards, int num)

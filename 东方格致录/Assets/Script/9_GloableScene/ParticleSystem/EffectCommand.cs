@@ -2,7 +2,7 @@
 using UnityEngine;
 namespace Command
 {
-    public class EffectCommand
+    public static class EffectCommand
     {
         public static void AudioEffectPlay(int Rank)
         {

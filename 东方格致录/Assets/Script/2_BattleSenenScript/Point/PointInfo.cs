@@ -2,7 +2,7 @@
 using System.Linq;
 namespace Info
 {
-    public class PointInfo
+    public static class PointInfo
     {
         public static int DownWaterPoint => Info.RowsInfo.GetDownCardList(RegionTypes.Water).Where(card => !card.IsGray).Select(card => card.CardPoint).Sum();
         public static int DownFirePoint => Info.RowsInfo.GetDownCardList(RegionTypes.Fire).Where(card => !card.IsGray).Select(card => card.CardPoint).Sum();

@@ -9,7 +9,7 @@ namespace Info
     /// <summary>
     /// 全局对战信息
     /// </summary>
-    public class AgainstInfo
+    public static class AgainstInfo
     {
         //网络同步信息
         public static Card TargetCard;
@@ -52,7 +52,7 @@ namespace Info
         public static bool IsPVP = false;
 
         public static List<Card> AllCardList => RowsInfo.globalCardList.SelectMany(x => x).ToList();
-        public static List<SingleRowInfo> AllRows => RowsInfo.singleRowInfos;
+        public static List<SingleRowInfo> AllRegionList => RowsInfo.singleRowInfos;
 
         public static bool IsPlayer1 = true;
         public static (int P1Score, int P2Score) PlayerScore;

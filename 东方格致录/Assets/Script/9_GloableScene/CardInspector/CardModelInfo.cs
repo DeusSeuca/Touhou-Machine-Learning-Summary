@@ -30,7 +30,7 @@ public class CardModelInfo
     public CardLevel level;
     [VerticalGroup("Split/Meta")]
     [LabelText("部署区域")]
-    public Property cardProperty = Property.All;
+    public Region cardProperty = Region.All;
     [VerticalGroup("Split/Meta")]
     [LabelText("部署所属")]
     public Territory cardTerritory = Territory.My;
@@ -38,7 +38,7 @@ public class CardModelInfo
     public string tag = "";
     [LabelText("卡片介绍")]
     public string describe = "";
-    public CardModelInfo(int cardId, string cardName, string describe, string tag, Sectarian sectarian, CardLevel level, Property cardProperty, Territory cardTerritory, int point, int ramification, Texture2D icon)
+    public CardModelInfo(int cardId, string cardName, string describe, string tag, Sectarian sectarian, CardLevel level, Region cardProperty, Territory cardTerritory, int point, int ramification, Texture2D icon)
     {
         this.icon = icon;
         this.cardId = cardId;

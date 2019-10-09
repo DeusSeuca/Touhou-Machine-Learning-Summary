@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Command
 {
-    public class CardCommand
+    public static class CardCommand
     {
          static int CreatCardRank;//卡牌创建时的自增命名
 
@@ -66,7 +66,7 @@ namespace Command
                 RowsInfo.GetUpCardList(RegionTypes.Deck).Remove(TargetCard);
                 RowsInfo.GetUpCardList(RegionTypes.Hand).Add(TargetCard);
             }
-            await OrderCard();
+            OrderCard();
             await Task.Delay(100);
         }
         //洗回牌库
@@ -91,7 +91,7 @@ namespace Command
             }
             await Task.Delay(500);
         }
-        public static async Task OrderCard(bool IsPlayerWash = true)
+        public static void OrderCard(bool IsPlayerWash = true)
         {
             RowsInfo.globalCardList[1] = RowsInfo.globalCardList[1].OrderBy(card => card.CardPoint).ToList();
             RowsInfo.globalCardList[3] = RowsInfo.globalCardList[3].OrderBy(card => card.CardPoint).ToList();
@@ -99,21 +99,6 @@ namespace Command
             RowsInfo.globalCardList[12] = RowsInfo.globalCardList[12].OrderBy(card => card.CardPoint).ToList();
 
         }
-        //[System.Obsolete("待废弃")]
-        //public static async Task PlayCard()
-        //{
-        //    Debug.Log("打出一张牌1");
-        //    Command.EffectCommand.AudioEffectPlay(0);
-        //    GameCommand.SetPlayCardLimit(true);
-        //    Card TargetCard = AgainstInfo.PlayerPlayCard;
-        //    TargetCard.IsPrePrepareToPlay = false;
-        //    Network.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
-        //    TargetCard.IsCanSee = true;
-        //    RowsInfo.GetMyCardList(RegionTypes.Hand).Remove(TargetCard);
-        //    RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
-        //    AgainstInfo.PlayerPlayCard = null;
-        //    TargetCard.Trigger<TriggerType.PlayCard>();
-        //}
         public static async Task PlayCard(bool IsAnsy)
         {
             Debug.Log("打出一张牌2");
@@ -128,15 +113,6 @@ namespace Command
             AgainstInfo.PlayerPlayCard = null;
             TargetCard.Trigger<TriggerType.PlayCard>();
         }
-        //废弃
-        //public static async Task DisCard(Card card = null)
-        //{
-        //    Card TargetCard = card == null ? AgainstInfo.PlayerPlayCard : card;
-        //    TargetCard.IsPrePrepareToPlay = false;
-        //    TargetCard.Row.Remove(TargetCard);
-        //    RowsInfo.GetMyCardList(RegionTypes.Grave).Add(TargetCard);
-        //    TargetCard.Trigger<TriggerType.Discard>();
-        //}
         public static async Task DisCard(Card card)
         {
             //Card TargetCard = card == null ? AgainstInfo.PlayerPlayCard : card;
