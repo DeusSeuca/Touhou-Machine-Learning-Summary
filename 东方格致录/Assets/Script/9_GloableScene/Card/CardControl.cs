@@ -26,13 +26,12 @@ namespace Control
             {
                 Info.AgainstInfo.PlayerPlayCard = ThisCard;
             }
-
         }
         private void OnMouseUp()
         {
-            if (Info.AgainstInfo.PlayerPlayCard!=null)
+            if (Info.AgainstInfo.PlayerPlayCard != null)
             {
-                if (Info.AgainstInfo.PlayerFocusRegion != null )
+                if (Info.AgainstInfo.PlayerFocusRegion != null)
                 {
                     if (Info.AgainstInfo.PlayerFocusRegion.name == "我方_墓地")
                     {

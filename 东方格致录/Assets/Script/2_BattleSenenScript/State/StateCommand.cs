@@ -1,6 +1,8 @@
 ﻿using CardSpace;
+using Extension;
 using GameEnum;
 using Info;
+using Model;
 using Network;
 using System;
 using System.Collections.Generic;
@@ -24,7 +26,7 @@ namespace Command
                 Info.AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1001, new List<int> { 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015 }) });
             }
             //RowCommand.SetAllRegionSelectable(false);
-            RowCommand.SetAllRegionSelectable( RegionTypes.None);
+            RowCommand.SetAllRegionSelectable(RegionTypes.None);
             await Task.Run(async () =>
             {
                 //await Task.Delay(500);
@@ -33,10 +35,10 @@ namespace Command
                 await Task.Delay(000);
                 //初始化领袖卡
                 Card MyLeaderCard = await CardCommand.CreatCard(Info.AllPlayerInfo.UserInfo.UseDeck.LeaderId);
-                RowsInfo.GetDownCardList(RegionTypes.Leader).Add(MyLeaderCard);
+                AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Leader).Add(MyLeaderCard);
                 MyLeaderCard.IsCanSee = true;
                 Card OpLeaderCard = await CardCommand.CreatCard(Info.AllPlayerInfo.OpponentInfo.UseDeck.LeaderId);
-                RowsInfo.GetUpCardList(RegionTypes.Leader).Add(OpLeaderCard);
+                AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Leader).Add(OpLeaderCard);
                 OpLeaderCard.IsCanSee = true;
 
 
@@ -45,13 +47,13 @@ namespace Command
                 for (int i = 0; i < Deck.CardIds.Count; i++)
                 {
                     Card NewCard = await CardCommand.CreatCard(Deck.CardIds[i]);
-                    RowsInfo.GetDownCardList(RegionTypes.Deck).Add(NewCard);
+                    AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Deck).Add(NewCard);
                 }
                 Deck = AllPlayerInfo.OpponentInfo.UseDeck;
                 for (int i = 0; i < Deck.CardIds.Count; i++)
                 {
                     Card NewCard = await CardCommand.CreatCard(Deck.CardIds[i]);
-                    RowsInfo.GetUpCardList(RegionTypes.Deck).Add(NewCard);
+                    AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Deck).Add(NewCard);
                 }
                 await Task.Delay(000);
             });
@@ -115,7 +117,7 @@ namespace Command
                         break;
                 }
                 await Task.Delay(2500);
-                await WaitForSelectBoardCard(Info.RowsInfo.GetDownCardList(RegionTypes.Hand), CardBoardMode.ExchangeCard); ;
+                await WaitForSelectBoardCard(AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Hand), CardBoardMode.ExchangeCard); ;
             });
         }
         public static async Task RoundEnd(int num)
@@ -209,7 +211,7 @@ namespace Command
             AgainstInfo.IsWaitForSelectLocation = true;
             Debug.Log("等待选择部署位置");
             //RowCommand.SetAllRegionSelectable(true);
-            RowCommand.SetAllRegionSelectable((RegionTypes)(card.property+5), card.territory);
+            RowCommand.SetAllRegionSelectable((RegionTypes)(card.property + 5), card.territory);
             AgainstInfo.SelectLocation = -1;
             // Debug.Log("开始进入部署位置");
             await Task.Run(() =>
@@ -218,7 +220,7 @@ namespace Command
             });
             // Debug.Log("选择部署位置完毕");
             Network.NetCommand.AsyncInfo(NetAcyncType.FocusLocation);
-            RowCommand.SetAllRegionSelectable( RegionTypes.None);
+            RowCommand.SetAllRegionSelectable(RegionTypes.None);
             //RowCommand.SetAllRegionSelectable(false);
             AgainstInfo.IsWaitForSelectLocation = false;
         }

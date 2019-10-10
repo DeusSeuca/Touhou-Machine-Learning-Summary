@@ -12,22 +12,22 @@ namespace Control
         public bool IsMyHandRegion;
         public bool IsSingle;
         public bool HasTempCard;
-        void Awake()
-        {
-            SingleInfo = GetComponent<SingleRowInfo>();
-        }
+        void Awake() => SingleInfo = GetComponent<SingleRowInfo>();
         void Update()
         {
-            ControlCardPosition(SingleInfo.ThisRowCards);
-            Command.RowCommand.RefreshHandCard(SingleInfo.ThisRowCards, IsMyHandRegion);
             TempCardControk();
+            ControlCardPosition(SingleInfo.ThisRowCards);
+            if (IsMyHandRegion)
+            {
+                RowCommand.RefreshHandCard(SingleInfo.ThisRowCards);
+            }
         }
         public void TempCardControk()
         {
             if (SingleInfo.TempCard == null && SingleInfo.CanBeSelected && AgainstInfo.PlayerFocusRegion == SingleInfo && !HasTempCard)
             {
                 HasTempCard = true;
-                _ = Command.RowCommand.CreatTempCard(SingleInfo);
+                _ = RowCommand.CreatTempCard(SingleInfo);
             }
             if (SingleInfo.TempCard != null && SingleInfo.Location != SingleInfo.ThisRowCards.IndexOf(SingleInfo.TempCard))
             {
@@ -39,7 +39,6 @@ namespace Control
                 HasTempCard = false;
             }
         }
-
         void ControlCardPosition(List<Card> ThisCardList)
         {
             int Num = ThisCardList.Count;

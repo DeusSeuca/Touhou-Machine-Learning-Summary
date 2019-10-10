@@ -1,8 +1,8 @@
 ﻿using CardSpace;
+using Extension;
 using GameEnum;
 using Info;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -12,7 +12,8 @@ namespace Command
     {
         public static async Task CreatTempCard(SingleRowInfo SingleInfo)
         {
-            SingleInfo.TempCard = await CardCommand.CreatCard(RowsInfo.GetMyCardList(RegionTypes.Uesd)[0].CardId);
+            Card modelCard = AgainstInfo.AllCardList.InRogin(Orientation.My, RegionTypes.Uesd)[0];
+            SingleInfo.TempCard = await CardCommand.CreatCard(modelCard.CardId);
             SingleInfo.TempCard.IsGray = true;
             SingleInfo.TempCard.IsCanSee = true;
             SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
@@ -29,42 +30,23 @@ namespace Command
             SingleInfo.ThisRowCards.Remove(SingleInfo.TempCard);
             SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
         }
-        public static void RefreshHandCard(List<Card> ThisCardList, bool IsMyHandRegion)
+        public static void RefreshHandCard(List<Card> cardList)
         {
-            if (IsMyHandRegion)
-            {
-                foreach (var item in ThisCardList)
-                {
-                    if (AgainstInfo.PlayerFocusCard != null && item == AgainstInfo.PlayerFocusCard && item.IsLimit == false)
-                    {
-                        item.IsPrePrepareToPlay = true;
-                    }
-                    else
-                    {
-                        item.IsPrePrepareToPlay = false;
-                    }
-                }
-            }
+            cardList.ForEach(card => card.IsPrePrepareToPlay = (AgainstInfo.PlayerFocusCard != null && card == AgainstInfo.PlayerFocusCard && !card.IsLimit));
         }
         public static void SetPlayCardLimit(bool IsLimit)
         {
-            Info.AgainstInfo.AllCardList.At(Orientation.Down).InRogin(RegionTypes.Leader, RegionTypes.Hand).ForEach(card => card.IsLimit = IsLimit);
+            AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Leader, RegionTypes.Hand).ForEach(card => card.IsLimit = IsLimit);
         }
-        /// <summary>
-        /// 显示可部署区域
-        /// </summary>
-        /// <param name="CanBeSelected"></param>
-       
         public static void SetAllRegionSelectable(RegionTypes region, Territory territory = Territory.All)
         {
-            Debug.Log(region);
             if (region == RegionTypes.None)
             {
-                Info.AgainstInfo.AllRegionList.InRogin(RegionTypes.Battle).ForEach(row => row.SetRegionSelectable(false));
+                AgainstInfo.AllRegionList.InRogin(RegionTypes.Battle).ForEach(row => row.SetRegionSelectable(false));
             }
             else
             {
-                Info.AgainstInfo.AllRegionList.InRogin(region).ForEach(row => row.SetRegionSelectable(true));
+                AgainstInfo.AllRegionList.InRogin(region).ForEach(row => row.SetRegionSelectable(true));
             }
         }
     }

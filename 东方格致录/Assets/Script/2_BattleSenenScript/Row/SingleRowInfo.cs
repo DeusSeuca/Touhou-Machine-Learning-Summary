@@ -1,5 +1,5 @@
 ﻿using CardSpace;
-using Control;
+using Extension;
 using GameEnum;
 using System.Collections.Generic;
 using Thread;
@@ -10,27 +10,19 @@ namespace Info
     {
         public Color color;
         public Card TempCard;
-
         public Orientation orientation;
         public RegionTypes region;
         public bool CanBeSelected;
-        public int RowRank => RowsInfo.globalCardList.IndexOf(ThisRowCards);
+        private void Awake() => RowsInfo.singleRowInfos.Add(this);
         public int Location => this.JudgeRank(AgainstInfo.FocusPoint);
+        public int RowRank => RowsInfo.globalCardList.IndexOf(ThisRowCards);
         public Material CardMaterial => transform.GetComponent<Renderer>().material;
-
-        public List<Card> ThisRowCards => orientation == Orientation.Down ? RowsInfo.GetDownCardList(region) : RowsInfo.GetUpCardList(region);
-        private void Awake()
-        {
-            RowsInfo.singleRowInfos.Add(this);
-            //CardMaterial = transform.GetComponent<Renderer>().material;
-        }
-
+        public List<Card> ThisRowCards => AgainstInfo.AllCardList.InRogin(orientation,region);
         public void SetRegionSelectable(bool CanBeSelected)
         {
             this.CanBeSelected = CanBeSelected;
             MainThread.Run(() =>
             {
-                print(name + "设置为" + (CanBeSelected ? color : Color.black));
                 CardMaterial.SetColor("_GlossColor", CanBeSelected ? color : Color.black);
             });
         }

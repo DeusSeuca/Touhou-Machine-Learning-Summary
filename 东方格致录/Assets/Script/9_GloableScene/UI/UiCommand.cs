@@ -27,13 +27,15 @@ namespace Command
                     Info.GameUI.UiInfo.CardBoard.SetActive(false);
                 });
             }
-
-            public static void CardBoardReload() => Command.GameUI.CardBoardCommand.CreatBoardCardActual();
+            public static void CardBoardReload()
+            {
+                Command.GameUI.CardBoardCommand.CreatBoardCardActual();
+            }
             public static Sprite GetBoardCardImage(int Id)
             {
                 if (!Info.GameUI.UiInfo.CardImage.ContainsKey(Id))
                 {
-                    var CardStandardInfo = Command.CardLibraryCommand.GetCardStandardInfo(Id);
+                    var CardStandardInfo = Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(Id);
                     Texture2D texture = CardStandardInfo.icon;
                     Info.GameUI.UiInfo.CardImage.Add(Id, Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero));
                 }
@@ -67,7 +69,6 @@ namespace Command
                     Info.AgainstInfo.ArrowList.Add(NewArrow);
                 });
             }
-
             public static void SetArrowDestory()
             {
                 MainThread.Run(() =>

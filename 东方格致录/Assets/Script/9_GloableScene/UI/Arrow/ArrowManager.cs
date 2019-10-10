@@ -6,7 +6,6 @@ namespace GameUI
         Transform StartPos;
         Transform EndPos;
         void Update() => UpdateState();
-
         private void UpdateState()
         {
             transform.position = (EndPos.position + StartPos.position) / 2;

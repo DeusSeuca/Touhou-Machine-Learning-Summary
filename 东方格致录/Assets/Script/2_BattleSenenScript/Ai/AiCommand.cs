@@ -1,4 +1,6 @@
-﻿using GameEnum;
+﻿using Extension;
+using GameEnum;
+using Info;
 using System;
 using System.Threading.Tasks;
 namespace Command
@@ -17,7 +19,7 @@ namespace Command
             }
             else
             {
-                await CardCommand.DisCard(Info.RowsInfo.GetMyCardList(RegionTypes.Hand)[0]);
+                await CardCommand.DisCard(AgainstInfo.AllCardList.InRogin(Orientation.My, RegionTypes.Hand)[0]);
             }
         }
     }

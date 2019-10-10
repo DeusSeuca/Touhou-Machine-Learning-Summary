@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Extension;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Control
@@ -7,10 +8,10 @@ namespace Control
     {
         public class NoticeControl : MonoBehaviour
         {
+            Animator Anim;
+            public float Aplha = 0;
             public GameObject[] NoticeTex;
             public GameObject NoticeModel;
-            public float Aplha = 0;
-            Animator Anim;
             void Start() => Anim = GetComponent<Animator>();
             void Update() => NoticeTex.ForEach(x => x.GetComponent<Image>().material.SetFloat("_Value", Aplha));
             [Button]

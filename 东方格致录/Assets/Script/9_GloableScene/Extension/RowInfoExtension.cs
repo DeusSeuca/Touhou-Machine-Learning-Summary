@@ -1,20 +1,26 @@
 ﻿using System.Linq;
 using UnityEngine;
-
-static partial class RowInfoExtension
+namespace Extension
 {
-    public static int JudgeRank(this Info.SingleRowInfo SingleInfo, Vector3 point)
+    static partial class RowInfoExtension
     {
-        int Rank = 0;
-        float posx = -(point.x - SingleInfo.transform.position.x);
-        int UniteNum = SingleInfo.ThisRowCards.Where(card => !card.IsGray).Count();
-        for (int i = 0; i < UniteNum; i++)
+        //public static void OrderCard(this Info.SingleRowInfo singleInfo)
+        //{
+        //    singleInfo.ThisRowCards = singleInfo.ThisRowCards.OrderBy(card => card.point);
+        //}
+        public static int JudgeRank(this Info.SingleRowInfo singleRowInfo, Vector3 point)
         {
-            if (posx > i * 1.6 - (UniteNum - 1) * 0.8)
+            int Rank = 0;
+            float posx = -(point.x - singleRowInfo.transform.position.x);
+            int UniteNum = singleRowInfo.ThisRowCards.Where(card => !card.IsGray).Count();
+            for (int i = 0; i < UniteNum; i++)
             {
-                Rank = i + 1;
+                if (posx > i * 1.6 - (UniteNum - 1) * 0.8)
+                {
+                    Rank = i + 1;
+                }
             }
+            return Rank;
         }
-        return Rank;
     }
 }

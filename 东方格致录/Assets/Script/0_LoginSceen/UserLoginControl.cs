@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Extension;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Network.NetInfoModel;
