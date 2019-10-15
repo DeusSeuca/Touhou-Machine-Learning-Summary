@@ -88,8 +88,8 @@ namespace Command
         }
         public static void OrderCard(bool IsPlayerWash = true)
         {
-            AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Hand) = AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Hand).OrderBy(card => card.point).ToList();
-            AgainstInfo.AllRegionList
+            //AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Hand) = AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Hand).OrderBy(card => card.point).ToList();
+            //AgainstInfo.AllRegionList
             RowsInfo.globalCardList[1] = RowsInfo.globalCardList[1].OrderBy(card => card.point).ToList();
             RowsInfo.globalCardList[3] = RowsInfo.globalCardList[3].OrderBy(card => card.point).ToList();
             RowsInfo.globalCardList[10] = RowsInfo.globalCardList[10].OrderBy(card => card.point).ToList();

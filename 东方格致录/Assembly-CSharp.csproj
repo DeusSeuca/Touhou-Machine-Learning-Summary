@@ -83,6 +83,7 @@
     <Compile Include="Assets\Script\9_GloableScene\Audio\AudioInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Camera\CameraControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Card.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Card\CardSet.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardDeck.cs" />
@@ -772,12 +773,6 @@
       <Project>{586757FC-85B8-2FCB-C574-39913C9BE477}</Project>
       <Name>Sirenix.OdinInspector.CompatibilityLayer.Editor</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram3.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Script\9_GloableScene\Test\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

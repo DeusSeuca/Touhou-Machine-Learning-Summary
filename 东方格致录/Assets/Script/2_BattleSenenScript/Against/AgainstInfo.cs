@@ -51,18 +51,18 @@ namespace Info
         public static bool IsMyTurn = true;
         public static bool IsPVP = false;
 
+        public static CardSet cardSet;
         public static List<Card> AllCardList => RowsInfo.globalCardList.SelectMany(x => x).ToList();
         public static List<SingleRowInfo> AllRegionList => RowsInfo.singleRowInfos;
 
+
         public static bool IsPlayer1 = true;
         public static (int P1Score, int P2Score) PlayerScore;
-        public static (int MyScore, int OpScore) ShowScore => IsPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);
-        public static bool IsPlayer1Pass;
-        public static bool IsPlayer2Pass;
-
-
+        public static (int MyScore, int OpScore) ShowScore => IsPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);       
         internal static bool IsBattleEnd;
 
+        public static bool IsPlayer1Pass;
+        public static bool IsPlayer2Pass;
         public static bool IsCurrectPass => IsPlayer1 ^ IsMyTurn ? IsPlayer2Pass : IsPlayer1Pass;
         public static bool IsBoothPass => IsPlayer1Pass && IsPlayer2Pass;
     };

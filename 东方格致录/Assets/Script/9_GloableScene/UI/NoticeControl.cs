@@ -11,7 +11,7 @@ namespace Control
             Animator Anim;
             public float Aplha = 0;
             public GameObject[] NoticeTex;
-            public GameObject NoticeModel;
+            //public GameObject NoticeModel;
             void Start() => Anim = GetComponent<Animator>();
             void Update() => NoticeTex.ForEach(x => x.GetComponent<Image>().material.SetFloat("_Value", Aplha));
             [Button]

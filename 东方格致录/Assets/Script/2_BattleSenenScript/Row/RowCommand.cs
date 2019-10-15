@@ -10,6 +10,14 @@ namespace Command
 {
     public static class RowCommand
     {
+        public static void InitRowsInfo()
+        {
+            RowsInfo.globalCardList.Clear();
+            for (int i = 0; i < 18; i++)
+            {
+                RowsInfo.globalCardList.Add(new List<Card>());
+            }
+        }
         public static async Task CreatTempCard(SingleRowInfo SingleInfo)
         {
             Card modelCard = AgainstInfo.AllCardList.InRogin(Orientation.My, RegionTypes.Uesd)[0];
