@@ -1,4 +1,5 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
 using Extension;
 using GameEnum;
 using Info;
@@ -10,17 +11,9 @@ namespace Command
 {
     public static class RowCommand
     {
-        public static void InitRowsInfo()
-        {
-            RowsInfo.globalCardList.Clear();
-            for (int i = 0; i < 18; i++)
-            {
-                RowsInfo.globalCardList.Add(new List<Card>());
-            }
-        }
         public static async Task CreatTempCard(SingleRowInfo SingleInfo)
         {
-            Card modelCard = AgainstInfo.AllCardList.InRogin(Orientation.My, RegionTypes.Uesd)[0];
+            Card modelCard = AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].cardList[0];
             SingleInfo.TempCard = await CardCommand.CreatCard(modelCard.CardId);
             SingleInfo.TempCard.IsGray = true;
             SingleInfo.TempCard.IsCanSee = true;
@@ -44,17 +37,18 @@ namespace Command
         }
         public static void SetPlayCardLimit(bool IsLimit)
         {
-            AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Leader, RegionTypes.Hand).ForEach(card => card.IsLimit = IsLimit);
+            AgainstInfo.cardSet[Orientation.Down][RegionTypes.Leader, RegionTypes.Hand].cardList.ForEach(card => card.IsLimit = IsLimit);
         }
         public static void SetAllRegionSelectable(RegionTypes region, Territory territory = Territory.All)
         {
             if (region == RegionTypes.None)
             {
-                AgainstInfo.AllRegionList.InRogin(RegionTypes.Battle).ForEach(row => row.SetRegionSelectable(false));
+                AgainstInfo.cardSet[RegionTypes.Battle].singleRowInfos.ForEach(row => row.SetRegionSelectable(false));
             }
             else
             {
-                AgainstInfo.AllRegionList.InRogin(region).ForEach(row => row.SetRegionSelectable(true));
+                AgainstInfo.cardSet[RegionTypes.Battle].singleRowInfos.ForEach(row => row.SetRegionSelectable(true));
+
             }
         }
     }

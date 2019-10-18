@@ -16,8 +16,8 @@ namespace Info
         //public static int UpSoilPoint => RowsInfo.GetUpCardList(RegionTypes.Soil).Where(card => !card.IsGray).Select(card => card.CardPoint).Sum();
         //public static int TotalUpPoint => UpWaterPoint + UpFirePoint + UpWindPoint + UpSoilPoint;
         //public static int TotalDownPoint => DownWaterPoint + DownFirePoint + DownWindPoint + DownSoilPoint;
-        public static int TotalUpPoint => AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Battle).Sum(card=>card.point);
-        public static int TotalDownPoint => AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Battle).Sum(card => card.point);
+        public static int TotalUpPoint => AgainstInfo.cardSet[Orientation.Up][ RegionTypes.Battle].cardList.Sum(card=>card.point);
+        public static int TotalDownPoint => AgainstInfo.cardSet[Orientation.Down][ RegionTypes.Battle].cardList.Sum(card => card.point);
         public static int TotalPlayer1Point => AgainstInfo.IsPlayer1 ? TotalDownPoint : TotalUpPoint;
         public static int TotalPlayer2Point => AgainstInfo.IsPlayer1 ? TotalUpPoint : TotalDownPoint;
     }

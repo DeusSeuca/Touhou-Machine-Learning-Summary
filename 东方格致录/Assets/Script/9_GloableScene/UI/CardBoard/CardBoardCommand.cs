@@ -1,4 +1,5 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
 using GameUI;
 using System.Collections.Generic;
 using Thread;

@@ -39,8 +39,6 @@ namespace Info
 
             public static RectTransform IntroductionTextBackground => Instance.CardIntroductionModel.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
             public static RectTransform IntroductionEffectBackground => Instance.CardIntroductionModel.transform.GetChild(0).GetChild(1).GetComponent<RectTransform>();
-
         }
     }
-
 }

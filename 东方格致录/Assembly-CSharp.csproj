@@ -83,11 +83,11 @@
     <Compile Include="Assets\Script\9_GloableScene\Audio\AudioInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Camera\CameraControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Card.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Card\CardSet.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardDeck.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardInfo.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Card\CardSet.cs" />
     <Compile Include="Assets\Script\9_GloableScene\CardInspector\CardLibrary.cs" />
     <Compile Include="Assets\Script\9_GloableScene\CardInspector\CardLibraryCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\CardInspector\CardLibrarySaveData.cs" />
@@ -123,9 +123,7 @@
     <Compile Include="Assets\Script\9_GloableScene\Enum\RegionTypes.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\Sectarian.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\Territory.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Extension\CardListExtension.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Extension\Extension.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Extension\RegionExtension.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Extension\RowInfoExtension.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Interactive\InteractiveControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Network\NetClient.cs" />
@@ -135,6 +133,7 @@
     <Compile Include="Assets\Script\9_GloableScene\ParticleSystem\EffectCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\ParticleSystem\ParticleInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Player\AllPlayerInfo.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Test\test.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Thread\MainThread.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowEndPoint.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowManager.cs" />

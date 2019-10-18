@@ -3,11 +3,7 @@ using UnityEngine;
 namespace Extension
 {
     static partial class RowInfoExtension
-    {
-        //public static void OrderCard(this Info.SingleRowInfo singleInfo)
-        //{
-        //    singleInfo.ThisRowCards = singleInfo.ThisRowCards.OrderBy(card => card.point);
-        //}
+    {       
         public static int JudgeRank(this Info.SingleRowInfo singleRowInfo, Vector3 point)
         {
             int Rank = 0;

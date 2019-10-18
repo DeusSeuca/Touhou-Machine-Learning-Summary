@@ -13,7 +13,7 @@ using Thread;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CardSpace
+namespace CardModel
 {
     public class Card : MonoBehaviour
     {
@@ -111,8 +111,7 @@ namespace CardSpace
         public async Task MoveTo(RegionTypes region, Orientation orientation, int rank = 0)
         {
             List<Card> OriginRow = RowsInfo.GetRow(this);
-            //List<Card> TargetRow = IsOnPlayerPart ? RowsInfo.GetMyCardList(region) : RowsInfo.GetOpCardList(region);
-            List<Card> TargetRow = AgainstInfo.AllCardList.InRogin(orientation, region);
+            List<Card> TargetRow = AgainstInfo.cardSet[orientation][region].cardList;
             OriginRow.Remove(this);
             TargetRow.Insert(rank, this);
             IsMoveStepOver = false;

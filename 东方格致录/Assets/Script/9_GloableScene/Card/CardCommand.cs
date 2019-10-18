@@ -1,4 +1,5 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
 using Command.CardInspector;
 using Extension;
 using GameEnum;
@@ -45,8 +46,7 @@ namespace Command
             await DrawCard(IsPlayerExchange, true);
             if (IsPlayerExchange)
             {
-                //GameUI.CardBoardCommand.LoadCardList(RowsInfo.GetMyCardList(RegionTypes.Hand));
-                GameUI.CardBoardCommand.LoadCardList(AgainstInfo.AllCardList.InRogin(Orientation.My, RegionTypes.Hand));
+                GameUI.CardBoardCommand.LoadCardList(AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].cardList);
             }
         }
         internal static Task RebackCard()
@@ -57,10 +57,11 @@ namespace Command
         {
             //Debug.Log("抽卡");
             EffectCommand.AudioEffectPlay(0);
-            Card TargetCard = AgainstInfo.AllCardList.InRogin(IsPlayerDraw ? Orientation.Down : Orientation.Up, RegionTypes.Deck)[0];
+            Card TargetCard = AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck].cardList[0];
             TargetCard.IsCanSee = IsPlayerDraw;
-            AgainstInfo.AllCardList.InRogin(IsPlayerDraw ? Orientation.Down : Orientation.Up, RegionTypes.Deck).Remove(TargetCard);
-            AgainstInfo.AllCardList.InRogin(IsPlayerDraw ? Orientation.Down : Orientation.Up, RegionTypes.Hand).Add(TargetCard);
+            AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck].Remove(TargetCard);
+            AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Hand].Add(TargetCard);
+
             OrderCard();
             await Task.Delay(100);
         }
@@ -72,29 +73,23 @@ namespace Command
             if (IsPlayerWash)
             {
                 AgainstInfo.TargetCard = TargetCard;
-                int MaxCardRank = AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Deck).Count;
+                int MaxCardRank = AgainstInfo.cardSet[Orientation.Down][RegionTypes.Deck].cardList.Count;
                 AgainstInfo.RandomRank = AiCommand.GetRandom(0, MaxCardRank);
                 Network.NetCommand.AsyncInfo(NetAcyncType.ExchangeCard);
-                AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Hand).Remove(TargetCard);
-                AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Deck).Insert(AgainstInfo.RandomRank, TargetCard);
+                AgainstInfo.cardSet[Orientation.Down][RegionTypes.Hand].Remove(TargetCard);
+                AgainstInfo.cardSet[Orientation.Down][RegionTypes.Deck].Add(TargetCard, AgainstInfo.RandomRank);
                 TargetCard.IsCanSee = false;
             }
             else
             {
-                AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Hand).Remove(TargetCard);
-                AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Deck).Insert(InsertRank, TargetCard);
+                AgainstInfo.cardSet[Orientation.Up][RegionTypes.Hand].Remove(TargetCard);
+                AgainstInfo.cardSet[Orientation.Up][RegionTypes.Deck].Add(TargetCard, InsertRank);
             }
             await Task.Delay(500);
         }
         public static void OrderCard(bool IsPlayerWash = true)
         {
-            //AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Hand) = AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Hand).OrderBy(card => card.point).ToList();
-            //AgainstInfo.AllRegionList
-            RowsInfo.globalCardList[1] = RowsInfo.globalCardList[1].OrderBy(card => card.point).ToList();
-            RowsInfo.globalCardList[3] = RowsInfo.globalCardList[3].OrderBy(card => card.point).ToList();
-            RowsInfo.globalCardList[10] = RowsInfo.globalCardList[10].OrderBy(card => card.point).ToList();
-            RowsInfo.globalCardList[12] = RowsInfo.globalCardList[12].OrderBy(card => card.point).ToList();
-
+            AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].Order();
         }
         public static async Task PlayCard(bool IsAnsy)
         {
@@ -106,19 +101,16 @@ namespace Command
             Network.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
             TargetCard.IsCanSee = true;
             RowsInfo.GetRow(TargetCard).Remove(TargetCard);
-            //RowsInfo.GetMyCardList(RegionTypes.Uesd).Add(TargetCard);
-            AgainstInfo.AllCardList.InRogin(Orientation.My, RegionTypes.Uesd).Add(TargetCard);
+            AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].Add(TargetCard);
             AgainstInfo.PlayerPlayCard = null;
             TargetCard.Trigger<TriggerType.PlayCard>();
         }
         public static async Task DisCard(Card card)
         {
-            //Card TargetCard = card == null ? AgainstInfo.PlayerPlayCard : card;
             card.IsPrePrepareToPlay = false;
             card.IsCanSee = false;
             card.Row.Remove(card);
-            //RowsInfo.GetMyCardList(RegionTypes.Grave).Add(card);
-            AgainstInfo.AllCardList.InRogin(Orientation.My, RegionTypes.Grave).Add(card);
+            AgainstInfo.cardSet[Orientation.My][RegionTypes.Grave].Add(card);
             card.Trigger<TriggerType.Discard>();
         }
         //强行移过来的
@@ -131,10 +123,6 @@ namespace Command
                 AgainstInfo.PlayerFocusRegion.ThisRowCards.Add(TargetCard);
                 AgainstInfo.IsCardEffectCompleted = true;
             }
-        }
-        //强行移过来的
-        public static void PlayCardToGraveyard()
-        {
         }
     }
 }

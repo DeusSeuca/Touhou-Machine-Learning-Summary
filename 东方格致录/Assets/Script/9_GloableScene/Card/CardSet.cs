@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CardModel;
 using CardSpace;
 using GameEnum;
 using Info;
@@ -11,34 +12,45 @@ using UnityEngine;
 public class CardSet
 {
     //主体信息
-    // public static List<List<Card>> globalCardList = new List<List<Card>>();
-    public static List<List<Card>> globalCardList => RowsInfo.globalCardList;
-    public List<SingleRowInfo> singleRowInfos;
-    public List<Card> rowCardList => singleRowInfos.SelectMany(x => x.ThisRowCards).ToList();
-
+    public static List<List<Card>> globalCardList = new List<List<Card>>();
+    public List<SingleRowInfo> singleRowInfos = new List<SingleRowInfo>();
+    //该
+    private List<Card> rowCardList => singleRowInfos.SelectMany(x => x.ThisRowCards).ToList();
     public List<Card> cardList;
+
     public void Init()
     {
-        if (!cardList.Any())
+        if (cardList == null)
         {
-            //singleRowInfos = Info.AgainstInfo.AllRegionList;
             cardList = globalCardList.SelectMany(x => x).ToList();
         }
     }
-    //public CardSet(List<SingleRowInfo> singleRowInfos)
-    //{
-    //    this.singleRowInfos = singleRowInfos;
-    //}
+    public CardSet()
+    {
+        globalCardList.Clear();
+        Enumerable.Range(0, 18).ToList().ForEach(x => globalCardList.Add(new List<Card>()));
+    }
     public CardSet(List<SingleRowInfo> singleRowInfos, List<Card> cardList = null)
     {
         this.singleRowInfos = singleRowInfos;
         this.cardList = cardList;
     }
-    public List<Card> this[int rank] => globalCardList[rank];
+    public List<Card> this[int rank]
+    {
+        get
+        {
+            return globalCardList[rank];
+        }
+        set
+        {
+            globalCardList[rank] = value;
+        }
+    }
     public CardSet this[params RegionTypes[] regions]
     {
         get
         {
+            Init();
             List<SingleRowInfo> targetRows = new List<SingleRowInfo>();
             if (regions.Contains(RegionTypes.Battle))
             {
@@ -61,6 +73,7 @@ public class CardSet
     {
         get
         {
+            Init();
             List<SingleRowInfo> targetRows = new List<SingleRowInfo>();
             switch (orientation)
             {
@@ -79,14 +92,14 @@ public class CardSet
             return new CardSet(targetRows, cardList);
         }
     }
-    public CardSet this[CardState orientation]
+    public CardSet this[CardState cardState]
     {
         get
         {
             return new CardSet(singleRowInfos, cardList);
         }
     }
-    public CardSet this[CardField orientation]
+    public CardSet this[CardField cardField]
     {
         get
         {
@@ -111,5 +124,17 @@ public class CardSet
             rank = singleRowInfos[0].ThisRowCards.Count;
         }
         singleRowInfos[0].ThisRowCards.Insert(rank, card);
+    }
+    public void Remove(Card card)
+    {
+        if (singleRowInfos.Count != 1)
+        {
+            Debug.LogWarning("选择区域异常，数量为" + singleRowInfos.Count);
+        }
+        singleRowInfos[0].ThisRowCards.Remove(card);
+    }
+    public void Order()
+    {
+        singleRowInfos.ForEach(x => x.ThisRowCards = x.ThisRowCards.OrderBy(x => x.point).ToList());
     }
 }

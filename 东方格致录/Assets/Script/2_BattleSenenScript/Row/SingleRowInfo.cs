@@ -1,4 +1,5 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
 using Extension;
 using GameEnum;
 using Sirenix.OdinInspector;
@@ -16,11 +17,21 @@ namespace Info
         public bool CanBeSelected;
         [ShowInInspector]
         public int rank => (int)region + (AgainstInfo.IsPlayer1 ^ (orientation == Orientation.Down) ? 9 : 0);
-        private void Awake() => RowsInfo.singleRowInfos.Add(this);
+        private void Awake() => AgainstInfo.cardSet.singleRowInfos.Add(this);
         public int Location => this.JudgeRank(AgainstInfo.FocusPoint);
-        public int RowRank => RowsInfo.globalCardList.IndexOf(ThisRowCards);
+        public int RowRank => CardSet.globalCardList.IndexOf(ThisRowCards);
         public Material CardMaterial => transform.GetComponent<Renderer>().material;
-        public List<Card> ThisRowCards => RowsInfo.globalCardList[rank];
+        public List<Card> ThisRowCards
+        {
+            get
+            {
+               return AgainstInfo.cardSet[rank];
+            }
+            set
+            {
+                AgainstInfo.cardSet[rank] = value;
+            }
+        }
         public void SetRegionSelectable(bool CanBeSelected)
         {
             this.CanBeSelected = CanBeSelected;

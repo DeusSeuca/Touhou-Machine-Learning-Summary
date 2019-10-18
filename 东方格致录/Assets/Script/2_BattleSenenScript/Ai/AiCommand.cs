@@ -19,7 +19,7 @@ namespace Command
             }
             else
             {
-                await CardCommand.DisCard(AgainstInfo.AllCardList.InRogin(Orientation.My, RegionTypes.Hand)[0]);
+                await CardCommand.DisCard(AgainstInfo.cardSet[Orientation.My][ RegionTypes.Hand].cardList[0]);
             }
         }
     }

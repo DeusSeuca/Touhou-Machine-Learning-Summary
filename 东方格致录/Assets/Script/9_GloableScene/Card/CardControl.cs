@@ -1,4 +1,5 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
 using Command.Network;
 using GameEnum;
 using UnityEngine;

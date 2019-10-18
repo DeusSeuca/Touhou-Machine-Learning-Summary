@@ -1,4 +1,5 @@
-﻿using GameEnum;
+﻿using CardModel;
+using GameEnum;
 using GameUI;
 using Thread;
 using UnityEngine;
@@ -41,7 +42,7 @@ namespace Command
                 }
                 return Info.GameUI.UiInfo.CardImage[Id];
             }
-            public static void ChangeIntroduction(CardSpace.Card card)
+            public static void ChangeIntroduction(Card card)
             {
                 string Title = card.CardName;
                 string Text = card.CardIntroduction;

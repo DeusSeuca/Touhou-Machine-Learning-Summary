@@ -1,4 +1,5 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
 using GameEnum;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,11 +52,9 @@ namespace Info
         public static bool IsMyTurn = true;
         public static bool IsPVP = false;
 
-        public static CardSet cardSet;
-        public static List<Card> AllCardList => RowsInfo.globalCardList.SelectMany(x => x).ToList();
-        public static List<SingleRowInfo> AllRegionList => RowsInfo.singleRowInfos;
+        public static CardSet cardSet=new CardSet();
 
-
+        public static List<Card> AllCardList => CardSet.globalCardList.SelectMany(x => x).ToList();
         public static bool IsPlayer1 = true;
         public static (int P1Score, int P2Score) PlayerScore;
         public static (int MyScore, int OpScore) ShowScore => IsPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);       

@@ -1,4 +1,5 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
 using System.Threading.Tasks;
 using UnityEngine;
 namespace Command
