@@ -37,7 +37,9 @@ namespace Command
                 //初始化领袖卡
                 Card MyLeaderCard = await CardCommand.CreatCard(AllPlayerInfo.UserInfo.UseDeck.LeaderId);
                 //AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Leader).Add(MyLeaderCard);
-                AgainstInfo.cardSet[Orientation.Down][RegionTypes.Leader].Add(MyLeaderCard);
+                CardSet cardSet1 = AgainstInfo.cardSet[Orientation.Down];
+                CardSet cardSet = cardSet1[RegionTypes.Leader];
+                cardSet.Add(MyLeaderCard);
                 MyLeaderCard.IsCanSee = true;
                 Card OpLeaderCard = await CardCommand.CreatCard(AllPlayerInfo.OpponentInfo.UseDeck.LeaderId);
                 // AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Leader).Add(OpLeaderCard);
@@ -63,6 +65,7 @@ namespace Command
                     AgainstInfo.cardSet[Orientation.Up][RegionTypes.Deck].Add(NewCard);
 
                 }
+                //AgainstInfo.cardSet.Init();
                 await Task.Delay(000);
             });
         }
@@ -97,12 +100,13 @@ namespace Command
                             Info.GameUI.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.AgainstInfo.ExChangeableCardNum;
                             for (int i = 0; i < 10; i++)
                             {
-                                await CardCommand.DrawCard();
+                                await CardCommand.DrawCard(IsPlayerDraw: true, isOrder: false);
                             }
                             for (int i = 0; i < 10; i++)
                             {
-                                await CardCommand.DrawCard(false);
+                                await CardCommand.DrawCard(IsPlayerDraw: false,isOrder:false);
                             }
+                            CardCommand.OrderCard();
                             break;
                         }
                     case (1):

@@ -7,21 +7,26 @@ using CardModel;
 using CardSpace;
 using GameEnum;
 using Info;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class CardSet
 {
     //主体信息
+    [ShowInInspector]
     public static List<List<Card>> globalCardList = new List<List<Card>>();
     public List<SingleRowInfo> singleRowInfos = new List<SingleRowInfo>();
     //该
-    private List<Card> rowCardList => singleRowInfos.SelectMany(x => x.ThisRowCards).ToList();
-    public List<Card> cardList;
+    //[ShowInInspector]
+    //private List<Card> rowCardList => singleRowInfos.SelectMany(x => x.ThisRowCards).ToList();
+    [HideInInspector]
+    public List<Card> cardList = null;
 
     public void Init()
     {
         if (cardList == null)
         {
+            Debug.Log("初始化" + cardList);
             cardList = globalCardList.SelectMany(x => x).ToList();
         }
     }
@@ -50,7 +55,7 @@ public class CardSet
     {
         get
         {
-            Init();
+            //Init();
             List<SingleRowInfo> targetRows = new List<SingleRowInfo>();
             if (regions.Contains(RegionTypes.Battle))
             {
@@ -65,22 +70,23 @@ public class CardSet
             {
                 targetRows = singleRowInfos.Where(row => regions.Contains(row.region)).ToList();
             }
-            cardList = cardList.Intersect(rowCardList).ToList();
-            return new CardSet(targetRows, cardList);
+            List<Card> filterCardList = cardList ?? globalCardList.SelectMany(x => x).ToList();
+            filterCardList = filterCardList.Intersect(targetRows.SelectMany(x => x.ThisRowCards)).ToList();
+            return new CardSet(targetRows, filterCardList);
         }
     }
     public CardSet this[Orientation orientation]
     {
         get
         {
-            Init();
+            //Init();
             List<SingleRowInfo> targetRows = new List<SingleRowInfo>();
             switch (orientation)
             {
                 case Orientation.Up:
                     targetRows = singleRowInfos.Where(row => row.orientation == orientation).ToList(); break;
                 case Orientation.Down:
-                    targetRows = singleRowInfos.Where(row => row.orientation == orientation).ToList(); ; break;
+                    targetRows = singleRowInfos.Where(row => row.orientation == orientation).ToList(); break;
                 case Orientation.My:
                     return this[AgainstInfo.IsMyTurn ? Orientation.Down : Orientation.Up];
                 case Orientation.Op:
@@ -88,8 +94,9 @@ public class CardSet
                 case Orientation.All:
                     targetRows = singleRowInfos; break;
             }
-            cardList = cardList.Intersect(rowCardList).ToList();
-            return new CardSet(targetRows, cardList);
+            List<Card> filterCardList = cardList ?? globalCardList.SelectMany(x => x).ToList();
+            filterCardList = filterCardList.Intersect(targetRows.SelectMany(x => x.ThisRowCards)).ToList();
+            return new CardSet(targetRows, filterCardList);
         }
     }
     public CardSet this[CardState cardState]
@@ -135,6 +142,6 @@ public class CardSet
     }
     public void Order()
     {
-        singleRowInfos.ForEach(x => x.ThisRowCards = x.ThisRowCards.OrderBy(x => x.point).ToList());
+        singleRowInfos.ForEach(x => x.ThisRowCards = x.ThisRowCards.OrderBy(card => card.point).ToList());
     }
 }

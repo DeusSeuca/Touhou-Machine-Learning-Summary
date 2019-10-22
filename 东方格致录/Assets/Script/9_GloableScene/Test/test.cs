@@ -9,6 +9,8 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
+    [ShowInInspector]
+    public CardSet cardSet => AgainstInfo.cardSet;
     [Button]
     public void test1()
     {

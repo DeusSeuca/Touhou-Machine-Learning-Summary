@@ -32,5 +32,4 @@ namespace Control
             OpPoint.transform.localScale = Vector3.one;
         }
     }
-
 }

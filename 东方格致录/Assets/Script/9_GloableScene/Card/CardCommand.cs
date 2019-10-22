@@ -53,16 +53,20 @@ namespace Command
         {
             throw new NotImplementedException();
         }
-        public static async Task DrawCard(bool IsPlayerDraw = true, bool ActiveBlackList = false)
+        public static async Task DrawCard(bool IsPlayerDraw = true, bool ActiveBlackList = false, bool isOrder = true)
         {
-            //Debug.Log("抽卡");
+            Debug.Log("抽卡");
             EffectCommand.AudioEffectPlay(0);
             Card TargetCard = AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck].cardList[0];
             TargetCard.IsCanSee = IsPlayerDraw;
+            CardSet TargetCardtemp = AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck];
+
             AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck].Remove(TargetCard);
             AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Hand].Add(TargetCard);
-
-            OrderCard();
+            if (isOrder)
+            {
+                OrderCard();
+            }
             await Task.Delay(100);
         }
         //洗回牌库
@@ -87,9 +91,9 @@ namespace Command
             }
             await Task.Delay(500);
         }
-        public static void OrderCard(bool IsPlayerWash = true)
+        public static void OrderCard()
         {
-            AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].Order();
+            AgainstInfo.cardSet[RegionTypes.Hand].Order();
         }
         public static async Task PlayCard(bool IsAnsy)
         {

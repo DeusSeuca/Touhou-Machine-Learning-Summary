@@ -49,6 +49,7 @@ namespace Command
             {
                 AgainstInfo.cardSet[RegionTypes.Battle].singleRowInfos.ForEach(row => row.SetRegionSelectable(true));
 
+                //AgainstInfo.cardSet[region][(Orientation)territory].singleRowInfos.ForEach(row => row.SetRegionSelectable(true));
             }
         }
     }

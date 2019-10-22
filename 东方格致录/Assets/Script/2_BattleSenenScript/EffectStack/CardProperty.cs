@@ -10,8 +10,6 @@ namespace GameAttribute
             this.cardProperty = cardProperty;
         }
     }
-
-
 }
 namespace GameEnum
 {
