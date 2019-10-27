@@ -34,23 +34,23 @@ namespace Control
             {
                 if (Info.AgainstInfo.PlayerFocusRegion != null)
                 {
-                    if (Info.AgainstInfo.PlayerFocusRegion.name == "我方_墓地")
+                    if (Info.AgainstInfo.PlayerFocusRegion.name == "下方_墓地")
                     {
                         print(name + "进入墓地");
-                        _ = Command.CardCommand.DisCard(GetComponent<Card>());
+                        _ = Command.CardCommand.DisCard(ThisCard);
                     }
-                    else if (Info.AgainstInfo.PlayerFocusRegion.name == "我方_领袖" || Info.AgainstInfo.PlayerFocusRegion.name == "我方_手牌")
+                    else if (Info.AgainstInfo.PlayerFocusRegion.name == "下方_领袖" || Info.AgainstInfo.PlayerFocusRegion.name == "下方_手牌")
                     {
                         Info.AgainstInfo.PlayerPlayCard = null;
                     }
                     else
                     {
-                        _ = Command.CardCommand.PlayCard(true);
+                        _ = Command.CardCommand.PlayCard(Info.AgainstInfo.PlayerPlayCard);
                     }
                 }
                 else
                 {
-                    _ = Command.CardCommand.PlayCard(true);
+                    _ = Command.CardCommand.PlayCard(Info.AgainstInfo.PlayerPlayCard);
                 }
             }
         }

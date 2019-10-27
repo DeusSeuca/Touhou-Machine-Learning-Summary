@@ -6,6 +6,7 @@ namespace Control
 {
     public class InteractiveControl : MonoBehaviour
     {
+        public float height;
         Ray ray;
         public float PassPressTime;
         void Update()
@@ -31,6 +32,10 @@ namespace Control
                     AgainstInfo.PlayerFocusRegion = null;
                 }
             }
+            float distance = (height - ray.origin.y) / ray.direction.y;
+            AgainstInfo.DragToPoint = ray.GetPoint(distance);
+            Debug.DrawLine(ray.origin, AgainstInfo.DragToPoint,Color.red);
+            Debug.DrawRay(ray.origin, ray.direction, Color.white);
         }
         private void KeyBoardEvent()
         {
@@ -80,14 +85,14 @@ namespace Control
                     }
                 }
             }
-            if (Input.GetMouseButton(0) && Info.AgainstInfo.IsMyTurn)
-            {
-                LayerMask mask = 1 << LayerMask.NameToLayer("Default");
-                if (Physics.Raycast(ray, out RaycastHit HitInfo, 100, mask))
-                {
-                    AgainstInfo.DragToPoint = HitInfo.point;
-                }
-            }
+            //if (Input.GetMouseButton(0) && Info.AgainstInfo.IsMyTurn)
+            //{
+            //    LayerMask mask = 1 << LayerMask.NameToLayer("Default");
+            //    if (Physics.Raycast(ray, out RaycastHit HitInfo, 100, mask))
+            //    {
+            //        AgainstInfo.DragToPoint = HitInfo.point;
+            //    }
+            //}
         }
     }
 }

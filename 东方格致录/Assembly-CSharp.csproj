@@ -132,6 +132,7 @@
     <Compile Include="Assets\Script\9_GloableScene\ParticleSystem\EffectCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\ParticleSystem\ParticleInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Player\AllPlayerInfo.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Test\checkmouse.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Test\test.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Thread\MainThread.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowEndPoint.cs" />

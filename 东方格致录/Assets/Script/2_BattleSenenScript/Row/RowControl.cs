@@ -16,29 +16,33 @@ namespace Control
         void Awake() => SingleInfo = GetComponent<SingleRowInfo>();
         void Update()
         {
-            TempCardControk();
+            TempCardControl();
             ControlCardPosition(SingleInfo.ThisRowCards);
             if (IsMyHandRegion)
             {
                 RowCommand.RefreshHandCard(SingleInfo.ThisRowCards);
             }
         }
-        public void TempCardControk()
+        public void TempCardControl()
         {
-            if (SingleInfo.TempCard == null && SingleInfo.CanBeSelected && AgainstInfo.PlayerFocusRegion == SingleInfo && !HasTempCard)
+            if (Info.AgainstInfo.IsMyTurn)
             {
-                HasTempCard = true;
-                _ = RowCommand.CreatTempCard(SingleInfo);
+                if (SingleInfo.TempCard == null && SingleInfo.CanBeSelected && AgainstInfo.PlayerFocusRegion == SingleInfo && !HasTempCard)
+                {
+                    HasTempCard = true;
+                    _ = RowCommand.CreatTempCard(SingleInfo);
+                }
+                if (SingleInfo.TempCard != null && SingleInfo.Location != SingleInfo.ThisRowCards.IndexOf(SingleInfo.TempCard))
+                {
+                    RowCommand.ChangeTempCard(SingleInfo);
+                }
+                if (SingleInfo.TempCard != null && !(SingleInfo.CanBeSelected && AgainstInfo.PlayerFocusRegion == SingleInfo))
+                {
+                    RowCommand.DestoryTempCard(SingleInfo);
+                    HasTempCard = false;
+                }
             }
-            if (SingleInfo.TempCard != null && SingleInfo.Location != SingleInfo.ThisRowCards.IndexOf(SingleInfo.TempCard))
-            {
-                RowCommand.ChangeTempCard(SingleInfo);
-            }
-            if (SingleInfo.TempCard != null && !(SingleInfo.CanBeSelected && AgainstInfo.PlayerFocusRegion == SingleInfo))
-            {
-                RowCommand.DestoryTempCard(SingleInfo);
-                HasTempCard = false;
-            }
+            
         }
         void ControlCardPosition(List<Card> ThisCardList)
         {

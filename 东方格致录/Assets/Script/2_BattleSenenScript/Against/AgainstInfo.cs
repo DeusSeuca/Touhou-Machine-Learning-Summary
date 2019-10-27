@@ -51,6 +51,8 @@ namespace Info
         public static int ExChangeableCardNum = 0;
         public static bool IsMyTurn = true;
         public static bool IsPVP = false;
+        public static bool IsPVE = !IsPVP;
+        public static bool isAIControl = false;
 
         public static CardSet cardSet=new CardSet();
 

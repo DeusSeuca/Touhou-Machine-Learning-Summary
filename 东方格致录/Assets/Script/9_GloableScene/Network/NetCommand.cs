@@ -156,9 +156,7 @@ namespace Command
                             //Debug.Log("触发卡牌同步");
                             int X = int.Parse(ReceiveInfo[2].ToString());
                             int Y = int.Parse(ReceiveInfo[3].ToString());
-                            Info.AgainstInfo.PlayerPlayCard = Info.RowsInfo.GetCard(X, Y);
-                            //_ = Command.CardCommand.PlayCard();
-                            Command.CardCommand.PlayCard(false).Wait();
+                            Command.CardCommand.PlayCard(Info.RowsInfo.GetCard(X, Y),false).Wait();
                             break;
                         }
                     case NetAcyncType.FocusRegion:

@@ -58,7 +58,7 @@ namespace Command
             Debug.Log("抽卡");
             EffectCommand.AudioEffectPlay(0);
             Card TargetCard = AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck].cardList[0];
-            TargetCard.IsCanSee = IsPlayerDraw;
+            TargetCard.SetCardSee(IsPlayerDraw);
             CardSet TargetCardtemp = AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck];
 
             AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck].Remove(TargetCard);
@@ -82,7 +82,7 @@ namespace Command
                 Network.NetCommand.AsyncInfo(NetAcyncType.ExchangeCard);
                 AgainstInfo.cardSet[Orientation.Down][RegionTypes.Hand].Remove(TargetCard);
                 AgainstInfo.cardSet[Orientation.Down][RegionTypes.Deck].Add(TargetCard, AgainstInfo.RandomRank);
-                TargetCard.IsCanSee = false;
+                TargetCard.SetCardSee(false);
             }
             else
             {
@@ -95,26 +95,30 @@ namespace Command
         {
             AgainstInfo.cardSet[RegionTypes.Hand].Order();
         }
-        public static async Task PlayCard(bool IsAnsy)
+        public static async Task PlayCard(Card targetCard, bool IsAnsy = true)
         {
             Debug.Log("打出一张牌2");
-            Command.EffectCommand.AudioEffectPlay(0);
+            EffectCommand.AudioEffectPlay(0);
             RowCommand.SetPlayCardLimit(true);
-            Card TargetCard = AgainstInfo.PlayerPlayCard;
-            TargetCard.IsPrePrepareToPlay = false;
-            Network.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
-            TargetCard.IsCanSee = true;
-            RowsInfo.GetRow(TargetCard).Remove(TargetCard);
-            AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].Add(TargetCard);
+            //Card TargetCard = AgainstInfo.PlayerPlayCard;
+            targetCard.IsPrePrepareToPlay = false;
+            if (IsAnsy)
+            {
+                Network.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
+            }
+            targetCard.SetCardSee(true);
+            targetCard.Row.Remove(targetCard);
+            AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].Add(targetCard);
             AgainstInfo.PlayerPlayCard = null;
-            TargetCard.Trigger<TriggerType.PlayCard>();
+            targetCard.Trigger<TriggerType.PlayCard>();
         }
         public static async Task DisCard(Card card)
         {
             card.IsPrePrepareToPlay = false;
-            card.IsCanSee = false;
+            card.SetCardSee(false);
             card.Row.Remove(card);
             AgainstInfo.cardSet[Orientation.My][RegionTypes.Grave].Add(card);
+            Info.AgainstInfo.PlayerPlayCard = null;
             card.Trigger<TriggerType.Discard>();
         }
         //强行移过来的

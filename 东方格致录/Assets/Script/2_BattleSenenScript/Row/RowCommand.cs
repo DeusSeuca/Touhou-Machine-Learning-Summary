@@ -16,7 +16,7 @@ namespace Command
             Card modelCard = AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].cardList[0];
             SingleInfo.TempCard = await CardCommand.CreatCard(modelCard.CardId);
             SingleInfo.TempCard.IsGray = true;
-            SingleInfo.TempCard.IsCanSee = true;
+            SingleInfo.TempCard.SetCardSee(true);
             SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
             SingleInfo.TempCard.Init();
         }
@@ -47,9 +47,9 @@ namespace Command
             }
             else
             {
-                AgainstInfo.cardSet[RegionTypes.Battle].singleRowInfos.ForEach(row => row.SetRegionSelectable(true));
+                //AgainstInfo.cardSet[RegionTypes.Battle].singleRowInfos.ForEach(row => row.SetRegionSelectable(true));
 
-                //AgainstInfo.cardSet[region][(Orientation)territory].singleRowInfos.ForEach(row => row.SetRegionSelectable(true));
+                AgainstInfo.cardSet[region][(Orientation)territory].singleRowInfos.ForEach(row => row.SetRegionSelectable(true));
             }
         }
     }

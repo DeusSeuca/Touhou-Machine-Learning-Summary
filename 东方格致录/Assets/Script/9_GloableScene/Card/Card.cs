@@ -32,7 +32,7 @@ namespace CardModel
         public bool IsInit = false;
         public bool IsGray = false;
         public bool IsLimit = true;
-        public bool IsCanSee = false;
+        public bool isCanSee = false;
         public bool IsMoveStepOver = true;
         public bool IsPrePrepareToPlay = false;
         public bool IsAutoMove => this != AgainstInfo.PlayerPlayCard;
@@ -52,13 +52,17 @@ namespace CardModel
         public void SetMoveTarget(Vector3 TargetPosition, Vector3 TargetEulers)
         {
             TargetPos = TargetPosition;
-            TargetRot = Quaternion.Euler(TargetEulers + new Vector3(0, 0, IsCanSee ? 0 : 180));
+            TargetRot = Quaternion.Euler(TargetEulers + new Vector3(0, 0, isCanSee ? 0 : 180));
             if (IsInit)
             {
                 transform.position = TargetPos;
                 transform.rotation = TargetRot;
                 IsInit = false;
             }
+        }
+        public void SetCardSee(bool isCanSee)
+        {
+            this.isCanSee = isCanSee;
         }
         public void RefreshState()
         {
