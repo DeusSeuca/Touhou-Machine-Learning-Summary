@@ -112,6 +112,7 @@ namespace CardModel
             Command.EffectCommand.AudioEffectPlay(1);
             await Task.Delay(1000);
         }
+        //临时移动测试
         public async Task MoveTo(RegionTypes region, Orientation orientation, int rank = 0)
         {
             List<Card> OriginRow = RowsInfo.GetRow(this);
@@ -131,6 +132,22 @@ namespace CardModel
             MoveSpeed = 0.1f;
             IsMoveStepOver = false;
             await Task.Delay(1000);
+            IsMoveStepOver = true;
+            MoveSpeed = 0.1f;
+            Command.EffectCommand.AudioEffectPlay(1);
+        }
+        //需要整理
+        public async Task RemoveFromBattle(Orientation orientation, int Index = 0)
+        {
+            SingleRowInfo grave = AgainstInfo.cardSet[orientation][RegionTypes.Grave].singleRowInfos[0];
+            IsMoveStepOver = false;
+            List<Card> OriginRow = RowsInfo.GetRow(this);
+            List<Card> TargetRow = grave.ThisRowCards;
+            OriginRow.Remove(this);
+            TargetRow.Insert(Index, this);
+            this.SetCardSee(false);
+            MoveSpeed = 0.1f;
+            await Task.Delay(100);
             IsMoveStepOver = true;
             MoveSpeed = 0.1f;
             Command.EffectCommand.AudioEffectPlay(1);

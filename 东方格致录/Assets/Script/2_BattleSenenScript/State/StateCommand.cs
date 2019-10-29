@@ -151,6 +151,7 @@ namespace Command
                 AgainstInfo.PlayerScore.P1Score += result == 0 || result == 1 ? 1 : 0;
                 AgainstInfo.PlayerScore.P2Score += result == 0 || result == 2 ? 1 : 0;
                 await Task.Delay(3500);
+                await ResetBattleAsync();
             });
         }
         public static async Task TurnStart()
@@ -319,6 +320,20 @@ namespace Command
             {
                 Debug.Log("敌方pass啦" + IsActive);
                 Info.GameUI.UiInfo.Instance.OpPass.SetActive(IsActive);
+            }
+        }
+        public static async Task ResetBattleAsync()
+        {
+            foreach (var card in AgainstInfo.cardSet[Orientation.Down][RegionTypes.Battle].cardList)
+            {
+                await card.RemoveFromBattle(Orientation.Down);
+                await Task.Delay(150);
+            }
+            foreach (var card in AgainstInfo.cardSet[Orientation.Up][RegionTypes.Battle].cardList)
+            {
+                await card.RemoveFromBattle(Orientation.Up);
+                await Task.Delay(150);
+
             }
         }
         public static async Task Surrender()
