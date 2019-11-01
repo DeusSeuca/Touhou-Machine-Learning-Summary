@@ -1,21 +1,23 @@
-﻿using Command;
+﻿using Command.Dialogue;
 using UnityEngine;
-
-public class DialogueControl : MonoBehaviour
+namespace Dialogue
 {
-    public GameObject DialogueUI;
-    void Update()
+    public class DialogueControl : MonoBehaviour
     {
-        if (Input.GetMouseButtonDown(0))
+        public GameObject DialogueUI;
+        void Update()
         {
-            if (!DialogueUI.activeSelf)
+            if (Input.GetMouseButtonDown(0))
             {
-                DialogueUI.SetActive(true);
-                DialogueCommand.play(1, 1);
-            }
-            else
-            {
-                DialgueInfo.DialgueInfos.IsNext = true;
+                if (!DialogueUI.activeSelf)
+                {
+                    DialogueUI.SetActive(true);
+                    DialogueCommand.Play(1, 1);
+                }
+                else
+                {
+                    DialgueInfo.DialgueInfos.IsNext = true;
+                }
             }
         }
     }

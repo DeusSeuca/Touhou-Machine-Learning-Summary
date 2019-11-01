@@ -1,30 +1,32 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class DialgueInfo : MonoBehaviour
+namespace Dialogue
 {
-    public static DialgueInfo DialgueInfos;
-    void Awake() => DialgueInfos = this;
-    public GameObject Left;
-    public GameObject Right;
-    public Text Text;
-    public bool IsNext;
-    public enum Chara
+    public class DialgueInfo : MonoBehaviour
     {
-        灵梦A,
-        灵梦B,
-        早苗
-    }
-    public class Dial : Attribute
-    {
-        public int step;
-        public int rank;
-
-        public Dial(int step, int rank)
+        public static DialgueInfo DialgueInfos;
+        void Awake() => DialgueInfos = this;
+        public GameObject Left;
+        public GameObject Right;
+        public Text Text;
+        public bool IsNext;
+        public enum Chara
         {
-            this.step = step;
-            this.rank = rank;
+            灵梦A,
+            灵梦B,
+            早苗
+        }
+        public class Dial : Attribute
+        {
+            public int step;
+            public int rank;
+
+            public Dial(int step, int rank)
+            {
+                this.step = step;
+                this.rank = rank;
+            }
         }
     }
 }

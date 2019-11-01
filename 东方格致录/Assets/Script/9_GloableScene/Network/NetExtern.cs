@@ -1,4 +1,5 @@
-﻿using NetworkCommsDotNet.Connections;
+﻿using Extension;
+using NetworkCommsDotNet.Connections;
 namespace Network
 {
     public static class NetExtern

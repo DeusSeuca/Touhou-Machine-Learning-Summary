@@ -1,6 +1,9 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
+using Extension;
 using GameEnum;
 using Info;
+using Model;
 using Network;
 using System;
 using System.Collections.Generic;
@@ -12,7 +15,7 @@ using UnityEngine.SceneManagement;
 
 namespace Command
 {
-    public class StateCommand
+    public static class StateCommand
     {
         public static async Task BattleStart()
         {
@@ -23,7 +26,8 @@ namespace Command
                 Info.AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1001, new List<int> { 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015 }) });
                 Info.AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1001, new List<int> { 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015 }) });
             }
-            RowCommand.SetAllRegionSelectable(false);
+            //RowCommand.SetAllRegionSelectable(false);
+            RowCommand.SetAllRegionSelectable(RegionTypes.None);
             await Task.Run(async () =>
             {
                 //await Task.Delay(500);
@@ -31,12 +35,17 @@ namespace Command
                 GameUI.UiCommand.NoticeBoardShow();
                 await Task.Delay(000);
                 //初始化领袖卡
-                Card MyLeaderCard = await CardCommand.CreatCard(Info.AllPlayerInfo.UserInfo.UseDeck.LeaderId);
-                RowsInfo.GetDownCardList(RegionTypes.Leader).Add(MyLeaderCard);
-                MyLeaderCard.IsCanSee = true;
-                Card OpLeaderCard = await CardCommand.CreatCard(Info.AllPlayerInfo.OpponentInfo.UseDeck.LeaderId);
-                RowsInfo.GetUpCardList(RegionTypes.Leader).Add(OpLeaderCard);
-                OpLeaderCard.IsCanSee = true;
+                Card MyLeaderCard = await CardCommand.CreatCard(AllPlayerInfo.UserInfo.UseDeck.LeaderId);
+                //AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Leader).Add(MyLeaderCard);
+                CardSet cardSet1 = AgainstInfo.cardSet[Orientation.Down];
+                CardSet cardSet = cardSet1[RegionTypes.Leader];
+                cardSet.Add(MyLeaderCard);
+                MyLeaderCard.SetCardSee(true);
+                Card OpLeaderCard = await CardCommand.CreatCard(AllPlayerInfo.OpponentInfo.UseDeck.LeaderId);
+                // AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Leader).Add(OpLeaderCard);
+                AgainstInfo.cardSet[Orientation.Up][RegionTypes.Leader].Add(OpLeaderCard);
+
+                OpLeaderCard.SetCardSee(true);
 
 
 
@@ -44,14 +53,19 @@ namespace Command
                 for (int i = 0; i < Deck.CardIds.Count; i++)
                 {
                     Card NewCard = await CardCommand.CreatCard(Deck.CardIds[i]);
-                    RowsInfo.GetDownCardList(RegionTypes.Deck).Add(NewCard);
+                    //AgainstInfo.AllCardList.InRogin(Orientation.Down, RegionTypes.Deck).Add(NewCard);
+                    AgainstInfo.cardSet[Orientation.Down][RegionTypes.Deck].Add(NewCard);
+
                 }
                 Deck = AllPlayerInfo.OpponentInfo.UseDeck;
                 for (int i = 0; i < Deck.CardIds.Count; i++)
                 {
                     Card NewCard = await CardCommand.CreatCard(Deck.CardIds[i]);
-                    RowsInfo.GetUpCardList(RegionTypes.Deck).Add(NewCard);
+                    //AgainstInfo.AllCardList.InRogin(Orientation.Up, RegionTypes.Deck).Add(NewCard);
+                    AgainstInfo.cardSet[Orientation.Up][RegionTypes.Deck].Add(NewCard);
+
                 }
+                //AgainstInfo.cardSet.Init();
                 await Task.Delay(000);
             });
         }
@@ -86,12 +100,13 @@ namespace Command
                             Info.GameUI.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.AgainstInfo.ExChangeableCardNum;
                             for (int i = 0; i < 10; i++)
                             {
-                                await CardCommand.DrawCard();
+                                await CardCommand.DrawCard(IsPlayerDraw: true, isOrder: false);
                             }
                             for (int i = 0; i < 10; i++)
                             {
-                                await CardCommand.DrawCard(false);
+                                await CardCommand.DrawCard(IsPlayerDraw: false, isOrder: false);
                             }
+                            CardCommand.OrderCard();
                             break;
                         }
                     case (1):
@@ -114,7 +129,7 @@ namespace Command
                         break;
                 }
                 await Task.Delay(2500);
-                await WaitForSelectBoardCard(Info.RowsInfo.GetDownCardList(RegionTypes.Hand), CardBoardMode.ExchangeCard); ;
+                await WaitForSelectBoardCard(AgainstInfo.cardSet[Orientation.Down][RegionTypes.Hand].cardList, CardBoardMode.ExchangeCard);
             });
         }
         public static async Task RoundEnd(int num)
@@ -136,6 +151,7 @@ namespace Command
                 AgainstInfo.PlayerScore.P1Score += result == 0 || result == 1 ? 1 : 0;
                 AgainstInfo.PlayerScore.P2Score += result == 0 || result == 2 ? 1 : 0;
                 await Task.Delay(3500);
+                await ResetBattleAsync();
             });
         }
         public static async Task TurnStart()
@@ -147,6 +163,7 @@ namespace Command
                 await Task.Delay(000);
                 AgainstInfo.IsCardEffectCompleted = false;
                 RowCommand.SetPlayCardLimit(!AgainstInfo.IsMyTurn);
+                AgainstInfo.isAIControl = AgainstInfo.IsPVE && !AgainstInfo.IsMyTurn;
                 await Task.Delay(000);
             });
         }
@@ -167,9 +184,9 @@ namespace Command
             await Task.Run(async () =>
             {
                 //print("出牌");
-                if (!Info.AgainstInfo.IsPVP && !Info.AgainstInfo.IsMyTurn)
+                if (AgainstInfo.isAIControl)
                 {
-                    await AiCommand.TempOperationAsync();
+                    await AiCommand.TempOperationPlayCard();
                 }
                 //当出牌,弃牌,pass时结束
                 while (true)
@@ -184,11 +201,6 @@ namespace Command
                         Info.AgainstInfo.IsCardEffectCompleted = false;
                         break;
                     }
-                    //if (Info.GlobalBattleInfo.IsCardEffectCompleted)
-                    //{
-                    //    Info.GlobalBattleInfo.IsCardEffectCompleted = false;
-                    //    break;
-                    //}
                 }
             });
         }
@@ -203,20 +215,30 @@ namespace Command
             Command.Network.NetCommand.AsyncInfo(NetAcyncType.FocusRegion);
             AgainstInfo.IsWaitForSelectRegion = false;
         }
-        public static async Task WaitForSelectLocation()
+        public static async Task WaitForSelectLocation(Card card)
         {
             AgainstInfo.IsWaitForSelectLocation = true;
-            //Debug.Log("开始进入部署位置");
-            RowCommand.SetAllRegionSelectable(true);
+            Debug.Log("等待选择部署位置");
+            RowCommand.SetAllRegionSelectable((RegionTypes)(card.property + 5), card.territory);
             AgainstInfo.SelectLocation = -1;
             // Debug.Log("开始进入部署位置");
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
-                while (Info.AgainstInfo.SelectLocation < 0) { }
+                while (AgainstInfo.SelectLocation < 0)
+                {
+                    if (AgainstInfo.isAIControl)
+                    {
+                        await Task.Delay(1000);
+                        List<SingleRowInfo> rows = AgainstInfo.cardSet.singleRowInfos.Where(row => row.CanBeSelected).ToList();
+                        int rowRank = AiCommand.GetRandom(0, rows.Count());
+                        AgainstInfo.SelectRegion = rows[rowRank];//设置部署区域
+                        AgainstInfo.SelectLocation = 0;//设置部署次序
+                    }
+                }
             });
             // Debug.Log("选择部署位置完毕");
             Network.NetCommand.AsyncInfo(NetAcyncType.FocusLocation);
-            RowCommand.SetAllRegionSelectable(false);
+            RowCommand.SetAllRegionSelectable(RegionTypes.None);
             AgainstInfo.IsWaitForSelectLocation = false;
         }
         public static async Task WaitForSelecUnit(Card OriginCard, List<Card> Cards, int num)
@@ -226,7 +248,6 @@ namespace Command
             Info.AgainstInfo.ArrowStartCard = OriginCard;
             AgainstInfo.IsWaitForSelectUnits = true;
             Info.AgainstInfo.AllCardList.ForEach(card => card.IsGray = true);
-            //GameCommand.GetCardList(LoadRangeOnBattle.All).ForEach(card => card.IsGray = true);
             Cards.ForEach(card => card.IsGray = false);
             AgainstInfo.SelectUnits.Clear();
             await Task.Run(async () =>
@@ -239,17 +260,14 @@ namespace Command
                 await Task.Delay(250);
                 GameUI.UiCommand.SetArrowDestory();
             });
-            //Debug.Log("双方数量" + Info.GlobalBattleInfo.SelectUnits.Count + ":" + Math.Min(Cards.Count, num));
             //Debug.Log("选择单位完毕");
-            Info.AgainstInfo.AllCardList.ForEach(card => card.IsGray = false);
-            //GameCommand.GetCardList(LoadRangeOnBattle.All).ForEach(card => card.IsGray = false);
+            AgainstInfo.AllCardList.ForEach(card => card.IsGray = false);
             AgainstInfo.IsWaitForSelectUnits = false;
 
         }
         public static async Task WaitForSelectBoardCard<T>(List<T> CardIds, CardBoardMode Mode = CardBoardMode.Select, int num = 1)
         {
             AgainstInfo.SelectBoardCardIds = new List<int>();
-            //GlobalBattleInfo.IsWaitForSelectBoardCard = true;
             GameUI.UiCommand.SetCardBoardShow();
             if (typeof(T) == typeof(Card))
             {
@@ -290,7 +308,6 @@ namespace Command
                 }
             });
             GameUI.UiCommand.SetCardBoardHide();
-            //GlobalBattleInfo.IsWaitForSelectBoardCard = false;
         }
         public static void SetPassState(bool IsPlayer1, bool IsActive)
         {
@@ -303,6 +320,20 @@ namespace Command
             {
                 Debug.Log("敌方pass啦" + IsActive);
                 Info.GameUI.UiInfo.Instance.OpPass.SetActive(IsActive);
+            }
+        }
+        public static async Task ResetBattleAsync()
+        {
+            foreach (var card in AgainstInfo.cardSet[Orientation.Down][RegionTypes.Battle].cardList)
+            {
+                await card.RemoveFromBattle(Orientation.Down);
+                await Task.Delay(150);
+            }
+            foreach (var card in AgainstInfo.cardSet[Orientation.Up][RegionTypes.Battle].cardList)
+            {
+                await card.RemoveFromBattle(Orientation.Up);
+                await Task.Delay(150);
+
             }
         }
         public static async Task Surrender()

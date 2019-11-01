@@ -1,4 +1,5 @@
-﻿using GameEnum;
+﻿using CardModel;
+using GameEnum;
 using GameUI;
 using Thread;
 using UnityEngine;
@@ -27,19 +28,21 @@ namespace Command
                     Info.GameUI.UiInfo.CardBoard.SetActive(false);
                 });
             }
-
-            public static void CardBoardReload() => Command.GameUI.CardBoardCommand.CreatBoardCardActual();
+            public static void CardBoardReload()
+            {
+                Command.GameUI.CardBoardCommand.CreatBoardCardActual();
+            }
             public static Sprite GetBoardCardImage(int Id)
             {
                 if (!Info.GameUI.UiInfo.CardImage.ContainsKey(Id))
                 {
-                    var CardStandardInfo = Command.CardLibraryCommand.GetCardStandardInfo(Id);
+                    var CardStandardInfo = Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(Id);
                     Texture2D texture = CardStandardInfo.icon;
                     Info.GameUI.UiInfo.CardImage.Add(Id, Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero));
                 }
                 return Info.GameUI.UiInfo.CardImage[Id];
             }
-            public static void ChangeIntroduction(CardSpace.Card card)
+            public static void ChangeIntroduction(Card card)
             {
                 string Title = card.CardName;
                 string Text = card.CardIntroduction;
@@ -67,7 +70,6 @@ namespace Command
                     Info.AgainstInfo.ArrowList.Add(NewArrow);
                 });
             }
-
             public static void SetArrowDestory()
             {
                 MainThread.Run(() =>
@@ -80,8 +82,8 @@ namespace Command
             {
                 MainThread.Run(() =>
                 {
-                    Info.GameUI.UiInfo.NoticeBoard.GetComponent<Text>().text = Info.GameUI.UiInfo.NoticeBoardTitle;
-                    Info.GameUI.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
+                    Info.GameUI.UiInfo.NoticeBoard.transform.GetChild(0).GetComponent<Text>().text = Info.GameUI.UiInfo.NoticeBoardTitle;
+                    //Info.GameUI.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
                 });
             }
             public void CardBoardClose() => Info.AgainstInfo.IsSelectCardOver = true;

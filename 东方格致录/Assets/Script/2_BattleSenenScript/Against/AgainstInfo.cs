@@ -1,4 +1,5 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
 using GameEnum;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Info
     /// <summary>
     /// 全局对战信息
     /// </summary>
-    public class AgainstInfo
+    public static class AgainstInfo
     {
         //网络同步信息
         public static Card TargetCard;
@@ -50,19 +51,19 @@ namespace Info
         public static int ExChangeableCardNum = 0;
         public static bool IsMyTurn = true;
         public static bool IsPVP = false;
+        public static bool IsPVE = !IsPVP;
+        public static bool isAIControl = false;
 
-        public static List<Card> AllCardList => RowsInfo.globalCardList.SelectMany(x => x).ToList();
-        public static List<SingleRowInfo> AllRows => RowsInfo.singleRowInfos;
+        public static CardSet cardSet=new CardSet();
 
+        public static List<Card> AllCardList => CardSet.globalCardList.SelectMany(x => x).ToList();
         public static bool IsPlayer1 = true;
         public static (int P1Score, int P2Score) PlayerScore;
-        public static (int MyScore, int OpScore) ShowScore => IsPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);
-        public static bool IsPlayer1Pass;
-        public static bool IsPlayer2Pass;
-
-
+        public static (int MyScore, int OpScore) ShowScore => IsPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);       
         internal static bool IsBattleEnd;
 
+        public static bool IsPlayer1Pass;
+        public static bool IsPlayer2Pass;
         public static bool IsCurrectPass => IsPlayer1 ^ IsMyTurn ? IsPlayer2Pass : IsPlayer1Pass;
         public static bool IsBoothPass => IsPlayer1Pass && IsPlayer2Pass;
     };

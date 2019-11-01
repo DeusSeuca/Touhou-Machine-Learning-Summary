@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,8 @@ namespace Info
 
             public static string CardBoardTitle = "";
             public static string NoticeBoardTitle = "";
+            [ShowInInspector]
+            public static bool isNoticeBoardShow = false;
 
             public static List<GameObject> ShowCardLIstOnBoard = new List<GameObject>();
             public static Dictionary<int, Sprite> CardImage = new Dictionary<int, Sprite>();
@@ -39,8 +42,6 @@ namespace Info
 
             public static RectTransform IntroductionTextBackground => Instance.CardIntroductionModel.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
             public static RectTransform IntroductionEffectBackground => Instance.CardIntroductionModel.transform.GetChild(0).GetChild(1).GetComponent<RectTransform>();
-
         }
     }
-
 }

@@ -1,4 +1,5 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
 using GameUI;
 using System.Collections.Generic;
 using Thread;
@@ -33,7 +34,7 @@ namespace Command
                     List<Card> Cards = Info.AgainstInfo.TargetCardList;
                     for (int i = 0; i < Cards.Count; i++)
                     {
-                        var CardStandardInfo = Command.CardLibraryCommand.GetCardStandardInfo(Cards[i].CardId);
+                        var CardStandardInfo = Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(Cards[i].CardId);
                         GameObject NewCard = GameObject.Instantiate(Info.GameUI.UiInfo.CardModel);
                         NewCard.GetComponent<BoardCardInfo>().Rank = i;
                         NewCard.transform.SetParent(Info.GameUI.UiInfo.Constant);
@@ -53,7 +54,7 @@ namespace Command
                     List<int> CardIds = Info.AgainstInfo.TargetCardIDList;
                     for (int i = 0; i < CardIds.Count; i++)
                     {
-                        var CardStandardInfo = Command.CardLibraryCommand.GetCardStandardInfo(CardIds[i]);
+                        var CardStandardInfo = Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardIds[i]);
                         GameObject NewCard = GameObject.Instantiate(Info.GameUI.UiInfo.CardModel);
                         NewCard.GetComponent<BoardCardInfo>().Rank = i;
                         NewCard.transform.SetParent(Info.GameUI.UiInfo.Constant);

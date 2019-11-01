@@ -1,4 +1,6 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
+using System.Threading.Tasks;
 using UnityEngine;
 namespace Command
 {
@@ -10,10 +12,10 @@ namespace Command
             {
                 //Command.GameSystem
             }
-            public static void DisCard(Card card)
+            public static async Task DisCard(Card card)
             {
                 //触发丢弃卡牌前
-                Command.CardCommand.DisCard(card);
+                await Command.CardCommand.DisCard(card);
                 card.Trigger<TriggerType.WhenDiscard>();
                 //触发丢弃卡牌后
             }

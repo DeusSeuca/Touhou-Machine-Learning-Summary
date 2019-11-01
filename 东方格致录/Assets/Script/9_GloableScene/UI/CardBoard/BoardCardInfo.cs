@@ -2,7 +2,7 @@
 
 namespace GameUI
 {
-    public class BoardCardInfo: MonoBehaviour
+    public class BoardCardInfo : MonoBehaviour
     {
         public int Rank;
         public void OnMouseClick()

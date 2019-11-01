@@ -14,7 +14,7 @@ namespace Control
             {
                 Bias = new Vector3(IsRight ? 0.1f : -0.1f, IsDown ? 0.1f : -0.1f);
                 transform.position = Camera.main.ViewportToScreenPoint(ViewportPoint + Bias);
-                if (Info.AgainstInfo.PlayerFocusCard != null && Info.AgainstInfo.PlayerFocusCard.IsCanSee)
+                if (Info.AgainstInfo.PlayerFocusCard != null && Info.AgainstInfo.PlayerFocusCard.isCanSee)
                 {
                     Cd = Mathf.Min(0.25f, Cd + Time.deltaTime);
                 }

@@ -1,6 +1,8 @@
-﻿using CardSpace;
-using Control;
+﻿using CardModel;
+using CardSpace;
+using Extension;
 using GameEnum;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using Thread;
 using UnityEngine;
@@ -10,29 +12,31 @@ namespace Info
     {
         public Color color;
         public Card TempCard;
-        //使用 Orientation 代替 Belong
-        public Belong belong;
         public Orientation orientation;
         public RegionTypes region;
         public bool CanBeSelected;
-        public RowControl Control;
-        public Material CardMaterial;
-        public int RowRank => RowsInfo.globalCardList.IndexOf(ThisRowCards);
+        [ShowInInspector]
+        public int rank => (int)region + (AgainstInfo.IsPlayer1 ^ (orientation == Orientation.Down) ? 9 : 0);
+        private void Awake() => AgainstInfo.cardSet.singleRowInfos.Add(this);
         public int Location => this.JudgeRank(AgainstInfo.FocusPoint);
-        public List<Card> ThisRowCards => belong == Belong.My ? RowsInfo.GetDownCardList(region) : RowsInfo.GetUpCardList(region);
-        private void Awake()
+        public int RowRank => CardSet.globalCardList.IndexOf(ThisRowCards);
+        public Material CardMaterial => transform.GetComponent<Renderer>().material;
+        public List<Card> ThisRowCards
         {
-            RowsInfo.singleRowInfos.Add(this);
-            Control = GetComponent<RowControl>();
-            CardMaterial = transform.GetComponent<Renderer>().material;
+            get
+            {
+               return AgainstInfo.cardSet[rank];
+            }
+            set
+            {
+                AgainstInfo.cardSet[rank] = value;
+            }
         }
-
         public void SetRegionSelectable(bool CanBeSelected)
         {
             this.CanBeSelected = CanBeSelected;
             MainThread.Run(() =>
             {
-                print(name + "设置为" + (CanBeSelected ? color : Color.black));
                 CardMaterial.SetColor("_GlossColor", CanBeSelected ? color : Color.black);
             });
         }

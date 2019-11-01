@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CardSpace.Card1003" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1003.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card" Collapsed="true">
+    <Position X="18.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAADARKAABAACAJQAADBQiAIIgAAAQACEAgAjAU=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Card\Card.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card0" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card0.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1001" Collapsed="true">
+    <Position X="5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1001.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1002" Collapsed="true">
+    <Position X="7.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1002.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1004" Collapsed="true">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1004.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1005" Collapsed="true">
+    <Position X="11.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1005.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1006" Collapsed="true">
+    <Position X="14" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1006.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1007" Collapsed="true">
+    <Position X="16.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1007.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1008" Collapsed="true">
+    <Position X="18.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1008.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1009">
+    <Position X="20.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1009.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1010" Collapsed="true">
+    <Position X="23" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1010.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1011" Collapsed="true">
+    <Position X="25.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1011.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1012" Collapsed="true">
+    <Position X="27.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1012.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1013" Collapsed="true">
+    <Position X="29.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1013.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1014" Collapsed="true">
+    <Position X="32" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1014.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1015" Collapsed="true">
+    <Position X="34.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1015.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardSpace.Card1016" Collapsed="true">
+    <Position X="36.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\CardSpace\Card1016.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Info.PointInfo" Collapsed="true">
+    <Position X="40.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAgAAAAAEgAABAAAAAAAABAAgAAkAAAgAAACAA=</HashCode>
+      <FileName>Assets\Script\2_BattleSenenScript\Point\PointInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Info.RowsInfo" Collapsed="true">
+    <Position X="39" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAACAAAAAAAAAAAAACAAQAACAAAAYAAiAAAAAEQ=</HashCode>
+      <FileName>Assets\Script\2_BattleSenenScript\Row\RowsInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Info.SingleRowInfo" Collapsed="true">
+    <Position X="40.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACBIAAAQAAAAAAAIAIACAAAAIABAACAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Script\2_BattleSenenScript\Row\SingleRowInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Info.AudioInfo" Collapsed="true">
+    <Position X="39" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAQAAQAAAAAEA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Audio\AudioInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Info.CardInfo" Collapsed="true">
+    <Position X="47.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAABAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Card\CardInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Command.RowCommand" Collapsed="true">
+    <Position X="44.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAQEAAAAgAAAAAAACAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\2_BattleSenenScript\Row\RowCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Command.CardCommand" Collapsed="true">
+    <Position X="42.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAgAAAgAAIAAACAEICgAAAAAgAAEAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Card\CardCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control.RowControl" Collapsed="true">
+    <Position X="46" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAABACAAAABAFAAAAACAAAAAAAAAAAgAAAEA=</HashCode>
+      <FileName>Assets\Script\2_BattleSenenScript\Row\RowControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control.CameraControl" Collapsed="true">
+    <Position X="40.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIACAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Camera\CameraControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control.CardControl" Collapsed="true">
+    <Position X="44.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAABAAAAAEAAAAAAAIAAAAAACAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Card\CardControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control.InteractiveControl" Collapsed="true">
+    <Position X="47.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQACAEA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Interactive\InteractiveControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Network.NetClient" Collapsed="true">
+    <Position X="40.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAQ=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Network\NetClient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Network.NetExtern" Collapsed="true">
+    <Position X="44.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Network\NetExtern.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Network.NetInfoModel" Collapsed="true">
+    <Position X="46" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Network\NetInfoModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Command.Network.NetCommand" Collapsed="true">
+    <Position X="42.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAgAAAAAAAAAgAAAAAAAQAgAABAAACAAASAAAAASQ=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Network\NetCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control.GameUI.IntroductionControl" Collapsed="true">
+    <Position X="39" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEAAEAABAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\UI\IntroductionControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control.GameUI.NoticeControl" Collapsed="true">
+    <Position X="47.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAABCAAAAAAAAAAAAAAAAAAQAAAAAAAAAEAAQA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\UI\NoticeControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Command.GameUI.UiCommand" Collapsed="true">
+    <Position X="42.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEAAAAJAAAAEAAAAAIAABAAAIACAAhQAAAAAAAAQAEg=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\UI\UiCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Info.GameUI.UiInfo" Collapsed="true">
+    <Position X="44.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAOgAJQQAAACAAgiCAAAAAAAEEAAggAQBgAEAAYAEA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\UI\UiInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="GameEnum.CardBoardMode" Collapsed="true">
+    <Position X="39" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Enum\CardBoardMode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEnum.CardLevel" Collapsed="true">
+    <Position X="40.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAACAAAEAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Enum\CardLevel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEnum.NetAcyncType" Collapsed="true">
+    <Position X="42.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAQAQAAEAAAAAAAAAAAAEAAABAAAEAAAAQA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Enum\NetAcyncType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEnum.Orientation" Collapsed="true">
+    <Position X="44.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAEAAAAAAAAAAAAAAAAAAAAIAAAAAACAI=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Enum\Orientation.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEnum.Region" Collapsed="true">
+    <Position X="46" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAkAAAAAIAEAAEAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Enum\Region.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEnum.RegionTypes" Collapsed="true">
+    <Position X="47.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAACEAQAAAkEAAAAABEAAEAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Enum\RegionTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEnum.Sectarian" Collapsed="true">
+    <Position X="39" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAIABAAAAgAAgAAAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Enum\Sectarian.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEnum.Territory" Collapsed="true">
+    <Position X="40.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAIAAAAAACAA=</HashCode>
+      <FileName>Assets\Script\9_GloableScene\Enum\Territory.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

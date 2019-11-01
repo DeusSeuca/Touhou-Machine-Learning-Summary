@@ -1,3 +1,4 @@
+using Extension;
 using GameEnum;
 using Network;
 using NetworkCommsDotNet;
@@ -14,7 +15,7 @@ namespace Command
 
     namespace Network
     {
-        public class NetCommand
+        public static class NetCommand
         {
             static Connection Client;
             public static void Bind(string Tag, PacketHandlerCallBackDelegate<string> Func) => AppendGlobalIncomingPacketHandler(Tag, Func);
@@ -69,7 +70,6 @@ namespace Command
                 Info.AgainstInfo.IsMyTurn = (bool)ReceiveInfo[1];
                 //Debug.LogError(Info.GlobalBattleInfo.IsPlayer1);
             }
-            [System.Obsolete("待废弃")]
             public static void AsyncInfo(NetAcyncType AcyncType)
             {
                 if (Info.AgainstInfo.IsPVP && (Info.AgainstInfo.IsMyTurn || AcyncType == NetAcyncType.FocusCard || AcyncType == NetAcyncType.ExchangeCard))
@@ -156,9 +156,7 @@ namespace Command
                             //Debug.Log("触发卡牌同步");
                             int X = int.Parse(ReceiveInfo[2].ToString());
                             int Y = int.Parse(ReceiveInfo[3].ToString());
-                            Info.AgainstInfo.PlayerPlayCard = Info.RowsInfo.GetCard(X, Y);
-                            //_ = Command.CardCommand.PlayCard();
-                            Command.CardCommand.PlayCard(false).Wait();
+                            Command.CardCommand.PlayCard(Info.RowsInfo.GetCard(X, Y),false).Wait();
                             break;
                         }
                     case NetAcyncType.FocusRegion:
@@ -182,7 +180,6 @@ namespace Command
 
                             break;
                         }
-
                     case NetAcyncType.SelectUnites:
                         {
                             Debug.Log("收到同步单位信息为" + Data);
@@ -190,7 +187,6 @@ namespace Command
                             Info.AgainstInfo.SelectUnits.AddRange(Locations.Select(location => Info.RowsInfo.GetCard(location.x, location.y)));
                             break;
                         }
-
                     case NetAcyncType.Pass:
                         {
                             GameUI.UiCommand.SetCurrentPass();
@@ -205,7 +201,7 @@ namespace Command
 
                             Location location = ReceiveInfo[2].ToString().ToObject<Location>();
                             int RandomRank = int.Parse(ReceiveInfo[3].ToString());
-                            _ = Command.CardCommand.ExchangeCard(Info.RowsInfo.GetCard(location), false, RandomRank);
+                            _ = CardCommand.ExchangeCard(Info.RowsInfo.GetCard(location), false, RandomRank);
                             break;
                         }
                     default:

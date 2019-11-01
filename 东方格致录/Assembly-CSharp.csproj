@@ -66,7 +66,6 @@
     <Compile Include="Assets\Script\0_LoginSceen\UserLoginControl.cs" />
     <Compile Include="Assets\Script\1_MenuScene\UserModeControl.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Against\AgainstInfo.cs" />
-    <Compile Include="Assets\Script\2_BattleSenenScript\Against\GameCommand.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Ai\AiCommand.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardEffectStack.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardProperty.cs" />
@@ -87,6 +86,7 @@
     <Compile Include="Assets\Script\9_GloableScene\Card\CardControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardDeck.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\CardInfo.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Card\CardSet.cs" />
     <Compile Include="Assets\Script\9_GloableScene\CardInspector\CardLibrary.cs" />
     <Compile Include="Assets\Script\9_GloableScene\CardInspector\CardLibraryCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\CardInspector\CardLibrarySaveData.cs" />
@@ -114,20 +114,14 @@
     <Compile Include="Assets\Script\9_GloableScene\Dialogue\DialogueCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Dialogue\DialogueControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Dialogue\Live2d.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Enum\Belong.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\CardBoardMode.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\CardLevel.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Enum\LoadRangeOnBattle.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Enum\LoadRangeOnOther.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\NetAcyncType.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\Orientation.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Enum\Property.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Enum\RegionName_Battle.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Enum\RegionName_Other.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Enum\Region.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\RegionTypes.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\Sectarian.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Enum\Territory.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Extension\CardListExtension.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Extension\Extension.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Extension\RowInfoExtension.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Interactive\InteractiveControl.cs" />
@@ -138,7 +132,8 @@
     <Compile Include="Assets\Script\9_GloableScene\ParticleSystem\EffectCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\ParticleSystem\ParticleInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Player\AllPlayerInfo.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Test\TestScript.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Test\checkmouse.cs" />
+    <Compile Include="Assets\Script\9_GloableScene\Test\test.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Thread\MainThread.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowEndPoint.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\Arrow\ArrowManager.cs" />
@@ -148,6 +143,7 @@
     <Compile Include="Assets\Script\9_GloableScene\UI\NoticeControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\UiCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\UiInfo.cs" />
+    <Compile Include="Assets\test\leimi.cs" />
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>E:/东方格致录/东方格致录/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>

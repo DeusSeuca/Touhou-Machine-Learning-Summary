@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.Compa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.CompatibilityLayer.Editor", "Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj", "{586757FC-85B8-2FCB-C574-39913C9BE477}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "单元测试", "..\单元测试\单元测试.csproj", "{3C0F81EA-C579-4CCD-AF7B-C5E18F416D47}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "内容测试", "..\控制台\内容测试\内容测试.csproj", "{BE2900D8-BA90-4936-83E1-4BE12C22D388}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,14 +25,6 @@ Global
 		{586757FC-85B8-2FCB-C574-39913C9BE477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{586757FC-85B8-2FCB-C574-39913C9BE477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{586757FC-85B8-2FCB-C574-39913C9BE477}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C0F81EA-C579-4CCD-AF7B-C5E18F416D47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C0F81EA-C579-4CCD-AF7B-C5E18F416D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C0F81EA-C579-4CCD-AF7B-C5E18F416D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C0F81EA-C579-4CCD-AF7B-C5E18F416D47}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE2900D8-BA90-4936-83E1-4BE12C22D388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE2900D8-BA90-4936-83E1-4BE12C22D388}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE2900D8-BA90-4936-83E1-4BE12C22D388}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE2900D8-BA90-4936-83E1-4BE12C22D388}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

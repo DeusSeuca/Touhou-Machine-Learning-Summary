@@ -1,4 +1,5 @@
-﻿using CardSpace;
+﻿using CardModel;
+using CardSpace;
 using Info;
 using System;
 using System.Collections.Generic;
