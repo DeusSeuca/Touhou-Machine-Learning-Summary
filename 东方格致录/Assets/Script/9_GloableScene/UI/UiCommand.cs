@@ -82,8 +82,8 @@ namespace Command
             {
                 MainThread.Run(() =>
                 {
-                    Info.GameUI.UiInfo.NoticeBoard.GetComponent<Text>().text = Info.GameUI.UiInfo.NoticeBoardTitle;
-                    Info.GameUI.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
+                    Info.GameUI.UiInfo.NoticeBoard.transform.GetChild(0).GetComponent<Text>().text = Info.GameUI.UiInfo.NoticeBoardTitle;
+                    //Info.GameUI.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
                 });
             }
             public void CardBoardClose() => Info.AgainstInfo.IsSelectCardOver = true;

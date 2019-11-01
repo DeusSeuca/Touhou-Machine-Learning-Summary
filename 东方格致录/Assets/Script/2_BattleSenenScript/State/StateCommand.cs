@@ -32,7 +32,7 @@ namespace Command
             {
                 //await Task.Delay(500);
                 GameUI.UiCommand.SetNoticeBoardTitle("对战开始");
-                //GameUI.UiCommand.NoticeBoardShow();
+                GameUI.UiCommand.NoticeBoardShow();
                 await Task.Delay(000);
                 //初始化领袖卡
                 Card MyLeaderCard = await CardCommand.CreatCard(AllPlayerInfo.UserInfo.UseDeck.LeaderId);
