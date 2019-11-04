@@ -25,7 +25,7 @@ namespace Control
         }
         public void TempCardControl()
         {
-            if (Info.AgainstInfo.IsMyTurn)
+            if (AgainstInfo.IsMyTurn)
             {
                 if (SingleInfo.TempCard == null && SingleInfo.CanBeSelected && AgainstInfo.PlayerFocusRegion == SingleInfo && !HasTempCard)
                 {
@@ -52,8 +52,8 @@ namespace Control
 
                 float Actual_Interval = Mathf.Min(Range / Num, 1.6f);
                 float Actual_Bias = IsSingle ? 0 : (Mathf.Min(ThisCardList.Count, 6) - 1) * 0.8f;
-                Vector3 Actual_Offset_Up = transform.up * (0.2f + i * 0.01f) * (ThisCardList[i].IsPrePrepareToPlay ? 1.1f : 1); //transform.up * (1 + i * 0.1f);//Vector3.up * (1 + i * 0.1f);
-                Vector3 MoveStepOver_Offset = ThisCardList[i].IsMoveStepOver ? Vector3.zero : Vector3.up;                                                                                                               // Vector3 Actual_Offset_Up = transform.up * i; //transform.up * (1 + i * 0.1f);//Vector3.up * (1 + i * 0.1f);
+                Vector3 Actual_Offset_Up = transform.up * (0.2f + i * 0.01f) * (ThisCardList[i].IsPrePrepareToPlay ? 1.1f : 1); 
+                Vector3 MoveStepOver_Offset = ThisCardList[i].IsMoveStepOver ? Vector3.zero : Vector3.up;
                 Vector3 Actual_Offset_Forward = ThisCardList[i].IsPrePrepareToPlay ? -transform.forward * 0.5f : Vector3.zero;
                 if (ThisCardList[i].IsAutoMove)
                 {

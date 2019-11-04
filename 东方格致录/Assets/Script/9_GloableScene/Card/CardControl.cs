@@ -36,7 +36,7 @@ namespace Control
                 {
                     if (Info.AgainstInfo.PlayerFocusRegion.name == "下方_墓地")
                     {
-                        print(name + "进入墓地");
+                        //print(name + "进入墓地");
                         _ = Command.CardCommand.DisCard(ThisCard);
                     }
                     else if (Info.AgainstInfo.PlayerFocusRegion.name == "下方_领袖" || Info.AgainstInfo.PlayerFocusRegion.name == "下方_手牌")

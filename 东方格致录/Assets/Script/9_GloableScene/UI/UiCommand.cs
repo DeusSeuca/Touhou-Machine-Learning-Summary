@@ -1,6 +1,7 @@
 ﻿using CardModel;
 using GameEnum;
 using GameUI;
+using System.Threading.Tasks;
 using Thread;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +12,8 @@ namespace Command
     {
         public class UiCommand : MonoBehaviour
         {
-            static GameObject MyPass => Info.GameUI.UiInfo.Instance.MyPass;
-            static GameObject OpPass => Info.GameUI.UiInfo.Instance.OpPass;
+            static GameObject MyPass => Info.GameUI.UiInfo.Instance.DownPass;
+            static GameObject OpPass => Info.GameUI.UiInfo.Instance.UpPass;
             public static void SetCardBoardShow()
             {
                 MainThread.Run(() =>
@@ -78,31 +79,42 @@ namespace Command
                     Info.AgainstInfo.ArrowList.Clear();
                 });
             }
-            public static void NoticeBoardShow()
+            public static async Task NoticeBoardShow()
             {
                 MainThread.Run(() =>
                 {
                     Info.GameUI.UiInfo.NoticeBoard.transform.GetChild(0).GetComponent<Text>().text = Info.GameUI.UiInfo.NoticeBoardTitle;
-                    //Info.GameUI.UiInfo.Instance.NoticeAnim.SetTrigger("Play");
                 });
+                Info.GameUI.UiInfo.isNoticeBoardShow = true;
+                await Task.Delay(1000);
+                Info.GameUI.UiInfo.isNoticeBoardShow = false;
             }
             public void CardBoardClose() => Info.AgainstInfo.IsSelectCardOver = true;
             public static void SetCardBoardMode(CardBoardMode CardBoardMode) => Info.AgainstInfo.CardBoardMode = CardBoardMode;
             public static void SetCurrentPass()
             {
-                if (Info.AgainstInfo.IsPlayer1 ^ Info.AgainstInfo.IsMyTurn)
+                MainThread.Run(() =>
                 {
-                    Info.AgainstInfo.IsPlayer2Pass = true;
-                }
-                else
-                {
-                    Info.AgainstInfo.IsPlayer1Pass = true;
-                }
+                    Info.GameUI.UiInfo.MyPass.SetActive(true);
+                    RefreshPassInfo();
+                });
             }
             public static void ReSetPassState()
             {
-                Info.AgainstInfo.IsPlayer1Pass = false;
-                Info.AgainstInfo.IsPlayer2Pass = false;
+                MainThread.Run(() =>
+                {
+                    Info.GameUI.UiInfo.MyPass.SetActive(false);
+                    Info.GameUI.UiInfo.OpPass.SetActive(false);
+                    RefreshPassInfo();
+                }); 
+            }
+            public static void RefreshPassInfo()
+            {
+                MainThread.Run(() =>
+                {
+                    Info.AgainstInfo.IsUpPass = Info.GameUI.UiInfo.Instance.UpPass.activeSelf;
+                    Info.AgainstInfo.IsDownPass = Info.GameUI.UiInfo.Instance.DownPass.activeSelf;
+                }); 
             }
         }
     }
