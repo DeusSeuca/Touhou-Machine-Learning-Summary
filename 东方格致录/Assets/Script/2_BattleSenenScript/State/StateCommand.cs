@@ -167,28 +167,23 @@ namespace Command
         {
             await Task.Run(async () =>
             {
-                Debug.Log("出牌");
+                //Debug.Log("出牌");
                 if (AgainstInfo.isAIControl)
                 {
-                    Debug.Log("自动出牌");
-
+                    //Debug.Log("自动出牌");
                     await AiCommand.TempOperationPlayCard();
                 }
                 bool IsMyPass = false;
                 //当出牌,弃牌,pass时结束
                 while (true)
                 {
-                    Debug.Log("结束了吗？");
-
                     if (AgainstInfo.IsCardEffectCompleted)
                     {
-                        Debug.Log("执行完毕？");
                         AgainstInfo.IsCardEffectCompleted = false;
                         break;
                     }
                     if (AgainstInfo.IsCurrectPass)
                     {
-                        Debug.Log("当前pass？");
                         AgainstInfo.IsCardEffectCompleted = false;
                         break;
                     }
