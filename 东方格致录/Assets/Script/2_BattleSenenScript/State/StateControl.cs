@@ -7,7 +7,7 @@ namespace Control
     {
         //bool IsLastPlay1Pass = false;
         //bool IsLastPlay2Pass = false;
-        void Start() => _ = BattleProcess();//PlayerSurrender().Catch();
+        void Start() =>  _=BattleProcess();//PlayerSurrender().Catch();
         //private void Update()
         //{
         //    //CheckPassState();
@@ -22,7 +22,6 @@ namespace Control
                 {
                     await StateCommand.TurnStart();
                     await StateCommand.WaitForPlayerOperation();
-                    print("end draw");
                     await StateCommand.TurnEnd();
                     if (Info.AgainstInfo.IsBoothPass) { break; }
                 }

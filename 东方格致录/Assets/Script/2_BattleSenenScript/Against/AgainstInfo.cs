@@ -78,7 +78,7 @@ namespace Info
         {
             get
             {
-                Command.GameUI.UiCommand.RefreshPassInfo();
+                //Command.GameUI.UiCommand.RefreshPassInfo();
                 return IsMyTurn ? IsDownPass : IsUpPass;
             }
         }
@@ -87,7 +87,7 @@ namespace Info
         {
             get
             {
-                Command.GameUI.UiCommand.RefreshPassInfo();
+                //Command.GameUI.UiCommand.RefreshPassInfo();
                 return IsUpPass && IsDownPass;
             }
         }
