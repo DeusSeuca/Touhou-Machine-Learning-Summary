@@ -96,7 +96,12 @@ namespace Command
                 MainThread.Run(() =>
                 {
                     Info.GameUI.UiInfo.MyPass.SetActive(true);
-                    RefreshPassInfo();
+                    switch (Info.AgainstInfo.IsMyTurn)
+                    {
+                        case true: Info.AgainstInfo.IsDownPass = true; break;
+                        case false: Info.AgainstInfo.IsUpPass = true; break;
+                    }
+                    //RefreshPassInfo();
                 });
             }
             public static void ReSetPassState()
@@ -105,17 +110,19 @@ namespace Command
                 {
                     Info.GameUI.UiInfo.MyPass.SetActive(false);
                     Info.GameUI.UiInfo.OpPass.SetActive(false);
-                    RefreshPassInfo();
-                }); 
+                    Info.AgainstInfo.IsUpPass = false;
+                    Info.AgainstInfo.IsDownPass = false;
+                    //RefreshPassInfo();
+                });
             }
-            public static void RefreshPassInfo()
-            {
-                MainThread.Run(() =>
-                {
-                    Info.AgainstInfo.IsUpPass = Info.GameUI.UiInfo.Instance.UpPass.activeSelf;
-                    Info.AgainstInfo.IsDownPass = Info.GameUI.UiInfo.Instance.DownPass.activeSelf;
-                }); 
-            }
+            //public static void RefreshPassInfo()
+            //{
+            //    MainThread.Run(() =>
+            //    {
+            //        Info.AgainstInfo.IsUpPass = Info.GameUI.UiInfo.Instance.UpPass.activeSelf;
+            //        Info.AgainstInfo.IsDownPass = Info.GameUI.UiInfo.Instance.DownPass.activeSelf;
+            //    }); 
+            //}
         }
     }
 

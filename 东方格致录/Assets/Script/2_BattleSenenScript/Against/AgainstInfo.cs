@@ -62,34 +62,10 @@ namespace Info
         public static (int MyScore, int OpScore) ShowScore => IsPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);
         //internal static bool IsBattleEnd;
 
-        //public static bool IsPlayer1Pass;
-        //public static bool IsPlayer2Pass;
-        /// <summary>
-        /// 待修改
-        /// </summary>
-        //public static bool IsPlayer1Pass=>Info.GameUI.UiInfo.Instance.UpPass.activeSelf;
-        //public static bool IsPlayer2Pass;
-
-        //public static bool IsCurrectPass => IsPlayer1 ^ IsMyTurn ? IsPlayer2Pass : IsPlayer1Pass;
-        //public static bool IsBoothPass => IsPlayer1Pass && IsPlayer2Pass;
         public static bool IsUpPass = false;
         public static bool IsDownPass = false;
-        public static bool IsCurrectPass
-        {
-            get
-            {
-                //Command.GameUI.UiCommand.RefreshPassInfo();
-                return IsMyTurn ? IsDownPass : IsUpPass;
-            }
-        }
+        public static bool IsCurrectPass => IsMyTurn ? IsDownPass : IsUpPass;
 
-        public static bool IsBoothPass
-        {
-            get
-            {
-                //Command.GameUI.UiCommand.RefreshPassInfo();
-                return IsUpPass && IsDownPass;
-            }
-        }
+        public static bool IsBoothPass => IsUpPass && IsDownPass;
     };
 }
