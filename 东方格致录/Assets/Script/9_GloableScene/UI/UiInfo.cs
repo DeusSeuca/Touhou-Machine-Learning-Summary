@@ -10,8 +10,11 @@ namespace Info
         public class UiInfo : MonoBehaviour
         {
             public static UiInfo Instance;
-            public GameObject MyPass;
-            public GameObject OpPass;
+            public GameObject DownPass;
+            public GameObject UpPass;
+            public static GameObject MyPass => AgainstInfo.IsMyTurn ? Instance.DownPass : Instance.UpPass;
+            public static GameObject OpPass => AgainstInfo.IsMyTurn ? Instance.UpPass : Instance.DownPass;
+
             public Animator NoticeAnim;
             public GameObject Arrow_Model;
             public GameObject CardInstanceModel;

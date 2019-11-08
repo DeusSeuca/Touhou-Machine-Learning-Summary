@@ -8,39 +8,37 @@ namespace Control
     {
         public class NoticeControl : MonoBehaviour
         {
-            //Animator Anim;
             public float Aplha = 0;
             public Color a;
-            Color targetColor = new Color(0, 0, 0, 0);
-            private static readonly Image image = Info.GameUI.UiInfo.NoticeBoard.GetComponent<Image>();
-            private static readonly Text text = Info.GameUI.UiInfo.NoticeBoard.transform.GetChild(0).GetComponent<Text>();
+            Color targetBackColor = new Color(0, 0, 0, 0);
+            Color targetWordColor = new Color(0, 0, 0, 0);
+            private Image image;
+            private Text text;
             Vector3 targetAugel = new Vector3(0, 0, 0);
             Vector3 currentAugel => Info.GameUI.UiInfo.NoticeBoard.transform.eulerAngles;
-            //public GameObject[] NoticeTex;
-            ////public GameObject NoticeModel;
-            //void Start() => Anim = GetComponent<Animator>();
-            //void Update() => NoticeTex.ForEach(x => x.GetComponent<Image>().material.SetFloat("_Value", Aplha));
-            //[Button]
-            //public void AnimPlay() => Anim.SetTrigger("Play");
+            private void Start()
+            {
+                image = Info.GameUI.UiInfo.NoticeBoard.GetComponent<Image>();
+                text = Info.GameUI.UiInfo.NoticeBoard.transform.GetChild(0).GetComponent<Text>();
+            }
             void Update()
             {
                 if (Info.GameUI.UiInfo.isNoticeBoardShow)
                 {
-                    targetColor = new Color(1, 1, 1, 1);
+                    targetBackColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+                    targetWordColor = new Color(0, 0, 0, 1f);
                     targetAugel = new Vector3(0, 0, 0);
 
                 }
                 else
                 {
-                    targetColor = new Color(0, 0, 0, 0);
+                    targetBackColor = new Color(0, 0, 0, 0);
+                    targetWordColor = new Color(0, 0, 0, 0);
                     targetAugel = new Vector3(90, 0, 0);
                 }
-                image.color = Color.Lerp(image.color, targetColor, Time.deltaTime);
-                text.color = Color.Lerp(text.color, targetColor, Time.deltaTime);
-                Info.GameUI.UiInfo.NoticeBoard.transform.eulerAngles = Vector3.Lerp(currentAugel, targetAugel, Time.deltaTime);
-
-                // Info.GameUI.UiInfo.NoticeBoard.GetComponent<Image>().material.SetFloat("_Value", Aplha);
-                // Info.GameUI.UiInfo.NoticeBoard.GetComponent<Image>().color = new Color(1, 1, 1, Aplha);
+                image.color = Color.Lerp(image.color, targetBackColor, Time.deltaTime * 5);
+                text.color = Color.Lerp(text.color, targetWordColor, Time.deltaTime * 5);
+                Info.GameUI.UiInfo.NoticeBoard.transform.eulerAngles = Vector3.Lerp(currentAugel, targetAugel, Time.deltaTime * 5);
             }
         }
     }

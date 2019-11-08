@@ -43,3 +43,4 @@ public class leimi : MonoBehaviour
         transform.position = Vector3.Lerp(start, end, time);
     }
 }
+

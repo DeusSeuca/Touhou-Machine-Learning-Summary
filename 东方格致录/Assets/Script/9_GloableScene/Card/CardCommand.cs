@@ -55,7 +55,7 @@ namespace Command
         }
         public static async Task DrawCard(bool IsPlayerDraw = true, bool ActiveBlackList = false, bool isOrder = true)
         {
-            Debug.Log("抽卡");
+            //Debug.Log("抽卡");
             EffectCommand.AudioEffectPlay(0);
             Card TargetCard = AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck].cardList[0];
             TargetCard.SetCardSee(IsPlayerDraw);
@@ -97,7 +97,7 @@ namespace Command
         }
         public static async Task PlayCard(Card targetCard, bool IsAnsy = true)
         {
-            Debug.Log("打出一张牌2");
+            //Debug.Log("打出一张牌2");
             EffectCommand.AudioEffectPlay(0);
             RowCommand.SetPlayCardLimit(true);
             //Card TargetCard = AgainstInfo.PlayerPlayCard;

@@ -15,6 +15,7 @@ namespace Control
         public static bool IsRuning;
         public static Stack<Func<Task>> TaskStack = new Stack<Func<Task>>();
         public static List<Func<Task>> AsyneTriggerTask = new List<Func<Task>>();
+        //需要改善
         public static async Task TriggerCardList<T>(List<Card> Cards)
         {
             Cards.ForEach(card => card.Trigger<T>());
