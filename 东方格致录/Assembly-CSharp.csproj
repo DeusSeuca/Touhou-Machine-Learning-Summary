@@ -79,6 +79,7 @@
     <Compile Include="Assets\Script\2_BattleSenenScript\Row\SingleRowInfo.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\State\StateCommand.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\State\StateControl.cs" />
+    <Compile Include="Assets\Script\2_BattleSenenScript\State\StateInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Audio\AudioInfo.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Camera\CameraControl.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Card\Card.cs" />
@@ -144,7 +145,6 @@
     <Compile Include="Assets\Script\9_GloableScene\UI\UiCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\UI\UiInfo.cs" />
     <Compile Include="Assets\test\leimi.cs" />
-    <None Include="Assets\3 Leaf Productions - Audio Pack\rock-wood sfx(mini pack)\ReadMe.txt" />
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>E:/东方格致录/东方格致录/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>

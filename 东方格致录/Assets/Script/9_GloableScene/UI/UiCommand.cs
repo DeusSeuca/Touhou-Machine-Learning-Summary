@@ -101,7 +101,6 @@ namespace Command
                         case true: Info.AgainstInfo.IsDownPass = true; break;
                         case false: Info.AgainstInfo.IsUpPass = true; break;
                     }
-                    //RefreshPassInfo();
                 });
             }
             public static void ReSetPassState()
@@ -112,17 +111,8 @@ namespace Command
                     Info.GameUI.UiInfo.OpPass.SetActive(false);
                     Info.AgainstInfo.IsUpPass = false;
                     Info.AgainstInfo.IsDownPass = false;
-                    //RefreshPassInfo();
                 });
             }
-            //public static void RefreshPassInfo()
-            //{
-            //    MainThread.Run(() =>
-            //    {
-            //        Info.AgainstInfo.IsUpPass = Info.GameUI.UiInfo.Instance.UpPass.activeSelf;
-            //        Info.AgainstInfo.IsDownPass = Info.GameUI.UiInfo.Instance.DownPass.activeSelf;
-            //    }); 
-            //}
         }
     }
 

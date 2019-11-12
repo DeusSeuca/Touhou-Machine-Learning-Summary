@@ -11,7 +11,7 @@ namespace Control
         public Text Password;
         void Start()
         {
-            Command.Network.NetCommand.Init(Network.NetClient.Client);
+            Command.Network.NetCommand.Init();
             UserLogin();//自动登录
         }
         public void UserRegister()

@@ -17,11 +17,10 @@ namespace Command
     {
         public static class NetCommand
         {
-            static Connection Client;
+            static Connection Client=>NetClient.Client;
             public static void Bind(string Tag, PacketHandlerCallBackDelegate<string> Func) => AppendGlobalIncomingPacketHandler(Tag, Func);
-            public static void Init(Connection NetClient)
+            public static void Init()
             {
-                Client = NetClient;
                 Bind("InitBattleInfo", InitBattleInfo);
                 Bind("JoinResult", JoinResult);
                 Bind("AsyncInfoRequir", AsyncInfoRequir);
@@ -137,7 +136,7 @@ namespace Command
             public static void AsyncInfoRequir(PacketHeader packetHeader, Connection connection, string Data)
             {
                 //Debug.Log("收到信息");
-                //Debug.Log("收到信息" + Data);
+                Debug.Log("收到信息" + Data);
                 object[] ReceiveInfo = Data.ToObject<GeneralCommand>().Datas;
                 //Debug.Log("收到信息" + Data);
                 //Debug.Log("收到信息1：" + ReceiveInfo[0].ToString());

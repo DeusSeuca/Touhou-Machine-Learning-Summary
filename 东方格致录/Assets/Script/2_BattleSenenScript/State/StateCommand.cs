@@ -19,6 +19,19 @@ namespace Command
     {
         public static async Task BattleStart()
         {
+            Debug.Log("假如1");
+
+            AgainstInfo.cardSet = new CardSet();
+            Info.StateInfo.TaskManager = new System.Threading.CancellationTokenSource();
+            MainThread.Run(() =>
+            {
+                foreach (var item in GameObject.FindGameObjectsWithTag("SingleInfo"))
+                {
+                    SingleRowInfo singleRowInfo = item.GetComponent<SingleRowInfo>();
+                    AgainstInfo.cardSet.singleRowInfos.Add(singleRowInfo);
+                }
+            });
+            await Task.Delay(500);
             if (!AgainstInfo.IsPVP)
             {
                 AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1001, new List<int> { 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015 }) });
@@ -28,6 +41,7 @@ namespace Command
             await Task.Run(async () =>
             {
                 //await Task.Delay(500);
+                Debug.Log("对战开始");
                 GameUI.UiCommand.SetNoticeBoardTitle("对战开始");
                 await GameUI.UiCommand.NoticeBoardShow();
                 //初始化领袖卡
@@ -61,9 +75,11 @@ namespace Command
             {
                 GameUI.UiCommand.SetNoticeBoardTitle($"对战终止\n{AgainstInfo.ShowScore.MyScore}:{AgainstInfo.ShowScore.OpScore}");
                 await GameUI.UiCommand.NoticeBoardShow();
-                // await Task.Delay(2000);
+                await Task.Delay(2000);
                 MainThread.Run(() =>
                 {
+                    Debug.Log("释放");
+                    StateInfo.TaskManager.Cancel();
                     SceneManager.LoadSceneAsync(1);
                 });
             });
@@ -80,7 +96,7 @@ namespace Command
                 {
                     case (0):
                         {
-                            Info.AgainstInfo.ExChangeableCardNum += 3;
+                            Info.AgainstInfo.ExChangeableCardNum = 3;
                             Info.GameUI.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.AgainstInfo.ExChangeableCardNum;
                             for (int i = 0; i < 10; i++)
                             {
@@ -176,6 +192,7 @@ namespace Command
                 //当出牌,弃牌,pass时结束
                 while (true)
                 {
+                    StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
                     if (AgainstInfo.IsCardEffectCompleted)
                     {
                         AgainstInfo.IsCardEffectCompleted = false;
@@ -195,7 +212,10 @@ namespace Command
             Info.AgainstInfo.SelectRegion = null;
             await Task.Run(() =>
             {
-                while (Info.AgainstInfo.SelectRegion == null) { }
+                while (Info.AgainstInfo.SelectRegion == null)
+                {
+                    StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
+                }
             });
             Command.Network.NetCommand.AsyncInfo(NetAcyncType.FocusRegion);
             AgainstInfo.IsWaitForSelectRegion = false;
@@ -211,6 +231,7 @@ namespace Command
             {
                 while (AgainstInfo.SelectLocation < 0)
                 {
+                    StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
                     if (AgainstInfo.isAIControl)
                     {
                         await Task.Delay(1000);
@@ -239,7 +260,10 @@ namespace Command
             {
                 await Task.Delay(500);
                 GameUI.UiCommand.SetArrowShow();
-                while (Info.AgainstInfo.SelectUnits.Count < Math.Min(Cards.Count, num)) { }
+                while (Info.AgainstInfo.SelectUnits.Count < Math.Min(Cards.Count, num)) 
+                {
+                    StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
+                }
                 Debug.Log("选择单位完毕" + Math.Min(Cards.Count, num));
                 Command.Network.NetCommand.AsyncInfo(GameEnum.NetAcyncType.SelectUnites);
                 await Task.Delay(250);
