@@ -16,21 +16,12 @@ namespace Control
         }
         public void UserRegister()
         {
-            GeneralCommand<int> msg = Command.Network.NetCommand.Register(UserName.text, Password.text).ToObject<GeneralCommand<int>>();
-            if (msg.Datas[0] == 1)
-            {
-                print("注册成功");
-            }
-            if (msg.Datas[0] == -1)
-            {
-                print("账号已存在");
-            }
+            Command.Network.NetCommand.Register(UserName.text, Password.text);
         }
         public void UserLogin()
         {
-            GeneralCommand<string> msg = Command.Network.NetCommand.Login(UserName.text, Password.text).ToObject<GeneralCommand<string>>();
-            Info.AllPlayerInfo.UserInfo = msg.Datas[1].ToObject<PlayerInfo>();
-            SceneManager.LoadSceneAsync(1);
+            Command.Network.NetCommand.Login(UserName.text, Password.text);
+
         }
     }
 }

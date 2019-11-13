@@ -161,10 +161,6 @@
     <Compile Include="Assets\Script\9_GloableScene\Extension\Extension.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Extension\RowInfoExtension.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Interactive\InteractiveControl.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Network - 复制\NetCommand.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Network - 复制\NetExtern.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Network - 复制\NetInfoModel.cs" />
-    <Compile Include="Assets\Script\9_GloableScene\Network\NetClient.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Network\NetCommand.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Network\NetExtern.cs" />
     <Compile Include="Assets\Script\9_GloableScene\Network\NetInfoModel.cs" />
