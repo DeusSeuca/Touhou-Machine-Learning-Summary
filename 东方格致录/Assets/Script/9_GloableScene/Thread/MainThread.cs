@@ -7,8 +7,8 @@ namespace Thread
 {
     public class MainThread : MonoBehaviour
     {
-        [ShowInInspector]
         static Queue<Action> TargetAction = new Queue<Action>();
+        //private void Start() => TargetAction = new Queue<Action>();
         public static void Run(Action RunAction) => TargetAction.Enqueue(RunAction);
         void Update()
         {

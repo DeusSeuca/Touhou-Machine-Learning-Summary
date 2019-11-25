@@ -12,7 +12,7 @@ namespace Command
         public static int GetRandom(int Min, int Max) => rand.Next(Min, Max);
         public static async Task TempOperationPlayCard()
         {
-            if ((Info.AgainstInfo.IsDownPass) && PointInfo.TotalDownPoint < PointInfo.TotalUpPoint)
+            if ((Info.AgainstInfo.IsDownPass && PointInfo.TotalDownPoint < PointInfo.TotalUpPoint)||AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].cardList.Count==0)
             {
                 GameUI.UiCommand.SetCurrentPass();
             }

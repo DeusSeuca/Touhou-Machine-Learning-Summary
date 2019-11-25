@@ -22,14 +22,14 @@ public class CardSet
     [HideInInspector]
     public List<Card> cardList = null;
 
-    public void Init()
-    {
-        if (cardList == null)
-        {
-            Debug.Log("初始化" + cardList);
-            cardList = globalCardList.SelectMany(x => x).ToList();
-        }
-    }
+    //public void Init()
+    //{
+    //    if (cardList == null)
+    //    {
+    //        Debug.Log("初始化" + cardList);
+    //        cardList = globalCardList.SelectMany(x => x).ToList();
+    //    }
+    //}
     public CardSet()
     {
         globalCardList.Clear();

@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class test : MonoBehaviour
 {
@@ -16,22 +17,24 @@ public class test : MonoBehaviour
     [Button]
     public void test1()
     {
+        //SceneManager.LoadSceneAsync(2);
+        Command.StateCommand.Surrender();
         //Debug.Log(AgainstInfo.IsCurrectPass);
-        Task.Run(() =>
-        {
-            //Debug.Log(AgainstInfo.IsCurrectPass);
-        });
+        //Task.Run(() =>
+        //{
+        //    //Debug.Log(AgainstInfo.IsCurrectPass);
+        //});
 
-        if (AgainstInfo.IsCardEffectCompleted)
-        {
-            Debug.Log("执行完毕？");
-            AgainstInfo.IsCardEffectCompleted = false;
-        }
-        if (AgainstInfo.IsCurrectPass)
-        {
-            Debug.Log("当前pass？");
-            AgainstInfo.IsCardEffectCompleted = false;
-        }
+        //if (AgainstInfo.IsCardEffectCompleted)
+        //{
+        //    Debug.Log("执行完毕？");
+        //    AgainstInfo.IsCardEffectCompleted = false;
+        //}
+        //if (AgainstInfo.IsCurrectPass)
+        //{
+        //    Debug.Log("当前pass？");
+        //    AgainstInfo.IsCardEffectCompleted = false;
+        //}
 
 
         //print("ya");

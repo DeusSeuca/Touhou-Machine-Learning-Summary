@@ -7,8 +7,9 @@ namespace Network
 {
     public class NetClient : MonoBehaviour
     {
-        static IPEndPoint ip = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 495);
-        static ConnectionInfo connInfo = new ConnectionInfo(ip);
+        public static IPEndPoint ip = new IPEndPoint(IPAddress.Parse("47.100.119.84"), 39526);
+        //static IPEndPoint ip = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 514);
+        public static ConnectionInfo connInfo = new ConnectionInfo(ip);
         public static Connection Client = TCPConnection.GetConnection(connInfo);
     }
 }
