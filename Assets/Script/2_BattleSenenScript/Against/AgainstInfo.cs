@@ -32,14 +32,18 @@ namespace Info
         public static Card PlayerFocusCard;
         public static Card OpponentFocusCard;
         public static Card PlayerPlayCard;
+        //选择属性
+        public static Region SelectProperty { get; set; }
+        public static bool IsWaitForSelectProperty { get; set; }
 
-        public static SingleRowInfo PlayerFocusRegion;
-        public static bool IsWaitForSelectRegion;
-        public static SingleRowInfo SelectRegion;
+        //选择的区域
+        public static SingleRowInfo PlayerFocusRegion { get; set; }
+        public static bool IsWaitForSelectRegion { get; set; }
+        public static SingleRowInfo SelectRegion { get; set; }
         //选择的单位
-        public static Card ArrowStartCard;
-        public static Card ArrowEndCard;
-        public static bool IsWaitForSelectUnits;
+        public static Card ArrowStartCard { get; set; }
+        public static Card ArrowEndCard { get; set; }
+        public static bool IsWaitForSelectUnits { get; set; }
         public static List<Card> SelectUnits = new List<Card>();//玩家选择的单位
         //选择的坐标
         public static Vector3 FocusPoint;
@@ -52,7 +56,8 @@ namespace Info
         public static bool IsMyTurn = true;
         public static bool IsPVP = false;
         public static bool IsPVE => !IsPVP;
-        public static bool isAIControl = false;
+        //public static bool isTimeout { get; set; }
+        public static bool isAIControl => IsPVE && (!IsMyTurn || Timer.isTimeout);
 
         public static CardSet cardSet = new CardSet();
 

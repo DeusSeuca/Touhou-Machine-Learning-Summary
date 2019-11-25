@@ -12,7 +12,7 @@ namespace Control
         void Start()
         {
             Command.Network.NetCommand.Init();
-            Command.Network.NetCommand.Login("", "");
+            //Command.Network.NetCommand.Login("", "");
 
             //UserLogin();//自动登录
         }

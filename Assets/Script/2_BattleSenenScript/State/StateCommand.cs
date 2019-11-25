@@ -32,8 +32,24 @@ namespace Command
             await Task.Delay(500);
             if (!AgainstInfo.IsPVP)
             {
-                AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1001, new List<int> { 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015 }) });
-                AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo("gezi", "yaya", new List<CardDeck> { new CardDeck("gezi", 1001, new List<int> { 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015 }) });
+                AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo(
+                    "gezi", "yaya",
+                    new List<CardDeck>
+                    {
+                        new CardDeck("gezi", 1001, new List<int>
+                        {
+                            1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 10161
+                        })
+                    });
+                AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo(
+                    "gezi", "yaya",
+                    new List<CardDeck>
+                    {
+                        new CardDeck("gezi", 1001, new List<int>
+                        {
+                            1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016
+                        })
+                    });
             }
             RowCommand.SetAllRegionSelectable(RegionTypes.None);
             await Task.Run(async () =>
@@ -161,7 +177,7 @@ namespace Command
                 //await Task.Delay(000);
                 AgainstInfo.IsCardEffectCompleted = false;
                 RowCommand.SetPlayCardLimit(!AgainstInfo.IsMyTurn);
-                AgainstInfo.isAIControl = AgainstInfo.IsPVE && !AgainstInfo.IsMyTurn;
+                //AgainstInfo.isAIControl = AgainstInfo.IsPVE && !AgainstInfo.IsMyTurn;
                 await Task.Delay(000);
             });
         }
@@ -179,18 +195,19 @@ namespace Command
         }
         public static async Task WaitForPlayerOperation()
         {
+            Timer.SetIsTimerStart(5);
             await Task.Run(async () =>
             {
                 Debug.Log("出牌");
-                if (AgainstInfo.isAIControl)
-                {
-                    Debug.Log("自动出牌");
-                    await AiCommand.TempOperationPlayCard();
-                }
                 //当出牌,弃牌,pass时结束
                 while (true)
                 {
                     StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
+                    if (AgainstInfo.isAIControl)
+                    {
+                        Debug.Log("自动出牌");
+                        await AiCommand.TempOperationPlayCard();
+                    }
                     if (AgainstInfo.IsCardEffectCompleted)
                     {
                         AgainstInfo.IsCardEffectCompleted = false;
@@ -201,8 +218,35 @@ namespace Command
                         AgainstInfo.IsCardEffectCompleted = false;
                         break;
                     }
+                    await Task.Delay(1000);
                 }
             });
+            Timer.SetIsTimerClose();
+        }
+        public static async Task WaitForSelectProperty()
+        {
+            //放大硬币
+            AgainstInfo.IsWaitForSelectProperty = true;
+            AgainstInfo.SelectProperty = Region.None;
+            Timer.SetIsTimerStart(20);
+            AgainstInfo.SelectRegion = null;
+            await Task.Run(async () =>
+            {
+                while (AgainstInfo.SelectProperty == Region.None)
+                {
+                    StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
+                    if (AgainstInfo.isAIControl)
+                    {
+                        int rowRank = AiCommand.GetRandom(0, 5);
+                        AgainstInfo.SelectProperty = (Region)rowRank;
+                        Debug.Log("设置属性为" + AgainstInfo.SelectProperty);
+                    }
+                    await Task.Delay(1000);
+                }
+            });
+            Command.Network.NetCommand.AsyncInfo(NetAcyncType.SelectProperty);
+            Timer.SetIsTimerClose();
+            AgainstInfo.IsWaitForSelectProperty = false;
         }
         public static async Task WaitForSelectRegion()
         {
@@ -215,7 +259,7 @@ namespace Command
                     StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
                 }
             });
-            Command.Network.NetCommand.AsyncInfo(NetAcyncType.FocusRegion);
+            Command.Network.NetCommand.AsyncInfo(NetAcyncType.SelectRegion);
             AgainstInfo.IsWaitForSelectRegion = false;
         }
         public static async Task WaitForSelectLocation(Card card)
@@ -241,7 +285,7 @@ namespace Command
                 }
             });
             // Debug.Log("选择部署位置完毕");
-            Network.NetCommand.AsyncInfo(NetAcyncType.FocusLocation);
+            Network.NetCommand.AsyncInfo(NetAcyncType.SelectLocation);
             RowCommand.SetAllRegionSelectable(RegionTypes.None);
             AgainstInfo.IsWaitForSelectLocation = false;
         }

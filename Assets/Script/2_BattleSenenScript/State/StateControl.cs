@@ -7,13 +7,13 @@ namespace Control
     {
 
         void Start() => _ = BattleProcess();
-
         public async Task BattleProcess()
         {
             await StateCommand.BattleStart();
             for (int i = 0; i < 3; i++)
             {
                 await StateCommand.RoundStart(i);
+                await StateCommand.WaitForSelectProperty();
                 while (true)
                 {
                     await StateCommand.TurnStart();

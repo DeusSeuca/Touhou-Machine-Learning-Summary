@@ -20,15 +20,24 @@ namespace Control
         {
             Cards.ForEach(card => card.Trigger<T>());
         }
-        public void Trigger<T>()
+        public static void Trigger<T>(Card card)
         {
             List<Func<Task>> Steps = new List<Func<Task>>();
-            List<PropertyInfo> tasks = GetType().GetProperties().Where(x =>
+            List<PropertyInfo> tasks = card.GetType().GetProperties().Where(x =>
                 x.GetCustomAttributes(true).Count() > 0 && x.GetCustomAttributes(true)[0].GetType() == typeof(T)).ToList();
             tasks.Reverse();
-            tasks.Select(x => x.GetValue(this)).Cast<Func<Task>>().ToList().ForEach(CardEffectStackControl.TaskStack.Push);
+            tasks.Select(x => x.GetValue(card)).Cast<Func<Task>>().ToList().ForEach(TaskStack.Push);
             _ = Run();
         }
+        //public void Trigger<T>()
+        //{
+        //    List<Func<Task>> Steps = new List<Func<Task>>();
+        //    List<PropertyInfo> tasks = GetType().GetProperties().Where(x =>
+        //        x.GetCustomAttributes(true).Count() > 0 && x.GetCustomAttributes(true)[0].GetType() == typeof(T)).ToList();
+        //    tasks.Reverse();
+        //    tasks.Select(x => x.GetValue(this)).Cast<Func<Task>>().ToList().ForEach(CardEffectStackControl.TaskStack.Push);
+        //    _ = Run();
+        //}
         public static async Task Run()
         {
             if (!IsRuning)
