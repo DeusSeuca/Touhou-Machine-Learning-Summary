@@ -12,6 +12,7 @@ ScriptsOnlyBuild:
     - Control.StateControl
     - Control.UserLoginControl
     - Control.UserModeControl
+    - EnumToggleButtonsAttributeExample
     - GameUI.ArrowEndPoint
     - GameUI.BoardCardInfo
     - Info.AllPlayerInfo
@@ -22,6 +23,7 @@ ScriptsOnlyBuild:
     - Info.RowsInfo
     - Info.SingleRowInfo
     - Thread.MainThread
+    - Timer
     - test
     Sirenix.OdinInspector.Editor.dll:
     - Sirenix.OdinInspector.Editor.ImportSettingsConfig
@@ -159,53 +161,53 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13680}
     - Class: 114
-      Script: {instanceID: 13844}
+      Script: {instanceID: 13846}
     - Class: 114
-      Script: {instanceID: 13864}
+      Script: {instanceID: 13866}
     - Class: 114
-      Script: {instanceID: 13976}
+      Script: {instanceID: 13978}
     - Class: 114
-      Script: {instanceID: 13996}
+      Script: {instanceID: 13998}
     - Class: 114
-      Script: {instanceID: 14124}
+      Script: {instanceID: 14126}
     - Class: 114
-      Script: {instanceID: 14152}
+      Script: {instanceID: 14154}
     - Class: 114
-      Script: {instanceID: 14160}
+      Script: {instanceID: 14162}
     - Class: 114
-      Script: {instanceID: 14230}
+      Script: {instanceID: 14232}
     - Class: 114
-      Script: {instanceID: 14478}
+      Script: {instanceID: 14480}
     - Class: 114
-      Script: {instanceID: 14494}
+      Script: {instanceID: 14496}
     - Class: 114
-      Script: {instanceID: 14548}
+      Script: {instanceID: 14550}
     - Class: 114
-      Script: {instanceID: 14580}
+      Script: {instanceID: 14584}
     - Class: 114
-      Script: {instanceID: 14732}
+      Script: {instanceID: 14736}
     - Class: 114
-      Script: {instanceID: 14788}
+      Script: {instanceID: 14792}
     - Class: 114
-      Script: {instanceID: 14982}
+      Script: {instanceID: 14986}
     - Class: 114
-      Script: {instanceID: 15032}
+      Script: {instanceID: 15036}
     - Class: 114
-      Script: {instanceID: 15236}
+      Script: {instanceID: 15240}
     - Class: 114
-      Script: {instanceID: 15238}
+      Script: {instanceID: 15242}
     - Class: 114
-      Script: {instanceID: 15270}
+      Script: {instanceID: 15274}
     - Class: 114
-      Script: {instanceID: 15300}
+      Script: {instanceID: 15304}
     - Class: 114
-      Script: {instanceID: 15302}
+      Script: {instanceID: 15306}
     - Class: 114
-      Script: {instanceID: 15352}
+      Script: {instanceID: 15356}
     - Class: 114
-      Script: {instanceID: 15432}
+      Script: {instanceID: 15436}
     - Class: 114
-      Script: {instanceID: 15438}
+      Script: {instanceID: 15442}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -252,13 +254,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13504}
     - Class: 114
-      Script: {instanceID: 14494}
+      Script: {instanceID: 14496}
     - Class: 114
-      Script: {instanceID: 14532}
+      Script: {instanceID: 14534}
     - Class: 114
-      Script: {instanceID: 14732}
+      Script: {instanceID: 14736}
     - Class: 114
-      Script: {instanceID: 15270}
+      Script: {instanceID: 15274}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -343,39 +345,43 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13680}
     - Class: 114
-      Script: {instanceID: 13976}
+      Script: {instanceID: 13688}
     - Class: 114
-      Script: {instanceID: 14094}
+      Script: {instanceID: 13978}
     - Class: 114
-      Script: {instanceID: 14186}
+      Script: {instanceID: 14096}
     - Class: 114
-      Script: {instanceID: 14348}
+      Script: {instanceID: 14188}
     - Class: 114
-      Script: {instanceID: 14494}
+      Script: {instanceID: 14350}
     - Class: 114
-      Script: {instanceID: 14580}
+      Script: {instanceID: 14496}
     - Class: 114
-      Script: {instanceID: 14690}
+      Script: {instanceID: 14568}
     - Class: 114
-      Script: {instanceID: 14732}
+      Script: {instanceID: 14584}
     - Class: 114
-      Script: {instanceID: 14820}
+      Script: {instanceID: 14694}
     - Class: 114
-      Script: {instanceID: 14924}
+      Script: {instanceID: 14736}
     - Class: 114
-      Script: {instanceID: 15004}
+      Script: {instanceID: 14824}
     - Class: 114
-      Script: {instanceID: 15142}
+      Script: {instanceID: 14928}
     - Class: 114
-      Script: {instanceID: 15182}
+      Script: {instanceID: 15008}
     - Class: 114
-      Script: {instanceID: 15270}
+      Script: {instanceID: 15146}
     - Class: 114
-      Script: {instanceID: 15276}
+      Script: {instanceID: 15186}
     - Class: 114
-      Script: {instanceID: 15286}
+      Script: {instanceID: 15274}
     - Class: 114
-      Script: {instanceID: 15364}
+      Script: {instanceID: 15280}
+    - Class: 114
+      Script: {instanceID: 15290}
+    - Class: 114
+      Script: {instanceID: 15368}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -951,7 +957,7 @@ ScriptsOnlyBuild:
     className: IntroductionControl
   - hash:
       serializedVersion: 2
-      Hash: 8806c3b979621fd8c96e030df412a490
+      Hash: 3cac3372e2bba1520a61a20de3dbb637
     assemblyName: Assembly-CSharp.dll
     namespaceName: CardInspector
     className: CardLibrarySaveData
@@ -1087,6 +1093,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnumToggleButtonsAttributeExample
   - hash:
       serializedVersion: 2
       Hash: 362f6d683348679954dbb2905ebe2b26
@@ -1459,6 +1471,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.RenderPipelines.Core.Runtime.dll
     namespaceName: UnityEngine.Rendering.UI
     className: DebugUIHandlerValue
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Timer
   - hash:
       serializedVersion: 2
       Hash: 34b96d96e6be7264ba2020c2c365bdb1

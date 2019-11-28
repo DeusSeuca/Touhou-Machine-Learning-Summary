@@ -15,7 +15,7 @@ namespace CardInspector
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(700, 700);
         }
         //会导致画面闪烁
-        // private void OnInspectorUpdate() => ForceMenuTreeRebuild();
+        //private void OnInspectorUpdate() => ForceMenuTreeRebuild();
         protected override OdinMenuTree BuildMenuTree()
         {
 

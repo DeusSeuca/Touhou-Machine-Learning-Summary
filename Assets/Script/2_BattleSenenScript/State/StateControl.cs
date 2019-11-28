@@ -19,7 +19,7 @@ namespace Control
                     await StateCommand.TurnStart();
                     await StateCommand.WaitForPlayerOperation();
                     await StateCommand.TurnEnd();
-                    if (Info.AgainstInfo.IsBoothPass) { break; }
+                    if (Info.AgainstInfo.isBoothPass) { break; }
                 }
                 await StateCommand.RoundEnd(i);
             }

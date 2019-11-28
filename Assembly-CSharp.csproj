@@ -137,6 +137,7 @@
     <Compile Include="Assets\Script\9_MixedScene\Test\leimi.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Test\test.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Thread\MainThread.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\Timer\EnumToggleButtonsAttributeExample.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Timer\Timer.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\Arrow\ArrowEndPoint.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\Arrow\ArrowManager.cs" />

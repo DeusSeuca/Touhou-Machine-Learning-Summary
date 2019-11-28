@@ -23,8 +23,7 @@ namespace Network
             public string Password;
             public int Level;
             public int Rank;
-            public int Faith;
-            public int Recharge;
+            public Dictionary<string, int> Resource { get; set; }
             public int UseDeckNum;
             public List<CardDeck> Deck;
             public CardDeck UseDeck => Deck[UseDeckNum];
@@ -36,9 +35,10 @@ namespace Network
                 this.Password = Password;
                 Level = 0;
                 Rank = 0;
-                Faith = 0;
-                Recharge = 0;
                 UseDeckNum = 0;
+                Resource = new Dictionary<string, int>();
+                Resource.Add("faith", 0);
+                Resource.Add("recharge", 0);
             }
 
         }

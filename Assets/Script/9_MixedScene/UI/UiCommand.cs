@@ -98,8 +98,8 @@ namespace Command
                     Info.GameUI.UiInfo.MyPass.SetActive(true);
                     switch (Info.AgainstInfo.IsMyTurn)
                     {
-                        case true: Info.AgainstInfo.IsDownPass = true; break;
-                        case false: Info.AgainstInfo.IsUpPass = true; break;
+                        case true: Info.AgainstInfo.isDownPass = true; break;
+                        case false: Info.AgainstInfo.isUpPass = true; break;
                     }
                 });
             }
@@ -109,8 +109,8 @@ namespace Command
                 {
                     Info.GameUI.UiInfo.MyPass.SetActive(false);
                     Info.GameUI.UiInfo.OpPass.SetActive(false);
-                    Info.AgainstInfo.IsUpPass = false;
-                    Info.AgainstInfo.IsDownPass = false;
+                    Info.AgainstInfo.isUpPass = false;
+                    Info.AgainstInfo.isDownPass = false;
                 });
             }
         }

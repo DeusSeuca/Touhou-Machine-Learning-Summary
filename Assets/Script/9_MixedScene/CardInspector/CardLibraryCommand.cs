@@ -20,11 +20,11 @@ namespace Command
             static string[] CsvData => File.ReadAllLines("Assets\\Resources\\CardData\\CardData.01.csv", Encoding.GetEncoding("gb2312"));
             public static void CreatScript(int cardId)
             {
-                string targetPath = Application.dataPath + $@"\Script\9_GloableScene\CardSpace\Card{cardId}.cs";
+                string targetPath = Application.dataPath + $@"\Script\9_MixedScene\CardSpace\Card{cardId}.cs";
 
                 if (!File.Exists(targetPath))
                 {
-                    string OriginPath = Application.dataPath + @"\Script\9_GloableScene\CardSpace\Card0.cs";
+                    string OriginPath = Application.dataPath + @"\Script\9_MixedScene\CardSpace\Card0.cs";
                     string ScriptText = File.ReadAllText(OriginPath).Replace("Card0", "Card" + cardId);
                     File.Create(targetPath).Close();
                     File.WriteAllText(targetPath, ScriptText);

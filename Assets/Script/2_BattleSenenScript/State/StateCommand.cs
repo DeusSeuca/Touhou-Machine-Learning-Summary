@@ -19,6 +19,8 @@ namespace Command
     {
         public static async Task BattleStart()
         {
+
+
             AgainstInfo.cardSet = new CardSet();
             Info.StateInfo.TaskManager = new System.Threading.CancellationTokenSource();
             MainThread.Run(() =>
@@ -38,7 +40,7 @@ namespace Command
                     {
                         new CardDeck("gezi", 1001, new List<int>
                         {
-                            1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 10161
+                            1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016
                         })
                     });
                 AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo(
@@ -110,7 +112,7 @@ namespace Command
                 {
                     case (0):
                         {
-                            Info.AgainstInfo.ExChangeableCardNum = 3;
+                            Info.AgainstInfo.ExChangeableCardNum = 0;
                             Info.GameUI.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.AgainstInfo.ExChangeableCardNum;
                             for (int i = 0; i < 10; i++)
                             {
@@ -195,6 +197,7 @@ namespace Command
         }
         public static async Task WaitForPlayerOperation()
         {
+            bool isFirstOperation = true;
             Timer.SetIsTimerStart(5);
             await Task.Run(async () =>
             {
@@ -203,8 +206,13 @@ namespace Command
                 while (true)
                 {
                     StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
-                    if (AgainstInfo.isAIControl)
+                    if (Timer.isTimeout)
                     {
+                        Debug.Log("超时");
+                    }
+                    if (AgainstInfo.isAIControl&& isFirstOperation)
+                    {
+                        isFirstOperation = false;
                         Debug.Log("自动出牌");
                         await AiCommand.TempOperationPlayCard();
                     }
@@ -213,7 +221,7 @@ namespace Command
                         AgainstInfo.IsCardEffectCompleted = false;
                         break;
                     }
-                    if (AgainstInfo.IsCurrectPass)
+                    if (AgainstInfo.isCurrectPass)
                     {
                         AgainstInfo.IsCardEffectCompleted = false;
                         break;
@@ -228,15 +236,17 @@ namespace Command
             //放大硬币
             AgainstInfo.IsWaitForSelectProperty = true;
             AgainstInfo.SelectProperty = Region.None;
-            Timer.SetIsTimerStart(20);
-            AgainstInfo.SelectRegion = null;
+            Timer.SetIsTimerStart(3);
+            //AgainstInfo.SelectRegion = null;
             await Task.Run(async () =>
             {
+                Debug.Log("等待选择属性");
                 while (AgainstInfo.SelectProperty == Region.None)
                 {
                     StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
                     if (AgainstInfo.isAIControl)
                     {
+                        Debug.Log("自动选择属性");
                         int rowRank = AiCommand.GetRandom(0, 5);
                         AgainstInfo.SelectProperty = (Region)rowRank;
                         Debug.Log("设置属性为" + AgainstInfo.SelectProperty);
@@ -383,6 +393,5 @@ namespace Command
             });
         }
     }
-
 }
 

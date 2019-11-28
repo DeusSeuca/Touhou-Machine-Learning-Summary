@@ -16,7 +16,7 @@ namespace Info
         public RegionTypes region;
         public bool CanBeSelected;
         [ShowInInspector]
-        public int rank => (int)region + (AgainstInfo.IsPlayer1 ^ (orientation == Orientation.Down) ? 9 : 0);
+        public int rank => (int)region + (AgainstInfo.isPlayer1 ^ (orientation == Orientation.Down) ? 9 : 0);
         private void Awake() => AgainstInfo.cardSet.singleRowInfos.Add(this);
         public int Location => this.JudgeRank(AgainstInfo.FocusPoint);
         public int RowRank => CardSet.globalCardList.IndexOf(ThisRowCards);

@@ -96,10 +96,10 @@ namespace Command
                     object[] ReceiveInfo = e.Data.ToObject<GeneralCommand>().Datas;
                     Info.AgainstInfo.RoomID = int.Parse(ReceiveInfo[0].ToString());
                     Debug.Log("房间号为" + Info.AgainstInfo.RoomID);
-                    Info.AgainstInfo.IsPlayer1 = (bool)ReceiveInfo[1];
-                    Debug.Log("是否玩家1？：" + Info.AgainstInfo.IsPlayer1);
+                    Info.AgainstInfo.isPlayer1 = (bool)ReceiveInfo[1];
+                    Debug.Log("是否玩家1？：" + Info.AgainstInfo.isPlayer1);
                     Info.AgainstInfo.IsPVP = true;
-                    Info.AgainstInfo.IsMyTurn = Info.AgainstInfo.IsPlayer1;
+                    Info.AgainstInfo.IsMyTurn = Info.AgainstInfo.isPlayer1;
                     Info.AllPlayerInfo.UserInfo = ReceiveInfo[2].ToString().ToObject<PlayerInfo>();
                     Info.AllPlayerInfo.OpponentInfo = ReceiveInfo[3].ToString().ToObject<PlayerInfo>();
                     Debug.Log("收到回应: " + e.Data);
@@ -206,8 +206,8 @@ namespace Command
                     Debug.Log("连接失败" + e.Message);
                     Debug.Log("连接失败" + e.Exception);
                 };
-                Debug.LogError("初始化数据" + new GeneralCommand(NetAcyncType.Init, Info.AgainstInfo.RoomID, Info.AgainstInfo.IsPlayer1).ToJson());
-                AsyncConnect.Send(new GeneralCommand(NetAcyncType.Init, Info.AgainstInfo.RoomID, Info.AgainstInfo.IsPlayer1).ToJson());
+                Debug.LogError("初始化数据" + new GeneralCommand(NetAcyncType.Init, Info.AgainstInfo.RoomID, Info.AgainstInfo.isPlayer1).ToJson());
+                AsyncConnect.Send(new GeneralCommand(NetAcyncType.Init, Info.AgainstInfo.RoomID, Info.AgainstInfo.isPlayer1).ToJson());
 
             }
             public static void AsyncInfo(NetAcyncType AcyncType)

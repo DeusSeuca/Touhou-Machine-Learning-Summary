@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23449c37c76c84b4ab05445f817bc7a9, type: 3}
   m_Name: SaveData
   m_EditorClassIdentifier: 
+  DefaultEnumBitmask: 14
+  SomeEnumField: 4
+  WideEnumField: 3
+  BitmaskEnumField: 0
+  EnumFieldWide: 4
+  test: 4
   Icon: {fileID: 2800000, guid: a78bffbeb81b48ae9ec71ad7969613e5, type: 3}
   LibraryCardCount: 0
   cards:

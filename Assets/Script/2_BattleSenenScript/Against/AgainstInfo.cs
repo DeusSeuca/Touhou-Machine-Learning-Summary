@@ -62,15 +62,15 @@ namespace Info
         public static CardSet cardSet = new CardSet();
 
         public static List<Card> AllCardList => CardSet.globalCardList.SelectMany(x => x).ToList();
-        public static bool IsPlayer1 = true;
+        public static bool isPlayer1 = true;
         public static (int P1Score, int P2Score) PlayerScore;
-        public static (int MyScore, int OpScore) ShowScore => IsPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);
+        public static (int MyScore, int OpScore) ShowScore => isPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);
         //internal static bool IsBattleEnd;
 
-        public static bool IsUpPass = false;
-        public static bool IsDownPass = false;
-        public static bool IsCurrectPass => IsMyTurn ? IsDownPass : IsUpPass;
+        public static bool isUpPass = false;
+        public static bool isDownPass = false;
+        public static bool isCurrectPass => IsMyTurn ? isDownPass : isUpPass;
 
-        public static bool IsBoothPass => IsUpPass && IsDownPass;
+        public static bool isBoothPass => isUpPass && isDownPass;
     };
 }
