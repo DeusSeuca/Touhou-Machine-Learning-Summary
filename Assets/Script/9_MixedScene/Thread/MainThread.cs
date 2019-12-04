@@ -16,7 +16,15 @@ namespace Thread
             {
                 for (int i = 0; i < TargetAction.Count; i++)
                 {
-                    TargetAction.Dequeue()();
+                    try
+                    {
+                        TargetAction.Dequeue()();
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log(e);
+                        throw;
+                    }
                 }
             }
         }

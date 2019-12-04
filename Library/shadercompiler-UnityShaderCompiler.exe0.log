@@ -1,32 +1,102 @@
 Base path: 'C:/Program Files/Unity/Hub/Editor/2020.1.0a12/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2020.1.0a12/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
-Cmd: preprocessCompute
-  insize=18277 outsize=18299 ok=1
-Cmd: preprocessCompute
-  insize=1170 outsize=1176 ok=1
-Cmd: preprocessCompute
-  insize=1448 outsize=1454 ok=1
-Cmd: preprocessCompute
-  insize=4847 outsize=4855 ok=1
-Cmd: preprocessCompute
-  insize=1800 outsize=1806 ok=1
-Cmd: preprocessCompute
-  insize=3064 outsize=3070 ok=1
-Cmd: preprocessCompute
-  insize=10871 outsize=10881 ok=1
-Cmd: preprocessCompute
-  insize=2038 outsize=2044 ok=1
-Cmd: preprocessCompute
-  insize=2053 outsize=2059 ok=1
-Cmd: preprocessCompute
-  insize=3390 outsize=3396 ok=1
-Cmd: preprocessCompute
-  insize=3066 outsize=3072 ok=1
-Cmd: preprocessCompute
-  insize=5431 outsize=5435 ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=8409 outsize=2249 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHTMAP_RGBM_ENCODING ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=6640 outsize=0 kw=UNITY_PASS_SHADOWCASTER pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHTMAP_RGBM_ENCODING ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=8945 outsize=0 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHTMAP_RGBM_ENCODING ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1
+Cmd: preprocess
+  insize=1516 outsize=295 ok=1

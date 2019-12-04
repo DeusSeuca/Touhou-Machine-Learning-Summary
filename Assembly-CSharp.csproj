@@ -143,6 +143,8 @@
     <Compile Include="Assets\Script\9_MixedScene\UI\Arrow\ArrowManager.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\CardBoard\BoardCardInfo.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\CardBoard\CardBoardCommand.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\UI\CoinControl.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\UI\CoinControl_new.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\IntroductionControl.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\NoticeControl.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\UiCommand.cs" />
