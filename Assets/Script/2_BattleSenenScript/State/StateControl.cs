@@ -6,7 +6,7 @@ namespace Control
     public class StateControl : MonoBehaviour
     {
 
-        //void Start() => _ = BattleProcess();
+        void Start() => _ = BattleProcess();
         public async Task BattleProcess()
         {
             await StateCommand.BattleStart();

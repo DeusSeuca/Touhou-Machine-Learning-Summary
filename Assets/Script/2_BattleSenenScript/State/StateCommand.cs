@@ -210,7 +210,7 @@ namespace Command
                     {
                         Debug.Log("超时");
                     }
-                    if (AgainstInfo.isAIControl&& isFirstOperation)
+                    if (AgainstInfo.isAIControl && isFirstOperation)
                     {
                         isFirstOperation = false;
                         Debug.Log("自动出牌");
@@ -234,9 +234,12 @@ namespace Command
         public static async Task WaitForSelectProperty()
         {
             //放大硬币
+            CoinControl.ScaleUp();
+            await Task.Delay(1000);
+            CoinControl.Unfold();
             AgainstInfo.IsWaitForSelectProperty = true;
             AgainstInfo.SelectProperty = Region.None;
-            Timer.SetIsTimerStart(3);
+            Timer.SetIsTimerStart(10);
             //AgainstInfo.SelectRegion = null;
             await Task.Run(async () =>
             {
@@ -247,8 +250,9 @@ namespace Command
                     if (AgainstInfo.isAIControl)
                     {
                         Debug.Log("自动选择属性");
-                        int rowRank = AiCommand.GetRandom(0, 5);
-                        AgainstInfo.SelectProperty = (Region)rowRank;
+                        int rowRank = AiCommand.GetRandom(0, 4);
+                        CoinControl.ChangeProperty((Region)rowRank);
+                        //AgainstInfo.SelectProperty = (Region)rowRank;
                         Debug.Log("设置属性为" + AgainstInfo.SelectProperty);
                     }
                     await Task.Delay(1000);
@@ -257,6 +261,8 @@ namespace Command
             Command.Network.NetCommand.AsyncInfo(NetAcyncType.SelectProperty);
             Timer.SetIsTimerClose();
             AgainstInfo.IsWaitForSelectProperty = false;
+            await Task.Delay(1000);
+            CoinControl.ScaleDown();
         }
         public static async Task WaitForSelectRegion()
         {

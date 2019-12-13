@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using GameEnum;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,18 +8,40 @@ using UnityEngine;
 
 public class CoinControl : MonoBehaviour
 {
-    AnimationCurve curve;
+    public AnimationCurve regionCcurve;
+    public AnimationCurve campCcurve;
+    public AnimationCurve centerCcurve;
+    public AnimationCurve scaleCcurve;
+    public GameObject camp;
     public GameObject center;
-    public GameObject roatePoint;
-    public GameObject water;
-    public GameObject fire;
-    public GameObject wind;
-    public GameObject soil;
+    public List<GameObject> Regions;
+
+    static float regionTime;
+    static Vector3 regions_start;
+    static Vector3 regions_end;
+
+    static float campTime;
+    static Vector3 camp_start;
+    static Vector3 camp_end;
+
+    static float centerTime;
+    static Vector3 center_start;
+    static Vector3 center_end;
+
+    static float scaleTime;
+    static Vector3 scalePos_start;
+    static Vector3 scalePos_end;
+    static Vector3 targetCoinScale = Vector3.one;
+
     [ShowInInspector]
+    public Vector3 startpos => transform.position;
+    [ShowInInspector]
+    public Vector3 endpos => transform.localPosition;
     // Start is called before the first frame update
     void Start()
     {
-       
+        scalePos_start = transform.position;
+        scalePos_end = transform.position;
         Task.Run(async () =>
         {
             await Task.Delay(1000);
@@ -35,92 +58,70 @@ public class CoinControl : MonoBehaviour
             }
         });
     }
-    [Button("切换属性")]
-    public void ChangeProperty(GameEnum.Region region)
+    private void Update()
     {
-        Unfold();
-        Vector3 start = roatePoint.transform.eulerAngles;
-        Vector3 end = new Vector3(0, 0, 450 + (int)region * 90);
-        Task.Run(async () =>
+        Regions.ForEach(region => region.transform.localPosition = Vector3.Lerp(regions_start, regions_end, regionCcurve.Evaluate(Time.time - regionTime)));
+        camp.transform.eulerAngles = Vector3.Lerp(camp_start, camp_end, campCcurve.Evaluate(Time.time - campTime));
+        center.transform.eulerAngles = Vector3.Lerp(center_start, center_end, centerCcurve.Evaluate((Time.time - centerTime)));
+        transform.position = Vector3.Lerp(transform.position, scalePos_end, Time.deltaTime * 5);
+        transform.localScale = Vector3.Lerp(transform.localScale, targetCoinScale, Time.deltaTime * 5);
+    }
+    public static void ChangeProperty(int i)
+    {
+        if (Info.AgainstInfo.IsWaitForSelectProperty)
         {
-            await Task.Delay(1000);
-            for (int i = 0; i < 100; i++)
-            {
-                MainThread.Run(() =>
-                {
-                    roatePoint.transform.eulerAngles = Vector3.Lerp(start, end, i / 100f);
-                });
-                await Task.Delay(10);
-            }
-            await Task.Delay(500);
+            ChangeProperty((Region)i);
+        }
+    }
+
+    [Button("切换属性")]
+    public static void ChangeProperty(Region region)
+    {
+        Task.Run(async () =>
+        {           
+            Info.AgainstInfo.SelectProperty = region;
             MainThread.Run(() =>
             {
-                Fold();
+                center_end = new Vector3(0, 0, 360 + (int)region * 90);
+                centerTime = Time.time;
             });
+            await Task.Delay(1000);
+            MainThread.Run(() => Fold());
+
         });
     }
     // Update is called once per frame
     [Button("展开")]
-    public void Unfold()
+    public static void Unfold()
     {
-        Vector3 start = Vector3.zero;
-        Vector3 end_water = new Vector3(25, 0, 0);
-        Vector3 end_fire = new Vector3(0, -25, 0);
-        Vector3 end_wind = new Vector3(-25, 0, 0);
-        Vector3 end_soil = new Vector3(0, 25, 0);
-        Task.Run(async () =>
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                MainThread.Run(() =>
-                {
-                    water.transform.localPosition = Vector3.Lerp(start, end_water, i / 100f);
-                    fire.transform.localPosition = Vector3.Lerp(start, end_fire, i / 100f);
-                    wind.transform.localPosition = Vector3.Lerp(start, end_wind, i / 100f);
-                    soil.transform.localPosition = Vector3.Lerp(start, end_soil, i / 100f);
-                });
-                await Task.Delay(5);
-            }
-        });
+        regions_start = new Vector3(0, 0, 0);
+        regions_end = new Vector3(0, 25, 0);
+        regionTime = Time.time;
     }
     [Button("关闭")]
-    public void Fold()
+    public static void Fold()
     {
-        Vector3 start_water = new Vector3(25, 0, 0);
-        Vector3 start_fire = new Vector3(0, -25, 0);
-        Vector3 start_wind = new Vector3(-25, 0, 0);
-        Vector3 start_soil = new Vector3(0, 25, 0);
-        Vector3 end = Vector3.zero;
-        Task.Run(async () =>
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                MainThread.Run(() =>
-                {
-                    water.transform.localPosition = Vector3.Lerp(start_water, end, i / 100f);
-                    fire.transform.localPosition = Vector3.Lerp(start_fire, end, i / 100f);
-                    wind.transform.localPosition = Vector3.Lerp(start_wind, end, i / 100f);
-                    soil.transform.localPosition = Vector3.Lerp(start_soil, end, i / 100f);
-                });
-                await Task.Delay(5);
-            }
-        });
+        regions_start = new Vector3(0, 25, 0);
+        regions_end = new Vector3(0, 0, 0);
+        regionTime = Time.time;
     }
     [Button("旋转")]
     public void ShowCurrentPlayerCoin(bool isMyturn)
     {
-        Vector3 start = new Vector3(0, isMyturn ? 180 : 0, 0);
-        Vector3 end = new Vector3(0, isMyturn ? 0 : 180, 0);
-        Task.Run(async () =>
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                MainThread.Run(() =>
-                {
-                    center.transform.eulerAngles = Vector3.Lerp(start, end, i / 100f);
-                });
-                await Task.Delay(100);
-            }
-        });
+        camp_start = new Vector3(0, isMyturn ? 180 : 0, 0);
+        camp_end = new Vector3(0, isMyturn ? 0 : 180, 0);
+        campTime = Time.time;
+    }
+    [Button("放大")]
+    public static void ScaleUp()
+    {
+        targetCoinScale = Vector3.one * 3;
+        scalePos_end = new Vector3(1920 / 2, 1080 / 2, 0);
+    }
+    [Button("缩小")]
+    public static void ScaleDown()
+    {
+        targetCoinScale = Vector3.one;
+        scalePos_end = scalePos_start;
     }
 }
