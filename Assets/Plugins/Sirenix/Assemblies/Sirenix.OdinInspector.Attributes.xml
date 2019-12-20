@@ -367,6 +367,11 @@
             If the button contains parameters, you can disable the foldout it creates by setting this to true.
             </summary>
         </member>
+        <member name="P:Sirenix.OdinInspector.ButtonAttribute.DrawResult">
+            <summary>
+            If the button has a return type, set this to false to not draw the result. Default value is true.
+            </summary>
+        </member>
         <member name="M:Sirenix.OdinInspector.ButtonAttribute.#ctor">
             <summary>
             Creates a button in the inspector named after the method.

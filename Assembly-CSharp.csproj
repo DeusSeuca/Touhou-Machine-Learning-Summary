@@ -786,10 +786,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Sirenix.OdinInspector.CompatibilityLayer.csproj">
-      <Project>{5797E9B8-830D-4632-3CB7-8FAC4D148CD3}</Project>
-      <Name>Sirenix.OdinInspector.CompatibilityLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj">
       <Project>{AADCB735-81E4-97E6-2A90-8DB07506B1A3}</Project>
       <Name>Sirenix.OdinInspector.CompatibilityLayer.Editor</Name>
