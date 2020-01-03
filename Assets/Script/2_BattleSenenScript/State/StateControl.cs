@@ -24,7 +24,7 @@ namespace Control
                 await StateCommand.RoundEnd(i);
             }
             await StateCommand.BattleEnd();
-            Debug.Log("完全中了");
+            Debug.Log("结束对局");
         }
     }
 }

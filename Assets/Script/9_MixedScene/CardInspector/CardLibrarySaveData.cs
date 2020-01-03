@@ -8,9 +8,6 @@ namespace CardInspector
     [CreateAssetMenu(fileName = "SaveData", menuName = "CreatCardDataAsset")]
     public partial class CardLibrarySaveData : ScriptableObject
     {
-       
-       
-
         [LabelText("牌库图标")]
         public Texture2D Icon;
         [ShowInInspector]

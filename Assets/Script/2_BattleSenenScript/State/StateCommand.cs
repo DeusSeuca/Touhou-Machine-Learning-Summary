@@ -94,7 +94,7 @@ namespace Command
                 await Task.Delay(2000);
                 MainThread.Run(() =>
                 {
-                    Debug.Log("释放");
+                    Debug.Log("释放线程资源");
                     StateInfo.TaskManager.Cancel();
                     SceneManager.LoadSceneAsync(1);
                 });
@@ -252,8 +252,6 @@ namespace Command
                         Debug.Log("自动选择属性");
                         int rowRank = AiCommand.GetRandom(0, 4);
                         CoinControl.ChangeProperty((Region)rowRank);
-                        //AgainstInfo.SelectProperty = (Region)rowRank;
-                        Debug.Log("设置属性为" + AgainstInfo.SelectProperty);
                     }
                     await Task.Delay(1000);
                 }

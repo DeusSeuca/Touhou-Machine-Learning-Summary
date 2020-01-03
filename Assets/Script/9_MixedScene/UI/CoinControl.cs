@@ -42,16 +42,26 @@ public class CoinControl : MonoBehaviour
     {
         scalePos_start = transform.position;
         scalePos_end = transform.position;
+        Debug.Log("当前进度为" + Timer.Process);
         Task.Run(async () =>
         {
+            Debug.Log("当前进度为1");
+
             await Task.Delay(1000);
-            Fold();
-            ShowCurrentPlayerCoin(true);
+            MainThread.Run(() =>
+            {
+                Fold();
+                ShowCurrentPlayerCoin(true);
+            });
+
             while (true)
             {
+                Info.StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
+                Debug.Log("当前进度为" + Timer.Process);
                 MainThread.Run(() =>
                 {
-                    transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, -Timer.Process);
+                    transform.GetChild(1).transform.eulerAngles = new Vector3(0, 0, -Timer.Process);
+                    Debug.Log("当前进度为" + Timer.Process);
 
                 });
                 await Task.Delay(1000);
@@ -66,7 +76,8 @@ public class CoinControl : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, scalePos_end, Time.deltaTime * 5);
         transform.localScale = Vector3.Lerp(transform.localScale, targetCoinScale, Time.deltaTime * 5);
     }
-    public static void ChangeProperty(int i)
+    //绑定于ui
+    public  void ChangeProperty(int i)
     {
         if (Info.AgainstInfo.IsWaitForSelectProperty)
         {
@@ -78,8 +89,9 @@ public class CoinControl : MonoBehaviour
     public static void ChangeProperty(Region region)
     {
         Task.Run(async () =>
-        {           
+        {
             Info.AgainstInfo.SelectProperty = region;
+            Debug.Log("设置属性为" + Info.AgainstInfo.SelectProperty);
             MainThread.Run(() =>
             {
                 center_end = new Vector3(0, 0, 360 + (int)region * 90);
