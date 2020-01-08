@@ -53,23 +53,23 @@ namespace Info
         public static List<int> SelectBoardCardIds;
         public static bool IsFinishSelectBoardCard;
         public static int ExChangeableCardNum = 0;
-        public static bool IsMyTurn = true;
-        public static bool IsPVP = false;
-        public static bool IsPVE => !IsPVP;
-        //public static bool isTimeout { get; set; }
-        public static bool isAIControl => IsPVE && (!IsMyTurn || Timer.isTimeout);
+        //判断是否1号玩家
+        public static bool isPlayer1 = false;
+        public static bool isMyTurn;
+        public static bool isPVP = false;
+        public static bool isPVE => !isPVP;
+        public static bool isAIControl => isPVE && (!isMyTurn || Timer.isTimeout);
 
         public static CardSet cardSet = new CardSet();
 
         public static List<Card> AllCardList => CardSet.globalCardList.SelectMany(x => x).ToList();
-        public static bool isPlayer1 = true;
+        
         public static (int P1Score, int P2Score) PlayerScore;
         public static (int MyScore, int OpScore) ShowScore => isPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);
-        //internal static bool IsBattleEnd;
 
         public static bool isUpPass = false;
         public static bool isDownPass = false;
-        public static bool isCurrectPass => IsMyTurn ? isDownPass : isUpPass;
+        public static bool isCurrectPass => isMyTurn ? isDownPass : isUpPass;
 
         public static bool isBoothPass => isUpPass && isDownPass;
     };

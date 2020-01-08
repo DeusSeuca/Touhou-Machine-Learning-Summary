@@ -99,7 +99,7 @@ namespace Command
         {
             //Debug.Log("打出一张牌2");
             EffectCommand.AudioEffectPlay(0);
-            RowCommand.SetPlayCardLimit(true);
+            RowCommand.SetPlayCardMoveFree(false);
             //Card TargetCard = AgainstInfo.PlayerPlayCard;
             targetCard.IsPrePrepareToPlay = false;
             if (IsAnsy)

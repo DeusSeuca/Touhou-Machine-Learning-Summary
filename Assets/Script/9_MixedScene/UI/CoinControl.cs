@@ -57,12 +57,9 @@ public class CoinControl : MonoBehaviour
             while (true)
             {
                 Info.StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
-                Debug.Log("当前进度为" + Timer.Process);
                 MainThread.Run(() =>
                 {
                     transform.GetChild(1).transform.eulerAngles = new Vector3(0, 0, -Timer.Process);
-                    Debug.Log("当前进度为" + Timer.Process);
-
                 });
                 await Task.Delay(1000);
             }

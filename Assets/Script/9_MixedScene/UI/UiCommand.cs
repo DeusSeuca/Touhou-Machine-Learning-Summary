@@ -96,7 +96,7 @@ namespace Command
                 MainThread.Run(() =>
                 {
                     Info.GameUI.UiInfo.MyPass.SetActive(true);
-                    switch (Info.AgainstInfo.IsMyTurn)
+                    switch (Info.AgainstInfo.isMyTurn)
                     {
                         case true: Info.AgainstInfo.isDownPass = true; break;
                         case false: Info.AgainstInfo.isUpPass = true; break;

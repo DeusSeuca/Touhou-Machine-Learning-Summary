@@ -98,8 +98,8 @@ namespace Command
                     Debug.Log("房间号为" + Info.AgainstInfo.RoomID);
                     Info.AgainstInfo.isPlayer1 = (bool)ReceiveInfo[1];
                     Debug.Log("是否玩家1？：" + Info.AgainstInfo.isPlayer1);
-                    Info.AgainstInfo.IsPVP = true;
-                    Info.AgainstInfo.IsMyTurn = Info.AgainstInfo.isPlayer1;
+                    Info.AgainstInfo.isPVP = true;
+                    //Info.AgainstInfo.isMyTurn = Info.AgainstInfo.isPlayer1;
                     Info.AllPlayerInfo.UserInfo = ReceiveInfo[2].ToString().ToObject<PlayerInfo>();
                     Info.AllPlayerInfo.OpponentInfo = ReceiveInfo[3].ToString().ToObject<PlayerInfo>();
                     Debug.Log("收到回应: " + e.Data);
@@ -212,7 +212,7 @@ namespace Command
             }
             public static void AsyncInfo(NetAcyncType AcyncType)
             {
-                if (Info.AgainstInfo.IsPVP && (Info.AgainstInfo.IsMyTurn || AcyncType == NetAcyncType.FocusCard || AcyncType == NetAcyncType.ExchangeCard))
+                if (Info.AgainstInfo.isPVP && (Info.AgainstInfo.isMyTurn || AcyncType == NetAcyncType.FocusCard || AcyncType == NetAcyncType.ExchangeCard))
                 {
                     switch (AcyncType)
                     {

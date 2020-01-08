@@ -88,9 +88,9 @@ public class CardSet
                 case Orientation.Down:
                     targetRows = singleRowInfos.Where(row => row.orientation == orientation).ToList(); break;
                 case Orientation.My:
-                    return this[AgainstInfo.IsMyTurn ? Orientation.Down : Orientation.Up];
+                    return this[AgainstInfo.isMyTurn ? Orientation.Down : Orientation.Up];
                 case Orientation.Op:
-                    return this[AgainstInfo.IsMyTurn ? Orientation.Up : Orientation.Down];
+                    return this[AgainstInfo.isMyTurn ? Orientation.Up : Orientation.Down];
                 case Orientation.All:
                     targetRows = singleRowInfos; break;
             }

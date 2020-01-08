@@ -40,7 +40,7 @@ namespace Control
         private void KeyBoardEvent()
         {
 
-            if (Input.GetKey(KeyCode.Space) && Info.AgainstInfo.IsMyTurn)
+            if (Input.GetKey(KeyCode.Space) && Info.AgainstInfo.isMyTurn)
             {
                 PassPressTime += Time.deltaTime;
                 if (PassPressTime > 2)
@@ -50,7 +50,7 @@ namespace Control
                     PassPressTime = 0;
                 }
             }
-            if (Input.GetKeyUp(KeyCode.Space) && Info.AgainstInfo.IsMyTurn)
+            if (Input.GetKeyUp(KeyCode.Space) && Info.AgainstInfo.isMyTurn)
             {
                 PassPressTime = 0;
             }
@@ -61,7 +61,7 @@ namespace Control
         }
         private void MouseEvent()
         {
-            if (Input.GetMouseButtonDown(0) && Info.AgainstInfo.IsMyTurn)
+            if (Input.GetMouseButtonDown(0) && Info.AgainstInfo.isMyTurn)
             {
                 //if (GlobalBattleInfo.PlayerFocusCard != null && GlobalBattleInfo.PlayerFocusCard.IsPrePrepareToPlay)
                 //{

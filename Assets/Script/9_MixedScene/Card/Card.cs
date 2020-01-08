@@ -31,7 +31,10 @@ namespace CardModel
 
         public bool IsInit = false;
         public bool IsGray = false;
-        public bool IsLimit = true;
+        /// <summary>
+        /// 卡牌是否能自由操控
+        /// </summary>
+        public bool isFree = true;
         public bool isCanSee = false;
         public bool IsMoveStepOver = true;
         public bool IsPrePrepareToPlay = false;
@@ -44,7 +47,12 @@ namespace CardModel
         public Text PointText => transform.GetChild(0).GetChild(0).GetComponent<Text>();
         public string CardName => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).cardName;
         public string CardIntroduction => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).describe;
-        public void Init()
+
+        [TriggerType.PlayCard]
+        public List<Func<Task>> cardEffect_Play = new List<Func<Task>>();
+        [TriggerType.Deploy]
+        public List<Func<Task>> cardEffect_Deploy = new List<Func<Task>>();
+        public  void Init()
         {
             IsInit = true;
             PointText.text = point.ToString();

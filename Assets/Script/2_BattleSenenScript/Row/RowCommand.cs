@@ -33,11 +33,11 @@ namespace Command
         }
         public static void RefreshHandCard(List<Card> cardList)
         {
-            cardList.ForEach(card => card.IsPrePrepareToPlay = (AgainstInfo.PlayerFocusCard != null && card == AgainstInfo.PlayerFocusCard && !card.IsLimit));
+            cardList.ForEach(card => card.IsPrePrepareToPlay = (AgainstInfo.PlayerFocusCard != null && card == AgainstInfo.PlayerFocusCard && card.isFree));
         }
-        public static void SetPlayCardLimit(bool IsLimit)
+        public static void SetPlayCardMoveFree(bool isFree)
         {
-            AgainstInfo.cardSet[Orientation.Down][RegionTypes.Leader, RegionTypes.Hand].cardList.ForEach(card => card.IsLimit = IsLimit);
+            AgainstInfo.cardSet[Orientation.Down][RegionTypes.Leader, RegionTypes.Hand].cardList.ForEach(card => card.isFree = isFree);
         }
         public static void SetAllRegionSelectable(RegionTypes region, Territory territory = Territory.All)
         {

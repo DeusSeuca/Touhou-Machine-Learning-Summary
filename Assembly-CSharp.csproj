@@ -70,7 +70,7 @@
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardEffectStack.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardProperty.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\TriggerType.cs" />
-    <Compile Include="Assets\Script\2_BattleSenenScript\GameSystem\GameSystem.cs" />
+    <Compile Include="Assets\Script\2_BattleSenenScript\GameSystem\PointSystem.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Point\PointControl.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Point\PointInfo.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Row\RowCommand.cs" />
@@ -137,7 +137,6 @@
     <Compile Include="Assets\Script\9_MixedScene\Test\leimi.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Test\test.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Thread\MainThread.cs" />
-    <Compile Include="Assets\Script\9_MixedScene\Timer\EnumToggleButtonsAttributeExample.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Timer\Timer.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\AddForce.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\Arrow\ArrowEndPoint.cs" />

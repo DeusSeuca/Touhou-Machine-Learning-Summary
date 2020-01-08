@@ -12,8 +12,8 @@ namespace Info
             public static UiInfo Instance;
             public GameObject DownPass;
             public GameObject UpPass;
-            public static GameObject MyPass => AgainstInfo.IsMyTurn ? Instance.DownPass : Instance.UpPass;
-            public static GameObject OpPass => AgainstInfo.IsMyTurn ? Instance.UpPass : Instance.DownPass;
+            public static GameObject MyPass => AgainstInfo.isMyTurn ? Instance.DownPass : Instance.UpPass;
+            public static GameObject OpPass => AgainstInfo.isMyTurn ? Instance.UpPass : Instance.DownPass;
 
             public Animator NoticeAnim;
             public GameObject Arrow_Model;

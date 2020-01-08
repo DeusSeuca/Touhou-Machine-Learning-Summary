@@ -25,7 +25,7 @@ namespace Control
         }
         public void TempCardControl()
         {
-            if (AgainstInfo.IsMyTurn)
+            if (AgainstInfo.isMyTurn)
             {
                 if (SingleInfo.TempCard == null && SingleInfo.CanBeSelected && AgainstInfo.PlayerFocusRegion == SingleInfo && !HasTempCard)
                 {

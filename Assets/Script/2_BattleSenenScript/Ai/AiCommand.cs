@@ -33,6 +33,10 @@ namespace Command
                 await CardCommand.DisCard(AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].cardList[0]);
             }
         }
+        public void test()
+        {
+            
+        }
     }
 }
 

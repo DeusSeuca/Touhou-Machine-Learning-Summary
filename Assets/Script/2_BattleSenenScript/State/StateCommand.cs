@@ -20,7 +20,7 @@ namespace Command
         public static async Task BattleStart()
         {
 
-
+            AgainstInfo.isMyTurn = AgainstInfo.isPlayer1;
             AgainstInfo.cardSet = new CardSet();
             Info.StateInfo.TaskManager = new System.Threading.CancellationTokenSource();
             MainThread.Run(() =>
@@ -32,7 +32,7 @@ namespace Command
                 }
             });
             await Task.Delay(500);
-            if (!AgainstInfo.IsPVP)
+            if (AgainstInfo.isPVE)
             {
                 AllPlayerInfo.UserInfo = new NetInfoModel.PlayerInfo(
                     "gezi", "yaya",
@@ -60,15 +60,15 @@ namespace Command
                 Debug.Log("对战开始");
                 GameUI.UiCommand.SetNoticeBoardTitle("对战开始");
                 await GameUI.UiCommand.NoticeBoardShow();
-                //初始化领袖卡
+                //初始化我方领袖卡
                 Card MyLeaderCard = await CardCommand.CreatCard(AllPlayerInfo.UserInfo.UseDeck.LeaderId);
-                CardSet cardSet1 = AgainstInfo.cardSet[Orientation.Down];
-                CardSet cardSet = cardSet1[RegionTypes.Leader];
-                cardSet.Add(MyLeaderCard);
+                AgainstInfo.cardSet[Orientation.Down][RegionTypes.Leader].Add(MyLeaderCard);
                 MyLeaderCard.SetCardSee(true);
+                //初始化敌方领袖卡
                 Card OpLeaderCard = await CardCommand.CreatCard(AllPlayerInfo.OpponentInfo.UseDeck.LeaderId);
                 AgainstInfo.cardSet[Orientation.Up][RegionTypes.Leader].Add(OpLeaderCard);
                 OpLeaderCard.SetCardSee(true);
+                //初始双方化牌组
                 CardDeck Deck = AllPlayerInfo.UserInfo.UseDeck;
                 for (int i = 0; i < Deck.CardIds.Count; i++)
                 {
@@ -76,6 +76,7 @@ namespace Command
                     AgainstInfo.cardSet[Orientation.Down][RegionTypes.Deck].Add(NewCard);
                 }
                 Deck = AllPlayerInfo.OpponentInfo.UseDeck;
+
                 for (int i = 0; i < Deck.CardIds.Count; i++)
                 {
                     Card NewCard = await CardCommand.CreatCard(Deck.CardIds[i]);
@@ -174,12 +175,11 @@ namespace Command
         {
             await Task.Run(async () =>
             {
-                GameUI.UiCommand.SetNoticeBoardTitle((AgainstInfo.IsMyTurn ? "我方" : "敌方") + "回合开始");
+                GameUI.UiCommand.SetNoticeBoardTitle((AgainstInfo.isMyTurn ? "我方" : "敌方") + "回合开始");
                 await GameUI.UiCommand.NoticeBoardShow();
                 //await Task.Delay(000);
                 AgainstInfo.IsCardEffectCompleted = false;
-                RowCommand.SetPlayCardLimit(!AgainstInfo.IsMyTurn);
-                //AgainstInfo.isAIControl = AgainstInfo.IsPVE && !AgainstInfo.IsMyTurn;
+                RowCommand.SetPlayCardMoveFree(AgainstInfo.isMyTurn);
                 await Task.Delay(000);
             });
         }
@@ -187,12 +187,12 @@ namespace Command
         {
             await Task.Run(async () =>
             {
-                GameUI.UiCommand.SetNoticeBoardTitle((AgainstInfo.IsMyTurn ? "我方" : "敌方") + "回合结束");
+                GameUI.UiCommand.SetNoticeBoardTitle((AgainstInfo.isMyTurn ? "我方" : "敌方") + "回合结束");
                 await GameUI.UiCommand.NoticeBoardShow();
                 //await Task.Delay(000);
-                RowCommand.SetPlayCardLimit(true);
+                RowCommand.SetPlayCardMoveFree(false);
                 await Task.Delay(1000);
-                AgainstInfo.IsMyTurn = !AgainstInfo.IsMyTurn;
+                AgainstInfo.isMyTurn = !AgainstInfo.isMyTurn;
             });
         }
         public static async Task WaitForPlayerOperation()
