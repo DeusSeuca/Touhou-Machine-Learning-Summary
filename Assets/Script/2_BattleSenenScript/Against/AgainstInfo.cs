@@ -54,7 +54,7 @@ namespace Info
         public static bool IsFinishSelectBoardCard;
         public static int ExChangeableCardNum = 0;
         //判断是否1号玩家
-        public static bool isPlayer1 = false;
+        public static bool isPlayer1 = true;
         public static bool isMyTurn;
         public static bool isPVP = false;
         public static bool isPVE => !isPVP;

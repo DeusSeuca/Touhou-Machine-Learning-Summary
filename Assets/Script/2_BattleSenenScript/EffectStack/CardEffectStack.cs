@@ -18,7 +18,7 @@ namespace Control
         //需要改善
         public static async Task TriggerCardList<T>(List<Card> Cards)
         {
-            Cards.ForEach(card => card.Trigger<T>());
+            Cards.ForEach(card => card.TriggerAsync<T>());
         }
         public static void Trigger<T>(Card card)
         {
@@ -29,15 +29,13 @@ namespace Control
             tasks.Select(x => x.GetValue(card)).Cast<Func<Task>>().ToList().ForEach(TaskStack.Push);
             _ = Run();
         }
-        //public void Trigger<T>()
-        //{
-        //    List<Func<Task>> Steps = new List<Func<Task>>();
-        //    List<PropertyInfo> tasks = GetType().GetProperties().Where(x =>
-        //        x.GetCustomAttributes(true).Count() > 0 && x.GetCustomAttributes(true)[0].GetType() == typeof(T)).ToList();
-        //    tasks.Reverse();
-        //    tasks.Select(x => x.GetValue(this)).Cast<Func<Task>>().ToList().ForEach(CardEffectStackControl.TaskStack.Push);
-        //    _ = Run();
-        //}
+        public static async Task Trigger_NewAsync<T>(Card card)
+        {
+            var tasks = (List<Func<Task>>)card.GetType().GetFields().First(x => x.GetCustomAttributes(true)[0].GetType() == typeof(T)).GetValue(card);
+            tasks.Reverse();
+            tasks.ForEach(TaskStack.Push);
+            await Run();
+        }
         public static async Task Run()
         {
             if (!IsRuning)

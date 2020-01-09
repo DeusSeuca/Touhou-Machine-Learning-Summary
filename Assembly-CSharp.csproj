@@ -132,13 +132,10 @@
     <Compile Include="Assets\Script\9_MixedScene\ParticleSystem\EffectCommand.cs" />
     <Compile Include="Assets\Script\9_MixedScene\ParticleSystem\ParticleInfo.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Player\AllPlayerInfo.cs" />
-    <Compile Include="Assets\Script\9_MixedScene\Test\OdinTest.cs" />
-    <Compile Include="Assets\Script\9_MixedScene\Test\checkmouse.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Test\leimi.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Test\test.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Thread\MainThread.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Timer\Timer.cs" />
-    <Compile Include="Assets\Script\9_MixedScene\UI\AddForce.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\Arrow\ArrowEndPoint.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\Arrow\ArrowManager.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\CardBoard\BoardCardInfo.cs" />

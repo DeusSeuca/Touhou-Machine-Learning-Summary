@@ -110,7 +110,7 @@ namespace Command
             targetCard.Row.Remove(targetCard);
             AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].Add(targetCard);
             AgainstInfo.PlayerPlayCard = null;
-            targetCard.Trigger<TriggerType.PlayCard>();
+            targetCard.TriggerAsync<TriggerType.PlayCard>();
         }
         public static async Task DisCard(Card card)
         {
@@ -119,7 +119,7 @@ namespace Command
             card.Row.Remove(card);
             AgainstInfo.cardSet[Orientation.My][RegionTypes.Grave].Add(card);
             Info.AgainstInfo.PlayerPlayCard = null;
-            card.Trigger<TriggerType.Discard>();
+            card.TriggerAsync<TriggerType.Discard>();
         }
         //强行移过来的
         public static void PlayCardToRegion()

@@ -26,15 +26,15 @@ namespace CardModel
         public Vector3 TargetPos;
         public Quaternion TargetRot;
 
-        public bool IsCover = true;
-        public bool IsLocked = true;
+        public bool IsCover = false;
+        public bool IsLocked = false;
 
         public bool IsInit = false;
         public bool IsGray = false;
         /// <summary>
         /// 卡牌是否能自由操控
         /// </summary>
-        public bool isFree = true;
+        public bool isFree = false;
         public bool isCanSee = false;
         public bool IsMoveStepOver = true;
         public bool IsPrePrepareToPlay = false;
@@ -52,7 +52,8 @@ namespace CardModel
         public List<Func<Task>> cardEffect_Play = new List<Func<Task>>();
         [TriggerType.Deploy]
         public List<Func<Task>> cardEffect_Deploy = new List<Func<Task>>();
-        public  void Init()
+        public List<Func<Task>> cardEffect_Dead = new List<Func<Task>>();
+        public void Init()
         {
             IsInit = true;
             PointText.text = point.ToString();
@@ -94,15 +95,10 @@ namespace CardModel
             transform.rotation = Quaternion.Lerp(transform.rotation, TargetRot, Time.deltaTime * 10);
             PointText.text = point.ToString();
         }
-        public void Trigger<T>()
+        public async Task TriggerAsync<T>()
         {
-            CardEffectStackControl.Trigger<T>(this);
-            //List<Func<Task>> Steps = new List<Func<Task>>();
-            //List<PropertyInfo> tasks = GetType().GetProperties().Where(x =>
-            //    x.GetCustomAttributes(true).Any() && x.GetCustomAttributes(true)[0].GetType() == typeof(T)).ToList();
-            //tasks.Reverse();
-            //tasks.Select(x => x.GetValue(this)).Cast<Func<Task>>().ToList().ForEach(CardEffectStackControl.TaskStack.Push);
-            //_ = CardEffectStackControl.Run();
+           // CardEffectStackControl.Trigger<T>(this);
+            await CardEffectStackControl.Trigger_NewAsync<T>(this);
         }
         public async Task Hurt(int point)
         {
