@@ -5,7 +5,6 @@ namespace Control
 {
     public class StateControl : MonoBehaviour
     {
-
         void Start() => _ = BattleProcess();
         private void OnApplicationQuit() => Info.StateInfo.TaskManager.Cancel();
         public async Task BattleProcess()

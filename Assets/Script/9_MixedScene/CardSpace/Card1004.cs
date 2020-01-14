@@ -10,10 +10,10 @@ namespace CardSpace
 {
     public class Card1004 : Card
     {
-        public new void Init()
+        public override void Init()
         {
             base.Init();
-
+            Debug.Log("进行了初始化");
             cardEffect_Play = new List<Func<Task>>()
             {
                 async () =>

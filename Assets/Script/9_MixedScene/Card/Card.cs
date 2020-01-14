@@ -53,7 +53,7 @@ namespace CardModel
         [TriggerType.Deploy]
         public List<Func<Task>> cardEffect_Deploy = new List<Func<Task>>();
         public List<Func<Task>> cardEffect_Dead = new List<Func<Task>>();
-        public void Init()
+        public virtual void Init()
         {
             IsInit = true;
             PointText.text = point.ToString();

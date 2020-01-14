@@ -31,7 +31,18 @@ namespace Control
         }
         public static async Task Trigger_NewAsync<T>(Card card)
         {
-            var tasks = (List<Func<Task>>)card.GetType().GetFields().First(x => x.GetCustomAttributes(true)[0].GetType() == typeof(T)).GetValue(card);
+            FieldInfo[] fieldInfo = card
+                  .GetType()
+                  .GetFields();
+            FieldInfo fieldInfo1 = fieldInfo
+                  .First(field => field.GetCustomAttributes(true).Any() &&
+                  field.GetCustomAttributes(true)[0].GetType() == typeof(T));
+            var tasks = (List<Func<Task>>)fieldInfo1
+                  .GetValue(card);
+
+
+           // FieldInfo fieldInfo1 = fieldInfo.First(x => x.GetCustomAttributes(true)[0].GetType() == typeof(T));
+            //var tasks = (List<Func<Task>>)fieldInfo1.GetValue(card);
             tasks.Reverse();
             tasks.ForEach(TaskStack.Push);
             await Run();

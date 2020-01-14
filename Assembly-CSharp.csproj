@@ -70,7 +70,7 @@
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardEffectStack.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardProperty.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\TriggerType.cs" />
-    <Compile Include="Assets\Script\2_BattleSenenScript\GameSystem\PointSystem.cs" />
+    <Compile Include="Assets\Script\2_BattleSenenScript\GameSystem\GameSystem.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Point\PointControl.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Point\PointInfo.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Row\RowCommand.cs" />

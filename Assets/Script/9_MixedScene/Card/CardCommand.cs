@@ -70,7 +70,6 @@ namespace Command
             await Task.Delay(100);
         }
         //洗回牌库
-
         public static async Task WashCard(Card TargetCard, bool IsPlayerWash = true, int InsertRank = 0)
         {
             Debug.Log("洗回卡牌");
