@@ -35,8 +35,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: b17c68c5dbf3c2a4d8d68a0a76ab353c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_CDB51A2A_Texture_1:
+        m_Texture: {fileID: 2800000, guid: a8e9003f1b659fe48a1fd26d30f844f1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_351666CF: 1.5
     - _IsFocus: 1
     - _IsRed: 0
     - _IsTemp: 1
+    - _gap: 1.5
     m_Colors: []

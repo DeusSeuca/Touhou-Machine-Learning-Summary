@@ -23,7 +23,7 @@ namespace Thread
                     catch (Exception e)
                     {
                         Debug.Log(e);
-                        throw;
+                        //throw;
                     }
                 }
             }

@@ -53,6 +53,8 @@ namespace GameSystem
         }
         public static async Task BanishCard(Card card)
         {
+            Debug.Log("丢弃" + card.name);
+
             await card.TriggerAsync<TriggerType.BeforeBanishCard>();
             await card.TriggerAsync<TriggerType.WhenBanishCard>();
             await card.TriggerAsync<TriggerType.AfterBanishCard>();

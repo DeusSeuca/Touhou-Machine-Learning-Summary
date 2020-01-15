@@ -53,10 +53,30 @@ namespace CardModel
         [TriggerType.Deploy]
         public List<Func<Task>> cardEffect_Deploy = new List<Func<Task>>();
         public List<Func<Task>> cardEffect_Dead = new List<Func<Task>>();
+        [TriggerType.BeforeBanishCard]
+        public List<Func<Task>> cardEffect_BeforeBanish = new List<Func<Task>>();
+        [TriggerType.WhenBanishCard]
+        public List<Func<Task>> cardEffect_WhenBanish = new List<Func<Task>>();
+        [TriggerType.AfterBanishCard]
+        public List<Func<Task>> cardEffect_AfterBanish = new List<Func<Task>>();
+
         public virtual void Init()
         {
             IsInit = true;
             PointText.text = point.ToString();
+            cardEffect_WhenBanish = new List<Func<Task>>()
+            {
+                async () =>
+                {
+                    Debug.Log("执行丢牌操作");
+                    MainThread.Run(() =>{GetComponent<CardControl>().CreatGap();});
+                    await   Task.Delay(2000);
+                    MainThread.Run(() =>{GetComponent<CardControl>().FoldGap();});
+                    await   Task.Delay(800);
+                    MainThread.Run(() =>{GetComponent<CardControl>().DestoryGap();});
+                    Debug.Log("执行丢牌操作");
+                }
+            };
         }
         public void SetMoveTarget(Vector3 TargetPosition, Vector3 TargetEulers)
         {
@@ -97,7 +117,7 @@ namespace CardModel
         }
         public async Task TriggerAsync<T>()
         {
-           // CardEffectStackControl.Trigger<T>(this);
+            // CardEffectStackControl.Trigger<T>(this);
             await CardEffectStackControl.Trigger_NewAsync<T>(this);
         }
         public async Task Hurt(int point)
