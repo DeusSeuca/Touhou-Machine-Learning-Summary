@@ -1,20 +1,26 @@
 using CardModel;
 using Command;
+using GameEnum;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using static Info.AgainstInfo;
 namespace CardSpace
 {
     public class Card0 : Card
     {
-        [TriggerType.PlayCard]
-        public Func<Task> Step1 => async () => { print("test"); await Task.Delay(1000); };
-
-        [TriggerType.PlayCard]
-        public Func<Task> Step2 => async () =>
+        public override void Init()
         {
-            await StateCommand.WaitForSelectLocation(this);
-            await Deploy();
-            await Task.Delay(100);
-        };
+            base.Init();
+
+            cardEffect_Play = new List<Func<Card, Task>>()
+            {
+                async (triggerCard) =>
+                {
+                    await GameSystem.SelectSystem.SelectLocation(this);
+                    await GameSystem.TransSystem.DeployCard(this);
+                }
+            };
+        }
     }
 }

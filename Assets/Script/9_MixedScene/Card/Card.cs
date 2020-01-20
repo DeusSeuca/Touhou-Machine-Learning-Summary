@@ -36,8 +36,8 @@ namespace CardModel
         /// </summary>
         public bool isFree = false;
         public bool isCanSee = false;
-        public bool IsMoveStepOver = true;
-        public bool IsPrePrepareToPlay = false;
+        public bool isMoveStepOver = true;
+        public bool isPrepareToPlay = false;
         public bool IsAutoMove => this != AgainstInfo.PlayerPlayCard;
 
         public List<Card> Row => RowsInfo.GetRow(this);
@@ -158,9 +158,9 @@ namespace CardModel
             List<Card> TargetRow = AgainstInfo.cardSet[orientation][region].cardList;
             OriginRow.Remove(this);
             TargetRow.Insert(rank, this);
-            IsMoveStepOver = false;
+            isMoveStepOver = false;
             await Task.Delay(1000);
-            IsMoveStepOver = true;
+            isMoveStepOver = true;
         }
         public async Task MoveTo(SingleRowInfo singleRowInfo, int Index = 0)
         {
@@ -169,9 +169,9 @@ namespace CardModel
             OriginRow.Remove(this);
             TargetRow.Insert(Index, this);
             MoveSpeed = 0.1f;
-            IsMoveStepOver = false;
+            isMoveStepOver = false;
             await Task.Delay(1000);
-            IsMoveStepOver = true;
+            isMoveStepOver = true;
             MoveSpeed = 0.1f;
             Command.EffectCommand.AudioEffectPlay(1);
         }
@@ -179,7 +179,7 @@ namespace CardModel
         public async Task RemoveFromBattle(Orientation orientation, int Index = 0)
         {
             SingleRowInfo grave = AgainstInfo.cardSet[orientation][RegionTypes.Grave].singleRowInfos[0];
-            IsMoveStepOver = false;
+            isMoveStepOver = false;
             List<Card> OriginRow = RowsInfo.GetRow(this);
             List<Card> TargetRow = grave.ThisRowCards;
             OriginRow.Remove(this);
@@ -187,7 +187,7 @@ namespace CardModel
             this.SetCardSee(false);
             MoveSpeed = 0.1f;
             await Task.Delay(100);
-            IsMoveStepOver = true;
+            isMoveStepOver = true;
             MoveSpeed = 0.1f;
             Command.EffectCommand.AudioEffectPlay(1);
         }

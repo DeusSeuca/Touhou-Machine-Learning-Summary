@@ -27,7 +27,7 @@ namespace Control
         }
         private void OnMouseDown()
         {
-            if (ThisCard.IsPrePrepareToPlay)
+            if (ThisCard.isPrepareToPlay)
             {
                 Info.AgainstInfo.PlayerPlayCard = ThisCard;
             }

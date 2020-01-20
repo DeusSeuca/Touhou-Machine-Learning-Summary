@@ -33,7 +33,7 @@ namespace Command
         }
         public static void RefreshHandCard(List<Card> cardList)
         {
-            cardList.ForEach(card => card.IsPrePrepareToPlay = (AgainstInfo.PlayerFocusCard != null && card == AgainstInfo.PlayerFocusCard && card.isFree));
+            cardList.ForEach(card => card.isPrepareToPlay = (AgainstInfo.PlayerFocusCard != null && card == AgainstInfo.PlayerFocusCard && card.isFree));
         }
         public static void SetPlayCardMoveFree(bool isFree)
         {

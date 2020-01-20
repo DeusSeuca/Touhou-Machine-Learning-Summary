@@ -18,7 +18,7 @@ namespace Control
         //需要改善
         public static async Task TriggerCardList<T>(List<Card> Cards)
         {
-            Cards.ForEach(card => card.TriggerAsync<T>());
+            Cards.ForEach(async card =>await card.TriggerAsync<T>());
         }
         //public static void Trigger<T>(Card card)
         //{

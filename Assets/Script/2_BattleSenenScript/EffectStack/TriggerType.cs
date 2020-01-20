@@ -17,6 +17,7 @@ namespace TriggerType
     public class Hurt : Attribute { }
     public class WhenOtherHurt : Attribute { }
     public class Dead : Attribute { }
-    public class TurnStart : Attribute { }
+    public class WhenTurnStart : Attribute { }
+    public class WhenTurnEnd : Attribute { }
     public class CountDown : Attribute { }
 }

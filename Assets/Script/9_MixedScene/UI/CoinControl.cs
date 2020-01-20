@@ -45,15 +45,12 @@ public class CoinControl : MonoBehaviour
         Debug.Log("当前进度为" + Timer.Process);
         Task.Run(async () =>
         {
-            Debug.Log("当前进度为1");
-
             await Task.Delay(1000);
             MainThread.Run(() =>
             {
                 Fold();
                 ShowCurrentPlayerCoin(true);
             });
-
             while (true)
             {
                 Info.StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
@@ -81,7 +78,6 @@ public class CoinControl : MonoBehaviour
             ChangeProperty((Region)i);
         }
     }
-
     [Button("切换属性")]
     public static void ChangeProperty(Region region)
     {
@@ -96,10 +92,8 @@ public class CoinControl : MonoBehaviour
             });
             await Task.Delay(1000);
             MainThread.Run(() => Fold());
-
         });
     }
-    // Update is called once per frame
     [Button("展开")]
     public static void Unfold()
     {

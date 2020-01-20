@@ -15,8 +15,9 @@ namespace Command
 {
     public static class CardCommand
     {
-        static int CreatCardRank;//卡牌创建时的自增命名
-
+        
+        public static void OrderCard() => AgainstInfo.cardSet[RegionTypes.Hand].Order();
+        public static void RemoveCard(Card card) => card.Row.Remove(card);
         public static async Task<Card> CreatCard(int id)
         {
             GameObject NewCard;
@@ -24,7 +25,7 @@ namespace Command
             MainThread.Run(() =>
             {
                 NewCard = GameObject.Instantiate(Info.CardInfo.cardModel);
-                NewCard.name = "Card" + CreatCardRank++;
+                NewCard.name = "Card" +Info.CardInfo.CreatCardRank++;
                 var CardStandardInfo = CardLibraryCommand.GetCardStandardInfo(id);
                 NewCard.AddComponent(Type.GetType("CardSpace.Card" + id));
                 Card card = NewCard.GetComponent<Card>();
@@ -47,9 +48,9 @@ namespace Command
             OriginRow.Remove(card);
             TargetRow.Insert(selectLocation, card);
             card.MoveSpeed = 0.1f;
-            card.IsMoveStepOver = false;
+            card.isMoveStepOver = false;
             await Task.Delay(1000);
-            card.IsMoveStepOver = true;
+            card.isMoveStepOver = true;
             card.MoveSpeed = 0.1f;
             EffectCommand.AudioEffectPlay(1);
         }
@@ -83,7 +84,6 @@ namespace Command
             }
             await Task.Delay(100);
         }
-        //洗回牌库
         public static async Task WashCard(Card TargetCard, bool IsPlayerWash = true, int InsertRank = 0)
         {
             Debug.Log("洗回卡牌");
@@ -104,17 +104,13 @@ namespace Command
             }
             await Task.Delay(500);
         }
-        public static void OrderCard()
-        {
-            AgainstInfo.cardSet[RegionTypes.Hand].Order();
-        }
         public static async Task PlayCard(Card targetCard, bool IsAnsy = true)
         {
             //Debug.Log("打出一张牌2");
             EffectCommand.AudioEffectPlay(0);
             RowCommand.SetPlayCardMoveFree(false);
             //Card TargetCard = AgainstInfo.PlayerPlayCard;
-            targetCard.IsPrePrepareToPlay = false;
+            targetCard.isPrepareToPlay = false;
             if (IsAnsy)
             {
                 Network.NetCommand.AsyncInfo(NetAcyncType.PlayCard);
@@ -127,24 +123,12 @@ namespace Command
         }
         public static async Task DisCard(Card card)
         {
-            card.IsPrePrepareToPlay = false;
+            card.isPrepareToPlay = false;
             card.SetCardSee(false);
             RemoveCard(card);
             AgainstInfo.cardSet[Orientation.My][RegionTypes.Grave].Add(card);
             Info.AgainstInfo.PlayerPlayCard = null;
             await card.TriggerAsync<TriggerType.Discard>();
-        }
-        public static void RemoveCard(Card card) => card.Row.Remove(card);
-        //强行移过来的
-        public static void PlayCardToRegion()
-        {
-            if (AgainstInfo.PlayerFocusRegion.ThisRowCards.Count < 5)
-            {
-                Card TargetCard = AgainstInfo.PlayerPlayCard;
-                TargetCard.IsPrePrepareToPlay = false;
-                AgainstInfo.PlayerFocusRegion.ThisRowCards.Add(TargetCard);
-                AgainstInfo.IsCardEffectCompleted = true;
-            }
         }
     }
 }

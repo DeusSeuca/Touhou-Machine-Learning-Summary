@@ -17,7 +17,6 @@ public class Timer : MonoBehaviour
         isTimerStart = true;
         limitTime = limit_time;
     }
-
     public static void SetIsTimerClose()
     {
         time = 0;
