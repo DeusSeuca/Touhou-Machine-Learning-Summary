@@ -97,7 +97,6 @@
     <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1001.cs" />
     <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1002.cs" />
     <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1003.cs" />
-    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1004.cs" />
     <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1005.cs" />
     <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1006.cs" />
     <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1007.cs" />

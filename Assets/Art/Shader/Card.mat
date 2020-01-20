@@ -20,15 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Back:
-        m_Texture: {fileID: 2800000, guid: d9418fa2763ec974da9bd70146dea518, type: 3}
+        m_Texture: {fileID: 2800000, guid: a78bffbeb81b48ae9ec71ad7969613e5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Front:
         m_Texture: {fileID: 2800000, guid: ccc6edda60f348643a3df62b6e646144, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2921F3E0_Texture_1:
-        m_Texture: {fileID: 2800000, guid: b17c68c5dbf3c2a4d8d68a0a76ab353c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_38099919_Texture_1:
@@ -40,9 +36,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_351666CF: 1.5
     - _IsFocus: 1
     - _IsRed: 0
     - _IsTemp: 1
-    - _gap: 1.5
+    - _gapWidth: 1.5
     m_Colors: []

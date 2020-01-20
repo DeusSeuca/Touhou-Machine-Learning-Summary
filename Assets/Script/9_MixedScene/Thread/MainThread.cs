@@ -8,7 +8,6 @@ namespace Thread
     public class MainThread : MonoBehaviour
     {
         static Queue<Action> TargetAction = new Queue<Action>();
-        //private void Start() => TargetAction = new Queue<Action>();
         public static void Run(Action RunAction) => TargetAction.Enqueue(RunAction);
         void Update()
         {
@@ -16,15 +15,18 @@ namespace Thread
             {
                 for (int i = 0; i < TargetAction.Count; i++)
                 {
-                    try
+                    while (TargetAction.Any())
                     {
                         TargetAction.Dequeue()();
                     }
-                    catch (Exception e)
-                    {
-                        Debug.Log(e);
-                        //throw;
-                    }
+                    //try
+                    //{
+                    //    TargetAction.Dequeue()();
+                    //}
+                    //catch (Exception e)
+                    //{
+                    //    Debug.LogError(e);
+                    //}
                 }
             }
         }

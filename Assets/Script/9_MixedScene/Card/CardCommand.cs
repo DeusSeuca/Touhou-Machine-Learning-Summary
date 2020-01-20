@@ -5,6 +5,7 @@ using Extension;
 using GameEnum;
 using Info;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Thread;
@@ -38,6 +39,19 @@ namespace Command
             });
             await Task.Run(() => { while (NewCardScript == null) { } });
             return NewCardScript;
+        }
+        public static async Task DeployCard(Card card, SingleRowInfo selectRegion, int selectLocation)
+        {
+            List<Card> OriginRow = RowsInfo.GetRow(card);
+            List<Card> TargetRow = selectRegion.ThisRowCards;
+            OriginRow.Remove(card);
+            TargetRow.Insert(selectLocation, card);
+            card.MoveSpeed = 0.1f;
+            card.IsMoveStepOver = false;
+            await Task.Delay(1000);
+            card.IsMoveStepOver = true;
+            card.MoveSpeed = 0.1f;
+            EffectCommand.AudioEffectPlay(1);
         }
         public static async Task ExchangeCard(Card TargetCard, bool IsPlayerExchange = true, int RandomRank = 0)
         {
@@ -109,17 +123,18 @@ namespace Command
             targetCard.Row.Remove(targetCard);
             AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].Add(targetCard);
             AgainstInfo.PlayerPlayCard = null;
-            targetCard.TriggerAsync<TriggerType.PlayCard>();
+            await targetCard.TriggerAsync<TriggerType.PlayCard>();
         }
         public static async Task DisCard(Card card)
         {
             card.IsPrePrepareToPlay = false;
             card.SetCardSee(false);
-            card.Row.Remove(card);
+            RemoveCard(card);
             AgainstInfo.cardSet[Orientation.My][RegionTypes.Grave].Add(card);
             Info.AgainstInfo.PlayerPlayCard = null;
-            card.TriggerAsync<TriggerType.Discard>();
+            await card.TriggerAsync<TriggerType.Discard>();
         }
+        public static void RemoveCard(Card card) => card.Row.Remove(card);
         //强行移过来的
         public static void PlayCardToRegion()
         {

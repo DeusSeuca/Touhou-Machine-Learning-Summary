@@ -32,7 +32,7 @@ namespace Control
                 Info.AgainstInfo.PlayerPlayCard = ThisCard;
             }
             //临时间隙
-            GameSystem.TransSystem.BanishCard(GetComponent<Card>());
+            //GameSystem.TransSystem.BanishCard(GetComponent<Card>());
         }
         private void OnMouseUp()
         {
@@ -64,12 +64,12 @@ namespace Control
         {
             if (gap_step == 1)
             {
-                gapMaterial.SetFloat("_width", Mathf.Lerp(gapMaterial.GetFloat("_width"), 1.5f, Time.deltaTime * 5));
+                gapMaterial.SetFloat("_gapWidth", Mathf.Lerp(gapMaterial.GetFloat("_gapWidth"), 1.5f, Time.deltaTime * 20));
             }
             else if (gap_step == 2)
             {
-                gapMaterial.SetFloat("_width", Mathf.Lerp(gapMaterial.GetFloat("_width"), 10, Time.deltaTime * 2));
-                cardMaterial.SetFloat("_gap", Mathf.Lerp(cardMaterial.GetFloat("_gap"), 10, Time.deltaTime * 2));
+                gapMaterial.SetFloat("_gapWidth", Mathf.Lerp(gapMaterial.GetFloat("_gapWidth"), 10, Time.deltaTime * 2));
+                cardMaterial.SetFloat("_gapWidth", Mathf.Lerp(cardMaterial.GetFloat("_gapWidth"), 10, Time.deltaTime * 2));
             }
         }
         public void CreatGap()

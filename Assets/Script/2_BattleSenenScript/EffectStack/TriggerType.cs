@@ -11,7 +11,9 @@ namespace TriggerType
     public class BeforeBanishCard : Attribute { }
     public class WhenBanishCard : Attribute { }
     public class AfterBanishCard : Attribute { }
-    public class Deploy : Attribute { }
+    public class BeforeDeployCard : Attribute { }
+    public class WhenDeployCard : Attribute { }
+    public class AfterDeployCard : Attribute { }
     public class Hurt : Attribute { }
     public class WhenOtherHurt : Attribute { }
     public class Dead : Attribute { }

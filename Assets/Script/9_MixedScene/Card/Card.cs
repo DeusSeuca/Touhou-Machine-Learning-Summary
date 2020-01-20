@@ -49,32 +49,46 @@ namespace CardModel
         public string CardIntroduction => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).describe;
 
         [TriggerType.PlayCard]
-        public List<Func<Task>> cardEffect_Play = new List<Func<Task>>();
-        [TriggerType.Deploy]
-        public List<Func<Task>> cardEffect_Deploy = new List<Func<Task>>();
-        public List<Func<Task>> cardEffect_Dead = new List<Func<Task>>();
+        public List<Func<Card, Task>> cardEffect_Play = new List<Func<Card, Task>>();
+
+        [TriggerType.BeforeDeployCard]
+        public List<Func<Card, Task>> cardEffect_BeforeDeploy = new List<Func<Card, Task>>();
+        [TriggerType.WhenDeployCard]
+        public List<Func<Card, Task>> cardEffect_WhenDeploy = new List<Func<Card, Task>>();
+        [TriggerType.AfterDeployCard]
+        public List<Func<Card, Task>> cardEffect_AfterDeploy = new List<Func<Card, Task>>();
+
+        public List<Func<Card, Task>> cardEffect_Dead = new List<Func<Card, Task>>();
+
         [TriggerType.BeforeBanishCard]
-        public List<Func<Task>> cardEffect_BeforeBanish = new List<Func<Task>>();
+        public List<Func<Card, Task>> cardEffect_BeforeBanish = new List<Func<Card, Task>>();
         [TriggerType.WhenBanishCard]
-        public List<Func<Task>> cardEffect_WhenBanish = new List<Func<Task>>();
+        public List<Func<Card, Task>> cardEffect_WhenBanish = new List<Func<Card, Task>>();
         [TriggerType.AfterBanishCard]
-        public List<Func<Task>> cardEffect_AfterBanish = new List<Func<Task>>();
+        public List<Func<Card, Task>> cardEffect_AfterBanish = new List<Func<Card, Task>>();
 
         public virtual void Init()
         {
             IsInit = true;
             PointText.text = point.ToString();
-            cardEffect_WhenBanish = new List<Func<Task>>()
+            cardEffect_BeforeBanish = new List<Func<Card, Task>>()
             {
-                async () =>
+                async (triggerCard) =>
                 {
-                    Debug.Log("执行丢牌操作");
+                    await Task.Delay(1000);
+                    Debug.LogWarning("我被遗弃了"+name);
+                }
+            };
+            cardEffect_WhenBanish = new List<Func<Card, Task>>()
+            {
+                async (triggerCard) =>
+                {
                     MainThread.Run(() =>{GetComponent<CardControl>().CreatGap();});
-                    await   Task.Delay(2000);
+                    await Task.Delay(800);
                     MainThread.Run(() =>{GetComponent<CardControl>().FoldGap();});
-                    await   Task.Delay(800);
+                    await Task.Delay(800);
                     MainThread.Run(() =>{GetComponent<CardControl>().DestoryGap();});
-                    Debug.Log("执行丢牌操作");
+                    Command.CardCommand.RemoveCard(this);
                 }
             };
         }

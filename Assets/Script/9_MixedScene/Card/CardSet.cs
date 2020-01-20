@@ -21,6 +21,12 @@ public class CardSet
     //private List<Card> rowCardList => singleRowInfos.SelectMany(x => x.ThisRowCards).ToList();
     [HideInInspector]
     public List<Card> cardList = null;
+    /// <summary>
+    /// 得到触发牌之外的卡牌列表，用于广播触发事件的前后相关事件
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
+    public List<Card> BroastCardList(Card card) => Info.AgainstInfo.cardSet[GameEnum.Orientation.All].cardList.Except(new List<Card> { card }).ToList();
 
     //public void Init()
     //{
@@ -34,6 +40,7 @@ public class CardSet
     {
         globalCardList.Clear();
         Enumerable.Range(0, 18).ToList().ForEach(x => globalCardList.Add(new List<Card>()));
+        //cardList = globalCardList.SelectMany(x => x).ToList();
     }
     public CardSet(List<SingleRowInfo> singleRowInfos, List<Card> cardList = null)
     {

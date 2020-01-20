@@ -54,7 +54,7 @@ namespace Info
         public static bool IsFinishSelectBoardCard;
         public static int ExChangeableCardNum = 0;
         //判断是否1号玩家
-        public static bool isPlayer1 = false;
+        public static bool isPlayer1 = true;
         public static bool isMyTurn;
         public static bool isPVP = false;
         public static bool isPVE => !isPVP;
@@ -63,7 +63,6 @@ namespace Info
         public static CardSet cardSet = new CardSet();
 
         public static List<Card> AllCardList => CardSet.globalCardList.SelectMany(x => x).ToList();
-        
         public static (int P1Score, int P2Score) PlayerScore;
         public static (int MyScore, int OpScore) ShowScore => isPlayer1 ? (PlayerScore.P1Score, PlayerScore.P2Score) : (PlayerScore.P2Score, PlayerScore.P1Score);
 

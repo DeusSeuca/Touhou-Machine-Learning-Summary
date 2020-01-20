@@ -13,32 +13,32 @@ namespace CardSpace
         public override void Init()
         {
             base.Init();
-            Debug.Log("进行了初始化");
-            cardEffect_Play = new List<Func<Task>>()
+            
+            cardEffect_Play = new List<Func<Card, Task>>()
             {
-                async () =>
+                async (triggerCard) =>
                 {
                     await GameSystem.SelectSystem.SelectLocation(this);
                     await GameSystem.TransSystem.DeployCard(this);
                 }
             };
-            cardEffect_Deploy = new List<Func<Task>>()
+            cardEffect_WhenDeploy= new List<Func<Card, Task>>()
             {
-                async () =>
-                {
-                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.My][RegionTypes.Hand].cardList,1);
-                    await GameSystem.TransSystem.PlayCard(SelectUnits);
-                },
-                async () =>
+                async (triggerCard) =>
                 {
                     await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.My][RegionTypes.Battle].cardList,1);
-                    await GameSystem.TransSystem.RecycleCard(SelectUnits);
+                    await GameSystem.PointSystem.Gain(SelectUnits,5);
+                },
+                async (triggerCard) =>
+                {
+                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.My][RegionTypes.Battle].cardList,1);
+                    //await GameSystem.TransSystem.RecycleCard(SelectUnits);
                 }
             };
         }
     }
 }
-//cardEffect_Dead = new List<Func<Task>>()
+//cardEffect_Dead = new List<Func<Card, Task>>()
 //{
 //    async () =>
 //    {
