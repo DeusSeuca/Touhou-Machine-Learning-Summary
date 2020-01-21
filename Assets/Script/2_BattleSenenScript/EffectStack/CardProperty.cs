@@ -11,20 +11,3 @@ namespace GameAttribute
         }
     }
 }
-namespace GameEnum
-{
-    public enum CardState
-    {
-        Spy
-    }
-    public enum CardField
-    {
-        Timer,
-        Point
-    }
-    public enum Tag
-    {
-        Machine,
-        Fairy        
-    }
-}

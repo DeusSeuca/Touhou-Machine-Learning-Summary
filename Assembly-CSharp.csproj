@@ -69,7 +69,11 @@
     <Compile Include="Assets\Script\2_BattleSenenScript\Against\AgainstInfo.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Ai\AiCommand.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardEffectStack.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1004.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\Enum\CardField.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardProperty.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\Enum\CardState.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\Enum\Tag.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\TriggerType.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\GameSystem\GameSystem.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Point\PointControl.cs" />

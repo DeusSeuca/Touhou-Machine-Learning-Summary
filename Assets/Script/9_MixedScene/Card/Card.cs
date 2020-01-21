@@ -15,6 +15,16 @@ using UnityEngine.UI;
 
 namespace CardModel
 {
+    enum A
+    {
+        gezi,
+        yaya
+    }
+    enum B
+    {
+        ni,
+        hao
+    }
     public class Card : MonoBehaviour
     {
         public int CardId;
@@ -42,30 +52,42 @@ namespace CardModel
 
         public List<Card> Row => RowsInfo.GetRow(this);
         public Network.NetInfoModel.Location Location => RowsInfo.GetLocation(this);
-
+      
 
         public Text PointText => transform.GetChild(0).GetChild(0).GetComponent<Text>();
         public string CardName => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).cardName;
         public string CardIntroduction => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).describe;
-
+        //打出
         [TriggerType.PlayCard]
         public List<Func<Card, Task>> cardEffect_Play = new List<Func<Card, Task>>();
-
-        [TriggerType.BeforeDeployCard]
+        //部署
+        [TriggerType.BeforeCardDeploy]
         public List<Func<Card, Task>> cardEffect_BeforeDeploy = new List<Func<Card, Task>>();
-        [TriggerType.WhenDeployCard]
+        [TriggerType.WhenCardDeploy]
         public List<Func<Card, Task>> cardEffect_WhenDeploy = new List<Func<Card, Task>>();
-        [TriggerType.AfterDeployCard]
+        [TriggerType.AfterCardDeploy]
         public List<Func<Card, Task>> cardEffect_AfterDeploy = new List<Func<Card, Task>>();
-
-        public List<Func<Card, Task>> cardEffect_Dead = new List<Func<Card, Task>>();
-
-        [TriggerType.BeforeBanishCard]
+        //死亡
+        [TriggerType.BeforeCardDead]
+        public List<Func<Card, Task>> cardEffect_BeforeDead = new List<Func<Card, Task>>();
+        [TriggerType.WhenCardDead]
+        public List<Func<Card, Task>> cardEffect_WhenDead = new List<Func<Card, Task>>();
+        [TriggerType.AfterCardDead]
+        public List<Func<Card, Task>> cardEffect_AfterDead = new List<Func<Card, Task>>();
+        //放逐
+        [TriggerType.BeforeCardBanish]
         public List<Func<Card, Task>> cardEffect_BeforeBanish = new List<Func<Card, Task>>();
-        [TriggerType.WhenBanishCard]
+        [TriggerType.WhenCardBanish]
         public List<Func<Card, Task>> cardEffect_WhenBanish = new List<Func<Card, Task>>();
-        [TriggerType.AfterBanishCard]
+        [TriggerType.AfterCardBanish]
         public List<Func<Card, Task>> cardEffect_AfterBanish = new List<Func<Card, Task>>();
+        //增益
+        [TriggerType.BeforeCardGain]
+        public List<Func<Card, Task>> cardEffect_BeforeGain = new List<Func<Card, Task>>();
+        [TriggerType.WhenCardGain]
+        public List<Func<Card, Task>> cardEffect_WhenGain = new List<Func<Card, Task>>();
+        [TriggerType.AfterCardGain]
+        public List<Func<Card, Task>> cardEffect_AfterGain = new List<Func<Card, Task>>();
 
         public virtual void Init()
         {
@@ -83,12 +105,7 @@ namespace CardModel
             {
                 async (triggerCard) =>
                 {
-                    MainThread.Run(() =>{GetComponent<CardControl>().CreatGap();});
-                    await Task.Delay(800);
-                    MainThread.Run(() =>{GetComponent<CardControl>().FoldGap();});
-                    await Task.Delay(800);
-                    MainThread.Run(() =>{GetComponent<CardControl>().DestoryGap();});
-                    Command.CardCommand.RemoveCard(this);
+                  await Command.CardCommand.BanishCard(this);
                 }
             };
         }
@@ -144,7 +161,7 @@ namespace CardModel
             Command.EffectCommand.AudioEffectPlay(1);
             await Task.Delay(100);
         }
-        public async Task Boost(int point)
+        public async Task Gain(int point)
         {
             this.point += point;
             Command.EffectCommand.ParticlePlay(0, transform.position);
@@ -191,16 +208,6 @@ namespace CardModel
             MoveSpeed = 0.1f;
             Command.EffectCommand.AudioEffectPlay(1);
         }
-        public async Task Deploy()
-        {
-            await MoveTo(AgainstInfo.SelectRegion, AgainstInfo.SelectLocation);
-        }
-        [Button]
-        public async Task MoveTest(RegionTypes Region, Orientation orientation, int Index)
-        {
-            await MoveTo(Region, orientation, Index);
-        }
-
         public int this[CardField property]
         {
             get

@@ -1,6 +1,7 @@
 ﻿using CardModel;
 using CardSpace;
 using Command.CardInspector;
+using Control;
 using Extension;
 using GameEnum;
 using Info;
@@ -40,6 +41,15 @@ namespace Command
             });
             await Task.Run(() => { while (NewCardScript == null) { } });
             return NewCardScript;
+        }
+        public static async Task BanishCard(Card card)
+        {
+            MainThread.Run(() => { card.GetComponent<CardControl>().CreatGap(); });
+            await Task.Delay(800);
+            MainThread.Run(() => { card.GetComponent<CardControl>().FoldGap(); });
+            await Task.Delay(800);
+            MainThread.Run(() => { card.GetComponent<CardControl>().DestoryGap(); });
+            RemoveCard(card);
         }
         public static async Task DeployCard(Card card, SingleRowInfo selectRegion, int selectLocation)
         {

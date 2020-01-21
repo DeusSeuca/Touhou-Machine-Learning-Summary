@@ -51,15 +51,15 @@ namespace GameSystem
         public static async Task DeployCard(Card card)
         {
             await Command.CardCommand.DeployCard(card, SelectRegion, SelectLocation);
-            await CardEffectStackControl.Trigger_NewAsync<TriggerType.BeforeDeployCard>(cardSet.BroastCardList(card));
-            await CardEffectStackControl.Trigger_NewAsync<TriggerType.WhenDeployCard>(card);
-            await CardEffectStackControl.Trigger_NewAsync<TriggerType.AfterDeployCard>(cardSet.BroastCardList(card));
+            await CardEffectStackControl.Trigger_NewAsync<TriggerType.BeforeCardDeploy>(cardSet.BroastCardList(card));
+            await CardEffectStackControl.Trigger_NewAsync<TriggerType.WhenCardDeploy>(card);
+            await CardEffectStackControl.Trigger_NewAsync<TriggerType.AfterCardDeploy>(cardSet.BroastCardList(card));
         }
         public static async Task BanishCard(Card card)
         {
-            await CardEffectStackControl.Trigger_NewAsync<TriggerType.BeforeBanishCard>(cardSet.BroastCardList(card));
-            await CardEffectStackControl.Trigger_NewAsync<TriggerType.WhenBanishCard>(card);
-            await CardEffectStackControl.Trigger_NewAsync<TriggerType.AfterBanishCard>(cardSet.BroastCardList(card));
+            await CardEffectStackControl.Trigger_NewAsync<TriggerType.BeforeCardBanish>(cardSet.BroastCardList(card));
+            await CardEffectStackControl.Trigger_NewAsync<TriggerType.WhenCardBanish>(card);
+            await CardEffectStackControl.Trigger_NewAsync<TriggerType.AfterCardBanish>(cardSet.BroastCardList(card));
         }
         public static async Task DisCard(Card card)
         {
@@ -87,7 +87,7 @@ namespace GameSystem
     {
         public static async Task WhenTurnStart(Card card, List<Card> targetCards, int num)
         {
-            await Command.StateCommand.WaitForSelecUnit(card, targetCards, num);
+           
         }
         public static async Task WhenTurnEnd(Card card)
         {
