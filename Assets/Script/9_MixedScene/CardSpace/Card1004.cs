@@ -6,32 +6,50 @@ using System.Threading.Tasks;
 using UnityEngine;
 using static Info.AgainstInfo;
 using GameEnum;
+using Thread;
+
 namespace CardSpace
 {
     public class Card1004 : Card
     {
+        //初始化一张卡牌1004
         public override void Init()
         {
             base.Init();
-            
-            cardEffect_Play = new List<Func<Card, Task>>()
+            //当被打出时触发的效果
+            cardEffect[TriggerTime.When][TriggerType.Play] = new List<Func<TriggerInfo, Task>>()
             {
-                async (triggerCard) =>
+                async (triggerInfo) =>
                 {
+                    //选择一个位置
                     await GameSystem.SelectSystem.SelectLocation(this);
-                    await GameSystem.TransSystem.DeployCard(this);
+                    //部署到这个位置
+                    await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,this));
                 }
             };
-            cardEffect_WhenDeploy= new List<Func<Card, Task>>()
+            //当被部署时触发的效果
+            cardEffect[TriggerTime.When][TriggerType.Deploy] = new List<Func<TriggerInfo, Task>>()
             {
-                async (triggerCard) =>
+                async (triggerInfo) =>
                 {
-                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.My][RegionTypes.Battle].cardList,1);
-                    await GameSystem.PointSystem.Gain(SelectUnits,5);
+                    //选择一个单位
+                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.My][RegionTypes.Battle].cardList,3);
+                    if (SelectUnits.Count>0)
+                    {
+                            //await GameSystem.PointSystem.Gain(TriggerInfo.Build(this,SelectUnits,1));
+                        await GameSystem.TransSystem.BanishCard(TriggerInfo.Build(this,SelectUnits));
+
+                        //Debug.Log("未选择的目标触发效果");
+                        //for (int i = 1; i < 10; i++)
+                        //{
+                        //    await GameSystem.PointSystem.Gain(TriggerInfo.Build(this,SelectUnits,1));
+                        //   // await Task.Delay(2000);
+                        //}
+                    }
                 },
-                async (triggerCard) =>
+                async (triggerInfo) =>
                 {
-                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.My][RegionTypes.Battle].cardList,1);
+                    //await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.My][RegionTypes.Battle].cardList,1);
                 }
             };
         }

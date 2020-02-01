@@ -1,4 +1,5 @@
-﻿using GameEnum;
+﻿using CardModel;
+using GameEnum;
 using Info;
 using UnityEngine;
 
@@ -34,7 +35,7 @@ namespace Control
             }
             float distance = (height - ray.origin.y) / ray.direction.y;
             AgainstInfo.DragToPoint = ray.GetPoint(distance);
-            Debug.DrawLine(ray.origin, AgainstInfo.DragToPoint,Color.red);
+            Debug.DrawLine(ray.origin, AgainstInfo.DragToPoint, Color.red);
             Debug.DrawRay(ray.origin, ray.direction, Color.white);
         }
         private void KeyBoardEvent()
@@ -71,10 +72,22 @@ namespace Control
                 {
                     AgainstInfo.SelectRegion = AgainstInfo.PlayerFocusRegion;
                 }
+                //处理选择单位的箭头
                 if (AgainstInfo.IsWaitForSelectUnits && AgainstInfo.PlayerFocusCard != null && !AgainstInfo.PlayerFocusCard.IsGray)
                 {
-                    AgainstInfo.SelectUnits.Add(AgainstInfo.PlayerFocusCard);
-                    Command.GameUI.UiCommand.SetArrowShow();
+                    Card playerFocusCard = AgainstInfo.PlayerFocusCard;
+                    if (!AgainstInfo.SelectUnits.Contains(playerFocusCard))
+                    {
+                        Debug.LogError("add" + playerFocusCard);
+                        AgainstInfo.SelectUnits.Add(playerFocusCard);
+                        Command.GameUI.UiCommand.CreatFixedArrow(playerFocusCard);
+                    }
+                    else
+                    {
+                        Debug.LogError("remove" + playerFocusCard);
+                        AgainstInfo.SelectUnits.Remove(playerFocusCard);
+                        Command.GameUI.UiCommand.DestoryFixedArrow(playerFocusCard);
+                    }
                 }
                 if (AgainstInfo.IsWaitForSelectLocation)
                 {

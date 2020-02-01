@@ -1,6 +1,7 @@
 ﻿using CardModel;
 using GameEnum;
 using GameUI;
+using System.Linq;
 using System.Threading.Tasks;
 using Thread;
 using UnityEngine;
@@ -57,21 +58,64 @@ namespace Command
             }
             public static void SetCardBoardTitle(string Title) => Info.GameUI.UiInfo.CardBoardTitle = Title;
             public static void SetNoticeBoardTitle(string Title) => Info.GameUI.UiInfo.NoticeBoardTitle = Title;
-            public static void SetArrowShow()
+            //public static void SetArrowShow()
+            //{
+            //    MainThread.Run(() =>
+            //    {
+            //        bool IsFirst = Info.AgainstInfo.ArrowList.Count == 0;
+            //        GameObject NewArrow = Instantiate(Info.GameUI.UiInfo.Arrow);
+            //        NewArrow.GetComponent<ArrowManager>().InitArrow(
+            //            Info.AgainstInfo.ArrowStartCard.transform,
+            //            IsFirst ? Info.GameUI.UiInfo.ArrowEndPoint.transform :
+            //            Info.AgainstInfo.PlayerFocusCard.transform
+            //            );
+            //        Info.AgainstInfo.ArrowList.Add(NewArrow);
+            //    });
+            //}
+            public static void CreatFreeArrow()
             {
                 MainThread.Run(() =>
                 {
-                    bool IsFirst = Info.AgainstInfo.ArrowList.Count == 0;
                     GameObject NewArrow = Instantiate(Info.GameUI.UiInfo.Arrow);
-                    NewArrow.GetComponent<ArrowManager>().RefreshArrow(
-                        Info.AgainstInfo.ArrowStartCard.transform,
-                        IsFirst ? Info.GameUI.UiInfo.ArrowEndPoint.transform :
-                        Info.AgainstInfo.PlayerFocusCard.transform
+                    NewArrow.GetComponent<ArrowManager>().InitArrow(
+                        Info.AgainstInfo.ArrowStartCard,
+                        Info.GameUI.UiInfo.ArrowEndPoint
                         );
                     Info.AgainstInfo.ArrowList.Add(NewArrow);
                 });
             }
-            public static void SetArrowDestory()
+            public static void DestoryFreeArrow()
+            {
+                MainThread.Run(() =>
+                {
+                    GameObject targetArrow = Info.AgainstInfo.ArrowList.First(arrow => arrow.GetComponent<ArrowManager>().targetCard = null);
+                    Info.AgainstInfo.ArrowList.Remove(targetArrow);
+                    Destroy(targetArrow);
+                });
+            }
+            public static void CreatFixedArrow(Card card)
+            {
+                MainThread.Run(() =>
+                {
+                    GameObject NewArrow = Instantiate(Info.GameUI.UiInfo.Arrow);
+                    NewArrow.GetComponent<ArrowManager>().InitArrow(
+                        Info.AgainstInfo.ArrowStartCard,
+                        Info.AgainstInfo.PlayerFocusCard
+                        );
+                    Info.AgainstInfo.ArrowList.Add(NewArrow);
+                });
+            }
+            public static void DestoryFixedArrow(Card card)
+            {
+                MainThread.Run(() =>
+                {
+                    GameObject targetArrow = Info.AgainstInfo.ArrowList.First(arrow => arrow.GetComponent<ArrowManager>().targetCard = card);
+                    Debug.LogError("确实是" + targetArrow.GetComponent<ArrowManager>().targetCard);
+                    Info.AgainstInfo.ArrowList.Remove(targetArrow);
+                    Destroy(targetArrow);
+                });
+            }
+            public static void DestoryAllArrow()
             {
                 MainThread.Run(() =>
                 {
@@ -79,6 +123,7 @@ namespace Command
                     Info.AgainstInfo.ArrowList.Clear();
                 });
             }
+
             public static async Task NoticeBoardShow()
             {
                 MainThread.Run(() =>

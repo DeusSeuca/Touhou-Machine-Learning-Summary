@@ -14,9 +14,9 @@ using UnityEngine;
 
 namespace Command
 {
+    //具体实现，还需进一步简化
     public static class CardCommand
     {
-        
         public static void OrderCard() => AgainstInfo.cardSet[RegionTypes.Hand].Order();
         public static void RemoveCard(Card card) => card.Row.Remove(card);
         public static async Task<Card> CreatCard(int id)
@@ -26,7 +26,7 @@ namespace Command
             MainThread.Run(() =>
             {
                 NewCard = GameObject.Instantiate(Info.CardInfo.cardModel);
-                NewCard.name = "Card" +Info.CardInfo.CreatCardRank++;
+                NewCard.name = "Card" + Info.CardInfo.CreatCardRank++;
                 var CardStandardInfo = CardLibraryCommand.GetCardStandardInfo(id);
                 NewCard.AddComponent(Type.GetType("CardSpace.Card" + id));
                 Card card = NewCard.GetComponent<Card>();
@@ -119,7 +119,6 @@ namespace Command
             //Debug.Log("打出一张牌2");
             EffectCommand.AudioEffectPlay(0);
             RowCommand.SetPlayCardMoveFree(false);
-            //Card TargetCard = AgainstInfo.PlayerPlayCard;
             targetCard.isPrepareToPlay = false;
             if (IsAnsy)
             {
@@ -129,7 +128,7 @@ namespace Command
             targetCard.Row.Remove(targetCard);
             AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].Add(targetCard);
             AgainstInfo.PlayerPlayCard = null;
-            await targetCard.TriggerAsync<TriggerType.PlayCard>();
+            //await targetCard.TriggerAsync<TriggerType.PlayCard>();
         }
         public static async Task DisCard(Card card)
         {
@@ -138,7 +137,30 @@ namespace Command
             RemoveCard(card);
             AgainstInfo.cardSet[Orientation.My][RegionTypes.Grave].Add(card);
             Info.AgainstInfo.PlayerPlayCard = null;
-            await card.TriggerAsync<TriggerType.Discard>();
+            //await card.TriggerAsync<TriggerType.Discard>();
+        }
+        public static async Task Gain(Card card, int point)
+        {
+            card.point += point;
+            EffectCommand.ParticlePlay(0, card);
+            EffectCommand.AudioEffectPlay(1);
+            await Task.Delay(1000);
+        }
+        public static async Task RemoveFromBattle(Card card,  int Index = 0)
+        {
+            Orientation orientation = card.belong == Territory.My ? Orientation.Down : Orientation.Up;
+            SingleRowInfo grave = AgainstInfo.cardSet[orientation][RegionTypes.Grave].singleRowInfos[0];
+            card.isMoveStepOver = false;
+            List<Card> OriginRow = RowsInfo.GetRow(card);
+            List<Card> TargetRow = grave.ThisRowCards;
+            OriginRow.Remove(card);
+            TargetRow.Insert(Index, card);
+            card.SetCardSee(false);
+            card.MoveSpeed = 0.1f;
+            await Task.Delay(100);
+            card.isMoveStepOver = true;
+            card.MoveSpeed = 0.1f;
+            Command.EffectCommand.AudioEffectPlay(1);
         }
     }
 }

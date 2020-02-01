@@ -41,6 +41,8 @@ namespace Command
                         new CardDeck("gezi", 1001, new List<int>
                         {
                             1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016
+                            //1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004
+
                         })
                     });
                 AllPlayerInfo.OpponentInfo = new NetInfoModel.PlayerInfo(
@@ -169,7 +171,7 @@ namespace Command
                 AgainstInfo.PlayerScore.P1Score += result == 0 || result == 1 ? 1 : 0;
                 AgainstInfo.PlayerScore.P2Score += result == 0 || result == 2 ? 1 : 0;
                 await Task.Delay(3500);
-                await ResetBattleAsync();
+                await GameSystem.TurnSystem.WhenRoundEnd();
             });
         }
         public static async Task TurnStart()
@@ -240,17 +242,18 @@ namespace Command
             CoinControl.Unfold();
             AgainstInfo.IsWaitForSelectProperty = true;
             AgainstInfo.SelectProperty = Region.None;
-            Timer.SetIsTimerStart(10);
+            //暂时设为1秒，之后还原成10秒
+            Timer.SetIsTimerStart(1);
             //AgainstInfo.SelectRegion = null;
             await Task.Run(async () =>
             {
-                Debug.Log("等待选择属性");
+               // Debug.Log("等待选择属性");
                 while (AgainstInfo.SelectProperty == Region.None)
                 {
                     StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
                     if (AgainstInfo.isAIControl)
                     {
-                        Debug.Log("自动选择属性");
+                        //Debug.Log("自动选择属性");
                         int rowRank = AiCommand.GetRandom(0, 4);
                         CoinControl.ChangeProperty((Region)rowRank);
                     }
@@ -306,30 +309,40 @@ namespace Command
         }
         public static async Task WaitForSelecUnit(Card OriginCard, List<Card> Cards, int num)
         {
-            //Debug.Log("选择场上数量" + Cards.Count);
-            //Debug.Log("选择场上单位" + Math.Min(Cards.Count, num));
-            Info.AgainstInfo.ArrowStartCard = OriginCard;
+            //可选列表中移除自身
+            Cards.Remove(OriginCard);
+            AgainstInfo.ArrowStartCard = OriginCard;
             AgainstInfo.IsWaitForSelectUnits = true;
-            Info.AgainstInfo.AllCardList.ForEach(card => card.IsGray = true);
+            AgainstInfo.AllCardList.ForEach(card => card.IsGray = true);
             Cards.ForEach(card => card.IsGray = false);
             AgainstInfo.SelectUnits.Clear();
             await Task.Run(async () =>
             {
-                await Task.Delay(500);
-                GameUI.UiCommand.SetArrowShow();
-                while (Info.AgainstInfo.SelectUnits.Count < Math.Min(Cards.Count, num))
+                //await Task.Delay(500);
+                if (Info.AgainstInfo.isMyTurn)
+                {
+                    //GameUI.UiCommand.SetArrowShow();
+                    GameUI.UiCommand.CreatFreeArrow();
+                }
+                int selectableNum = Math.Min(Cards.Count, num);
+                while (AgainstInfo.SelectUnits.Count < selectableNum)
                 {
                     StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
+                    if (AgainstInfo.isAIControl)
+                    {
+                        //自动选择场上单位
+                        Cards= Cards.OrderBy(x => AiCommand.GetRandom(0, 514)).ToList();
+                        Info.AgainstInfo.SelectUnits = Cards.Take(selectableNum).ToList();
+                    }
+                    await Task.Delay(1000);
                 }
                 Debug.Log("选择单位完毕" + Math.Min(Cards.Count, num));
-                Command.Network.NetCommand.AsyncInfo(GameEnum.NetAcyncType.SelectUnites);
+                Network.NetCommand.AsyncInfo(NetAcyncType.SelectUnites);
+                GameUI.UiCommand.DestoryAllArrow();
                 await Task.Delay(250);
-                GameUI.UiCommand.SetArrowDestory();
             });
-            //Debug.Log("选择单位完毕");
             AgainstInfo.AllCardList.ForEach(card => card.IsGray = false);
             AgainstInfo.IsWaitForSelectUnits = false;
-
         }
         public static async Task WaitForSelectBoardCard<T>(List<T> CardIds, CardBoardMode Mode = CardBoardMode.Select, int num = 1)
         {
@@ -374,19 +387,6 @@ namespace Command
                 }
             });
             GameUI.UiCommand.SetCardBoardHide();
-        }
-        public static async Task ResetBattleAsync()
-        {
-            foreach (var card in AgainstInfo.cardSet[Orientation.Down][RegionTypes.Battle].cardList)
-            {
-                await card.RemoveFromBattle(Orientation.Down);
-                await Task.Delay(150);
-            }
-            foreach (var card in AgainstInfo.cardSet[Orientation.Up][RegionTypes.Battle].cardList)
-            {
-                await card.RemoveFromBattle(Orientation.Up);
-                await Task.Delay(150);
-            }
         }
         public static async Task Surrender()
         {

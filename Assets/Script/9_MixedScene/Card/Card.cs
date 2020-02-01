@@ -12,19 +12,10 @@ using System.Threading.Tasks;
 using Thread;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace CardModel
 {
-    enum A
-    {
-        gezi,
-        yaya
-    }
-    enum B
-    {
-        ni,
-        hao
-    }
+
+
     public class Card : MonoBehaviour
     {
         public int CardId;
@@ -33,6 +24,7 @@ namespace CardModel
         public float MoveSpeed = 0.1f;
         public Region property;
         public Territory territory;
+        public Territory belong => Info.AgainstInfo.cardSet[GameEnum.Orientation.Down].cardList.Contains(this) ? Territory.My : Territory.Op;
         public Vector3 TargetPos;
         public Quaternion TargetRot;
 
@@ -52,60 +44,60 @@ namespace CardModel
 
         public List<Card> Row => RowsInfo.GetRow(this);
         public Network.NetInfoModel.Location Location => RowsInfo.GetLocation(this);
-      
+
 
         public Text PointText => transform.GetChild(0).GetChild(0).GetComponent<Text>();
         public string CardName => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).cardName;
         public string CardIntroduction => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).describe;
-        //打出
-        [TriggerType.PlayCard]
-        public List<Func<Card, Task>> cardEffect_Play = new List<Func<Card, Task>>();
-        //部署
-        [TriggerType.BeforeCardDeploy]
-        public List<Func<Card, Task>> cardEffect_BeforeDeploy = new List<Func<Card, Task>>();
-        [TriggerType.WhenCardDeploy]
-        public List<Func<Card, Task>> cardEffect_WhenDeploy = new List<Func<Card, Task>>();
-        [TriggerType.AfterCardDeploy]
-        public List<Func<Card, Task>> cardEffect_AfterDeploy = new List<Func<Card, Task>>();
-        //死亡
-        [TriggerType.BeforeCardDead]
-        public List<Func<Card, Task>> cardEffect_BeforeDead = new List<Func<Card, Task>>();
-        [TriggerType.WhenCardDead]
-        public List<Func<Card, Task>> cardEffect_WhenDead = new List<Func<Card, Task>>();
-        [TriggerType.AfterCardDead]
-        public List<Func<Card, Task>> cardEffect_AfterDead = new List<Func<Card, Task>>();
-        //放逐
-        [TriggerType.BeforeCardBanish]
-        public List<Func<Card, Task>> cardEffect_BeforeBanish = new List<Func<Card, Task>>();
-        [TriggerType.WhenCardBanish]
-        public List<Func<Card, Task>> cardEffect_WhenBanish = new List<Func<Card, Task>>();
-        [TriggerType.AfterCardBanish]
-        public List<Func<Card, Task>> cardEffect_AfterBanish = new List<Func<Card, Task>>();
-        //增益
-        [TriggerType.BeforeCardGain]
-        public List<Func<Card, Task>> cardEffect_BeforeGain = new List<Func<Card, Task>>();
-        [TriggerType.WhenCardGain]
-        public List<Func<Card, Task>> cardEffect_WhenGain = new List<Func<Card, Task>>();
-        [TriggerType.AfterCardGain]
-        public List<Func<Card, Task>> cardEffect_AfterGain = new List<Func<Card, Task>>();
+
+
+        public Dictionary<TriggerTime, Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>> cardEffect = new Dictionary<TriggerTime, Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>>();
 
         public virtual void Init()
         {
             IsInit = true;
             PointText.text = point.ToString();
-            cardEffect_BeforeBanish = new List<Func<Card, Task>>()
+
+            foreach (TriggerTime tirggerTime in Enum.GetValues(typeof(TriggerTime)))
             {
-                async (triggerCard) =>
+                cardEffect[tirggerTime] = new Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>();
+                foreach (TriggerType triggerType in Enum.GetValues(typeof(TriggerType)))
                 {
-                    await Task.Delay(1000);
-                    Debug.LogWarning("我被遗弃了"+name);
+                    cardEffect[tirggerTime][triggerType] = new List<Func<TriggerInfo, Task>>();
+                }
+            }
+            cardEffect[TriggerTime.When][TriggerType.Gain] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
+                {
+                    Debug.Log("执行增益操作");
+                    await Command.CardCommand.Gain(this,triggerInfo.point);
                 }
             };
-            cardEffect_WhenBanish = new List<Func<Card, Task>>()
+            cardEffect[TriggerTime.Before][TriggerType.Banish] = new List<Func<TriggerInfo, Task>>()
             {
-                async (triggerCard) =>
+                async (triggerInfo) =>
+                {
+                    //await Task.Delay(1000);
+                    //Debug.LogWarning("我被遗弃了"+name);
+                }
+            };
+            cardEffect[TriggerTime.When][TriggerType.Banish] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
                 {
                   await Command.CardCommand.BanishCard(this);
+                }
+            };
+            cardEffect[TriggerTime.After][TriggerType.RoundEnd] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
+                {
+                    if (Info.AgainstInfo.cardSet[RegionTypes.Battle].cardList.Contains(this))
+                    {
+                        Debug.Log("移除啦");
+                        await Command.CardCommand.RemoveFromBattle(this);
+                    }
                 }
             };
         }
@@ -146,68 +138,48 @@ namespace CardModel
             transform.rotation = Quaternion.Lerp(transform.rotation, TargetRot, Time.deltaTime * 10);
             PointText.text = point.ToString();
         }
-        public async Task TriggerAsync<T>()
-        {
-            // CardEffectStackControl.Trigger<T>(this);
-            await CardEffectStackControl.Trigger_NewAsync<T>(this);
-        }
+        //public async Task TriggerAsync<T>()
+        //{
+        //    // CardEffectStackControl.Trigger<T>(this);
+        //    //await CardEffectStackControl.Trigger_NewAsync<T>(this);
+        //}
         public async Task Hurt(int point)
         {
             this.point = Math.Max(this.point - point, 0);
             MainThread.Run(() =>
             {
-                Command.EffectCommand.ParticlePlay(1, transform.position);
+                //Command.EffectCommand.ParticlePlay(1, transform.position);
             });
             Command.EffectCommand.AudioEffectPlay(1);
             await Task.Delay(100);
         }
-        public async Task Gain(int point)
-        {
-            this.point += point;
-            Command.EffectCommand.ParticlePlay(0, transform.position);
-            Command.EffectCommand.AudioEffectPlay(1);
-            await Task.Delay(1000);
-        }
+
         //临时移动测试
-        public async Task MoveTo(RegionTypes region, Orientation orientation, int rank = 0)
-        {
-            List<Card> OriginRow = RowsInfo.GetRow(this);
-            List<Card> TargetRow = AgainstInfo.cardSet[orientation][region].cardList;
-            OriginRow.Remove(this);
-            TargetRow.Insert(rank, this);
-            isMoveStepOver = false;
-            await Task.Delay(1000);
-            isMoveStepOver = true;
-        }
-        public async Task MoveTo(SingleRowInfo singleRowInfo, int Index = 0)
-        {
-            List<Card> OriginRow = RowsInfo.GetRow(this);
-            List<Card> TargetRow = singleRowInfo.ThisRowCards;
-            OriginRow.Remove(this);
-            TargetRow.Insert(Index, this);
-            MoveSpeed = 0.1f;
-            isMoveStepOver = false;
-            await Task.Delay(1000);
-            isMoveStepOver = true;
-            MoveSpeed = 0.1f;
-            Command.EffectCommand.AudioEffectPlay(1);
-        }
+        //public async Task MoveTo(RegionTypes region, Orientation orientation, int rank = 0)
+        //{
+        //    List<Card> OriginRow = RowsInfo.GetRow(this);
+        //    List<Card> TargetRow = AgainstInfo.cardSet[orientation][region].cardList;
+        //    OriginRow.Remove(this);
+        //    TargetRow.Insert(rank, this);
+        //    isMoveStepOver = false;
+        //    await Task.Delay(1000);
+        //    isMoveStepOver = true;
+        //}
+        //public async Task MoveTo(SingleRowInfo singleRowInfo, int Index = 0)
+        //{
+        //    List<Card> OriginRow = RowsInfo.GetRow(this);
+        //    List<Card> TargetRow = singleRowInfo.ThisRowCards;
+        //    OriginRow.Remove(this);
+        //    TargetRow.Insert(Index, this);
+        //    MoveSpeed = 0.1f;
+        //    isMoveStepOver = false;
+        //    await Task.Delay(1000);
+        //    isMoveStepOver = true;
+        //    MoveSpeed = 0.1f;
+        //    Command.EffectCommand.AudioEffectPlay(1);
+        //}
         //需要整理
-        public async Task RemoveFromBattle(Orientation orientation, int Index = 0)
-        {
-            SingleRowInfo grave = AgainstInfo.cardSet[orientation][RegionTypes.Grave].singleRowInfos[0];
-            isMoveStepOver = false;
-            List<Card> OriginRow = RowsInfo.GetRow(this);
-            List<Card> TargetRow = grave.ThisRowCards;
-            OriginRow.Remove(this);
-            TargetRow.Insert(Index, this);
-            this.SetCardSee(false);
-            MoveSpeed = 0.1f;
-            await Task.Delay(100);
-            isMoveStepOver = true;
-            MoveSpeed = 0.1f;
-            Command.EffectCommand.AudioEffectPlay(1);
-        }
+
         public int this[CardField property]
         {
             get
@@ -219,12 +191,7 @@ namespace CardModel
                 }).ToList();
                 return s.Any() ? (int)s[0].GetValue(this) : 0;
             }
-            set
-            {
-                GetType().GetFields().First(field => ((CardProperty)field.GetCustomAttribute(typeof(CardProperty))).cardProperty == property).SetValue(this, value);
-            }
+            set => GetType().GetFields().First(field => ((CardProperty)field.GetCustomAttribute(typeof(CardProperty))).cardProperty == property).SetValue(this, value);
         }
-
     }
-
 }

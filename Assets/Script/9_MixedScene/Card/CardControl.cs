@@ -31,8 +31,6 @@ namespace Control
             {
                 Info.AgainstInfo.PlayerPlayCard = ThisCard;
             }
-            //临时间隙
-            //GameSystem.TransSystem.BanishCard(GetComponent<Card>());
         }
         private void OnMouseUp()
         {
@@ -51,12 +49,14 @@ namespace Control
                     }
                     else
                     {
-                        _ = Command.CardCommand.PlayCard(Info.AgainstInfo.PlayerPlayCard);
+                        Debug.Log("1打出一张牌"+ Info.AgainstInfo.PlayerPlayCard);
+                        _ = GameSystem.TransSystem.PlayCard(TriggerInfo.Build(null, Info.AgainstInfo.PlayerPlayCard));
                     }
                 }
                 else
                 {
-                    _ = Command.CardCommand.PlayCard(Info.AgainstInfo.PlayerPlayCard);
+                    Debug.Log("2打出一张牌"+ Info.AgainstInfo.PlayerPlayCard);
+                    _ = GameSystem.TransSystem.PlayCard(TriggerInfo.Build(null, Info.AgainstInfo.PlayerPlayCard));
                 }
             }
         }

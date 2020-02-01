@@ -17,28 +17,20 @@ namespace Info
         public bool CanBeSelected;
         [ShowInInspector]
         public int rank => (int)region + (AgainstInfo.isPlayer1 ^ (orientation == Orientation.Down) ? 9 : 0);
+
         private void Awake() => AgainstInfo.cardSet.singleRowInfos.Add(this);
         public int Location => this.JudgeRank(AgainstInfo.FocusPoint);
         public int RowRank => CardSet.globalCardList.IndexOf(ThisRowCards);
         public Material CardMaterial => transform.GetComponent<Renderer>().material;
         public List<Card> ThisRowCards
         {
-            get
-            {
-               return AgainstInfo.cardSet[rank];
-            }
-            set
-            {
-                AgainstInfo.cardSet[rank] = value;
-            }
+            get => AgainstInfo.cardSet[rank];
+            set => AgainstInfo.cardSet[rank] = value;
         }
         public void SetRegionSelectable(bool CanBeSelected)
         {
             this.CanBeSelected = CanBeSelected;
-            MainThread.Run(() =>
-            {
-                CardMaterial.SetColor("_GlossColor", CanBeSelected ? color : Color.black);
-            });
+            MainThread.Run(() =>{CardMaterial.SetColor("_GlossColor", CanBeSelected ? color : Color.black);});
         }
     }
 }

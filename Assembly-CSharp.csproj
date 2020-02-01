@@ -8,8 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{BD4C99E4-9CBE-A40F-3C9E-2590DED3802C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -68,13 +67,9 @@
     <Compile Include="Assets\Script\1_MenuScene\UserModeControl.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Against\AgainstInfo.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Ai\AiCommand.cs" />
-    <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardEffectStack.cs" />
-    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1004.cs" />
-    <Compile Include="Assets\Script\9_MixedScene\Enum\CardField.cs" />
+    <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardEffectStackControl.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\CardProperty.cs" />
-    <Compile Include="Assets\Script\9_MixedScene\Enum\CardState.cs" />
-    <Compile Include="Assets\Script\9_MixedScene\Enum\Tag.cs" />
-    <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\TriggerType.cs" />
+    <Compile Include="Assets\Script\2_BattleSenenScript\EffectStack\TriggerInfo.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\GameSystem\GameSystem.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Point\PointControl.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Point\PointInfo.cs" />
@@ -99,19 +94,40 @@
     <Compile Include="Assets\Script\9_MixedScene\CardInspector\CardMenu.cs" />
     <Compile Include="Assets\Script\9_MixedScene\CardInspector\CardModelInfo.cs" />
     <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card0.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1001.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1002.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1003.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1004.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1005.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1006.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1007.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1008.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1009.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1010.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1011.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1012.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1013.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1014.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1015.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card1016.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Dialogue\DialgueInfo.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Dialogue\Dialogue.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Dialogue\DialogueCommand.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Dialogue\DialogueControl.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Dialogue\Live2d.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\CardBoardMode.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\Enum\CardField.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\CardLevel.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\Enum\CardState.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\NetAcyncType.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\Orientation.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\Region.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\RegionTypes.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\Sectarian.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\Enum\Tag.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\Territory.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\Enum\TriggerTime.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\Enum\TriggerType.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Extension\Extension.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Extension\RowInfoExtension.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Interactive\InteractiveControl.cs" />

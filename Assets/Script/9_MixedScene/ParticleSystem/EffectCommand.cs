@@ -1,4 +1,5 @@
-﻿using Thread;
+﻿using CardModel;
+using Thread;
 using UnityEngine;
 namespace Command
 {
@@ -14,12 +15,12 @@ namespace Command
                 GameObject.Destroy(Source, Source.clip.length);
             });
         }
-        public static void ParticlePlay(int Rank, Vector3 Position)
+        public static void ParticlePlay(int Rank,Card card)
         {
             MainThread.Run(() =>
             {
                 ParticleSystem TargetParticle = GameObject.Instantiate(Info.ParticleInfo.Instance.ParticleEffect[Rank]);
-                TargetParticle.transform.position = Position;
+                TargetParticle.transform.position = card.transform.position;
                 TargetParticle.Play();
                 GameObject.Destroy(TargetParticle, 2);
             });

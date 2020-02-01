@@ -13,12 +13,12 @@ namespace CardSpace
         {
             base.Init();
 
-            cardEffect_Play = new List<Func<Card, Task>>()
+            cardEffect[TriggerTime.When][TriggerType.Play] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerCard) =>
                 {
                     await GameSystem.SelectSystem.SelectLocation(this);
-                    await GameSystem.TransSystem.DeployCard(this);
+                    await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,this));
                 }
             };
         }
