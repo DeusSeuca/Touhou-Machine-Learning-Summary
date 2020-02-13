@@ -76,19 +76,21 @@ namespace Command
             {
                 MainThread.Run(() =>
                 {
-                    GameObject NewArrow = Instantiate(Info.GameUI.UiInfo.Arrow);
-                    NewArrow.GetComponent<ArrowManager>().InitArrow(
+                    GameObject newArrow = Instantiate(Info.GameUI.UiInfo.Arrow);
+                    newArrow.name = "Arrow-null";
+                    newArrow.GetComponent<ArrowManager>().InitArrow(
                         Info.AgainstInfo.ArrowStartCard,
                         Info.GameUI.UiInfo.ArrowEndPoint
                         );
-                    Info.AgainstInfo.ArrowList.Add(NewArrow);
+                    Info.AgainstInfo.ArrowList.Add(newArrow);
                 });
             }
             public static void DestoryFreeArrow()
             {
                 MainThread.Run(() =>
                 {
-                    GameObject targetArrow = Info.AgainstInfo.ArrowList.First(arrow => arrow.GetComponent<ArrowManager>().targetCard = null);
+                    GameObject targetArrow = Info.AgainstInfo.ArrowList.First(arrow => arrow.GetComponent<ArrowManager>().targetCard == null);
+                    
                     Info.AgainstInfo.ArrowList.Remove(targetArrow);
                     Destroy(targetArrow);
                 });
@@ -97,20 +99,24 @@ namespace Command
             {
                 MainThread.Run(() =>
                 {
-                    GameObject NewArrow = Instantiate(Info.GameUI.UiInfo.Arrow);
-                    NewArrow.GetComponent<ArrowManager>().InitArrow(
+                    GameObject newArrow = Instantiate(Info.GameUI.UiInfo.Arrow);
+                    newArrow.name = "Arrow-" + card.name;
+                    newArrow.GetComponent<ArrowManager>().InitArrow(
                         Info.AgainstInfo.ArrowStartCard,
                         Info.AgainstInfo.PlayerFocusCard
                         );
-                    Info.AgainstInfo.ArrowList.Add(NewArrow);
+                    Info.AgainstInfo.ArrowList.Add(newArrow);
                 });
             }
             public static void DestoryFixedArrow(Card card)
             {
                 MainThread.Run(() =>
                 {
-                    GameObject targetArrow = Info.AgainstInfo.ArrowList.First(arrow => arrow.GetComponent<ArrowManager>().targetCard = card);
+                    //Arrow定位出错？
+                    GameObject targetArrow = Info.AgainstInfo.ArrowList.First(arrow => arrow.GetComponent<ArrowManager>().targetCard == card);
+                    
                     Debug.LogError("确实是" + targetArrow.GetComponent<ArrowManager>().targetCard);
+                    Debug.LogError("确实是" + targetArrow);
                     Info.AgainstInfo.ArrowList.Remove(targetArrow);
                     Destroy(targetArrow);
                 });

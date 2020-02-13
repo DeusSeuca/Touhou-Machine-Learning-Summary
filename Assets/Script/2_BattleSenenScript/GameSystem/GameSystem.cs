@@ -15,7 +15,6 @@ namespace GameSystem
     /// </summary>
     public class PointSystem
     {
-        //这个为啥没执行啊= =
         public static async Task Gain(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Gain]);
         public static async Task Hurt(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Hurt]);
     }
@@ -54,37 +53,10 @@ namespace GameSystem
     //好像不需要
     public class TurnSystem
     {
-        public static async Task WhenRoundStart()
-        {
-            
-        }
-        public static async Task WhenRoundEnd()
-        {
-            Debug.Log("出发了回合结束");
-            await TriggerLogic(TriggerInfo.Build(null, cardSet[RegionTypes.Battle].cardList)[TriggerType.RoundEnd]);
-        }
-        public static async Task WhenTurnStart()
-        {
-
-        }
-        public static async Task WhenTurnEnd()
-        {
-            await TriggerLogic(TriggerInfo.Build(null, targetCard: null)[TriggerType.TurnEnd]);
-
-            //await CardEffectStackControl.Trigger(TriggerTime.When, TriggerType.TurnEnd, cardSet[RegionTypes.Battle].cardList);
-
-            //foreach (var card in Info.AgainstInfo.cardSet[Orientation.Down][RegionTypes.Battle].cardList)
-            //{
-
-            //    await Command.CardCommand.RemoveFromBattle(card, Orientation.Down);
-            //    await Task.Delay(150);
-            //}
-            //foreach (var card in cardSet[RegionTypes.Battle].cardList)
-            //{
-            //    //await Command.CardCommand.RemoveFromBattle(card);
-            //    await Task.Delay(150);
-            //}
-            //await CardEffectStackControl.Trigger_NewAsync<TriggerType.AfterDisCard>(cardSet.BroastCardList(card));
-        }
+        public static async Task WhenTurnStart() => await TriggerLogic(TriggerInfo.Build(null, targetCard: null)[TriggerType.TurnStart]);
+        public static async Task WhenTurnEnd() => await TriggerLogic(TriggerInfo.Build(null, targetCard: null)[TriggerType.TurnEnd]);
+        public static async Task WhenRoundStart() => await TriggerLogic(TriggerInfo.Build(null, cardSet[RegionTypes.Battle].cardList)[TriggerType.RoundStart]);
+        public static async Task WhenRoundEnd() => await TriggerLogic(TriggerInfo.Build(null, cardSet[RegionTypes.Battle].cardList)[TriggerType.RoundEnd]);
+       
     }
 }

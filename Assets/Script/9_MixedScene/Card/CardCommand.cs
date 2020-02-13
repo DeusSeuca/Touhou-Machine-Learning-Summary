@@ -21,11 +21,12 @@ namespace Command
         public static void RemoveCard(Card card) => card.Row.Remove(card);
         public static async Task<Card> CreatCard(int id)
         {
-            GameObject NewCard;
+            //GameObject NewCard;
             Card NewCardScript = null;
             MainThread.Run(() =>
             {
-                NewCard = GameObject.Instantiate(Info.CardInfo.cardModel);
+                GameObject NewCard = GameObject.Instantiate(Info.CardInfo.cardModel);
+                NewCard.transform.SetParent(GameObject.FindGameObjectWithTag("Card").transform);
                 NewCard.name = "Card" + Info.CardInfo.CreatCardRank++;
                 var CardStandardInfo = CardLibraryCommand.GetCardStandardInfo(id);
                 NewCard.AddComponent(Type.GetType("CardSpace.Card" + id));

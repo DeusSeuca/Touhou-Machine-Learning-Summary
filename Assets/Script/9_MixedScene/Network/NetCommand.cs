@@ -22,8 +22,6 @@ namespace Command
             static WebSocket AsyncConnect = new WebSocket($"ws://{ip}/AsyncInfo");
             public static void Init()
             {
-
-
                 //var clients = new WebSocket($"ws://{ip}/Join");
                 //clients.OnMessage += (sender, e) =>
                 //{

@@ -1,5 +1,6 @@
 using CardInspector;
 using GameEnum;
+using Info.CardInspector;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,8 @@ using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using static Info.CardInspector.CardLibraryInfo;
+using static Info.CardInspector.CardLibraryInfo.LevelLibrary.SectarianCardLibrary.RankLibrary;
 
 namespace Command
 {
@@ -14,10 +17,112 @@ namespace Command
     {
         public static class CardLibraryCommand
         {
-            public static CardLibrarySaveData GetLibrarySaveData() => Resources.Load<CardLibrarySaveData>("CardData\\SaveData");
+            public static CardLibraryInfo GetLibraryInfo() => Resources.Load<CardLibraryInfo>("CardData\\SaveData");
+            public static CardModelInfo GetCardStandardInfo(int id) => CardLibraryCommand.GetLibraryInfo().multiModeCards.First(info => info.cardId == id);
+
+            static string[] CsvData;
 
 
-            static string[] CsvData => File.ReadAllLines("Assets\\Resources\\CardData\\CardData.01.csv", Encoding.GetEncoding("gb2312"));
+            public static void Init()
+            {
+                GetLibraryInfo().cardLibrarieList = new List<SectarianCardLibrary>()
+                {
+                    new SectarianCardLibrary(Sectarian.Neutral,true),
+                    new SectarianCardLibrary(Sectarian.Buddhism,true),
+                    new SectarianCardLibrary(Sectarian.Shintoism,true),
+                    new SectarianCardLibrary(Sectarian.science,true),
+                    new SectarianCardLibrary(Sectarian.Taoism,true),
+                    new SectarianCardLibrary(Sectarian.Neutral,false),
+                    new SectarianCardLibrary(Sectarian.Buddhism,false),
+                    new SectarianCardLibrary(Sectarian.Shintoism,false),
+                    new SectarianCardLibrary(Sectarian.science,false),
+                    new SectarianCardLibrary(Sectarian.Taoism,false)
+                };
+            }
+            public static void LoadFromCsv()
+            {
+                //加载单人模式卡牌信息
+                CsvData = File.ReadAllLines("Assets\\Resources\\CardData\\CardData-Single.csv", Encoding.GetEncoding("gb2312"));
+                GetLibraryInfo().singleModeCards = new List<CardModelInfo>();
+                for (int i = 1; i < CsvData.Length; i++)
+                {
+                    Texture2D tex = Resources.Load<Texture2D>("CardTex\\" + GetCsvData<string>(i, "ImageUrl"));
+                    GetLibraryInfo().singleModeCards.Add(
+                        new CardModelInfo(
+                            GetCsvData<int>(i, "Id") + 10000,
+                            GetCsvData<string>(i, "Level"),
+                            GetCsvData<string>(i, "Name-" + useLanguage),
+                            GetCsvData<string>(i, "Describe-" + useLanguage),
+                            GetCsvData<string>(i, "Tag"),
+                            GetCsvData<Sectarian>(i, "Camp"),
+                            GetCsvData<CardRank>(i, "Rank"),
+                            GetCsvData<Region>(i, "Region"),
+                            GetCsvData<Territory>(i, "Territory"),
+                            GetCsvData<int>(i, "Point"),
+                            GetCsvData<int>(i, "RamificationRank"),
+                            tex
+                        ));
+                }
+                //加载多人模式卡牌信息
+                CsvData = File.ReadAllLines("Assets\\Resources\\CardData\\CardData-Multi.csv", Encoding.GetEncoding("gb2312"));
+                GetLibraryInfo().multiModeCards = new List<CardModelInfo>();
+                for (int i = 1; i < CsvData.Length; i++)
+                {
+                    Texture2D tex = Resources.Load<Texture2D>("CardTex\\" + GetCsvData<string>(i, "ImageUrl"));
+                    GetLibraryInfo().multiModeCards.Add(
+                        new CardModelInfo(
+                            GetCsvData<int>(i, "Id") + 20000,
+                            "多人",
+                            GetCsvData<string>(i, "Name-" + useLanguage),
+                            GetCsvData<string>(i, "Describe-" + useLanguage),
+                            GetCsvData<string>(i, "Tag-" + useLanguage),
+                            GetCsvData<Sectarian>(i, "Camp"),
+                            GetCsvData<CardRank>(i, "Level"),
+                            GetCsvData<Region>(i, "Region"),
+                            GetCsvData<Territory>(i, "Territory"),
+                            GetCsvData<int>(i, "Point"),
+                            GetCsvData<int>(i, "RamificationRank"),
+                            tex
+                        ));
+                }
+
+              
+                Init();
+                CardMenu.UpdateInspector();
+            }
+            private static T GetCsvData<T>(int i, string item)
+            {
+                try
+                {
+                    int rank = CsvData[0].Split(',').ToList().IndexOf(item);
+                    return (T)Convert.ChangeType(CsvData[i].Split(',')[rank], typeof(T).IsEnum ? typeof(int) : typeof(T));
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e.ToString());
+                    return  default;
+                }
+
+            }
+            public static void SaveToCsv()
+            {
+
+
+            }
+            public static void ClearCsvData()
+            {
+                GetLibraryInfo().multiModeCards.Clear();
+                GetLibraryInfo().singleModeCards.Clear();
+                foreach (var cardLibrarie in GetLibraryInfo().cardLibrarieList)
+                {
+                    foreach (var sIngleSectarianLibrary in cardLibrarie.sIngleSectarianLibraries)
+                    {
+                        sIngleSectarianLibrary.CardModelInfos.Clear();
+                    }
+                }
+                CardMenu.UpdateInspector();
+            }
+
             public static void CreatScript(int cardId)
             {
                 string targetPath = Application.dataPath + $@"\Script\9_MixedScene\CardSpace\Card{cardId}.cs";
@@ -32,51 +137,6 @@ namespace Command
                     AssetDatabase.Refresh();
 #endif
                 }
-            }
-            public static CardModelInfo GetCardStandardInfo(int id) => Command.CardInspector.CardLibraryCommand.GetLibrarySaveData().cards.First(info => info.cardId == id);
-            public static void LoadFromCsv()
-            {
-                //TextAsset binAsset = Resources.Load("csv", typeof(TextAsset)) as TextAsset;
-                //var s = Resources.Load("CardData.csv").ToJson();
-                GetLibrarySaveData().cards = new List<CardModelInfo>();
-                string Language = "Ch";
-                for (int i = 1; i < CsvData.Length; i++)
-                {
-                    Texture2D tex = Resources.Load<Texture2D>("CardTex\\" + GetCsvData<string>(i, "ImageUrl"));
-                    GetLibrarySaveData().cards.Add(
-                        new CardModelInfo(
-                            GetCsvData<int>(i, "Id") + 1000,
-                            GetCsvData<string>(i, "Name-" + Language),
-                            GetCsvData<string>(i, "Describe-" + Language),
-                            GetCsvData<string>(i, "Tag-" + Language),
-                            GetCsvData<Sectarian>(i, "Camp"),
-                            GetCsvData<CardLevel>(i, "Level"),
-                            GetCsvData<Region>(i, "Region"),
-                            GetCsvData<Territory>(i, "Territory"),
-                            GetCsvData<int>(i, "Point"),
-                            GetCsvData<int>(i, "RamificationRank"),
-                            tex
-                        ));
-                }
-            }
-            private static T GetCsvData<T>(int i, string item)
-            {
-                try
-                {
-                    int rank = CsvData[0].Split(',').ToList().IndexOf(item);
-                    return (T)Convert.ChangeType(CsvData[i].Split(',')[rank], typeof(T).IsEnum ? typeof(int) : typeof(T));
-                }
-                catch (Exception e)
-                {
-                    Debug.Log(e.ToString());
-                    int rank = CsvData[0].Split(',').ToList().IndexOf(item);
-                    return (T)Convert.ChangeType(CsvData[i].Split(',')[rank], typeof(T).IsEnum ? typeof(int) : typeof(T));
-                }
-
-            }
-            public static void SaveToCsv()
-            {
-                GetLibrarySaveData().cards.Clear();
             }
         }
     }

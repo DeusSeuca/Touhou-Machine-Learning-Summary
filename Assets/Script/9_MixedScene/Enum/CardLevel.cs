@@ -1,10 +1,10 @@
 ﻿namespace GameEnum
 {
-    public enum CardLevel
+    public enum CardRank
     {
-        Leader = 4,
-        Glod = 3,
-        Silver = 2,
-        Copper = 1,
+        Leader = 1,
+        Glod = 2,
+        Silver = 3,
+        Copper = 4,
     }
 }

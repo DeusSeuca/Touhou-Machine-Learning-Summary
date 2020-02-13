@@ -9,6 +9,7 @@ namespace Control
         private void OnApplicationQuit() => Info.StateInfo.TaskManager.Cancel();
         public async Task BattleProcess()
         {
+            
             await StateCommand.BattleStart();
             for (int i = 0; i < 3; i++)
             {

@@ -201,7 +201,8 @@ namespace Command
         public static async Task WaitForPlayerOperation()
         {
             bool isFirstOperation = true;
-            Timer.SetIsTimerStart(60);
+            //Timer.SetIsTimerStart(60);
+            Timer.SetIsTimerStart(6000);
             await Task.Run(async () =>
             {
                 Debug.Log("出牌");

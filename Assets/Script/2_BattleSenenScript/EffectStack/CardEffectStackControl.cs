@@ -19,7 +19,19 @@ namespace Control
         public Dictionary<string, int> dict;
         [ShowInInspector]
         public static Stack<(Func<TriggerInfo, Task>, TriggerInfo)> TaskStack = new Stack<(Func<TriggerInfo, Task>, TriggerInfo)>();
-        //public static List<Func<Card, Task>> AsyneTriggerTask = new List<Func<Card, Task>>();
+        public static async Task Run()
+        {
+            if (!IsRuning)
+            {
+                IsRuning = true;
+                while (TaskStack.Count != 0)
+                {
+                    (Func<TriggerInfo, Task>, TriggerInfo) taskinfo = TaskStack.Pop();
+                    await taskinfo.Item1(taskinfo.Item2);
+                }
+                IsRuning = false;
+            }
+        }
         public static async Task TriggerLogic(TriggerInfo triggerInfo)
         {
             foreach (var card in triggerInfo.targetCards)
@@ -58,19 +70,6 @@ namespace Control
             tasks.ForEach(task => TaskStack.Push((task, triggerInfo)));
             await Run();
         }
-        public static async Task Run()
-        {
-            if (!IsRuning)
-            {
-                IsRuning = true;
-                while (TaskStack.Count != 0)
-                {
-                    //可能出奇怪的bug
-                    (Func<TriggerInfo, Task>, TriggerInfo) taskinfo = TaskStack.Pop();
-                    await taskinfo.Item1(taskinfo.Item2);
-                }
-                IsRuning = false;
-            }
-        }
+        
     }
 }

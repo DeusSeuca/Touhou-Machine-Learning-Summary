@@ -18,7 +18,7 @@ public class test : MonoBehaviour
     public void test1()
     {
         //SceneManager.LoadSceneAsync(2);
-        Command.StateCommand.Surrender();
+        //ExcelImport.ExcelCommand.Init("Ch");
         //Debug.Log(AgainstInfo.IsCurrectPass);
         //Task.Run(() =>
         //{
