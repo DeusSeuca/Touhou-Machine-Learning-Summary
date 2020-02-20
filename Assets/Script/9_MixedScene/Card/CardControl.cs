@@ -31,6 +31,7 @@ namespace Control
             {
                 Info.AgainstInfo.PlayerPlayCard = ThisCard;
             }
+            //Command.EffectCommand.TheWorldPlay(GetComponent<Card>());
         }
         private void OnMouseUp()
         {

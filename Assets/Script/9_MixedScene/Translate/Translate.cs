@@ -15,6 +15,11 @@ static class Translate
         tagCsvData = File.ReadAllLines("Assets\\Resources\\CardData\\Tag.csv", Encoding.GetEncoding("gb2312"));
         return GetCsvData(tagCsvData, text);
     }
+    public static string TransUiText(this string text)
+    {
+        tagCsvData = File.ReadAllLines("Assets\\Resources\\CardData\\UiText.csv", Encoding.GetEncoding("gb2312"));
+        return GetCsvData(tagCsvData, text);
+    }
     private static string GetCsvData(string[] CsvData, string text)
     {
         //默认中文列位置

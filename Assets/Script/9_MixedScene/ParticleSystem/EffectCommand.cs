@@ -1,4 +1,5 @@
 ﻿using CardModel;
+using System.Threading.Tasks;
 using Thread;
 using UnityEngine;
 namespace Command
@@ -23,6 +24,29 @@ namespace Command
                 TargetParticle.transform.position = card.transform.position;
                 TargetParticle.Play();
                 GameObject.Destroy(TargetParticle, 2);
+            });
+        }
+        public static void TheWorldPlay(Card card)
+        {
+            
+            MainThread.Run(() =>
+            {
+                SceneEffectInfo.theWorldEffect.gameObject.SetActive(true);
+                Vector3 screenPoint = Camera.main.WorldToScreenPoint(card.transform.position);
+                SceneEffectInfo.theWorldEffect.transform.position = Camera.main.ScreenPointToRay(screenPoint).GetPoint(5);
+            });
+            Task.Run(async () =>
+            {
+                TheWorldEffect.state = 0;
+                await Task.Delay(1000);
+                TheWorldEffect.state = 1;
+                await Task.Delay(2000);
+                TheWorldEffect.state = 0;
+                await Task.Delay(1000);
+                MainThread.Run(() =>
+                {
+                    SceneEffectInfo.theWorldEffect.gameObject.SetActive(false);
+                });
             });
         }
     }

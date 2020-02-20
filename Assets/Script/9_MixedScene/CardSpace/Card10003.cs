@@ -15,7 +15,7 @@ namespace CardSpace
 
             cardEffect[TriggerTime.When][TriggerType.Play] = new List<Func<TriggerInfo, Task>>()
             {
-                async (triggerCard) =>
+                async (triggerInfo) =>
                 {
                     await GameSystem.SelectSystem.SelectLocation(this);
                     await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,this));

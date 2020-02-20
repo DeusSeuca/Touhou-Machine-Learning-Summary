@@ -1,4 +1,5 @@
 using CardInspector;
+using Extension;
 using GameEnum;
 using Info.CardInspector;
 using System;
@@ -9,6 +10,8 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 using static Info.CardInspector.CardLibraryInfo;
+using static Info.CardInspector.CardLibraryInfo.LevelLibrary;
+using static Info.CardInspector.CardLibraryInfo.LevelLibrary.SectarianCardLibrary;
 using static Info.CardInspector.CardLibraryInfo.LevelLibrary.SectarianCardLibrary.RankLibrary;
 
 namespace Command
@@ -18,26 +21,51 @@ namespace Command
         public static class CardLibraryCommand
         {
             public static CardLibraryInfo GetLibraryInfo() => Resources.Load<CardLibraryInfo>("CardData\\SaveData");
-            public static CardModelInfo GetCardStandardInfo(int id) => CardLibraryCommand.GetLibraryInfo().multiModeCards.First(info => info.cardId == id);
+            public static CardModelInfo GetCardStandardInfo(int id) => new List<CardModelInfo>()
+                    .Union(GetLibraryInfo().singleModeCards)
+                    .Union(GetLibraryInfo().multiModeCards)
+                    .First(info => info.cardId == id);
 
             static string[] CsvData;
-
-
+            //初始化每个牌库的每个关卡所包含的卡牌
             public static void Init()
             {
-                GetLibraryInfo().cardLibrarieList = new List<SectarianCardLibrary>()
+                CardLibraryInfo cardLibraryInfo = GetLibraryInfo();
+                cardLibraryInfo.levelLibries = new List<LevelLibrary>();
+                cardLibraryInfo.includeLevel.ForEach(level => cardLibraryInfo.levelLibries.Add(new LevelLibrary(cardLibraryInfo.singleModeCards, level)));
+                foreach (var levelLibrart in cardLibraryInfo.levelLibries.Where(library => library.isSingleMode))
                 {
-                    new SectarianCardLibrary(Sectarian.Neutral,true),
-                    new SectarianCardLibrary(Sectarian.Buddhism,true),
-                    new SectarianCardLibrary(Sectarian.Shintoism,true),
-                    new SectarianCardLibrary(Sectarian.science,true),
-                    new SectarianCardLibrary(Sectarian.Taoism,true),
-                    new SectarianCardLibrary(Sectarian.Neutral,false),
-                    new SectarianCardLibrary(Sectarian.Buddhism,false),
-                    new SectarianCardLibrary(Sectarian.Shintoism,false),
-                    new SectarianCardLibrary(Sectarian.science,false),
-                    new SectarianCardLibrary(Sectarian.Taoism,false)
-                };
+                    levelLibrart.sectarianCardLibraries = new List<SectarianCardLibrary>();
+                    foreach (var sectarian in levelLibrart.includeSectarian)
+                    {
+                        levelLibrart.sectarianCardLibraries.Add(new SectarianCardLibrary(levelLibrart.cardModelInfos, sectarian));
+
+                        foreach (var sectarianLibrary in levelLibrart.sectarianCardLibraries)
+                        {
+                            foreach (var rank in sectarianLibrary.includeRank)
+                            {
+                                sectarianLibrary.rankLibraries.Add(new RankLibrary(sectarianLibrary.cardModelInfos, rank));
+                            }
+                        }
+                    }
+                }
+                cardLibraryInfo.levelLibries.Add(new LevelLibrary(cardLibraryInfo.multiModeCards, "多人"));
+                foreach (var levelLibrart in cardLibraryInfo.levelLibries.Where(library => !library.isSingleMode))
+                {
+                    levelLibrart.sectarianCardLibraries = new List<SectarianCardLibrary>();
+                    foreach (var sectarian in levelLibrart.includeSectarian)
+                    {
+                        levelLibrart.sectarianCardLibraries.Add(new SectarianCardLibrary(levelLibrart.cardModelInfos, sectarian));
+
+                        foreach (var sectarianLibrary in levelLibrart.sectarianCardLibraries)
+                        {
+                            foreach (var rank in sectarianLibrary.includeRank)
+                            {
+                                sectarianLibrary.rankLibraries.Add(new RankLibrary(sectarianLibrary.cardModelInfos, rank));
+                            }
+                        }
+                    }
+                }
             }
             public static void LoadFromCsv()
             {
@@ -85,11 +113,15 @@ namespace Command
                             tex
                         ));
                 }
-
-              
                 Init();
+                Refresh();
+            }
+
+            public static void Refresh()
+            {
                 CardMenu.UpdateInspector();
             }
+
             private static T GetCsvData<T>(int i, string item)
             {
                 try
@@ -100,7 +132,7 @@ namespace Command
                 catch (Exception e)
                 {
                     Debug.Log(e.ToString());
-                    return  default;
+                    return default;
                 }
 
             }
@@ -113,11 +145,11 @@ namespace Command
             {
                 GetLibraryInfo().multiModeCards.Clear();
                 GetLibraryInfo().singleModeCards.Clear();
-                foreach (var cardLibrarie in GetLibraryInfo().cardLibrarieList)
+                foreach (var cardLibrarie in GetLibraryInfo().levelLibries)
                 {
-                    foreach (var sIngleSectarianLibrary in cardLibrarie.sIngleSectarianLibraries)
+                    foreach (var sIngleSectarianLibrary in cardLibrarie.sectarianCardLibraries)
                     {
-                        sIngleSectarianLibrary.CardModelInfos.Clear();
+                        sIngleSectarianLibrary.cardModelInfos.Clear();
                     }
                 }
                 CardMenu.UpdateInspector();

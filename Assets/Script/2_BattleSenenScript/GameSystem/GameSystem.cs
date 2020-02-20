@@ -17,6 +17,12 @@ namespace GameSystem
     {
         public static async Task Gain(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Gain]);
         public static async Task Hurt(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Hurt]);
+        public static async Task Cure(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Cure]);
+        public static async Task Reset(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Reset]);
+        public static async Task Destory(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Destory]);
+        public static async Task Strengthen(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Strengthen]);
+        public static async Task Impair(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Impair]);
+        
     }
     /// <summary>
     /// 转移卡牌位置、所属区域的相关机制

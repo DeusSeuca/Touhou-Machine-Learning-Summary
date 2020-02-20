@@ -21,7 +21,7 @@ public class leimi : MonoBehaviour
         //敌方间谍牌
         cardSet = cardSet[Orientation.Op][CardState.Spy];
         //含有机器标签的牌
-        cardSet = cardSet[Tag.Machine];
+        cardSet = cardSet[CardTag.Machine];
 
     }
 

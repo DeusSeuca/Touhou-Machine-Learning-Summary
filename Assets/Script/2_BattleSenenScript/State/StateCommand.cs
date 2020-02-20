@@ -38,9 +38,10 @@ namespace Command
                     "gezi", "yaya",
                     new List<CardDeck>
                     {
-                        new CardDeck("gezi", 1001, new List<int>
+                        new CardDeck("gezi", 10001, new List<int>
                         {
-                            1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016
+                            10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,
+                            //10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
                             //1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004
 
                         })
@@ -49,10 +50,11 @@ namespace Command
                     "gezi", "yaya",
                     new List<CardDeck>
                     {
-                        new CardDeck("gezi", 1001, new List<int>
+                        new CardDeck("gezi", 10001, new List<int>
                         {
+                            10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,
                             //1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016
-                            1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004
+                            //10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
                         })
                     });
             }
@@ -60,8 +62,8 @@ namespace Command
             await Task.Run(async () =>
             {
                 //await Task.Delay(500);
-                Debug.Log("对战开始");
-                GameUI.UiCommand.SetNoticeBoardTitle("对战开始");
+                Debug.Log("对战开始".TransUiText());
+                GameUI.UiCommand.SetNoticeBoardTitle("对战开始".TransUiText());
                 await GameUI.UiCommand.NoticeBoardShow();
                 //初始化我方领袖卡
                 Card MyLeaderCard = await CardCommand.CreatCard(AllPlayerInfo.UserInfo.UseDeck.LeaderId);
@@ -117,7 +119,7 @@ namespace Command
                     case (0):
                         {
                             Info.AgainstInfo.ExChangeableCardNum = 0;
-                            Info.GameUI.UiInfo.CardBoardTitle = "剩余抽卡次数为" + Info.AgainstInfo.ExChangeableCardNum;
+                            Info.GameUI.UiInfo.CardBoardTitle = "剩余抽卡次数为".TransUiText() + Info.AgainstInfo.ExChangeableCardNum;
                             for (int i = 0; i < 10; i++)
                             {
                                 await CardCommand.DrawCard(IsPlayerDraw: true, isOrder: false);
@@ -178,7 +180,7 @@ namespace Command
         {
             await Task.Run(async () =>
             {
-                GameUI.UiCommand.SetNoticeBoardTitle((AgainstInfo.isMyTurn ? "我方" : "敌方") + "回合开始");
+                GameUI.UiCommand.SetNoticeBoardTitle(AgainstInfo.isMyTurn ? "我方回合开始".TransUiText() : "对方回合开始".TransUiText());
                 await GameUI.UiCommand.NoticeBoardShow();
                 //await Task.Delay(000);
                 AgainstInfo.IsCardEffectCompleted = false;
@@ -190,7 +192,7 @@ namespace Command
         {
             await Task.Run(async () =>
             {
-                GameUI.UiCommand.SetNoticeBoardTitle((AgainstInfo.isMyTurn ? "我方" : "敌方") + "回合结束");
+                GameUI.UiCommand.SetNoticeBoardTitle(AgainstInfo.isMyTurn ? "我方回合结束".TransUiText() : "对方回合结束".TransUiText());
                 await GameUI.UiCommand.NoticeBoardShow();
                 //await Task.Delay(000);
                 RowCommand.SetPlayCardMoveFree(false);

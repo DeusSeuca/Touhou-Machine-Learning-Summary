@@ -15,8 +15,21 @@ namespace CardSpace
 
             cardEffect[TriggerTime.When][TriggerType.Play] = new List<Func<TriggerInfo, Task>>()
             {
-                async (triggerCard) =>
+                async (triggerInfo) =>
                 {
+                    await GameSystem.SelectSystem.SelectLocation(this);
+                    await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,this));
+                }
+            };
+            cardEffect[TriggerTime.When][TriggerType.Deploy] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
+                {
+                    int targetCount=cardSet[CardTag.Fairy].count;
+                    for (int i = 0; i < targetCount; i++)
+                    {
+                        await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,cardSet[CardRank.Silver,CardRank.Copper][0],1));
+                    }
                     await GameSystem.SelectSystem.SelectLocation(this);
                     await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,this));
                 }

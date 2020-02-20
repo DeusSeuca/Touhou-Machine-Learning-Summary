@@ -15,33 +15,8 @@ public class test : MonoBehaviour
     public CardSet cardSet => AgainstInfo.cardSet;
 
     [Button]
-    public void test1()
+    public void test1(GameEnum.Language language)
     {
-        //SceneManager.LoadSceneAsync(2);
-        //ExcelImport.ExcelCommand.Init("Ch");
-        //Debug.Log(AgainstInfo.IsCurrectPass);
-        //Task.Run(() =>
-        //{
-        //    //Debug.Log(AgainstInfo.IsCurrectPass);
-        //});
-
-        //if (AgainstInfo.IsCardEffectCompleted)
-        //{
-        //    Debug.Log("执行完毕？");
-        //    AgainstInfo.IsCardEffectCompleted = false;
-        //}
-        //if (AgainstInfo.IsCurrectPass)
-        //{
-        //    Debug.Log("当前pass？");
-        //    AgainstInfo.IsCardEffectCompleted = false;
-        //}
-
-
-        //print("ya");
-        //var a = AgainstInfo.cardSet[Orientation.Down];
-        //var b = a[RegionTypes.Leader];
-        //b.Add(new Card());
-
-        //print("yaya");
+        Translate.currentLanguage = language.ToString();
     }
 }

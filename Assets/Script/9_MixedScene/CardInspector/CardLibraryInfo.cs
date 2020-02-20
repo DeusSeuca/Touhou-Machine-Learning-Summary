@@ -3,10 +3,12 @@ using GameEnum;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+
 using System.Linq;
 using UnityEngine;
 using static Info.CardInspector.CardLibraryInfo.LevelLibrary.SectarianCardLibrary.RankLibrary;
+//你干啥呢？
+// 我好像只能看你这一个文件右边没有其他的吗？
 
 namespace Info
 {
@@ -15,9 +17,27 @@ namespace Info
         [CreateAssetMenu(fileName = "SaveData", menuName = "CreatCardDataAsset")]
         public partial class CardLibraryInfo : SerializedScriptableObject
         {
+            //[LabelText("单人牌库图标")]
+            //public Texture2D singleIcon;
+            //[LabelText("多人牌库图标")]
+            //public Texture2D MultiIcon;
 
-            [LabelText("牌库图标")]
-            public Texture2D icon;
+            [HorizontalGroup("Button", 120, LabelWidth = 70)]
+            [Button("刷新卡牌数据")]
+            public void Refresh() => CardLibraryCommand.Refresh();
+
+            [HorizontalGroup("Button", 120, LabelWidth = 70)]
+            [Button("载入卡牌数据从表格")]
+            public void Load() => CardLibraryCommand.LoadFromCsv();
+
+            [HorizontalGroup("Button", 120, LabelWidth = 70)]
+            [Button("清空卡牌数据")]
+            public void Clear() => CardLibraryCommand.ClearCsvData();
+
+            [HorizontalGroup("Button", 120, LabelWidth = 70)]
+            [Button("保存卡牌数据到表格")]
+            public void Save() => CardLibraryCommand.SaveToCsv();
+
             [ShowInInspector]
             [LabelText("单人模式牌库卡牌数量")]
             public int singleModeCardCount => singleModeCards.Count;
@@ -30,30 +50,33 @@ namespace Info
             public List<CardModelInfo> singleModeCards = new List<CardModelInfo>();
             public List<CardModelInfo> multiModeCards = new List<CardModelInfo>();
             [HideInInspector]
-            public List<LevelLibrary> cardLibrarieList = new List<LevelLibrary>();
+            public List<LevelLibrary> levelLibries = new List<LevelLibrary>();
             [ShowInInspector]
             public List<string> includeLevel => singleModeCards.Select(x => x.level).Distinct().ToList();
 
 
-            [HorizontalGroup("Button", 155, LabelWidth = 70)]
-            [Button("载入卡牌数据从csv表格")]
-            public void Load() => CardLibraryCommand.LoadFromCsv();
 
-            [HorizontalGroup("Button", 155, LabelWidth = 70)]
-            [Button("清空卡牌数据")]
-            public void Clear() => CardLibraryCommand.ClearCsvData();
-
-            [HorizontalGroup("Button", 155, LabelWidth = 70)]
-            [Button("保存卡牌数据到csv表格")]
-            public void Save() => CardLibraryCommand.SaveToCsv();
 
             [ShowInInspector]
             public Dictionary<Sectarian, Texture2D> sectarianIcons;
             [ShowInInspector]
             public Dictionary<CardRank, Texture2D> rankIcons;
+
             public class LevelLibrary
             {
-                public List<SectarianCardLibrary> cardLibrarieList = new List<SectarianCardLibrary>();
+                internal bool isSingleMode;
+                public string level;
+                public List<SectarianCardLibrary> sectarianCardLibraries = new List<SectarianCardLibrary>();
+                [TabGroup("卡片管理")]
+                public List<CardModelInfo> cardModelInfos;
+                public List<Sectarian> includeSectarian => cardModelInfos.Select(x => x.sectarian).Distinct().ToList();
+
+                public LevelLibrary(List<CardModelInfo> singleModeCardsModels, string level)
+                {
+                    this.level = level;
+                    isSingleMode = level != "多人";
+                    cardModelInfos = singleModeCardsModels.Where(cards => cards.level == level).ToList();
+                }
 
                 public class SectarianCardLibrary
                 {
@@ -61,11 +84,10 @@ namespace Info
                     [HorizontalGroup("Split", 55, LabelWidth = 70)]
                     public Texture2D icon;
 
-
                     [VerticalGroup("Split/Meta")]
                     [LabelText("当前卡牌数量")]
                     public int cardNum;
-                    public bool isSingleMode;
+                    //public bool isSingleMode;
                     [TabGroup("卡片制作")]
                     [HideLabel, PreviewField(128, ObjectFieldAlignment.Right)]
                     public Texture2D cardIcon;
@@ -80,7 +102,6 @@ namespace Info
 
                     [TabGroup("卡片制作")]
                     public int point;
-
 
                     [TabGroup("卡片制作")]
                     [Button("添加卡牌")]
@@ -112,27 +133,16 @@ namespace Info
                         //}
                     }
                     [TabGroup("卡片管理")]
-                    public List<CardModelInfo> CardModelInfos;
-                    public List<RankLibrary> sIngleSectarianLibraries;
-                    //List<string> includeLevel => CardModelInfos.Select(x => x.level).Distinct().ToList();
+                    public List<CardModelInfo> cardModelInfos;
+                    public List<RankLibrary> rankLibraries = new List<RankLibrary>();
+                    public List<CardRank> includeRank => cardModelInfos.Select(x => x.Rank).Distinct().ToList();
 
 
-                    public SectarianCardLibrary(Sectarian sectarian, bool isSingle)
+                    public SectarianCardLibrary(List<CardModelInfo> CardsModels, Sectarian sectarian)
                     {
                         this.sectarian = sectarian;
-                        isSingleMode = isSingle;
-                        List<CardModelInfo> targetCardList = isSingle ? CardLibraryCommand.GetLibraryInfo().singleModeCards : CardLibraryCommand.GetLibraryInfo().multiModeCards;
-                        CardModelInfos = targetCardList.Where(card => card.sectarian == sectarian).ToList();
                         icon = CardLibraryCommand.GetLibraryInfo().sectarianIcons[sectarian];
-
-                        sIngleSectarianLibraries = new List<RankLibrary>()
-                    {
-                        new RankLibrary(isSingle,sectarian,CardRank.Leader),
-                        new RankLibrary(isSingle,sectarian,CardRank.Glod),
-                        new RankLibrary(isSingle,sectarian,CardRank.Silver),
-                        new RankLibrary(isSingle,sectarian,CardRank.Copper),
-                    };
-
+                        cardModelInfos = CardsModels.Where(card => card.sectarian == sectarian).ToList();
                     }
                     public class RankLibrary
                     {
@@ -141,18 +151,12 @@ namespace Info
                         public Texture2D icon;
                         public CardRank rank;
                         [TabGroup("卡片管理")]
-                        public List<CardModelInfo> CardModelInfos;
-                        [TabGroup("卡片管理2")]
-                        public List<CardModelInfo> this[string level] => CardModelInfos.Where(x => x.level == level).ToList();
-                        //public List<string> includeLevel => CardModelInfos.Select(x => x.level).Distinct().ToList();
-                        public RankLibrary(bool isSingle, Sectarian sectarian, CardRank rank)
+                        public List<CardModelInfo> cardModelInfos;
+                        public RankLibrary(List<CardModelInfo> cardsModels, CardRank rank)
                         {
                             this.rank = rank;
-                            CardLibraryInfo cardLibraryInfo = CardLibraryCommand.GetLibraryInfo();
-                            icon = cardLibraryInfo.rankIcons[rank];
-                            CardModelInfos = (isSingle ? cardLibraryInfo.singleModeCards : cardLibraryInfo.multiModeCards)
-                                .Where(card => card.sectarian == sectarian && card.Rank == rank)
-                                .ToList();
+                            icon = CardLibraryCommand.GetLibraryInfo().rankIcons[rank];
+                            cardModelInfos = cardsModels.Where(cards => cards.Rank == rank).ToList();
                         }
                         [Serializable]
                         public class CardModelInfo
@@ -210,15 +214,15 @@ namespace Info
                             public void OpenCardScript()
                             {
                                 string targetPath = Application.dataPath + $@"\Script\9_MixedScene\CardSpace\Card{cardId}.cs";
-                                Command.CardInspector.CardLibraryCommand.CreatScript(cardId);
-                                Process.Start(targetPath);
+                                CardLibraryCommand.CreatScript(cardId);
+                                System.Diagnostics.Process.Start(targetPath);
                             }
                         }
                     }
                 }
             }
 
-            
+
         }
     }
 }

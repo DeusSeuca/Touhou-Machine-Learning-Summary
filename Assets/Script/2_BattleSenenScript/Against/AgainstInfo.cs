@@ -60,6 +60,9 @@ namespace Info
         public static bool isPVE => !isPVP;
         public static bool isAIControl => isPVE && (!isMyTurn || Timer.isTimeout);
 
+        /// <summary>
+        /// 对局中卡牌的集合
+        /// </summary>
         public static CardSet cardSet = new CardSet();
 
         public static List<Card> AllCardList => CardSet.globalCardList.SelectMany(x => x).ToList();

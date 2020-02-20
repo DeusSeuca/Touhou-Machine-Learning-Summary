@@ -16,11 +16,9 @@ public class CardSet
     [ShowInInspector]
     public static List<List<Card>> globalCardList = new List<List<Card>>();
     public List<SingleRowInfo> singleRowInfos = new List<SingleRowInfo>();
-    //该
-    //[ShowInInspector]
-    //private List<Card> rowCardList => singleRowInfos.SelectMany(x => x.ThisRowCards).ToList();
     [HideInInspector]
     public List<Card> cardList = null;
+    public int count => cardList.Count;
     /// <summary>
     /// 得到触发牌之外的卡牌列表，用于广播触发事件的前后相关事件
     /// </summary>
@@ -28,19 +26,10 @@ public class CardSet
     /// <returns></returns>
     public List<Card> BroastCardList(Card card) => Info.AgainstInfo.cardSet[GameEnum.Orientation.All].cardList.Except(new List<Card> { card }).ToList();
 
-    //public void Init()
-    //{
-    //    if (cardList == null)
-    //    {
-    //        Debug.Log("初始化" + cardList);
-    //        cardList = globalCardList.SelectMany(x => x).ToList();
-    //    }
-    //}
     public CardSet()
     {
         globalCardList.Clear();
         Enumerable.Range(0, 18).ToList().ForEach(x => globalCardList.Add(new List<Card>()));
-        //cardList = globalCardList.SelectMany(x => x).ToList();
     }
     public CardSet(List<SingleRowInfo> singleRowInfos, List<Card> cardList = null)
     {
@@ -62,7 +51,6 @@ public class CardSet
     {
         get
         {
-            //Init();
             List<SingleRowInfo> targetRows = new List<SingleRowInfo>();
             if (regions.Contains(RegionTypes.Battle))
             {
@@ -86,7 +74,6 @@ public class CardSet
     {
         get
         {
-            //Init();
             List<SingleRowInfo> targetRows = new List<SingleRowInfo>();
             switch (orientation)
             {
@@ -106,6 +93,7 @@ public class CardSet
             return new CardSet(targetRows, filterCardList);
         }
     }
+    //待补充
     public CardSet this[CardState cardState]
     {
         get
@@ -113,6 +101,7 @@ public class CardSet
             return new CardSet(singleRowInfos, cardList);
         }
     }
+    //待补充
     public CardSet this[CardField cardField]
     {
         get
@@ -120,7 +109,16 @@ public class CardSet
             return new CardSet(singleRowInfos, cardList);
         }
     }
-    public CardSet this[params Tag[] tags]
+    //待补充
+    public CardSet this[params CardTag[] tags]
+    {
+        get
+        {
+            return new CardSet(singleRowInfos, cardList);
+        }
+    }
+    //待补充
+    public CardSet this[params CardRank[] tags]
     {
         get
         {
