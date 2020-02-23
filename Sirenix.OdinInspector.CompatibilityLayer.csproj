@@ -300,6 +300,9 @@
     <Reference Include="ICSharpCode.NRefactory">
       <HintPath>G:/UnityProject/TouhouMachineLearning2020/Library/PackageCache/com.unity.render-pipelines.core@7.1.2/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>G:/UnityProject/TouhouMachineLearning2020/Assets/Plugins/RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.0a12/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
     </Reference>

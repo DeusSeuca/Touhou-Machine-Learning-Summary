@@ -3,12 +3,9 @@ using GameEnum;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
-
 using System.Linq;
 using UnityEngine;
 using static Info.CardInspector.CardLibraryInfo.LevelLibrary.SectarianCardLibrary.RankLibrary;
-//你干啥呢？
-// 我好像只能看你这一个文件右边没有其他的吗？
 
 namespace Info
 {
@@ -191,24 +188,25 @@ namespace Info
                             [LabelText("部署所属"), EnumToggleButtons]
                             public Territory cardTerritory = Territory.My;
                             [LabelText("卡片标签"), EnumToggleButtons]
-                            public string tag = "";
+                            public string cardTag ="";
                             [LabelText("卡片介绍")]
                             public string introduction = "";
                             [LabelText("效果描述")]
                             public string describe = "";
-                            public CardModelInfo(int cardId, string level, string cardName, string describe, string tag, Sectarian sectarian, CardRank rank, Region cardProperty, Territory cardTerritory, int point, int ramification, Texture2D icon)
+                            public CardModelInfo(int cardId, string level, string cardName, string describe, string cardTag, Sectarian sectarian, CardRank rank, Region cardProperty, Territory cardTerritory, int point, int ramification, Texture2D icon)
                             {
                                 this.icon = icon;
                                 this.cardId = cardId;
                                 this.level = level;
                                 this.cardName = cardName;
                                 this.describe = describe;
-                                this.tag = tag;
+                                this.cardTag =String.Join(" ", cardTag.Split(' ').Select(x=>x.TransTag()));
                                 this.point = point;
                                 this.sectarian = sectarian;
                                 this.cardProperty = cardProperty;
                                 this.cardTerritory = cardTerritory;
                                 this.Rank = rank;
+                                CardLibraryCommand.CreatScript(cardId);
                             }
                             [Button("打开脚本")]
                             public void OpenCardScript()

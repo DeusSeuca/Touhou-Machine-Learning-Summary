@@ -36,6 +36,7 @@ namespace Command
                 card.icon = CardStandardInfo.icon;
                 card.property = CardStandardInfo.cardProperty;
                 card.territory = CardStandardInfo.cardTerritory;
+                card.cardTag = CardStandardInfo.cardTag;
                 card.GetComponent<Renderer>().material.SetTexture("_Front", card.icon);
                 card.Init();
                 NewCardScript = card;

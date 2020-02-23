@@ -24,6 +24,7 @@ namespace CardModel
         public float MoveSpeed = 0.1f;
         public Region property;
         public Territory territory;
+        public string cardTag;
         public Territory belong => Info.AgainstInfo.cardSet[GameEnum.Orientation.Down].cardList.Contains(this) ? Territory.My : Territory.Op;
         public Vector3 TargetPos;
         public Quaternion TargetRot;

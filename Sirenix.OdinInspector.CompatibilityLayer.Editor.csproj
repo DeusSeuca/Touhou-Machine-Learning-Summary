@@ -319,6 +319,9 @@
     <Reference Include="ICSharpCode.NRefactory">
       <HintPath>G:/UnityProject/TouhouMachineLearning2020/Library/PackageCache/com.unity.render-pipelines.core@7.1.2/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>G:/UnityProject/TouhouMachineLearning2020/Assets/Plugins/RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>G:/UnityProject/TouhouMachineLearning2020/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>

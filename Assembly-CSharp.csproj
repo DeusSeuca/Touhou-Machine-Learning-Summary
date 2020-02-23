@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\-1_Other\Danmu.cs" />
     <Compile Include="Assets\Script\0_LoginSceen\UserLoginControl.cs" />
     <Compile Include="Assets\Script\1_MenuScene\UserModeControl.cs" />
     <Compile Include="Assets\Script\2_BattleSenenScript\Against\AgainstInfo.cs" />
@@ -97,7 +98,35 @@
     <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10001.cs" />
     <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10002.cs" />
     <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10003.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10004.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10005.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10006.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10007.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10008.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10009.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10010.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10011.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10012.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10013.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10014.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10015.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card10016.cs" />
     <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20001.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20002.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20003.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20004.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20005.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20006.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20007.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20008.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20009.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20010.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20011.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20012.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20013.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20014.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20015.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\CardSpace\Card20016.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Dialogue\DialgueInfo.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Dialogue\Dialogue.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Dialogue\DialogueCommand.cs" />
@@ -142,6 +171,8 @@
     <Compile Include="Assets\Script\9_MixedScene\UI\NoticeControl.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\UiCommand.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\UiInfo.cs" />
+    <None Include="Assets\Script\-1_Other\info.txt" />
+    <None Include="Assets\Script\-1_Other\cookie.txt" />
     <Reference Include="Unity.XR.Management">
       <HintPath>G:/UnityProject/TouhouMachineLearning2020/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
     </Reference>
@@ -417,6 +448,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>G:/UnityProject/TouhouMachineLearning2020/Assets/UnityPackages/JsonNet-Lite/Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>G:/UnityProject/TouhouMachineLearning2020/Assets/Plugins/RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.0a12/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

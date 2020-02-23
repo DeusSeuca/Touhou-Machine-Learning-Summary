@@ -116,7 +116,7 @@ namespace UnityEditor.Rendering.Universal
             // we want the fade group to stay hidden.
             using (var group = new EditorGUILayout.FadeGroupScope(1.0f - m_AnimDirOptions.faded))
                 if (group.visible)
-                    { var dr_119_40_637177984021407806 = m_AnimAreaOptions.target; settings.DrawRange(); }
+                    { var dr_119_40_637180056857321012 = m_AnimAreaOptions.target; settings.DrawRange(); }
 
             // Spot angle
             using (var group = new EditorGUILayout.FadeGroupScope(m_AnimSpotOptions.faded))

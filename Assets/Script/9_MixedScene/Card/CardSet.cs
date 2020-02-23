@@ -30,6 +30,7 @@ public class CardSet
     {
         globalCardList.Clear();
         Enumerable.Range(0, 18).ToList().ForEach(x => globalCardList.Add(new List<Card>()));
+       
     }
     public CardSet(List<SingleRowInfo> singleRowInfos, List<Card> cardList = null)
     {
@@ -109,16 +110,22 @@ public class CardSet
             return new CardSet(singleRowInfos, cardList);
         }
     }
-    //待补充
+    /// <summary>
+    /// 根据Tag检索卡牌
+    /// </summary>
+    /// <param name="tags"></param>
+    /// <returns></returns>
     public CardSet this[params CardTag[] tags]
     {
         get
         {
-            return new CardSet(singleRowInfos, cardList);
+            cardList = cardList ?? globalCardList.SelectMany(x => x).ToList();
+            List<Card> filterCardList = cardList.Where(card => tags.Any(tag => card.cardTag.Contains(tag.TransTag()))).ToList();
+            return new CardSet(singleRowInfos, filterCardList);
         }
     }
     //待补充
-    public CardSet this[params CardRank[] tags]
+    public CardSet this[params CardRank[] ranks]
     {
         get
         {
