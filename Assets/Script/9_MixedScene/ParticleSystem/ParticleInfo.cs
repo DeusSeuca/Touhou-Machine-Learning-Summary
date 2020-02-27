@@ -6,6 +6,7 @@ namespace Info
         public static ParticleInfo Instance;
         public ParticleSystem[] ParticleEffect;
         private void Awake() => Instance = this;
+        public GameObject Bullet;
     }
 }
 

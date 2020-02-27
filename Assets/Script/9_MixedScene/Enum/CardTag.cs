@@ -3,6 +3,8 @@
     public enum CardTag
     {
         Machine,
-        Fairy        
+        Fairy,
+        Object,
+        SpellCard
     }
 }

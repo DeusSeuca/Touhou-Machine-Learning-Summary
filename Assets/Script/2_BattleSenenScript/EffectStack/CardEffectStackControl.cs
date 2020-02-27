@@ -65,11 +65,17 @@ namespace Control
         }
         public static async Task Trigger(TriggerInfo triggerInfo)
         {
-            var tasks = triggerInfo.targetCards[0].cardEffect[triggerInfo.triggerTime][triggerInfo.triggerType];
+            var tasks = triggerInfo.targetCard.cardEffect[triggerInfo.triggerTime][triggerInfo.triggerType];
             tasks.Reverse();
             tasks.ForEach(task => TaskStack.Push((task, triggerInfo)));
             await Run();
         }
-        
+        public static async Task TriggerMulti(TriggerInfo triggerInfo)
+        {
+            var tasks = triggerInfo.targetCard.cardEffect[triggerInfo.triggerTime][triggerInfo.triggerType];
+            tasks.Reverse();
+            tasks.ForEach(task => TaskStack.Push((task, triggerInfo)));
+            await Run();
+        }
     }
 }

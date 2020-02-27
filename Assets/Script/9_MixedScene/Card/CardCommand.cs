@@ -32,7 +32,7 @@ namespace Command
                 NewCard.AddComponent(Type.GetType("CardSpace.Card" + id));
                 Card card = NewCard.GetComponent<Card>();
                 card.CardId = CardStandardInfo.cardId;
-                card.point = CardStandardInfo.point;
+                card.basePoint = CardStandardInfo.point;
                 card.icon = CardStandardInfo.icon;
                 card.property = CardStandardInfo.cardProperty;
                 card.territory = CardStandardInfo.cardTerritory;
@@ -141,14 +141,31 @@ namespace Command
             Info.AgainstInfo.PlayerPlayCard = null;
             //await card.TriggerAsync<TriggerType.Discard>();
         }
-        public static async Task Gain(Card card, int point)
+        public static async Task Gain(TriggerInfo triggerInfo)
         {
-            card.point += point;
+            Debug.Log("增益粒子");
+            EffectCommand.Bullet_Gain(triggerInfo);
+            EffectCommand.AudioEffectPlay(1);
+            await Task.Delay(1000);
+            triggerInfo.targetCard.changePoint += triggerInfo.point;
+
+        }
+        public static async Task Cure(Card card)
+        {
+            card.changePoint = Math.Max(0, card.changePoint);
             EffectCommand.ParticlePlay(0, card);
             EffectCommand.AudioEffectPlay(1);
             await Task.Delay(1000);
         }
-        public static async Task RemoveFromBattle(Card card,  int Index = 0)
+        public static async Task Hurt(Card card, int point)
+        {
+            card.changePoint -= point;
+            EffectCommand.ParticlePlay(1, card);
+            EffectCommand.AudioEffectPlay(1);
+            await Task.Delay(1000);
+        }
+
+        public static async Task RemoveFromBattle(Card card, int Index = 0)
         {
             Orientation orientation = card.belong == Territory.My ? Orientation.Down : Orientation.Up;
             SingleRowInfo grave = AgainstInfo.cardSet[orientation][RegionTypes.Grave].singleRowInfos[0];

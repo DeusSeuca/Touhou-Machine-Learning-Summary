@@ -19,7 +19,9 @@ namespace CardModel
     public class Card : MonoBehaviour
     {
         public int CardId;
-        public int point;
+        public int basePoint;
+        public int changePoint;
+        public int showPoint => basePoint + changePoint;
         public Texture2D icon;
         public float MoveSpeed = 0.1f;
         public Region property;
@@ -54,10 +56,27 @@ namespace CardModel
 
         public Dictionary<TriggerTime, Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>> cardEffect = new Dictionary<TriggerTime, Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>>();
 
+        private void Update() => RefreshCardUi();
+
+        public void RefreshCardUi()
+        {
+            PointText.text = (basePoint + changePoint).ToString();
+            if (changePoint > 0)
+            {
+                PointText.color = Color.green;
+            }
+            else if (changePoint < 0)
+            {
+                PointText.color = Color.red;
+            }
+            else
+            {
+                PointText.color = Color.black;
+            }
+        }
         public virtual void Init()
         {
             IsInit = true;
-            PointText.text = point.ToString();
 
             foreach (TriggerTime tirggerTime in Enum.GetValues(typeof(TriggerTime)))
             {
@@ -72,7 +91,24 @@ namespace CardModel
                 async (triggerInfo) =>
                 {
                     Debug.Log("执行增益操作");
-                    await Command.CardCommand.Gain(this,triggerInfo.point);
+                    //await Command.CardCommand.Gain(this,triggerInfo.point);
+                    await Command.CardCommand.Gain(triggerInfo);
+                }
+            };
+            cardEffect[TriggerTime.When][TriggerType.Hurt] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
+                {
+                    Debug.Log("执行受伤操作");
+                    await Command.CardCommand.Hurt(this,triggerInfo.point);
+                }
+            };
+            cardEffect[TriggerTime.When][TriggerType.Cure] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
+                {
+                    Debug.Log("执行治愈操作");
+                    await Command.CardCommand.Cure(this);
                 }
             };
             cardEffect[TriggerTime.Before][TriggerType.Banish] = new List<Func<TriggerInfo, Task>>()
@@ -137,16 +173,11 @@ namespace CardModel
             material.SetFloat("_IsTemp", IsGray ? 0 : 1);
             transform.position = Vector3.Lerp(transform.position, TargetPos, MoveSpeed);
             transform.rotation = Quaternion.Lerp(transform.rotation, TargetRot, Time.deltaTime * 10);
-            PointText.text = point.ToString();
+            PointText.text = basePoint.ToString();
         }
-        //public async Task TriggerAsync<T>()
-        //{
-        //    // CardEffectStackControl.Trigger<T>(this);
-        //    //await CardEffectStackControl.Trigger_NewAsync<T>(this);
-        //}
         public async Task Hurt(int point)
         {
-            this.point = Math.Max(this.point - point, 0);
+            this.basePoint = Math.Max(this.basePoint - point, 0);
             MainThread.Run(() =>
             {
                 //Command.EffectCommand.ParticlePlay(1, transform.position);
@@ -154,33 +185,6 @@ namespace CardModel
             Command.EffectCommand.AudioEffectPlay(1);
             await Task.Delay(100);
         }
-
-        //临时移动测试
-        //public async Task MoveTo(RegionTypes region, Orientation orientation, int rank = 0)
-        //{
-        //    List<Card> OriginRow = RowsInfo.GetRow(this);
-        //    List<Card> TargetRow = AgainstInfo.cardSet[orientation][region].cardList;
-        //    OriginRow.Remove(this);
-        //    TargetRow.Insert(rank, this);
-        //    isMoveStepOver = false;
-        //    await Task.Delay(1000);
-        //    isMoveStepOver = true;
-        //}
-        //public async Task MoveTo(SingleRowInfo singleRowInfo, int Index = 0)
-        //{
-        //    List<Card> OriginRow = RowsInfo.GetRow(this);
-        //    List<Card> TargetRow = singleRowInfo.ThisRowCards;
-        //    OriginRow.Remove(this);
-        //    TargetRow.Insert(Index, this);
-        //    MoveSpeed = 0.1f;
-        //    isMoveStepOver = false;
-        //    await Task.Delay(1000);
-        //    isMoveStepOver = true;
-        //    MoveSpeed = 0.1f;
-        //    Command.EffectCommand.AudioEffectPlay(1);
-        //}
-        //需要整理
-
         public int this[CardField property]
         {
             get
@@ -194,5 +198,6 @@ namespace CardModel
             }
             set => GetType().GetFields().First(field => ((CardProperty)field.GetCustomAttribute(typeof(CardProperty))).cardProperty == property).SetValue(this, value);
         }
+
     }
 }

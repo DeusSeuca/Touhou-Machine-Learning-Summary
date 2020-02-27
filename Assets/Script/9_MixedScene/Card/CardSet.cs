@@ -16,7 +16,7 @@ public class CardSet
     [ShowInInspector]
     public static List<List<Card>> globalCardList = new List<List<Card>>();
     public List<SingleRowInfo> singleRowInfos = new List<SingleRowInfo>();
-    [HideInInspector]
+    [ShowInInspector]
     public List<Card> cardList = null;
     public int count => cardList.Count;
     /// <summary>
@@ -30,7 +30,6 @@ public class CardSet
     {
         globalCardList.Clear();
         Enumerable.Range(0, 18).ToList().ForEach(x => globalCardList.Add(new List<Card>()));
-       
     }
     public CardSet(List<SingleRowInfo> singleRowInfos, List<Card> cardList = null)
     {
@@ -120,7 +119,32 @@ public class CardSet
         get
         {
             cardList = cardList ?? globalCardList.SelectMany(x => x).ToList();
-            List<Card> filterCardList = cardList.Where(card => tags.Any(tag => card.cardTag.Contains(tag.TransTag()))).ToList();
+            List<Card> filterCardList = cardList.Where(card => 
+                tags.Any(tag => 
+                    card.cardTag.Contains(tag.TransTag())))
+                .ToList();
+            return new CardSet(singleRowInfos, filterCardList);
+        }
+    }
+    //待补充
+    public CardSet this[CardFeature cardFeature]
+    {
+        get
+        {
+            List<Card> filterCardList= cardList;
+            switch (cardFeature)
+            {
+                case CardFeature.Largest:
+                    int largestPoint = cardList.Max(card => card.showPoint);
+                    filterCardList = cardList.Where(card => card.showPoint == largestPoint).ToList();
+                    break;
+                case CardFeature.Lowest:
+                    int lowestPoint = cardList.Min(card => card.showPoint);
+                    filterCardList = cardList.Where(card => card.showPoint == lowestPoint).ToList();
+                    break;
+                default:
+                    break;
+            }
             return new CardSet(singleRowInfos, filterCardList);
         }
     }
@@ -154,6 +178,6 @@ public class CardSet
     }
     public void Order()
     {
-        singleRowInfos.ForEach(x => x.ThisRowCards = x.ThisRowCards.OrderBy(card => card.point).ToList());
+        singleRowInfos.ForEach(x => x.ThisRowCards = x.ThisRowCards.OrderBy(card => card.basePoint).ToList());
     }
 }

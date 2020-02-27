@@ -1,4 +1,5 @@
 ﻿using CardModel;
+using Control;
 using System.Threading.Tasks;
 using Thread;
 using UnityEngine;
@@ -23,12 +24,22 @@ namespace Command
                 ParticleSystem TargetParticle = GameObject.Instantiate(Info.ParticleInfo.Instance.ParticleEffect[Rank]);
                 TargetParticle.transform.position = card.transform.position;
                 TargetParticle.Play();
-                GameObject.Destroy(TargetParticle, 2);
+                GameObject.Destroy(TargetParticle.gameObject, 2);
+            });
+        }
+        public static void Bullet_Gain(TriggerInfo triggerInfo)
+        {
+            MainThread.Run(() =>
+            {
+                GameObject Bullet = GameObject.Instantiate(Info.ParticleInfo.Instance.Bullet);
+                BulletControl bulletControl= Bullet.GetComponent<BulletControl>();
+                bulletControl.Init(triggerInfo.triggerCard, triggerInfo.targetCard);
+                bulletControl.Play();
+                Bullet.GetComponent<ParticleSystem>().Play();
             });
         }
         public static void TheWorldPlay(Card card)
         {
-            
             MainThread.Run(() =>
             {
                 SceneEffectInfo.theWorldEffect.gameObject.SetActive(true);

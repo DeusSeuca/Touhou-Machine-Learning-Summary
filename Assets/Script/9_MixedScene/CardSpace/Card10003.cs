@@ -21,6 +21,34 @@ namespace CardSpace
                     await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,this));
                 }
             };
+            cardEffect[TriggerTime.When][TriggerType.Deploy] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
+                {
+                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[RegionTypes.Battle].cardList,1);
+                    await GameSystem.PointSystem.Gain(TriggerInfo.Build(this,SelectUnits,1));
+                },
+                async (triggerInfo) =>
+                {
+                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[RegionTypes.Battle].cardList,1);
+                    await GameSystem.PointSystem.Gain(TriggerInfo.Build(this,SelectUnits,1));
+                },
+                async (triggerInfo) =>
+                {
+                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[RegionTypes.Battle].cardList,1);
+                    await GameSystem.PointSystem.Gain(TriggerInfo.Build(this,SelectUnits,1));
+                },
+                async (triggerInfo) =>
+                {
+                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[RegionTypes.Battle].cardList,1);
+                    await GameSystem.PointSystem.Gain(TriggerInfo.Build(this,SelectUnits,1));
+                },
+                async (triggerInfo) =>
+                {
+                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[RegionTypes.Battle].cardList,1);
+                    await GameSystem.PointSystem.Gain(TriggerInfo.Build(this,SelectUnits,1));
+                },
+            };
         }
     }
 }

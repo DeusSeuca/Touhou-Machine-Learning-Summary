@@ -40,8 +40,8 @@ namespace Command
                     {
                         new CardDeck("gezi", 10001, new List<int>
                         {
-                            10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,
-                            //10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
+                            //10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,
+                            10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
                             //1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004
 
                         })
@@ -52,8 +52,8 @@ namespace Command
                     {
                         new CardDeck("gezi", 10001, new List<int>
                         {
-                            10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,
-                            //1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016, 1012, 1013, 1014, 1015, 1016
+                            //10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,
+                             10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
                             //10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
                         })
                     });
@@ -250,7 +250,7 @@ namespace Command
             //AgainstInfo.SelectRegion = null;
             await Task.Run(async () =>
             {
-               // Debug.Log("等待选择属性");
+                // Debug.Log("等待选择属性");
                 while (AgainstInfo.SelectProperty == Region.None)
                 {
                     StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
@@ -310,7 +310,7 @@ namespace Command
             RowCommand.SetAllRegionSelectable(RegionTypes.None);
             AgainstInfo.IsWaitForSelectLocation = false;
         }
-        public static async Task WaitForSelecUnit(Card OriginCard, List<Card> Cards, int num)
+        public static async Task WaitForSelecUnit(Card OriginCard, List<Card> Cards, int num,bool isAuto)
         {
             //可选列表中移除自身
             Cards.Remove(OriginCard);
@@ -322,22 +322,21 @@ namespace Command
             await Task.Run(async () =>
             {
                 //await Task.Delay(500);
-                if (Info.AgainstInfo.isMyTurn)
+                if (Info.AgainstInfo.isMyTurn&& !isAuto)
                 {
-                    //GameUI.UiCommand.SetArrowShow();
                     GameUI.UiCommand.CreatFreeArrow();
                 }
                 int selectableNum = Math.Min(Cards.Count, num);
                 while (AgainstInfo.SelectUnits.Count < selectableNum)
                 {
                     StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
-                    if (AgainstInfo.isAIControl)
+                    if (AgainstInfo.isAIControl||isAuto)
                     {
                         //自动选择场上单位
-                        Cards= Cards.OrderBy(x => AiCommand.GetRandom(0, 514)).ToList();
+                        Cards = Cards.OrderBy(x => AiCommand.GetRandom(0, 514)).ToList();
                         Info.AgainstInfo.SelectUnits = Cards.Take(selectableNum).ToList();
                     }
-                    await Task.Delay(1000);
+                    await Task.Delay(100);
                 }
                 Debug.Log("选择单位完毕" + Math.Min(Cards.Count, num));
                 Network.NetCommand.AsyncInfo(NetAcyncType.SelectUnites);

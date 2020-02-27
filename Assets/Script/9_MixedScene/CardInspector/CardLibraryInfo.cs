@@ -201,6 +201,8 @@ namespace Info
                                 this.cardName = cardName;
                                 this.describe = describe;
                                 this.cardTag =String.Join(" ", cardTag.Split(' ').Select(x=>x.TransTag()));
+                                Debug.LogError(cardTag+"--"+ this.cardTag);
+
                                 this.point = point;
                                 this.sectarian = sectarian;
                                 this.cardProperty = cardProperty;

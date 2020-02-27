@@ -25,11 +25,17 @@ namespace CardSpace
             {
                 async (triggerInfo) =>
                 {
-                    await Task.Delay(300);
-                    EffectCommand.TheWorldPlay(this);
-                    await Task.Delay(2000);
+                    //await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.My][RegionTypes.Battle][CardRank.Copper,CardRank.Silver].cardList,1);
+                    //await GameSystem.PointSystem.Cure(TriggerInfo.Build(this,SelectUnits));
+                },
+                async (triggerInfo) =>
+                {
+                     //await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,SelectUnits));
                 }
             };
         }
     }
 }
+//await Task.Delay(300);
+////EffectCommand.TheWorldPlay(this);
+//await Task.Delay(2000);

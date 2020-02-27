@@ -4,6 +4,7 @@ using GameEnum;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 using static Info.AgainstInfo;
 namespace CardSpace
 {
@@ -25,13 +26,14 @@ namespace CardSpace
             {
                 async (triggerInfo) =>
                 {
-                    int targetCount=cardSet[CardTag.Fairy].count;
+                    int targetCount=cardSet[Orientation.My][RegionTypes.Battle][CardTag.Fairy].count;
+                    Debug.Log("场上妖精数量为"+targetCount);
+                    //Debug.Log(cardSet[CardRank.Silver,CardRank.Copper].count);
                     for (int i = 0; i < targetCount; i++)
                     {
-                        await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,cardSet[CardRank.Silver,CardRank.Copper][0],1));
+                        await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardRank.Silver,CardRank.Copper].cardList,1,isAuto:true);
+                        await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,SelectUnits));
                     }
-                    await GameSystem.SelectSystem.SelectLocation(this);
-                    await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,this));
                 }
             };
         }

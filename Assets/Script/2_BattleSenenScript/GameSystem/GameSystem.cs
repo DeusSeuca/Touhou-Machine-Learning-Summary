@@ -41,7 +41,7 @@ namespace GameSystem
         }
         public static async Task DeployCard(TriggerInfo triggerInfo)
         {
-            await Command.CardCommand.DeployCard(triggerInfo.triggerCard, SelectRegion, SelectLocation);
+            await Command.CardCommand.DeployCard(triggerInfo.targetCard, SelectRegion, SelectLocation);
             await TriggerLogic(triggerInfo[TriggerType.Deploy]);
             //Info.AgainstInfo.IsCardEffectCompleted = true;
         }
@@ -53,7 +53,7 @@ namespace GameSystem
     /// </summary>
     public class SelectSystem
     {
-        public static async Task SelectUnite(Card card, List<Card> targetCards, int num) => await Command.StateCommand.WaitForSelecUnit(card, targetCards, num);
+        public static async Task SelectUnite(Card card, List<Card> targetCards, int num,bool isAuto=false) => await Command.StateCommand.WaitForSelecUnit(card, targetCards, num, isAuto);
         public static async Task SelectLocation(Card card) => await Command.StateCommand.WaitForSelectLocation(card);
     }
     //好像不需要

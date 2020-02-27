@@ -19,14 +19,6 @@ namespace Thread
                     {
                         TargetAction.Dequeue()();
                     }
-                    //try
-                    //{
-                    //    TargetAction.Dequeue()();
-                    //}
-                    //catch (Exception e)
-                    //{
-                    //    Debug.LogError(e);
-                    //}
                 }
             }
         }
