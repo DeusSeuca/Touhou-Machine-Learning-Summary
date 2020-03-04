@@ -7,12 +7,19 @@ public class TriggerInfo
     public TriggerType triggerType;
     public Card triggerCard;
     public List<Card> targetCards;
+    public object[] param;
     public Card targetCard => targetCards[0];
     public int point;
+
+    //public TriggerInfo(params object[] param)
+    //{
+    //    this.param = param;
+    //}
+
     public TriggerInfo this[TriggerTime triggerTime] => Clone(triggerTime: triggerTime);
     public TriggerInfo this[TriggerType triggerType] => Clone(triggerType: triggerType);
     public TriggerInfo this[List<Card> targetCards] => Clone(targetCards: targetCards);
-    public TriggerInfo this[Card targetCard] => Clone(targetCards:new List<Card> { targetCard });
+    public TriggerInfo this[Card targetCard] => Clone(targetCards: new List<Card> { targetCard });
 
     private TriggerInfo Clone(TriggerTime? triggerTime = null, TriggerType? triggerType = null, List<Card> targetCards = null)
     {
@@ -22,22 +29,25 @@ public class TriggerInfo
         triggerInfo.triggerCard = triggerCard;
         triggerInfo.targetCards = targetCards ?? this.targetCards;
         triggerInfo.point = point;
+        triggerInfo.param = param;
         return triggerInfo;
     }
-    public static TriggerInfo Build(Card triggerCard, List<Card> targetCards, int point = 0)
+    public static TriggerInfo Build(Card triggerCard, List<Card> targetCards, int point = 0, params object[] param)
     {
         TriggerInfo triggerInfo = new TriggerInfo();
         triggerInfo.triggerCard = triggerCard;
         triggerInfo.targetCards = targetCards;
         triggerInfo.point = point;
+        triggerInfo.param = param;
         return triggerInfo;
     }
-    public static TriggerInfo Build(Card triggerCard, Card targetCard, int point = 0)
+    public static TriggerInfo Build(Card triggerCard, Card targetCard, int point = 0, params object[] param)
     {
         TriggerInfo triggerInfo = new TriggerInfo();
         triggerInfo.triggerCard = triggerCard;
         triggerInfo.targetCards = new List<Card>() { targetCard };
         triggerInfo.point = point;
+        triggerInfo.param = param;
         return triggerInfo;
     }
 }

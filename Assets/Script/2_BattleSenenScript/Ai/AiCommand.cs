@@ -22,7 +22,7 @@ namespace Command
             {
 
                 Card targetCard = Info.AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].cardList[0];
-                await GameSystem.TransSystem.PlayCard(TriggerInfo.Build(null, targetCard));
+                await GameSystem.TransSystem.PlayCard(TriggerInfo.Build(targetCard, targetCard));
                 //await CardCommand.PlayCard(targetCard);
             }
         }

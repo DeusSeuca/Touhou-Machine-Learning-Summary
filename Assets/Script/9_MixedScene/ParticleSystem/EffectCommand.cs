@@ -1,5 +1,6 @@
 ﻿using CardModel;
 using Control;
+using System;
 using System.Threading.Tasks;
 using Thread;
 using UnityEngine;
@@ -31,8 +32,19 @@ namespace Command
         {
             MainThread.Run(() =>
             {
-                GameObject Bullet = GameObject.Instantiate(Info.ParticleInfo.Instance.Bullet);
+                GameObject Bullet = GameObject.Instantiate(Info.ParticleInfo.Instance.GainBullet);
                 BulletControl bulletControl= Bullet.GetComponent<BulletControl>();
+                bulletControl.Init(triggerInfo.triggerCard, triggerInfo.targetCard);
+                bulletControl.Play();
+                Bullet.GetComponent<ParticleSystem>().Play();
+            });
+        }
+        internal static void Bullet_Hurt(TriggerInfo triggerInfo)
+        {
+            MainThread.Run(() =>
+            {
+                GameObject Bullet = GameObject.Instantiate(Info.ParticleInfo.Instance.HurtBullet);
+                BulletControl bulletControl = Bullet.GetComponent<BulletControl>();
                 bulletControl.Init(triggerInfo.triggerCard, triggerInfo.targetCard);
                 bulletControl.Play();
                 Bullet.GetComponent<ParticleSystem>().Play();
@@ -60,6 +72,8 @@ namespace Command
                 });
             });
         }
+
+        
     }
 }
 

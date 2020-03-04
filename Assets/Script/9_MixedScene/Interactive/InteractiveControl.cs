@@ -73,18 +73,18 @@ namespace Control
                     AgainstInfo.SelectRegion = AgainstInfo.PlayerFocusRegion;
                 }
                 //处理选择单位的箭头
-                if (AgainstInfo.IsWaitForSelectUnits && AgainstInfo.PlayerFocusCard != null && !AgainstInfo.PlayerFocusCard.IsGray)
+                if (AgainstInfo.IsWaitForSelectUnits && AgainstInfo.PlayerFocusCard != null && !AgainstInfo.PlayerFocusCard.isGray)
                 {
                     Card playerFocusCard = AgainstInfo.PlayerFocusCard;
                     if (!AgainstInfo.SelectUnits.Contains(playerFocusCard))
                     {
-                        Debug.LogError("add" + playerFocusCard);
+                        //Debug.LogError("add" + playerFocusCard);
                         AgainstInfo.SelectUnits.Add(playerFocusCard);
                         Command.GameUI.UiCommand.CreatFixedArrow(playerFocusCard);
                     }
                     else
                     {
-                        Debug.LogError("remove" + playerFocusCard);
+                        //Debug.LogError("remove" + playerFocusCard);
                         AgainstInfo.SelectUnits.Remove(playerFocusCard);
                         Command.GameUI.UiCommand.DestoryFixedArrow(playerFocusCard);
                     }

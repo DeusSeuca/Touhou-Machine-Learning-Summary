@@ -51,13 +51,13 @@ namespace Control
                     else
                     {
                         Debug.Log("1打出一张牌"+ Info.AgainstInfo.PlayerPlayCard);
-                        _ = GameSystem.TransSystem.PlayCard(TriggerInfo.Build(null, Info.AgainstInfo.PlayerPlayCard));
+                        _ = GameSystem.TransSystem.PlayCard(TriggerInfo.Build(Info.AgainstInfo.PlayerPlayCard, Info.AgainstInfo.PlayerPlayCard));
                     }
                 }
                 else
                 {
                     Debug.Log("2打出一张牌"+ Info.AgainstInfo.PlayerPlayCard);
-                    _ = GameSystem.TransSystem.PlayCard(TriggerInfo.Build(null, Info.AgainstInfo.PlayerPlayCard));
+                    _ = GameSystem.TransSystem.PlayCard(TriggerInfo.Build(Info.AgainstInfo.PlayerPlayCard, Info.AgainstInfo.PlayerPlayCard));
                 }
             }
         }

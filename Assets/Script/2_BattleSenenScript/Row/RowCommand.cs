@@ -15,8 +15,8 @@ namespace Command
         {
             Card modelCard = AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].cardList[0];
             SingleInfo.TempCard = await CardCommand.CreatCard(modelCard.CardId);
-            SingleInfo.TempCard.IsGray = true;
-            SingleInfo.TempCard.SetCardSee(true);
+            SingleInfo.TempCard.isGray = true;
+            SingleInfo.TempCard.SetCardSeeAble(true);
             SingleInfo.ThisRowCards.Insert(SingleInfo.Location, SingleInfo.TempCard);
             SingleInfo.TempCard.Init();
         }

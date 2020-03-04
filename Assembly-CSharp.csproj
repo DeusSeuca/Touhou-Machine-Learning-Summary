@@ -173,6 +173,8 @@
     <Compile Include="Assets\Script\9_MixedScene\UI\NoticeControl.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\UiCommand.cs" />
     <Compile Include="Assets\Script\9_MixedScene\UI\UiInfo.cs" />
+    <None Include="Assets\Script\-1_Other\info.txt" />
+    <None Include="Assets\Script\-1_Other\cookie.txt" />
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>G:/UnityProject/TouhouMachineLearning/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
     </Reference>

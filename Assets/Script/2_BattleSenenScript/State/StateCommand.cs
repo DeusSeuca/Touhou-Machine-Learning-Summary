@@ -41,7 +41,8 @@ namespace Command
                         new CardDeck("gezi", 10001, new List<int>
                         {
                             //10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,
-                            10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
+                            10002, 10003, 10004, 10005, 10002, 10012, 10012, 10012, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
+                            //10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
                             //1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004
 
                         })
@@ -68,11 +69,11 @@ namespace Command
                 //初始化我方领袖卡
                 Card MyLeaderCard = await CardCommand.CreatCard(AllPlayerInfo.UserInfo.UseDeck.LeaderId);
                 AgainstInfo.cardSet[Orientation.Down][RegionTypes.Leader].Add(MyLeaderCard);
-                MyLeaderCard.SetCardSee(true);
+                MyLeaderCard.SetCardSeeAble(true);
                 //初始化敌方领袖卡
                 Card OpLeaderCard = await CardCommand.CreatCard(AllPlayerInfo.OpponentInfo.UseDeck.LeaderId);
                 AgainstInfo.cardSet[Orientation.Up][RegionTypes.Leader].Add(OpLeaderCard);
-                OpLeaderCard.SetCardSee(true);
+                OpLeaderCard.SetCardSeeAble(true);
                 //初始双方化牌组
                 CardDeck Deck = AllPlayerInfo.UserInfo.UseDeck;
                 for (int i = 0; i < Deck.CardIds.Count; i++)
@@ -207,7 +208,7 @@ namespace Command
             Timer.SetIsTimerStart(6000);
             await Task.Run(async () =>
             {
-                Debug.Log("出牌");
+                //Debug.Log("出牌");
                 //当出牌,弃牌,pass时结束
                 while (true)
                 {
@@ -287,7 +288,7 @@ namespace Command
         {
             AgainstInfo.IsWaitForSelectLocation = true;
             //Debug.Log("等待选择部署位置");
-            RowCommand.SetAllRegionSelectable((RegionTypes)(card.property + 5), card.territory);
+            RowCommand.SetAllRegionSelectable((RegionTypes)(card.region + 5), card.territory);
             AgainstInfo.SelectLocation = -1;
             // Debug.Log("开始进入部署位置");
             await Task.Run(async () =>
@@ -316,8 +317,8 @@ namespace Command
             Cards.Remove(OriginCard);
             AgainstInfo.ArrowStartCard = OriginCard;
             AgainstInfo.IsWaitForSelectUnits = true;
-            AgainstInfo.AllCardList.ForEach(card => card.IsGray = true);
-            Cards.ForEach(card => card.IsGray = false);
+            AgainstInfo.AllCardList.ForEach(card => card.isGray = true);
+            Cards.ForEach(card => card.isGray = false);
             AgainstInfo.SelectUnits.Clear();
             await Task.Run(async () =>
             {
@@ -343,7 +344,7 @@ namespace Command
                 GameUI.UiCommand.DestoryAllArrow();
                 await Task.Delay(250);
             });
-            AgainstInfo.AllCardList.ForEach(card => card.IsGray = false);
+            AgainstInfo.AllCardList.ForEach(card => card.isGray = false);
             AgainstInfo.IsWaitForSelectUnits = false;
         }
         public static async Task WaitForSelectBoardCard<T>(List<T> CardIds, CardBoardMode Mode = CardBoardMode.Select, int num = 1)

@@ -2,7 +2,8 @@
 {
     public enum CardField
     {
-        Timer,
+        Timer,//计时
+        Vitality,//活力
         Point
     }
 }

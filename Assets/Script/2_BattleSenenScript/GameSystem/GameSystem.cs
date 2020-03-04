@@ -22,7 +22,7 @@ namespace GameSystem
         public static async Task Destory(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Destory]);
         public static async Task Strengthen(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Strengthen]);
         public static async Task Impair(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Impair]);
-        
+
     }
     /// <summary>
     /// 转移卡牌位置、所属区域的相关机制
@@ -41,7 +41,11 @@ namespace GameSystem
         }
         public static async Task DeployCard(TriggerInfo triggerInfo)
         {
-            await Command.CardCommand.DeployCard(triggerInfo.targetCard, SelectRegion, SelectLocation);
+            //部署效果特殊处理，先部署再触发部署效果
+            if (triggerInfo.targetCards.Any() && SelectRegion != null)
+            {
+                await Command.CardCommand.DeployCard(triggerInfo.targetCard);
+            }
             await TriggerLogic(triggerInfo[TriggerType.Deploy]);
             //Info.AgainstInfo.IsCardEffectCompleted = true;
         }
@@ -53,7 +57,8 @@ namespace GameSystem
     /// </summary>
     public class SelectSystem
     {
-        public static async Task SelectUnite(Card card, List<Card> targetCards, int num,bool isAuto=false) => await Command.StateCommand.WaitForSelecUnit(card, targetCards, num, isAuto);
+        //public static async Task SelectUnite(Card card, List<Card> targetCards, int num,bool isAuto=false) => await Command.StateCommand.WaitForSelecUnit(card, targetCards, num, isAuto);
+        public static async Task SelectUnite(Card card, List<Card> targetCards, int num, bool isAuto = false) => await TriggerLogic(TriggerInfo.Build(card, card, 0, card, targetCards, num, false)[TriggerType.SelectUnite]);
         public static async Task SelectLocation(Card card) => await Command.StateCommand.WaitForSelectLocation(card);
     }
     //好像不需要
@@ -63,6 +68,6 @@ namespace GameSystem
         public static async Task WhenTurnEnd() => await TriggerLogic(TriggerInfo.Build(null, targetCard: null)[TriggerType.TurnEnd]);
         public static async Task WhenRoundStart() => await TriggerLogic(TriggerInfo.Build(null, cardSet[RegionTypes.Battle].cardList)[TriggerType.RoundStart]);
         public static async Task WhenRoundEnd() => await TriggerLogic(TriggerInfo.Build(null, cardSet[RegionTypes.Battle].cardList)[TriggerType.RoundEnd]);
-       
+
     }
 }

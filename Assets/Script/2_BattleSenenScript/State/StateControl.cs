@@ -14,7 +14,7 @@ namespace Control
             for (int i = 0; i < 3; i++)
             {
                 await StateCommand.RoundStart(i);
-                await StateCommand.WaitForSelectProperty();
+                //await StateCommand.WaitForSelectProperty();
                 while (true)
                 {
                     await StateCommand.TurnStart();

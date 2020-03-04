@@ -28,11 +28,10 @@ namespace CardSpace
                 {
                     int targetCount=cardSet[Orientation.My][RegionTypes.Battle][CardTag.Fairy].count;
                     Debug.Log("场上妖精数量为"+targetCount);
-                    //Debug.Log(cardSet[CardRank.Silver,CardRank.Copper].count);
                     for (int i = 0; i < targetCount; i++)
                     {
                         await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardRank.Silver,CardRank.Copper].cardList,1,isAuto:true);
-                        await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,SelectUnits));
+                        await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,SelectUnits,1));
                     }
                 }
             };

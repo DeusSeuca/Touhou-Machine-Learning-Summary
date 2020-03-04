@@ -2,6 +2,8 @@
 {
     public enum CardState
     {
-        Spy
+        Spy,
+        Seal
+
     }
 }

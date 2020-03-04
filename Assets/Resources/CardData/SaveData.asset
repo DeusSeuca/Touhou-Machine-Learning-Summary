@@ -153,7 +153,7 @@ MonoBehaviour:
       Data: 0-0
     - Name: cardName
       Entry: 1
-      Data: "\u5927\u5996\u7CBE\u5927"
+      Data: "\u5927\u5996\u7CBE"
     - Name: point
       Entry: 3
       Data: 1
@@ -819,7 +819,7 @@ MonoBehaviour:
       Data: 0
     - Name: cardProperty
       Entry: 3
-      Data: 0
+      Data: 4
     - Name: cardTerritory
       Entry: 3
       Data: 0
@@ -2407,7 +2407,7 @@ MonoBehaviour:
   - icon: {fileID: 2800000, guid: bc9935e38df1b43459a9877ff6288742, type: 3}
     cardId: 10002
     level: 0-0
-    cardName: "\u5927\u5996\u7CBE\u5927"
+    cardName: "\u5927\u5996\u7CBE"
     point: 1
     Rank: 2
     sectarian: 0
@@ -2531,7 +2531,7 @@ MonoBehaviour:
     point: 2
     Rank: 4
     sectarian: 0
-    cardProperty: 0
+    cardProperty: 4
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
     introduction: 

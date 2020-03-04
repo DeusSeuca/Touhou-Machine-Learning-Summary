@@ -216,13 +216,13 @@ namespace Command
                     {
                         case NetAcyncType.FocusCard:
                             {
-                                Location TargetCardLocation = Info.AgainstInfo.PlayerFocusCard != null ? Info.AgainstInfo.PlayerFocusCard.Location : new Location(-1, -1);
+                                Location TargetCardLocation = Info.AgainstInfo.PlayerFocusCard != null ? Info.AgainstInfo.PlayerFocusCard.location : new Location(-1, -1);
                                 AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y).ToJson());
                                 break;
                             }
                         case NetAcyncType.PlayCard:
                             {
-                                Location TargetCardLocation = Info.AgainstInfo.PlayerPlayCard.Location;
+                                Location TargetCardLocation = Info.AgainstInfo.PlayerPlayCard.location;
                                 //Debug.Log("同步焦点卡片为" + TargetCardLocation);
                                 AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y).ToJson());
 
@@ -246,7 +246,7 @@ namespace Command
                             }
                         case NetAcyncType.SelectUnites:
                             {
-                                List<Location> Locations = Info.AgainstInfo.SelectUnits.Select(unite => unite.Location).ToList();
+                                List<Location> Locations = Info.AgainstInfo.SelectUnits.Select(unite => unite.location).ToList();
                                 Debug.LogError("发出的指令为：" + new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, Locations).ToJson());
                                 AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, Locations.ToJson()).ToJson());
                                 Debug.LogError("选择单位完成");
@@ -255,7 +255,7 @@ namespace Command
                         case NetAcyncType.ExchangeCard:
                             {
                                 Debug.Log("触发交换卡牌信息");
-                                Location Locat = Info.AgainstInfo.TargetCard.Location;
+                                Location Locat = Info.AgainstInfo.TargetCard.location;
                                 int RandomRank = Info.AgainstInfo.RandomRank;
                                 AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, Locat.ToJson(), RandomRank).ToJson());
                                 break;

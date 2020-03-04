@@ -1,13 +1,9 @@
-﻿using Control;
-using Extension;
-using GameAttribute;
-using GameEnum;
+﻿using GameEnum;
 using Info;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Thread;
 using UnityEngine;
@@ -19,35 +15,56 @@ namespace CardModel
     public class Card : MonoBehaviour
     {
         public int CardId;
+
         public int basePoint;
         public int changePoint;
         public int showPoint => basePoint + changePoint;
+
         public Texture2D icon;
-        public float MoveSpeed = 0.1f;
-        public Region property;
+        public float moveSpeed = 0.1f;
+        public Region region;
         public Territory territory;
         public string cardTag;
+
+
+        [ShowInInspector]
+        private Dictionary<CardField, int> cardFields = new Dictionary<CardField, int>();
+        public int this[CardField cardField]
+        {
+            get => cardFields.ContainsKey(cardField) ? cardFields[cardField] : 0;
+            set => cardFields[cardField] = value;
+        }
+        [ShowInInspector]
+        private Dictionary<CardState, bool> cardStates = new Dictionary<CardState, bool>();
+        public bool this[CardState cardState]
+        {
+            get => cardStates.ContainsKey(cardState) ? cardStates[cardState] : false;
+            set => cardStates[cardState] = value;
+        }
         public Territory belong => Info.AgainstInfo.cardSet[GameEnum.Orientation.Down].cardList.Contains(this) ? Territory.My : Territory.Op;
-        public Vector3 TargetPos;
-        public Quaternion TargetRot;
+        public Vector3 targetPosition;
+        public Quaternion targetQuaternion;
 
-        public bool IsCover = false;
-        public bool IsLocked = false;
-
-        public bool IsInit = false;
-        public bool IsGray = false;
-        /// <summary>
-        /// 卡牌是否能自由操控
-        /// </summary>
+        //状态相关参数
+        public bool isInit = false;
+        public bool isGray = false;
+        public bool isCover = false;
+        public bool isLocked = false;
         public bool isFree = false;
         public bool isCanSee = false;
+        public void SetCardSeeAble(bool isCanSee) => this.isCanSee = isCanSee;
         public bool isMoveStepOver = true;
         public bool isPrepareToPlay = false;
         public bool IsAutoMove => this != AgainstInfo.PlayerPlayCard;
 
-        public List<Card> Row => RowsInfo.GetRow(this);
-        public Network.NetInfoModel.Location Location => RowsInfo.GetLocation(this);
-
+        public List<Card> belongCardList => RowsInfo.GetCardList(this);
+        public Network.NetInfoModel.Location location => RowsInfo.GetLocation(this);
+        //[ShowInInspector]
+        public Card LeftCard => location.y > 0 ? belongCardList[location.y - 1] : null;
+        //[ShowInInspector]
+        public Card RightCard => location.y < belongCardList.Count - 1 ? belongCardList[location.y + 1] : null;
+        [ShowInInspector]
+        public int twoSideVitality => (LeftCard == null ? 0 : LeftCard[CardField.Vitality]) + (RightCard == null ? 0 : RightCard[CardField.Vitality]);
 
         public Text PointText => transform.GetChild(0).GetChild(0).GetComponent<Text>();
         public string CardName => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).cardName;
@@ -76,7 +93,7 @@ namespace CardModel
         }
         public virtual void Init()
         {
-            IsInit = true;
+            isInit = true;
 
             foreach (TriggerTime tirggerTime in Enum.GetValues(typeof(TriggerTime)))
             {
@@ -90,8 +107,6 @@ namespace CardModel
             {
                 async (triggerInfo) =>
                 {
-                    Debug.Log("执行增益操作");
-                    //await Command.CardCommand.Gain(this,triggerInfo.point);
                     await Command.CardCommand.Gain(triggerInfo);
                 }
             };
@@ -99,26 +114,38 @@ namespace CardModel
             {
                 async (triggerInfo) =>
                 {
-                    Debug.Log("执行受伤操作");
-                    await Command.CardCommand.Hurt(this,triggerInfo.point);
+                    await Command.CardCommand.Hurt(triggerInfo);
                 }
             };
             cardEffect[TriggerTime.When][TriggerType.Cure] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
-                    Debug.Log("执行治愈操作");
-                    await Command.CardCommand.Cure(this);
+                    triggerInfo.point=-Math.Min(0, triggerInfo.targetCard.changePoint);
+                     await Command.CardCommand.Gain(triggerInfo);
                 }
             };
-            cardEffect[TriggerTime.Before][TriggerType.Banish] = new List<Func<TriggerInfo, Task>>()
+            cardEffect[TriggerTime.When][TriggerType.SelectUnite] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
-                    //await Task.Delay(1000);
-                    //Debug.LogWarning("我被遗弃了"+name);
+                    Card card=  (Card)triggerInfo.param[0];
+                    List<Card> targetCards =  (List<Card>)triggerInfo.param[1];
+                    int num = (int) triggerInfo.param[2];
+                    bool isAuto = (bool) triggerInfo.param[3];
+                    await Command.StateCommand.WaitForSelecUnit(card, targetCards, num, isAuto);
                 }
             };
+            //cardEffect[TriggerTime.Before][TriggerType.Deploy] = new List<Func<TriggerInfo, Task>>()
+            //{
+            //    async (triggerInfo) =>
+            //    {
+            //        if (triggerInfo.triggerCard==this)
+            //        {
+
+            //     }
+            //    }
+            //};
             cardEffect[TriggerTime.When][TriggerType.Banish] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
@@ -140,19 +167,16 @@ namespace CardModel
         }
         public void SetMoveTarget(Vector3 TargetPosition, Vector3 TargetEulers)
         {
-            TargetPos = TargetPosition;
-            TargetRot = Quaternion.Euler(TargetEulers + new Vector3(0, 0, isCanSee ? 0 : 180));
-            if (IsInit)
+            targetPosition = TargetPosition;
+            targetQuaternion = Quaternion.Euler(TargetEulers + new Vector3(0, 0, isCanSee ? 0 : 180));
+            if (isInit)
             {
-                transform.position = TargetPos;
-                transform.rotation = TargetRot;
-                IsInit = false;
+                transform.position = targetPosition;
+                transform.rotation = targetQuaternion;
+                isInit = false;
             }
         }
-        public void SetCardSee(bool isCanSee)
-        {
-            this.isCanSee = isCanSee;
-        }
+
         public void RefreshState()
         {
             Material material = GetComponent<Renderer>().material;
@@ -170,34 +194,10 @@ namespace CardModel
             {
                 material.SetFloat("_IsFocus", 0);
             }
-            material.SetFloat("_IsTemp", IsGray ? 0 : 1);
-            transform.position = Vector3.Lerp(transform.position, TargetPos, MoveSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, TargetRot, Time.deltaTime * 10);
+            material.SetFloat("_IsTemp", isGray ? 0 : 1);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, moveSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetQuaternion, Time.deltaTime * 10);
             PointText.text = basePoint.ToString();
         }
-        public async Task Hurt(int point)
-        {
-            this.basePoint = Math.Max(this.basePoint - point, 0);
-            MainThread.Run(() =>
-            {
-                //Command.EffectCommand.ParticlePlay(1, transform.position);
-            });
-            Command.EffectCommand.AudioEffectPlay(1);
-            await Task.Delay(100);
-        }
-        public int this[CardField property]
-        {
-            get
-            {
-                var s = GetType().GetFields().Where(field =>
-                {
-                    Attribute attribute = field.GetCustomAttribute(typeof(CardProperty));
-                    return attribute != null && ((CardProperty)attribute).cardProperty == property;
-                }).ToList();
-                return s.Any() ? (int)s[0].GetValue(this) : 0;
-            }
-            set => GetType().GetFields().First(field => ((CardProperty)field.GetCustomAttribute(typeof(CardProperty))).cardProperty == property).SetValue(this, value);
-        }
-
     }
 }

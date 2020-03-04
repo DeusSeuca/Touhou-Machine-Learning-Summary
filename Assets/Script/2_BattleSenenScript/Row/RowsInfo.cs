@@ -11,7 +11,8 @@ namespace Info
 {
     public class RowsInfo : SerializedMonoBehaviour
     {
-        public static List<Card> GetRow(Card TargetCard) => CardSet.globalCardList.First(list => list.Contains(TargetCard));
+        public static List<Card> GetCardList(Card targetCard) => CardSet.globalCardList.First(list => list.Contains(targetCard));
+        //public static List<Card> GetRegion(Card targetCard) =>RowsInfo. CardSet.globalCardList.First(list => list.Contains(targetCard));
         public static NetInfoModel.Location GetLocation(Card TargetCard)
         {
             int RankX = -1;

@@ -21,7 +21,6 @@ namespace Dialogue
         {
             public int step;
             public int rank;
-
             public Dial(int step, int rank)
             {
                 this.step = step;

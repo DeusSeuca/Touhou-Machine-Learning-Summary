@@ -14,6 +14,8 @@
     Destory,
     Strengthen,
     Impair,
+    
+    SelectUnite,
 
     RoundStart,
     RoundEnd,

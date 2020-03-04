@@ -8,28 +8,85 @@ using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System.IO;
+
 namespace Control
 {
 
-    public class CardEffectStackControl:MonoBehaviour
+    public class CardEffectStackControl : MonoBehaviour
     {
+        [ShowInInspector]
         public static bool IsRuning;
+        [ShowInInspector]
         public static int taskCount = 0;
         [ShowInInspector]
         public Dictionary<string, int> dict;
         [ShowInInspector]
-        public static Stack<(Func<TriggerInfo, Task>, TriggerInfo)> TaskStack = new Stack<(Func<TriggerInfo, Task>, TriggerInfo)>();
+        public static (Func<TriggerInfo, Task>, TriggerInfo) taskinfo;
+        [ShowInInspector]
+        public static Stack<(Func<TriggerInfo, Task>, TriggerInfo)> runTaskStack = new Stack<(Func<TriggerInfo, Task>, TriggerInfo)>();
+        [ShowInInspector]
+        public static Stack<(Func<TriggerInfo, Task>, TriggerInfo)> tempTaskStack = new Stack<(Func<TriggerInfo, Task>, TriggerInfo)>();
         public static async Task Run()
         {
+            Debug.LogError("执行状态" + IsRuning);
             if (!IsRuning)
             {
                 IsRuning = true;
-                while (TaskStack.Count != 0)
+                while (runTaskStack.Count != 0)
                 {
-                    (Func<TriggerInfo, Task>, TriggerInfo) taskinfo = TaskStack.Pop();
+                    Debug.LogError("开始执行任务，当前数量为" + runTaskStack.Count);
+                    taskinfo = runTaskStack.Pop();
+                    Thread.MainThread.Run(() =>
+                    {
+                        Debug.LogError($"{taskinfo.Item2.triggerTime} {taskinfo.Item2.triggerCard.name}触发{taskinfo.Item2.targetCard.name}的{taskinfo.Item2.triggerType}效果");
+
+                    });
                     await taskinfo.Item1(taskinfo.Item2);
                 }
                 IsRuning = false;
+            }
+        }
+        public static async Task Run(TriggerInfo triggerInfo)
+        {
+            var tasks = triggerInfo.targetCard.cardEffect[triggerInfo.triggerTime][triggerInfo.triggerType];
+            Thread.MainThread.Run(() =>
+            {
+                for (int i = 0; i < tasks.Count; i++)
+                {
+                    Debug.LogWarning($"效果栈登记{triggerInfo.triggerTime} {triggerInfo.triggerCard.name}触发{triggerInfo.targetCard.name}的{triggerInfo.triggerType}{tasks.Count - i}效果");
+                }
+            });
+            if (!IsRuning)
+            {
+                for (int i = tasks.Count - 1; i >= 0; i--)
+                {
+                    runTaskStack.Push((tasks[i], triggerInfo));
+                }
+                IsRuning = true;
+                while (runTaskStack.Count != 0)
+                {
+                    Debug.LogError("开始执行任务，当前数量为" + runTaskStack.Count);
+                    taskinfo = runTaskStack.Pop();
+                    Thread.MainThread.Run(() =>
+                    {
+                        Debug.LogError($"{taskinfo.Item2.triggerTime} {taskinfo.Item2.triggerCard.name}触发{taskinfo.Item2.targetCard.name}的{taskinfo.Item2.triggerType}效果");
+
+                    });
+                    await taskinfo.Item1(taskinfo.Item2);
+                    while (tempTaskStack.Count>0)
+                    {
+                        runTaskStack.Push(tempTaskStack.Pop());
+                    }
+                }
+                IsRuning = false;
+            }
+            else
+            {
+                for (int i = tasks.Count - 1; i >= 0; i--)
+                {
+                    tempTaskStack.Push((tasks[i], triggerInfo));
+                }
             }
         }
         public static async Task TriggerLogic(TriggerInfo triggerInfo)
@@ -37,9 +94,9 @@ namespace Control
             foreach (var card in triggerInfo.targetCards)
             {
                 AddEffectStactTask();
-                await TriggerBoradcast(triggerInfo[card][TriggerTime.Before]);
+                //await TriggerBoradcast(triggerInfo[card][TriggerTime.Before]);
                 await Trigger(triggerInfo[card][TriggerTime.When]);
-                await TriggerBoradcast(triggerInfo[card][TriggerTime.After]);
+                //await TriggerBoradcast(triggerInfo[card][TriggerTime.After]);
                 RemoveEffectStactTask();
             }
         }
@@ -50,7 +107,7 @@ namespace Control
             if (taskCount == 0)
             {
                 Info.AgainstInfo.IsCardEffectCompleted = true;
-                Debug.LogError("当前效果栈清空");
+                Debug.LogWarning("当前效果栈清空");
             }
         }
 
@@ -65,17 +122,27 @@ namespace Control
         }
         public static async Task Trigger(TriggerInfo triggerInfo)
         {
-            var tasks = triggerInfo.targetCard.cardEffect[triggerInfo.triggerTime][triggerInfo.triggerType];
-            tasks.Reverse();
-            tasks.ForEach(task => TaskStack.Push((task, triggerInfo)));
-            await Run();
+            //var tasks = triggerInfo.targetCard.cardEffect[triggerInfo.triggerTime][triggerInfo.triggerType];
+            //for (int i = tasks.Count - 1; i >= 0; i--)
+            //{
+            //    TaskStack.Push((tasks[i], triggerInfo));
+            //}
+            //Thread.MainThread.Run(() =>
+            //{
+            //    for (int i = 0; i < tasks.Count; i++)
+            //    {
+            //        Debug.LogWarning($"效果栈登记{triggerInfo.triggerTime} {triggerInfo.triggerCard.name}触发{triggerInfo.targetCard.name}的{triggerInfo.triggerType}{tasks.Count - i}效果");
+            //    }
+            //});
+            //await Task.Delay(10);
+            await Run(triggerInfo);
         }
-        public static async Task TriggerMulti(TriggerInfo triggerInfo)
-        {
-            var tasks = triggerInfo.targetCard.cardEffect[triggerInfo.triggerTime][triggerInfo.triggerType];
-            tasks.Reverse();
-            tasks.ForEach(task => TaskStack.Push((task, triggerInfo)));
-            await Run();
-        }
+        //public static async Task TriggerMulti(TriggerInfo triggerInfo)
+        //{
+        //    var tasks = triggerInfo.targetCard.cardEffect[triggerInfo.triggerTime][triggerInfo.triggerType];
+        //    tasks.Reverse();
+        //    tasks.ForEach(task => TaskStack.Push((task, triggerInfo)));
+        //    await Run();
+        //}
     }
 }

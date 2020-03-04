@@ -132,18 +132,21 @@ public class CardSet
         get
         {
             List<Card> filterCardList= cardList;
-            switch (cardFeature)
+            if (filterCardList.Any())
             {
-                case CardFeature.Largest:
-                    int largestPoint = cardList.Max(card => card.showPoint);
-                    filterCardList = cardList.Where(card => card.showPoint == largestPoint).ToList();
-                    break;
-                case CardFeature.Lowest:
-                    int lowestPoint = cardList.Min(card => card.showPoint);
-                    filterCardList = cardList.Where(card => card.showPoint == lowestPoint).ToList();
-                    break;
-                default:
-                    break;
+                switch (cardFeature)
+                {
+                    case CardFeature.Largest:
+                        int largestPoint = cardList.Max(card => card.showPoint);
+                        filterCardList = cardList.Where(card => card.showPoint == largestPoint).ToList();
+                        break;
+                    case CardFeature.Lowest:
+                        int lowestPoint = cardList.Min(card => card.showPoint);
+                        filterCardList = cardList.Where(card => card.showPoint == lowestPoint).ToList();
+                        break;
+                    default:
+                        break;
+                }
             }
             return new CardSet(singleRowInfos, filterCardList);
         }
