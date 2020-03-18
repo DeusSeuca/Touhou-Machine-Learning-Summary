@@ -30,5 +30,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_AEDF346F: 10
+    - _gapWidth: 2.9
     - _width: 10
     m_Colors: []

@@ -64,10 +64,6 @@ namespace Control
         {
             if (Input.GetMouseButtonDown(0) && Info.AgainstInfo.isMyTurn)
             {
-                //if (GlobalBattleInfo.PlayerFocusCard != null && GlobalBattleInfo.PlayerFocusCard.IsPrePrepareToPlay)
-                //{
-                //    GlobalBattleInfo.PlayerPlayCard = GlobalBattleInfo.PlayerFocusCard;
-                //}
                 if (AgainstInfo.IsWaitForSelectRegion)
                 {
                     AgainstInfo.SelectRegion = AgainstInfo.PlayerFocusRegion;
@@ -98,14 +94,6 @@ namespace Control
                     }
                 }
             }
-            //if (Input.GetMouseButton(0) && Info.AgainstInfo.IsMyTurn)
-            //{
-            //    LayerMask mask = 1 << LayerMask.NameToLayer("Default");
-            //    if (Physics.Raycast(ray, out RaycastHit HitInfo, 100, mask))
-            //    {
-            //        AgainstInfo.DragToPoint = HitInfo.point;
-            //    }
-            //}
         }
     }
 }

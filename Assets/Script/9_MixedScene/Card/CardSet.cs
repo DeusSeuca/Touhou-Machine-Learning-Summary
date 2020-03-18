@@ -17,14 +17,17 @@ public class CardSet
     public static List<List<Card>> globalCardList = new List<List<Card>>();
     public List<SingleRowInfo> singleRowInfos = new List<SingleRowInfo>();
     [ShowInInspector]
-    public List<Card> cardList = null;
-    public int count => cardList.Count;
+    private List<Card> cardList = null;
+    public int count => CardList.Count;
+
+    public List<Card> CardList { get => cardList?? globalCardList.SelectMany(x => x).ToList(); set => cardList = value; }
+
     /// <summary>
     /// 得到触发牌之外的卡牌列表，用于广播触发事件的前后相关事件
     /// </summary>
     /// <param name="card"></param>
     /// <returns></returns>
-    public List<Card> BroastCardList(Card card) => Info.AgainstInfo.cardSet[GameEnum.Orientation.All].cardList.Except(new List<Card> { card }).ToList();
+    public List<Card> BroastCardList(Card card) => Info.AgainstInfo.cardSet[GameEnum.Orientation.All].CardList.Except(new List<Card> { card }).ToList();
 
     public CardSet()
     {
@@ -34,18 +37,12 @@ public class CardSet
     public CardSet(List<SingleRowInfo> singleRowInfos, List<Card> cardList = null)
     {
         this.singleRowInfos = singleRowInfos;
-        this.cardList = cardList;
+        this.CardList = cardList;
     }
     public List<Card> this[int rank]
     {
-        get
-        {
-            return globalCardList[rank];
-        }
-        set
-        {
-            globalCardList[rank] = value;
-        }
+        get => globalCardList[rank];
+        set => globalCardList[rank] = value;
     }
     public CardSet this[params RegionTypes[] regions]
     {
@@ -65,7 +62,7 @@ public class CardSet
             {
                 targetRows = singleRowInfos.Where(row => regions.Contains(row.region)).ToList();
             }
-            List<Card> filterCardList = cardList ?? globalCardList.SelectMany(x => x).ToList();
+            List<Card> filterCardList = CardList ?? globalCardList.SelectMany(x => x).ToList();
             filterCardList = filterCardList.Intersect(targetRows.SelectMany(x => x.ThisRowCards)).ToList();
             return new CardSet(targetRows, filterCardList);
         }
@@ -88,7 +85,8 @@ public class CardSet
                 case Orientation.All:
                     targetRows = singleRowInfos; break;
             }
-            List<Card> filterCardList = cardList ?? globalCardList.SelectMany(x => x).ToList();
+            //List<Card> filterCardList = cardList ?? globalCardList.SelectMany(x => x).ToList();
+            List<Card> filterCardList = CardList ;
             filterCardList = filterCardList.Intersect(targetRows.SelectMany(x => x.ThisRowCards)).ToList();
             return new CardSet(targetRows, filterCardList);
         }
@@ -98,7 +96,7 @@ public class CardSet
     {
         get
         {
-            return new CardSet(singleRowInfos, cardList);
+            return new CardSet(singleRowInfos, CardList);
         }
     }
     //待补充
@@ -106,7 +104,7 @@ public class CardSet
     {
         get
         {
-            return new CardSet(singleRowInfos, cardList);
+            return new CardSet(singleRowInfos, CardList);
         }
     }
     /// <summary>
@@ -118,8 +116,8 @@ public class CardSet
     {
         get
         {
-            cardList = cardList ?? globalCardList.SelectMany(x => x).ToList();
-            List<Card> filterCardList = cardList.Where(card => 
+            CardList = CardList ?? globalCardList.SelectMany(x => x).ToList();
+            List<Card> filterCardList = CardList.Where(card => 
                 tags.Any(tag => 
                     card.cardTag.Contains(tag.TransTag())))
                 .ToList();
@@ -131,18 +129,18 @@ public class CardSet
     {
         get
         {
-            List<Card> filterCardList= cardList;
+            List<Card> filterCardList= CardList;
             if (filterCardList.Any())
             {
                 switch (cardFeature)
                 {
                     case CardFeature.Largest:
-                        int largestPoint = cardList.Max(card => card.showPoint);
-                        filterCardList = cardList.Where(card => card.showPoint == largestPoint).ToList();
+                        int largestPoint = CardList.Max(card => card.showPoint);
+                        filterCardList = CardList.Where(card => card.showPoint == largestPoint).ToList();
                         break;
                     case CardFeature.Lowest:
-                        int lowestPoint = cardList.Min(card => card.showPoint);
-                        filterCardList = cardList.Where(card => card.showPoint == lowestPoint).ToList();
+                        int lowestPoint = CardList.Min(card => card.showPoint);
+                        filterCardList = CardList.Where(card => card.showPoint == lowestPoint).ToList();
                         break;
                     default:
                         break;
@@ -156,7 +154,7 @@ public class CardSet
     {
         get
         {
-            return new CardSet(singleRowInfos, cardList);
+            return new CardSet(singleRowInfos, CardList);
         }
     }
     public void Add(Card card, int rank = -1)
@@ -179,6 +177,7 @@ public class CardSet
         }
         singleRowInfos[0].ThisRowCards.Remove(card);
     }
+    //任意区域排序
     public void Order()
     {
         singleRowInfos.ForEach(x => x.ThisRowCards = x.ThisRowCards.OrderBy(card => card.basePoint).ToList());

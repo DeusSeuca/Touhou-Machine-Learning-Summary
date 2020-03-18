@@ -2,16 +2,16 @@
 {
     public enum RegionTypes
     {
-        Leader,
-        Hand,
-        Uesd,
-        Deck,
-        Grave,
         Water,
         Fire,
         Wind,
         Soil,
         Battle,
-        None
+        None,
+        Leader,
+        Hand,
+        Uesd,
+        Deck,
+        Grave,
     }
 }

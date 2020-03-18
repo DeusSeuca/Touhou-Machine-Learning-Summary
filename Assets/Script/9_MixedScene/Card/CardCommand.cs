@@ -21,7 +21,6 @@ namespace Command
         public static void RemoveCard(Card card) => card.belongCardList.Remove(card);
         public static async Task<Card> CreatCard(int id)
         {
-            //GameObject NewCard;
             Card NewCardScript = null;
             MainThread.Run(() =>
             {
@@ -53,30 +52,33 @@ namespace Command
             MainThread.Run(() => { card.GetComponent<CardControl>().DestoryGap(); });
             RemoveCard(card);
         }
-        //public static async Task DeployCard(Card targetCard, SingleRowInfo selectRegion, int selectLocation)
-        //{
-        //    //List<Card> OriginRow = RowsInfo.GetCardList(targetCard);
-        //    List<Card> TargetRow = selectRegion.ThisRowCards;
-        //    //OriginRow.Remove(targetCard);
-        //    RemoveCard(targetCard);
-        //    TargetRow.Insert(selectLocation, targetCard);
-        //    targetCard.MoveSpeed = 0.1f;
-        //    targetCard.isMoveStepOver = false;
-        //    await Task.Delay(1000);
-        //    targetCard.isMoveStepOver = true;
-        //    targetCard.MoveSpeed = 0.1f;
-        //    EffectCommand.AudioEffectPlay(1);
-        //}
+        public static async Task SummonCard(Card targetCard)
+        {
+            //await Task.Delay(1000);
+            RemoveCard(targetCard);
+            List<Card> TargetRow = AgainstInfo
+                .cardSet[(RegionTypes)targetCard.region][(Orientation)targetCard.territory]
+                .singleRowInfos.First().ThisRowCards;
+            TargetRow.Add(targetCard);
+            targetCard.isCanSee = true;
+            //targetCard.moveSpeed = 0.1f;
+            targetCard.isMoveStepOver = false;
+            await Task.Delay(1000);
+            targetCard.isMoveStepOver = true;
+            //targetCard.moveSpeed = 0.1f;
+            EffectCommand.AudioEffectPlay(1);
+        }
+
         public static async Task DeployCard(Card targetCard)
         {
             List<Card> TargetRow = AgainstInfo.SelectRegion.ThisRowCards;
             RemoveCard(targetCard);
             TargetRow.Insert(AgainstInfo.SelectLocation, targetCard);
-            targetCard.moveSpeed = 0.1f;
+            //targetCard.moveSpeed = 0.1f;
             targetCard.isMoveStepOver = false;
             await Task.Delay(1000);
             targetCard.isMoveStepOver = true;
-            targetCard.moveSpeed = 0.1f;
+            //targetCard.moveSpeed = 0.1f;
             EffectCommand.AudioEffectPlay(1);
         }
         public static async Task ExchangeCard(Card targetCard, bool IsPlayerExchange = true, int RandomRank = 0)
@@ -86,7 +88,7 @@ namespace Command
             await DrawCard(IsPlayerExchange, true);
             if (IsPlayerExchange)
             {
-                GameUI.CardBoardCommand.LoadCardList(AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].cardList);
+                GameUI.CardBoardCommand.LoadCardList(AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].CardList);
             }
         }
         internal static Task RebackCard()
@@ -97,7 +99,7 @@ namespace Command
         {
             //Debug.Log("抽卡");
             EffectCommand.AudioEffectPlay(0);
-            Card TargetCard = AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck].cardList[0];
+            Card TargetCard = AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck].CardList[0];
             TargetCard.SetCardSeeAble(IsPlayerDraw);
             CardSet TargetCardtemp = AgainstInfo.cardSet[IsPlayerDraw ? Orientation.Down : Orientation.Up][RegionTypes.Deck];
 
@@ -115,7 +117,7 @@ namespace Command
             if (IsPlayerWash)
             {
                 AgainstInfo.TargetCard = TargetCard;
-                int MaxCardRank = AgainstInfo.cardSet[Orientation.Down][RegionTypes.Deck].cardList.Count;
+                int MaxCardRank = AgainstInfo.cardSet[Orientation.Down][RegionTypes.Deck].CardList.Count;
                 AgainstInfo.RandomRank = AiCommand.GetRandom(0, MaxCardRank);
                 Network.NetCommand.AsyncInfo(NetAcyncType.ExchangeCard);
                 AgainstInfo.cardSet[Orientation.Down][RegionTypes.Hand].Remove(TargetCard);
@@ -131,7 +133,6 @@ namespace Command
         }
         public static async Task PlayCard(Card targetCard, bool IsAnsy = true)
         {
-            //Debug.Log("打出一张牌2");
             EffectCommand.AudioEffectPlay(0);
             RowCommand.SetPlayCardMoveFree(false);
             targetCard.isPrepareToPlay = false;
@@ -141,10 +142,8 @@ namespace Command
             }
             targetCard.SetCardSeeAble(true);
             RemoveCard(targetCard);
-            //targetCard.Row.Remove(targetCard);
             AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].Add(targetCard);
             AgainstInfo.PlayerPlayCard = null;
-            //await targetCard.TriggerAsync<TriggerType.PlayCard>();
         }
         public static async Task DisCard(Card card)
         {
@@ -152,51 +151,41 @@ namespace Command
             card.SetCardSeeAble(false);
             RemoveCard(card);
             AgainstInfo.cardSet[Orientation.My][RegionTypes.Grave].Add(card);
-            Info.AgainstInfo.PlayerPlayCard = null;
-            //await card.TriggerAsync<TriggerType.Discard>();
+            AgainstInfo.PlayerPlayCard = null;
         }
+
+        public static async Task SealCard(Card card)
+        {
+            card.cardStates[CardState.Seal] = true;
+        }
+
         public static async Task Gain(TriggerInfo triggerInfo)
         {
-            //Debug.Log("增益弹幕");
             EffectCommand.Bullet_Gain(triggerInfo);
             EffectCommand.AudioEffectPlay(1);
             await Task.Delay(1000);
             triggerInfo.targetCard.changePoint += triggerInfo.point;
             await Task.Delay(1000);
         }
-        //public static async Task Cure(TriggerInfo triggerInfo)
-        //{
-        //    triggerInfo.targetCard.changePoint = Math.Max(0, card.changePoint);
-        //    EffectCommand.ParticlePlay(0, card);
-        //    EffectCommand.AudioEffectPlay(1);
-        //    triggerInfo.targetCard.changePoint = 0;
-        //    await Task.Delay(1000);
-        //}
         public static async Task Hurt(TriggerInfo triggerInfo)
         {
-            Debug.Log("伤害弹幕");
             EffectCommand.Bullet_Hurt(triggerInfo);
             EffectCommand.AudioEffectPlay(1);
             await Task.Delay(1000);
             triggerInfo.targetCard.changePoint -= triggerInfo.point;
             await Task.Delay(1000);
         }
-
         public static async Task RemoveFromBattle(Card card, int Index = 0)
         {
             Orientation orientation = card.belong == Territory.My ? Orientation.Down : Orientation.Up;
-            SingleRowInfo grave = AgainstInfo.cardSet[orientation][RegionTypes.Grave].singleRowInfos[0];
-            card.isMoveStepOver = false;
-            List<Card> OriginRow = RowsInfo.GetCardList(card);
-            List<Card> TargetRow = grave.ThisRowCards;
-            OriginRow.Remove(card);
-            TargetRow.Insert(Index, card);
+            RemoveCard(card);
+            AgainstInfo.cardSet[orientation][RegionTypes.Grave].singleRowInfos[0].ThisRowCards.Insert(Index, card);
             card.SetCardSeeAble(false);
-            card.moveSpeed = 0.1f;
+            card.changePoint = 0;
+            card.isMoveStepOver = false;
             await Task.Delay(100);
             card.isMoveStepOver = true;
-            card.moveSpeed = 0.1f;
-            Command.EffectCommand.AudioEffectPlay(1);
+            EffectCommand.AudioEffectPlay(1);
         }
     }
 }

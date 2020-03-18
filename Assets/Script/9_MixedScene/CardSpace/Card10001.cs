@@ -30,7 +30,7 @@ namespace CardSpace
                     Debug.Log("场上妖精数量为"+targetCount);
                     for (int i = 0; i < targetCount; i++)
                     {
-                        await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardRank.Silver,CardRank.Copper].cardList,1,isAuto:true);
+                        await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardRank.Silver,CardRank.Copper].CardList,1,isAuto:true);
                         await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,SelectUnits,1));
                     }
                 }

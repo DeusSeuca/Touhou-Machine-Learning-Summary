@@ -26,32 +26,13 @@ namespace CardSpace
             {
                 async (triggerInfo) =>
                 {
-                    //for (int i = 0; i < 3; i++)
-                    //{
-                    //    Debug.Log("①等待选择一个单位");
-                    //    await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardFeature.Largest].cardList,1,false);
-                    //    Debug.Log("②对其造成伤害");
-                    //    await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,SelectUnits,1));
-                    //    Debug.Log("③伤害完毕");
-                    //}
-                    Debug.Log("①等待选择一个单位");
-                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardFeature.Largest].cardList,1,false);
-                    Debug.Log("②对其造成伤害");
-                    await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,SelectUnits,1));
-                    Debug.Log("③伤害完毕");
-                    Debug.Log("①等待选择一个单位");
-                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardFeature.Largest].cardList,1,false);
-                    Debug.Log("②对其造成伤害");
-                    await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,SelectUnits,1));
-                    Debug.Log("③伤害完毕");
-                    Debug.Log("①等待选择一个单位");
-                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardFeature.Largest].cardList,1,false);
-                    Debug.Log("②对其造成伤害");
-                    await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,SelectUnits,1));
-                    Debug.Log("③伤害完毕");
+                    for (int i = 0; i < twoSideVitality; i++)
+                    {
+                        await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardFeature.Largest].CardList,1,true);
+                        await GameSystem.PointSystem.Hurt(new TriggerInfo(this,SelectUnits,1));
+                    }
                 }
             };
         }
     }
 }
-//twoSideVitality+1+2

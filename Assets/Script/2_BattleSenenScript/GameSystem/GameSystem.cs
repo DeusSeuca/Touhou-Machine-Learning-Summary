@@ -47,27 +47,45 @@ namespace GameSystem
                 await Command.CardCommand.DeployCard(triggerInfo.targetCard);
             }
             await TriggerLogic(triggerInfo[TriggerType.Deploy]);
-            //Info.AgainstInfo.IsCardEffectCompleted = true;
         }
         public static async Task BanishCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Banish]);
         public static async Task Discard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Discard]);
+        public static async Task SummonCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Summon]);
+    }
+    public class StateSystem
+    {
+        public static async Task SealCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Banish]);
+        public static async Task CloseCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Banish]);
+        public static async Task ScoutCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Banish]);
+    }
+    public class FieldSystem
+    {
+        //直接改变，不触发机制
+        public static async Task Increase(TriggerInfo triggerInfo, CardField cardField)
+        {
+            foreach (var targetCard in triggerInfo.targetCards)
+            {
+                if (targetCard[cardField]!=0)
+                {
+                    targetCard[cardField]++;
+                }
+            }
+        }
     }
     /// <summary>
     /// 选择单位、区域、场景属性的相关机制
     /// </summary>
     public class SelectSystem
     {
-        //public static async Task SelectUnite(Card card, List<Card> targetCards, int num,bool isAuto=false) => await Command.StateCommand.WaitForSelecUnit(card, targetCards, num, isAuto);
-        public static async Task SelectUnite(Card card, List<Card> targetCards, int num, bool isAuto = false) => await TriggerLogic(TriggerInfo.Build(card, card, 0, card, targetCards, num, false)[TriggerType.SelectUnite]);
+        public static async Task SelectUnite(Card card, List<Card> targetCards, int num, bool isAuto = false) => await Command.StateCommand.WaitForSelecUnit(card, targetCards, num, isAuto);
+        // public static async Task SelectUnite(Card card, List<Card> targetCards, int num, bool isAuto = false) => await TriggerLogic(TriggerInfo.Build(card, card, 0, card, targetCards, num, false)[TriggerType.SelectUnite]);
         public static async Task SelectLocation(Card card) => await Command.StateCommand.WaitForSelectLocation(card);
     }
-    //好像不需要
-    public class TurnSystem
+    public class ProcessSystem
     {
         public static async Task WhenTurnStart() => await TriggerLogic(TriggerInfo.Build(null, targetCard: null)[TriggerType.TurnStart]);
-        public static async Task WhenTurnEnd() => await TriggerLogic(TriggerInfo.Build(null, targetCard: null)[TriggerType.TurnEnd]);
-        public static async Task WhenRoundStart() => await TriggerLogic(TriggerInfo.Build(null, cardSet[RegionTypes.Battle].cardList)[TriggerType.RoundStart]);
-        public static async Task WhenRoundEnd() => await TriggerLogic(TriggerInfo.Build(null, cardSet[RegionTypes.Battle].cardList)[TriggerType.RoundEnd]);
-
+        public static async Task WhenTurnEnd() => await TriggerAll(new TriggerInfo(null, targetCard: null)[TriggerTime.When][TriggerType.TurnEnd]);
+        public static async Task WhenRoundStart() => await TriggerLogic(TriggerInfo.Build(null, cardSet[RegionTypes.Battle].CardList)[TriggerType.RoundStart]);
+        public static async Task WhenRoundEnd() => await TriggerAll(new TriggerInfo(null, targetCard: null)[TriggerTime.When][TriggerType.RoundEnd]);
     }
 }

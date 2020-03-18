@@ -14,15 +14,16 @@ namespace Command
         public static async Task TempOperationPlayCard()
         {
             if ((Info.AgainstInfo.isDownPass && Info.PointInfo.TotalDownPoint < Info.PointInfo.TotalUpPoint) ||
-                Info.AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].cardList.Count == 0)
+                Info.AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].CardList.Count == 0)
             {
                 GameUI.UiCommand.SetCurrentPass();
             }
             else
             {
 
-                Card targetCard = Info.AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].cardList[0];
+                Card targetCard = Info.AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].CardList[0];
                 await GameSystem.TransSystem.PlayCard(TriggerInfo.Build(targetCard, targetCard));
+                Info.AgainstInfo.IsCardEffectCompleted = true;
                 //await CardCommand.PlayCard(targetCard);
             }
         }
@@ -35,7 +36,7 @@ namespace Command
             }
             else
             {
-                await CardCommand.DisCard(Info.AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].cardList[0]);
+                await CardCommand.DisCard(Info.AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].CardList[0]);
             }
         }
     }

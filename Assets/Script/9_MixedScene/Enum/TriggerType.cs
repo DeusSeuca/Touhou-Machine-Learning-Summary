@@ -6,6 +6,7 @@
     Discard,
     Dead,
     Banish,
+    Summon,
 
     Gain,
     Hurt,
@@ -14,7 +15,12 @@
     Destory,
     Strengthen,
     Impair,
-    
+
+    Seal,//封印
+    Close,//自闭
+    Scout,//侦查
+
+
     SelectUnite,
 
     RoundStart,

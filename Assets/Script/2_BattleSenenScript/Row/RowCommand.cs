@@ -13,7 +13,7 @@ namespace Command
     {
         public static async Task CreatTempCard(SingleRowInfo SingleInfo)
         {
-            Card modelCard = AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].cardList[0];
+            Card modelCard = AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].CardList[0];
             SingleInfo.TempCard = await CardCommand.CreatCard(modelCard.CardId);
             SingleInfo.TempCard.isGray = true;
             SingleInfo.TempCard.SetCardSeeAble(true);
@@ -37,7 +37,7 @@ namespace Command
         }
         public static void SetPlayCardMoveFree(bool isFree)
         {
-            AgainstInfo.cardSet[Orientation.Down][RegionTypes.Leader, RegionTypes.Hand].cardList.ForEach(card => card.isFree = isFree);
+            AgainstInfo.cardSet[Orientation.Down][RegionTypes.Leader, RegionTypes.Hand].CardList.ForEach(card => card.isFree = isFree);
         }
         public static void SetAllRegionSelectable(RegionTypes region, Territory territory = Territory.All)
         {

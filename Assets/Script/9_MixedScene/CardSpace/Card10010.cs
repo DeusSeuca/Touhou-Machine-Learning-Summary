@@ -21,6 +21,14 @@ namespace CardSpace
                     await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,this));
                 }
             };
+            cardEffect[TriggerTime.When][TriggerType.Deploy] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
+                {
+                    await GameSystem.SelectSystem.SelectLocation(this);
+                    await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,this));
+                }
+            };
         }
     }
 }

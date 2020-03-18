@@ -2,7 +2,9 @@
 using CardSpace;
 using Command.Network;
 using GameEnum;
+using System.Threading.Tasks;
 using UnityEngine;
+using static Info.AgainstInfo;
 namespace Control
 {
     public class CardControl : MonoBehaviour
@@ -14,14 +16,14 @@ namespace Control
         Material cardMaterial => GetComponent<Renderer>().material;
         private void OnMouseEnter()
         {
-            Info.AgainstInfo.PlayerFocusCard = ThisCard;
+            PlayerFocusCard = ThisCard;
             Command.Network.NetCommand.AsyncInfo(NetAcyncType.FocusCard);
         }
         private void OnMouseExit()
         {
-            if (Info.AgainstInfo.PlayerFocusCard == ThisCard)
+            if (PlayerFocusCard == ThisCard)
             {
-                Info.AgainstInfo.PlayerFocusCard = null;
+                PlayerFocusCard = null;
                 NetCommand.AsyncInfo(NetAcyncType.FocusCard);
             }
         }
@@ -29,36 +31,47 @@ namespace Control
         {
             if (ThisCard.isPrepareToPlay)
             {
-                Info.AgainstInfo.PlayerPlayCard = ThisCard;
+                PlayerPlayCard = ThisCard;
             }
             //Command.EffectCommand.TheWorldPlay(GetComponent<Card>());
         }
         private void OnMouseUp()
         {
-            if (Info.AgainstInfo.PlayerPlayCard != null)
+            if (PlayerPlayCard != null)
             {
-                if (Info.AgainstInfo.PlayerFocusRegion != null)
+                //if (PlayerFocusRegion != null)
+                //{
+                if (PlayerFocusRegion != null && PlayerFocusRegion.name == "下方_墓地")
                 {
-                    if (Info.AgainstInfo.PlayerFocusRegion.name == "下方_墓地")
-                    {
-                        //print(name + "进入墓地");
-                        _ = Command.CardCommand.DisCard(ThisCard);
-                    }
-                    else if (Info.AgainstInfo.PlayerFocusRegion.name == "下方_领袖" || Info.AgainstInfo.PlayerFocusRegion.name == "下方_手牌")
-                    {
-                        Info.AgainstInfo.PlayerPlayCard = null;
-                    }
-                    else
-                    {
-                        Debug.Log("1打出一张牌"+ Info.AgainstInfo.PlayerPlayCard);
-                        _ = GameSystem.TransSystem.PlayCard(TriggerInfo.Build(Info.AgainstInfo.PlayerPlayCard, Info.AgainstInfo.PlayerPlayCard));
-                    }
+                    //print(name + "进入墓地");
+                    _ = Command.CardCommand.DisCard(ThisCard);
+                }
+                else if (PlayerFocusRegion != null && (PlayerFocusRegion.name == "下方_领袖" || PlayerFocusRegion.name == "下方_手牌"))
+                {
+                    PlayerPlayCard = null;
                 }
                 else
                 {
-                    Debug.Log("2打出一张牌"+ Info.AgainstInfo.PlayerPlayCard);
-                    _ = GameSystem.TransSystem.PlayCard(TriggerInfo.Build(Info.AgainstInfo.PlayerPlayCard, Info.AgainstInfo.PlayerPlayCard));
+                    Debug.Log("1打出一张牌" + PlayerPlayCard);
+                    Task.Run(async () =>
+                    {
+                        await GameSystem.TransSystem.PlayCard(TriggerInfo.Build(PlayerPlayCard, PlayerPlayCard));
+                        Debug.LogError("我的回合结束啦！");
+                        IsCardEffectCompleted = true;
+                    });
+
                 }
+                //}
+                //else
+                //{
+                //    Debug.Log("2打出一张牌" + Info.AgainstInfo.PlayerPlayCard);
+                //    Task.Run(async () =>
+                //    {
+                //        await GameSystem.TransSystem.PlayCard(TriggerInfo.Build(Info.AgainstInfo.PlayerPlayCard, Info.AgainstInfo.PlayerPlayCard));
+                //        Debug.LogError("我的回合结束啦！");
+                //        Info.AgainstInfo.IsCardEffectCompleted = true;
+                //    });
+                //}
             }
         }
         private void Update()

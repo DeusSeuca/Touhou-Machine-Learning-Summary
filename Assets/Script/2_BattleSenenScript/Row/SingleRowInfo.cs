@@ -16,7 +16,18 @@ namespace Info
         public RegionTypes region;
         public bool CanBeSelected;
         [ShowInInspector]
-        public int rank => (int)region + (AgainstInfo.isPlayer1 ^ (orientation == Orientation.Down) ? 9 : 0);
+        public int rank
+        {
+            get
+            {
+                int regionId = (int)region;
+                if (region > RegionTypes.Battle)
+                {
+                    regionId -= 2;
+                }
+                return regionId + (AgainstInfo.isPlayer1 ^ (orientation == Orientation.Down) ? 9 : 0);
+            }
+        }
 
         private void Awake() => AgainstInfo.cardSet.singleRowInfos.Add(this);
         public int Location => this.JudgeRank(AgainstInfo.FocusPoint);
@@ -30,7 +41,7 @@ namespace Info
         public void SetRegionSelectable(bool CanBeSelected)
         {
             this.CanBeSelected = CanBeSelected;
-            MainThread.Run(() =>{CardMaterial.SetColor("_GlossColor", CanBeSelected ? color : Color.black);});
+            MainThread.Run(() => { CardMaterial.SetColor("_GlossColor", CanBeSelected ? color : Color.black); });
         }
     }
 }

@@ -18,7 +18,7 @@ namespace CardModel
 
         public int basePoint;
         public int changePoint;
-        public int showPoint => basePoint + changePoint;
+        public int showPoint => Mathf.Max(0, basePoint + changePoint);
 
         public Texture2D icon;
         public float moveSpeed = 0.1f;
@@ -28,20 +28,20 @@ namespace CardModel
 
 
         [ShowInInspector]
-        private Dictionary<CardField, int> cardFields = new Dictionary<CardField, int>();
+        public Dictionary<CardField, int> cardFields = new Dictionary<CardField, int>();
         public int this[CardField cardField]
         {
             get => cardFields.ContainsKey(cardField) ? cardFields[cardField] : 0;
             set => cardFields[cardField] = value;
         }
         [ShowInInspector]
-        private Dictionary<CardState, bool> cardStates = new Dictionary<CardState, bool>();
+        public Dictionary<CardState, bool> cardStates = new Dictionary<CardState, bool>();
         public bool this[CardState cardState]
         {
             get => cardStates.ContainsKey(cardState) ? cardStates[cardState] : false;
             set => cardStates[cardState] = value;
         }
-        public Territory belong => Info.AgainstInfo.cardSet[GameEnum.Orientation.Down].cardList.Contains(this) ? Territory.My : Territory.Op;
+        public Territory belong => Info.AgainstInfo.cardSet[GameEnum.Orientation.Down].CardList.Contains(this) ? Territory.My : Territory.Op;
         public Vector3 targetPosition;
         public Quaternion targetQuaternion;
 
@@ -153,11 +153,38 @@ namespace CardModel
                   await Command.CardCommand.BanishCard(this);
                 }
             };
-            cardEffect[TriggerTime.After][TriggerType.RoundEnd] = new List<Func<TriggerInfo, Task>>()
+            cardEffect[TriggerTime.When][TriggerType.Summon] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
-                    if (Info.AgainstInfo.cardSet[RegionTypes.Battle].cardList.Contains(this))
+                  await Command.CardCommand.SummonCard(this);
+                }
+            };
+            //卡牌状态变化时效果
+            cardEffect[TriggerTime.When][TriggerType.Seal] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
+                {
+                  await Command.CardCommand.SealCard(this);
+                }
+            };
+            //登记卡牌回合状态变化时效果
+            cardEffect[TriggerTime.When][TriggerType.TurnEnd] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
+                {
+                    //我死啦
+                    if (showPoint==0&&AgainstInfo.cardSet[RegionTypes.Battle].CardList.Contains(this))
+                    {
+                        await Command.CardCommand.RemoveFromBattle(this);
+                    }
+                }
+            };
+            cardEffect[TriggerTime.When][TriggerType.RoundEnd] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
+                {
+                    if (AgainstInfo.cardSet[RegionTypes.Battle].CardList.Contains(this))
                     {
                         Debug.Log("移除啦");
                         await Command.CardCommand.RemoveFromBattle(this);

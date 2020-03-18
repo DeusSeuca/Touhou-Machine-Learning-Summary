@@ -27,7 +27,7 @@ namespace CardSpace
             {
                 async (triggerInfo) =>
                 {
-                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.My][RegionTypes.Battle][CardRank.Copper].cardList,1);
+                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.My][RegionTypes.Battle][CardRank.Copper].CardList,1);
                     await GameSystem.PointSystem.Cure(TriggerInfo.Build(this,SelectUnits));
                 }
             };
