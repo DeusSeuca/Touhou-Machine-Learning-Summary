@@ -70,7 +70,8 @@ namespace Command
             public static void LoadFromCsv()
             {
                 //加载单人模式卡牌信息
-                CsvData = File.ReadAllLines("Assets\\Resources\\CardData\\CardData-Single.csv", Encoding.GetEncoding("gb2312"));
+                //CsvData = File.ReadAllLines("Assets\\Resources\\CardData\\CardData-Single.csv", Encoding.GetEncoding("gb2312"));
+                CsvData = File.ReadAllLines("Assets\\Resources\\CardData\\CardData-Single.csv", Encoding.UTF8);
                 GetLibraryInfo().singleModeCards = new List<CardModelInfo>();
                 for (int i = 1; i < CsvData.Length; i++)
                 {
@@ -92,7 +93,8 @@ namespace Command
                         ));
                 }
                 //加载多人模式卡牌信息
-                CsvData = File.ReadAllLines("Assets\\Resources\\CardData\\CardData-Multi.csv", Encoding.GetEncoding("gb2312"));
+                //CsvData = File.ReadAllLines("Assets\\Resources\\CardData\\CardData-Multi.csv", Encoding.GetEncoding("gb2312"));
+                CsvData = File.ReadAllLines("Assets\\Resources\\CardData\\CardData-Multi.csv", Encoding.UTF8);
                 GetLibraryInfo().multiModeCards = new List<CardModelInfo>();
                 for (int i = 1; i < CsvData.Length; i++)
                 {
@@ -119,7 +121,9 @@ namespace Command
 
             public static void Refresh()
             {
+                #if UNITY_EDITOR    
                 CardMenu.UpdateInspector();
+                #endif
             }
 
             private static T GetCsvData<T>(int i, string item)
@@ -152,7 +156,9 @@ namespace Command
                         sIngleSectarianLibrary.cardModelInfos.Clear();
                     }
                 }
+#if UNITY_EDITOR
                 CardMenu.UpdateInspector();
+#endif
             }
 
             public static void CreatScript(int cardId)

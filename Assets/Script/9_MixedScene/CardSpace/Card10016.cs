@@ -13,12 +13,15 @@ namespace CardSpace
         {
             base.Init();
 
-            cardEffect[TriggerTime.When][TriggerType.Play] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.Play] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
-                    await GameSystem.SelectSystem.SelectLocation(this);
-                    await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,this));
+                    await Task.Delay(1000);
+                    await  GameSystem.SelectSystem.SelectBoardCard(cardSet[Orientation.My][RegionTypes.Grave][CardRank.Copper].CardList);
+                    //await  GameSystem.TransSystem.PlayCard(new TriggerInfo(this,cardBoardList[SelectBoardCardIds[0]]));
+                    await  GameSystem.TransSystem.ReviveCard(new TriggerInfo(this,selectActualCards));
+                    await  GameSystem.TransSystem.MoveToGrave(new TriggerInfo(this,this));
                 }
             };
         }

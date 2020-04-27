@@ -19,11 +19,10 @@ namespace Command
     {
         public static async Task BattleStart()
         {
-
             AgainstInfo.isMyTurn = AgainstInfo.isPlayer1;
             AgainstInfo.cardSet = new CardSet();
             Info.StateInfo.TaskManager = new System.Threading.CancellationTokenSource();
-            MainThread.Run((Action)(() =>
+            MainThread.Run(() =>
             {
                 foreach (var item in GameObject.FindGameObjectsWithTag("SingleInfo"))
                 {
@@ -31,7 +30,7 @@ namespace Command
                     AgainstInfo.cardSet.singleRowInfos.Add(singleRowInfo);
                 }
                 AgainstInfo.cardSet.CardList = null;
-            }));
+            });
             await Task.Delay(500);
             if (AgainstInfo.isPVE)
             {
@@ -39,7 +38,7 @@ namespace Command
                     "gezi", "yaya",
                     new List<CardDeck>
                     {
-                        new CardDeck("gezi", 10001, new List<int>
+                        new CardDeck("gezi", 10014, new List<int>
                         {
                             //10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,
                             10002, 10008, 10004, 10005, 10007, 10006,10008, 10004,  10012, 10010, 10011, 10012, 10014, 10007,10006, 10016,  10008, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
@@ -61,6 +60,7 @@ namespace Command
                     });
             }
             RowCommand.SetAllRegionSelectable(RegionTypes.None);
+            //Debug.LogError("初始双方信息");
             await Task.Run(async () =>
             {
                 try
@@ -79,6 +79,8 @@ namespace Command
                     OpLeaderCard.SetCardSeeAble(true);
                     //初始双方化牌组
                     CardDeck Deck = AllPlayerInfo.UserInfo.UseDeck;
+                    //Debug.LogError("初始双方化牌组");
+
                     for (int i = 0; i < Deck.CardIds.Count; i++)
                     {
                         Card NewCard = await CardCommand.CreatCard(Deck.CardIds[i]);
@@ -96,7 +98,7 @@ namespace Command
                 }
                 catch (Exception e)
                 {
-                    Debug.Log(e);
+                    Debug.LogError(e);
                 }
             });
         }
@@ -118,7 +120,7 @@ namespace Command
         }
         public static async Task RoundStart(int num)
         {
-            await Task.Run((Func<Task>)(async () =>
+            await Task.Run(async () =>
             {
                 GameUI.UiCommand.ReSetPassState();
                 GameUI.UiCommand.SetNoticeBoardTitle($"第{num + 1}小局开始");
@@ -161,8 +163,8 @@ namespace Command
                         break;
                 }
                 await Task.Delay(2500);
-                await WaitForSelectBoardCard((List<Card>)AgainstInfo.cardSet[Orientation.Down][RegionTypes.Hand].CardList, CardBoardMode.ExchangeCard);
-            }));
+                await WaitForSelectBoardCard(AgainstInfo.cardSet[Orientation.Down][RegionTypes.Hand].CardList, CardBoardMode.ExchangeCard);
+            });
         }
         public static async Task RoundEnd(int num)
         {
@@ -297,7 +299,7 @@ namespace Command
         public static async Task WaitForSelectLocation(Card card)
         {
             AgainstInfo.IsWaitForSelectLocation = true;
-            //Debug.Log("等待选择部署位置");
+            Debug.Log("等待选择部署位置");
             // RowCommand.SetAllRegionSelectable((RegionTypes)(card.region + 5), card.territory);//去掉+5
             RowCommand.SetAllRegionSelectable((RegionTypes)card.region, card.territory);
             AgainstInfo.SelectLocation = -1;
@@ -315,9 +317,11 @@ namespace Command
                         AgainstInfo.SelectRegion = rows[rowRank];//设置部署区域
                         AgainstInfo.SelectLocation = 0;//设置部署次序
                     }
+                    await Task.Delay(1000);
+                    Debug.Log("等待选择坐标" + AgainstInfo.SelectLocation);
                 }
             });
-            // Debug.Log("选择部署位置完毕");
+            Debug.Log($"选择坐标{AgainstInfo.SelectLocation}");
             Network.NetCommand.AsyncInfo(NetAcyncType.SelectLocation);
             RowCommand.SetAllRegionSelectable(RegionTypes.None);
             AgainstInfo.IsWaitForSelectLocation = false;
@@ -342,11 +346,12 @@ namespace Command
                 while (AgainstInfo.SelectUnits.Count < selectableNum)
                 {
                     StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
-                    if (AgainstInfo.isAIControl || isAuto)
+                    //当pve模式或者pvp中的我方回合时，用自身随机决定，否则等待网络同步
+                    if (AgainstInfo.isAIControl || (isAuto&&AgainstInfo.isMyTurn))
                     {
-                        //自动选择场上单位
+                        Debug.Log("自动选择场上单位");
                         Cards = Cards.OrderBy(x => AiCommand.GetRandom(0, 514)).ToList();
-                        Info.AgainstInfo.SelectUnits = Cards.Take(selectableNum).ToList();
+                        AgainstInfo.SelectUnits = Cards.Take(selectableNum).ToList();
                     }
                     await Task.Delay(100);
                 }
@@ -354,14 +359,15 @@ namespace Command
                 Network.NetCommand.AsyncInfo(NetAcyncType.SelectUnites);
                 GameUI.UiCommand.DestoryAllArrow();
                 await Task.Delay(250);
-                Debug.Log("选择单位真的完毕");
+                Debug.Log("同步选择单位完毕");
             });
             AgainstInfo.AllCardList.ForEach(card => card.isGray = false);
             AgainstInfo.IsWaitForSelectUnits = false;
+            Debug.Log("结束选择单位");
         }
         public static async Task WaitForSelectBoardCard<T>(List<T> CardIds, CardBoardMode Mode = CardBoardMode.Select, int num = 1)
         {
-            AgainstInfo.SelectBoardCardIds = new List<int>();
+            AgainstInfo.selectBoardCardRanks = new List<int>();
             GameUI.UiCommand.SetCardBoardShow();
             if (typeof(T) == typeof(Card))
             {
@@ -377,18 +383,18 @@ namespace Command
                 switch (Mode)
                 {
                     case CardBoardMode.Select:
-                        while (AgainstInfo.SelectBoardCardIds.Count < Mathf.Min(CardIds.Count, num) && !AgainstInfo.IsFinishSelectBoardCard) { }
+                        while (AgainstInfo.selectBoardCardRanks.Count < Mathf.Min(CardIds.Count, num) && !AgainstInfo.IsFinishSelectBoardCard) { }
                         break;
                     case CardBoardMode.ExchangeCard:
                         {
                             while (Info.AgainstInfo.ExChangeableCardNum != 0 && !Info.AgainstInfo.IsSelectCardOver)
                             {
-                                if (Info.AgainstInfo.SelectBoardCardIds.Count > 0)
+                                if (Info.AgainstInfo.selectBoardCardRanks.Count > 0)
                                 {
                                     List<Card> CardLists = CardIds.Cast<Card>().ToList();
-                                    await CardCommand.ExchangeCard(CardLists[AgainstInfo.SelectBoardCardIds[0]]);
+                                    await CardCommand.ExchangeCard(CardLists[AgainstInfo.selectBoardCardRanks[0]]);
                                     Info.AgainstInfo.ExChangeableCardNum--;
-                                    Info.AgainstInfo.SelectBoardCardIds.Clear();
+                                    Info.AgainstInfo.selectBoardCardRanks.Clear();
                                     GameUI.UiCommand.SetCardBoardTitle("剩余抽卡次数为" + Info.AgainstInfo.ExChangeableCardNum);
                                 }
                             }

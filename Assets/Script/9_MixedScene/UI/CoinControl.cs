@@ -25,7 +25,9 @@ public class CoinControl : MonoBehaviour
     static Vector3 camp_end;
 
     static float centerTime;
+#pragma warning disable CS0649 // 从未对字段“CoinControl.center_start”赋值，字段将一直保持其默认值 
     static Vector3 center_start;
+#pragma warning restore CS0649 // 从未对字段“CoinControl.center_start”赋值，字段将一直保持其默认值 
     static Vector3 center_end;
 
     static float scaleTime;

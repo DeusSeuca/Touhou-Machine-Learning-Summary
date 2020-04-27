@@ -34,10 +34,7 @@ namespace Control
             middlePos = (endPos + startPos)/2 + Vector3.up*5;
         }
         [Button("播放")]
-        public void Play()
-        {
-            progress = 0;
-        }
+        public void Play() => progress = 0;
     }
 
 }

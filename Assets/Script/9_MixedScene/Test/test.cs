@@ -3,6 +3,7 @@ using Command;
 using GameEnum;
 using Info;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,6 +19,13 @@ public class test : MonoBehaviour
 
     public string text;
     [Button]
+    public void test0()
+    {
+       var s= Resources.Load<TextAsset>("CardData/Tag").text.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+
+    }
+    [Button]
     public void test1(GameEnum.Language language)
     {
         Translate.currentLanguage = language.ToString();
@@ -31,7 +39,7 @@ public class test : MonoBehaviour
 
     public void filterCardSet(List<GameEnum.CardTag> tags)
     {
-        FiltercardSet  = cardSet[tags.ToArray()];
+        FiltercardSet = cardSet[tags.ToArray()];
     }
-    
+
 }

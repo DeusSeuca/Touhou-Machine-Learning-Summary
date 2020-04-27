@@ -96,7 +96,11 @@ public class CardSet
     {
         get
         {
-            return new CardSet(singleRowInfos, CardList);
+            //CardList = CardList ?? globalCardList.SelectMany(x => x).ToList();
+            List<Card> filterCardList = CardList.Where(card =>
+               card.cardStates.ContainsKey(cardState) && card.cardStates[cardState])
+                .ToList();
+            return new CardSet(singleRowInfos, filterCardList);
         }
     }
     //待补充
@@ -104,7 +108,11 @@ public class CardSet
     {
         get
         {
-            return new CardSet(singleRowInfos, CardList);
+            //CardList = CardList ?? globalCardList.SelectMany(x => x).ToList();
+            List<Card> filterCardList = CardList.Where(card =>
+               card.cardFields.ContainsKey(cardField))
+                .ToList();
+            return new CardSet(singleRowInfos, filterCardList);
         }
     }
     /// <summary>
@@ -154,6 +162,11 @@ public class CardSet
     {
         get
         {
+            //List<Card> filterCardList = CardList.Where(card =>
+            //   ranks.Any(tag =>
+            //       card.ran.Contains(tag.TransTag())))
+            //   .ToList();
+            //return new CardSet(singleRowInfos, filterCardList);
             return new CardSet(singleRowInfos, CardList);
         }
     }

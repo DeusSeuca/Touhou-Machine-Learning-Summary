@@ -35,13 +35,17 @@ namespace Live2D.Cubism.Samples.OriginalWorkflow.Demo
         /// Operation animation clip from the inspector.
         /// </summary>
         [SerializeField]
+#pragma warning disable CS0649 // 从未对字段“CubismSampleController._bodyAnimation”赋值，字段将一直保持其默认值 null
         private AnimationClip _bodyAnimation;
+#pragma warning restore CS0649 // 从未对字段“CubismSampleController._bodyAnimation”赋值，字段将一直保持其默认值 null
 
         /// <summary>
         /// Array of motion set in tapbody.
         /// </summary>
         [SerializeField]
+#pragma warning disable CS0649 // 从未对字段“CubismSampleController._tapBodyMotions”赋值，字段将一直保持其默认值 null
         private AnimationClip[] _tapBodyMotions;
+#pragma warning restore CS0649 // 从未对字段“CubismSampleController._tapBodyMotions”赋值，字段将一直保持其默认值 null
 
         /// <summary>
         /// Motion set in loop motion.

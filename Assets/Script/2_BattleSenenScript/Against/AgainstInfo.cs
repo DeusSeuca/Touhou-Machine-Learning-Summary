@@ -15,8 +15,9 @@ namespace Info
         //网络同步信息
         public static Card TargetCard;
         public static int RandomRank;
-        public static List<int> TargetCardIDList;
-        public static List<Card> TargetCardList;
+
+        
+
         public static bool IsSelectCardOver;
         public static int RoomID;
         //操作标志位
@@ -24,7 +25,7 @@ namespace Info
         public static bool IsCardEffectCompleted;
         public static List<GameObject> ArrowList = new List<GameObject>();
 
-        public static CardBoardMode CardBoardMode;
+        //public static CardBoardMode CardBoardMode;
         public static List<int> Player1BlackCardList;
         public static List<int> Player2BlackCardList;
 
@@ -50,7 +51,13 @@ namespace Info
         public static bool IsWaitForSelectLocation;
         public static int SelectLocation = -1;
         //选择的卡牌面板卡片
-        public static List<int> SelectBoardCardIds;
+        public static List<int> cardBoardIDList;
+        public static List<Card> cardBoardList;
+
+        public static List<int> selectBoardCardRanks;
+        public static List<Card> selectActualCards=> selectBoardCardRanks.Select(rank=> cardBoardList[rank]).ToList();
+        public static List<int> selectVirualCardIds => selectBoardCardRanks.Select(rank => cardBoardIDList[rank]).ToList();
+
         public static bool IsFinishSelectBoardCard;
         public static int ExChangeableCardNum = 0;
         //判断是否1号玩家

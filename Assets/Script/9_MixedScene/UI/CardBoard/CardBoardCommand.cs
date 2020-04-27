@@ -11,27 +11,28 @@ namespace Command
     {
         public class CardBoardCommand
         {
-            public static void LoadCardList(List<int> CardsIds)
+            public static void LoadCardList(List<int> cardIds)
             {
-                Info.AgainstInfo.TargetCardIDList = CardsIds;
+                Info.AgainstInfo.cardBoardIDList = cardIds;
                 CreatBoardCardVitual();
             }
-            public static void LoadCardList(List<Card> CardsIds)
+            public static void LoadCardList(List<Card> cards)
             {
-                Info.AgainstInfo.TargetCardList = CardsIds;
+                Info.AgainstInfo.cardBoardList = cards;
                 CreatBoardCardActual();
             }
             public void Replace(int num, Card card)
             {
 
             }
+            //生成对局存在的卡牌
             public static void CreatBoardCardActual()
             {
                 MainThread.Run(() =>
                 {
                     Info.GameUI.UiInfo.CardBoard.transform.GetChild(1).GetComponent<Text>().text = Info.GameUI.UiInfo.CardBoardTitle;
                     Info.GameUI.UiInfo.ShowCardLIstOnBoard.ForEach(GameObject.Destroy);
-                    List<Card> Cards = Info.AgainstInfo.TargetCardList;
+                    List<Card> Cards = Info.AgainstInfo.cardBoardList;
                     for (int i = 0; i < Cards.Count; i++)
                     {
                         var CardStandardInfo = Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(Cards[i].CardId);
@@ -45,13 +46,14 @@ namespace Command
                     Info.GameUI.UiInfo.Constant.GetComponent<RectTransform>().sizeDelta = new Vector2(Cards.Count * 325 + 200, 800);
                 });
             }
+            //生成对局不存在的卡牌
             private static void CreatBoardCardVitual()
             {
                 MainThread.Run(() =>
                 {
                     Info.GameUI.UiInfo.CardBoard.transform.GetChild(1).GetComponent<Text>().text = Info.GameUI.UiInfo.CardBoardTitle;
                     Info.GameUI.UiInfo.ShowCardLIstOnBoard.ForEach(GameObject.Destroy);
-                    List<int> CardIds = Info.AgainstInfo.TargetCardIDList;
+                    List<int> CardIds = Info.AgainstInfo.cardBoardIDList;
                     for (int i = 0; i < CardIds.Count; i++)
                     {
                         var CardStandardInfo = Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardIds[i]);

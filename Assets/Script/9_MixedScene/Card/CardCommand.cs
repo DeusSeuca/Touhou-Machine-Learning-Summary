@@ -133,6 +133,8 @@ namespace Command
         }
         public static async Task PlayCard(Card targetCard, bool IsAnsy = true)
         {
+            
+            AgainstInfo.PlayerPlayCard = targetCard;
             EffectCommand.AudioEffectPlay(0);
             RowCommand.SetPlayCardMoveFree(false);
             targetCard.isPrepareToPlay = false;
@@ -152,6 +154,16 @@ namespace Command
             RemoveCard(card);
             AgainstInfo.cardSet[Orientation.My][RegionTypes.Grave].Add(card);
             AgainstInfo.PlayerPlayCard = null;
+        }
+
+        public static async Task ReviveCard(TriggerInfo triggerInfo)
+        {
+            Card card = triggerInfo.targetCard;
+            EffectCommand.AudioEffectPlay(0);
+            card.SetCardSeeAble(true);
+            RemoveCard(card);
+            AgainstInfo.cardSet[Orientation.My][RegionTypes.Uesd].Add(card);
+            await card.cardAbility[TriggerTime.When][TriggerType.Play][0](triggerInfo);
         }
 
         public static async Task SealCard(Card card)
@@ -175,7 +187,7 @@ namespace Command
             triggerInfo.targetCard.changePoint -= triggerInfo.point;
             await Task.Delay(1000);
         }
-        public static async Task RemoveFromBattle(Card card, int Index = 0)
+        public static async Task MoveToGrave(Card card, int Index = 0)
         {
             Orientation orientation = card.belong == Territory.My ? Orientation.Down : Orientation.Up;
             RemoveCard(card);

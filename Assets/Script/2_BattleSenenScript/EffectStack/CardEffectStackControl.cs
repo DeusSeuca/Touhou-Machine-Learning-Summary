@@ -115,7 +115,7 @@ namespace Control
         }
         public static async Task Trigger(TriggerInfo triggerInfo)
         {
-            List<Func<TriggerInfo, Task>> tasks = triggerInfo.targetCard.cardEffect[triggerInfo.triggerTime][triggerInfo.triggerType];
+            List<Func<TriggerInfo, Task>> tasks = triggerInfo.targetCard.cardAbility[triggerInfo.triggerTime][triggerInfo.triggerType];
             foreach (var task in tasks)
             {
                 await task(triggerInfo);
@@ -134,7 +134,7 @@ namespace Control
             {
                 foreach (var card in AgainstInfo.cardSet.CardList)
                 {
-                    List<Func<TriggerInfo, Task>> tasks = card.cardEffect[triggerInfo.triggerTime][triggerInfo.triggerType];
+                    List<Func<TriggerInfo, Task>> tasks = card.cardAbility[triggerInfo.triggerTime][triggerInfo.triggerType];
                     foreach (var task in tasks)
                     {
                         await task(triggerInfo);
@@ -156,7 +156,7 @@ namespace Control
         {
             foreach (var card in AgainstInfo.cardSet.CardList)
             {
-                List<Func<TriggerInfo, Task>> tasks = card.cardEffect[triggerInfo.triggerTime][triggerInfo.triggerType];
+                List<Func<TriggerInfo, Task>> tasks = card.cardAbility[triggerInfo.triggerTime][triggerInfo.triggerType];
                 foreach (var task in tasks)
                 {
                     await task(triggerInfo);

@@ -4,12 +4,22 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using UnityEngine;
 
 static class Translate
 {
     public static string currentLanguage = "Ch";
     static string[] tagCsvData;
+    static string[] UITextgCsvData;
+    public static void Load()
+    {
+        //tagCsvData = File.ReadAllLines("Assets\\Resources\\CardData\\Tag.csv", Encoding.GetEncoding("gb2312"));
+        //Thread.MainThread.Run(() =>
+        //{
+            tagCsvData = Resources.Load<TextAsset>("CardData/Tag").text.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            UITextgCsvData = Resources.Load<TextAsset>("CardData/UiText").text.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        //});
+    }
     /// <summary>
     /// 根据中文调取对应语言的tag
     /// </summary>
@@ -17,9 +27,19 @@ static class Translate
     /// <returns></returns>
     public static string TransTag(this string text)
     {
-        tagCsvData = File.ReadAllLines("Assets\\Resources\\CardData\\Tag.csv", Encoding.GetEncoding("gb2312"));
+        //try
+        //{
+        //    Load("CardData/Tag");
+        //}
+        //catch (Exception e)
+        //{
+        //    UnityEngine.Debug.LogError("翻译异常"+e.Message);
+        //}
         return GetCsvData(tagCsvData, text,"Ch");
     }
+
+   
+
     /// <summary>
     /// 根据枚举体调取对应语言的tag
     /// </summary>
@@ -27,13 +47,15 @@ static class Translate
     /// <returns></returns>
     public static string TransTag(this GameEnum.CardTag cardTag)
     {
-        tagCsvData = File.ReadAllLines("Assets\\Resources\\CardData\\Tag.csv", Encoding.GetEncoding("gb2312"));
+        //Load("CardData/Tag");
+        //tagCsvData = File.ReadAllLines("Assets\\Resources\\CardData\\Tag.csv", Encoding.GetEncoding("gb2312"));
         return GetCsvData(tagCsvData, cardTag.ToString(), "En");
     }
     public static string TransUiText(this string text)
     {
-        tagCsvData = File.ReadAllLines("Assets\\Resources\\CardData\\UiText.csv", Encoding.GetEncoding("gb2312"));
-        return GetCsvData(tagCsvData, text);
+       // Load("CardData/UiText");
+        //tagCsvData = File.ReadAllLines("Assets\\Resources\\CardData\\UiText.csv", Encoding.GetEncoding("gb2312"));
+        return GetCsvData(UITextgCsvData, text);
     }
     private static string GetCsvData(string[] CsvData, string text,string defaultLanguage="Ch")
     {

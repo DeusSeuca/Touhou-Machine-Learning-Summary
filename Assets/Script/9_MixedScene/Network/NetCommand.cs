@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using static Network.NetInfoModel;
 using WebSocketSharp;
 using System.Threading.Tasks;
+using CardModel;
 
 namespace Command
 {
@@ -121,83 +122,99 @@ namespace Command
                 AsyncConnect.Connect();
                 AsyncConnect.OnMessage += (sender, e) =>
                 {
-                    Debug.Log("收到信息" + e.Data);
-                    object[] ReceiveInfo = e.Data.ToObject<GeneralCommand>().Datas;
-                    NetAcyncType Type = (NetAcyncType)int.Parse(ReceiveInfo[0].ToString());
-                    switch (Type)
+                    try
                     {
-                        case NetAcyncType.FocusCard:
-                            {
-                                int X = int.Parse(ReceiveInfo[2].ToString());
-                                int Y = int.Parse(ReceiveInfo[3].ToString());
-                                Info.AgainstInfo.OpponentFocusCard = Info.RowsInfo.GetCard(X, Y);
-                                break;
-                            }
-                        case NetAcyncType.PlayCard:
-                            {
-                                //Debug.Log("触发卡牌同步");
-                                int X = int.Parse(ReceiveInfo[2].ToString());
-                                int Y = int.Parse(ReceiveInfo[3].ToString());
-                                Command.CardCommand.PlayCard(Info.RowsInfo.GetCard(X, Y), false).Wait();
-                                break;
-                            }
-                        case NetAcyncType.SelectRegion:
-                            {
-                                //Debug.Log("触发区域同步");
-                                int X = int.Parse(ReceiveInfo[2].ToString());
-                                Info.AgainstInfo.SelectRegion = Info.RowsInfo.GetSingleRowInfoById(X);
-                                break;
-                            }
-                        case NetAcyncType.SelectLocation:
-                            {
-                                //Debug.Log("触发坐标同步");
-                                int X = int.Parse(ReceiveInfo[2].ToString());
-                                int Y = int.Parse(ReceiveInfo[3].ToString());
-                                //Info.RowsInfo.SingleRowInfos.First(infos => infos.ThisRowCard == Info.RowsInfo.GlobalCardList[X]);
-                                Info.AgainstInfo.SelectRegion = Info.RowsInfo.GetSingleRowInfoById(X);
-                                Info.AgainstInfo.SelectLocation = Y;
-                                //Debug.Log($"坐标为：{X}:{Y}");
-                                //Debug.Log($"信息为：{Info.GlobalBattleInfo.SelectRegion}:{Info.GlobalBattleInfo.SelectLocation}");
-                                break;
-                            }
-                        case NetAcyncType.SelectUnites:
-                            {
-                                //Debug.Log("收到同步单位信息为" + rawData);
-                                List<Location> Locations = ReceiveInfo[2].ToString().ToObject<List<Location>>();
-                                Info.AgainstInfo.SelectUnits.AddRange(Locations.Select(location => Info.RowsInfo.GetCard(location.x, location.y)));
-                                break;
-                            }
-                        case NetAcyncType.Pass:
-                            {
-                                GameUI.UiCommand.SetCurrentPass();
-                                break;
-                            }
-                        case NetAcyncType.Surrender:
-                            {
-                                Task.Run(async () =>
+                        Debug.Log("收到信息" + e.Data);
+                        object[] ReceiveInfo = e.Data.ToObject<GeneralCommand>().Datas;
+                        NetAcyncType Type = (NetAcyncType)int.Parse(ReceiveInfo[0].ToString());
+                        switch (Type)
+                        {
+                            case NetAcyncType.FocusCard:
                                 {
-                                    await StateCommand.BattleEnd(true, true);
-                                });
+                                    int X = int.Parse(ReceiveInfo[2].ToString());
+                                    int Y = int.Parse(ReceiveInfo[3].ToString());
+                                    Info.AgainstInfo.OpponentFocusCard = Info.RowsInfo.GetCard(X, Y);
+                                    break;
+                                }
+                            case NetAcyncType.PlayCard:
+                                {
+                                    //Debug.Log("触发卡牌同步");
+                                    int X = int.Parse(ReceiveInfo[2].ToString());
+                                    int Y = int.Parse(ReceiveInfo[3].ToString());
+                                    //Command.CardCommand.PlayCard(Info.RowsInfo.GetCard(X, Y), false).Wait();
+                                    Card targetCard = Info.RowsInfo.GetCard(X, Y);
+                                    Task.Run(async () =>
+                                    {
+                                        await GameSystem.TransSystem.PlayCard(new TriggerInfo(targetCard, targetCard), false);
+                                        Info.AgainstInfo.IsCardEffectCompleted = true;
+                                    });
+                                    break;
+                                }
+                            case NetAcyncType.SelectRegion:
+                                {
+                                    //Debug.Log("触发区域同步");
+                                    int X = int.Parse(ReceiveInfo[2].ToString());
+                                    Info.AgainstInfo.SelectRegion = Info.RowsInfo.GetSingleRowInfoById(X);
+                                    break;
+                                }
+                            case NetAcyncType.SelectUnites:
+                                {
+                                    //Debug.Log("收到同步单位信息为" + rawData);
+                                    List<Location> Locations = ReceiveInfo[2].ToString().ToObject<List<Location>>();
+                                    Info.AgainstInfo.SelectUnits.AddRange(Locations.Select(location => Info.RowsInfo.GetCard(location.x, location.y)));
+                                    break;
+                                }
+                            case NetAcyncType.SelectLocation:
+                                {
+                                    Debug.Log("触发坐标同步");
+                                    int X = int.Parse(ReceiveInfo[2].ToString());
+                                    int Y = int.Parse(ReceiveInfo[3].ToString());
+                                    //Info.RowsInfo.SingleRowInfos.First(infos => infos.ThisRowCard == Info.RowsInfo.GlobalCardList[X]);
+                                    Info.AgainstInfo.SelectRegion = Info.RowsInfo.GetSingleRowInfoById(X);
+                                    Info.AgainstInfo.SelectLocation = Y;
+                                    Debug.Log($"坐标为：{X}:{Y}");
+                                    Debug.Log($"信息为：{"gezi"}:{Info.AgainstInfo.SelectLocation}");
+                                    break;
+                                }
+                            case NetAcyncType.Pass:
+                                {
+                                    GameUI.UiCommand.SetCurrentPass();
+                                    break;
+                                }
+                            case NetAcyncType.Surrender:
+                                {
+                                    Task.Run(async () =>
+                                    {
+                                        Debug.Log("收到结束指令");
+                                        await StateCommand.BattleEnd(true, true);
+                                    });
+                                    break;
+                                }
+                            case NetAcyncType.ExchangeCard:
+                                {
+                                    Debug.Log("交换卡牌信息");
+                                    // Debug.Log("收到信息" + rawData);
+                                    Location location = ReceiveInfo[2].ToString().ToObject<Location>();
+                                    int RandomRank = int.Parse(ReceiveInfo[3].ToString());
+                                    _ = CardCommand.ExchangeCard(Info.RowsInfo.GetCard(location), false, RandomRank);
+                                    break;
+                                }
+                            case NetAcyncType.SelectProperty:
+                                {
+                                    Info.AgainstInfo.SelectProperty = (Region)int.Parse(ReceiveInfo[1].ToString());
+                                    Debug.Log("通过网络同步当前属性为" + Info.AgainstInfo.SelectProperty);
+                                    break;
+                                }
+                            default:
                                 break;
-                            }
-                        case NetAcyncType.ExchangeCard:
-                            {
-                                Debug.Log("交换卡牌信息");
-                                // Debug.Log("收到信息" + rawData);
-                                Location location = ReceiveInfo[2].ToString().ToObject<Location>();
-                                int RandomRank = int.Parse(ReceiveInfo[3].ToString());
-                                _ = CardCommand.ExchangeCard(Info.RowsInfo.GetCard(location), false, RandomRank);
-                                break;
-                            }
-                        case NetAcyncType.SelectProperty:
-                            {
-                                Info.AgainstInfo.SelectProperty = (Region)int.Parse(ReceiveInfo[1].ToString());
-                                Debug.Log("通过网络同步当前属性为" + Info.AgainstInfo.SelectProperty);
-                                break;
-                            }
-                        default:
-                            break;
+                        }
                     }
+                    catch (System.Exception ex)
+                    {
+                        Debug.Log(ex);
+                        throw;
+                    }
+
                 };
                 AsyncConnect.OnError += (sender, e) =>
                 {
@@ -217,13 +234,13 @@ namespace Command
                         case NetAcyncType.FocusCard:
                             {
                                 Location TargetCardLocation = Info.AgainstInfo.PlayerFocusCard != null ? Info.AgainstInfo.PlayerFocusCard.location : new Location(-1, -1);
-                                AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y).ToJson());
+                                //AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y).ToJson());
                                 break;
                             }
                         case NetAcyncType.PlayCard:
                             {
+                                Debug.Log("发出同步");
                                 Location TargetCardLocation = Info.AgainstInfo.PlayerPlayCard.location;
-                                //Debug.Log("同步焦点卡片为" + TargetCardLocation);
                                 AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y).ToJson());
 
                                 break;
@@ -236,20 +253,20 @@ namespace Command
 
                                 break;
                             }
-                        case NetAcyncType.SelectLocation:
-                            {
-                                int RowRank = Info.AgainstInfo.SelectRegion.RowRank;
-                                int LocationRank = Info.AgainstInfo.SelectLocation;
-                                Debug.Log("同步焦点区域为" + RowRank);
-                                AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, RowRank, LocationRank).ToJson());
-                                break;
-                            }
                         case NetAcyncType.SelectUnites:
                             {
                                 List<Location> Locations = Info.AgainstInfo.SelectUnits.Select(unite => unite.location).ToList();
                                 Debug.LogError("发出的指令为：" + new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, Locations).ToJson());
                                 AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, Locations.ToJson()).ToJson());
                                 Debug.LogError("选择单位完成");
+                                break;
+                            }
+                        case NetAcyncType.SelectLocation:
+                            {
+                                int RowRank = Info.AgainstInfo.SelectRegion.RowRank;
+                                int LocationRank = Info.AgainstInfo.SelectLocation;
+                                Debug.Log("同步焦点坐标给对面：" + RowRank);
+                                AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, RowRank, LocationRank).ToJson());
                                 break;
                             }
                         case NetAcyncType.ExchangeCard:

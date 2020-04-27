@@ -27,16 +27,16 @@ MonoBehaviour:
     - {fileID: 2800000, guid: f7a4df42a218fc344b92903babb445d3, type: 3}
     - {fileID: 2800000, guid: adb3fdc43825cf34088182aeff86debb, type: 3}
     - {fileID: 2800000, guid: 288dd6542dd7fe748af27a20be78506a, type: 3}
-    - {fileID: 2800000, guid: 85ff3bdfb8dff6142a341096c83d8a2e, type: 3}
-    - {fileID: 2800000, guid: 35d7ef2d17ad07447861519e2539c9b1, type: 3}
-    - {fileID: 2800000, guid: 8ec3224b1a98c7d4ebf3af33eadb5314, type: 3}
     - {fileID: 2800000, guid: d7830024a45bb914080acc73e7f971b9, type: 3}
     - {fileID: 2800000, guid: 7b0a55f7976988d44aeda1981ce595ce, type: 3}
     - {fileID: 2800000, guid: a0dd64c89f835c2409dcd8b8507e1ad4, type: 3}
     - {fileID: 2800000, guid: 2478b06134676534398def56aaf52edd, type: 3}
     - {fileID: 2800000, guid: cc833378deb9a504f94395f56bf5596b, type: 3}
-    - {fileID: 2800000, guid: 6de65329c0af66a42b5cad9e164d39e8, type: 3}
     - {fileID: 2800000, guid: 586f0656a7e8a294396feeb3acbdbf43, type: 3}
+    - {fileID: 2800000, guid: 85ff3bdfb8dff6142a341096c83d8a2e, type: 3}
+    - {fileID: 2800000, guid: 35d7ef2d17ad07447861519e2539c9b1, type: 3}
+    - {fileID: 2800000, guid: 8ec3224b1a98c7d4ebf3af33eadb5314, type: 3}
+    - {fileID: 2800000, guid: 6de65329c0af66a42b5cad9e164d39e8, type: 3}
     - {fileID: 2800000, guid: a3e36d8df3e5f6744858f13cdca4521e, type: 3}
     - {fileID: 2800000, guid: c8e3e0f6fc6791a4e97d086d457e830b, type: 3}
     - {fileID: 2800000, guid: b6f5ca53834f49a41aba7f58d32feb2d, type: 3}
@@ -52,7 +52,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 2
     - Name: 
       Entry: 7
       Data: 1|Info.CardInspector.CardLibraryInfo+LevelLibrary, Assembly-CSharp
@@ -94,7 +94,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 10
+      Data: 16
     - Name: 
       Entry: 7
       Data: 5|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
@@ -113,7 +113,7 @@ MonoBehaviour:
       Data: "\u677F\u70E7\u742A\u9732\u8BFA"
     - Name: point
       Entry: 3
-      Data: 2
+      Data: 9
     - Name: Rank
       Entry: 3
       Data: 1
@@ -134,7 +134,7 @@ MonoBehaviour:
       Data: 
     - Name: describe
       Entry: 1
-      Data: "\u573A\u4E0A\u6BCF\u5B58\u5728\u4E00\u4E2A\u5996\u7CBE\u5355\u4F4D\u4FBF\u5BF9\u5BF9\u65B9\u573A\u4E0A\u9020\u62101\u70B9\u4F24\u5BB3\uFF0C\u8870\u90001"
+      Data: "\u6211\u65B9\u573A\u4E0A\u6BCF\u5B58\u5728\u4E00\u4E2A\u5996\u7CBE\u5355\u4F4D\u4E14\u81EA\u8EAB\u70B9\u6570\u5927\u4E8E1\u65F6\u4FBF\u5BF9\u5BF9\u65B9\u573A\u4E0A\u9020\u6210\u4E00\u6B211\u70B9\u4F24\u5BB3\uFF0C\u8870\u90001"
     - Name: 
       Entry: 8
       Data: 
@@ -156,7 +156,7 @@ MonoBehaviour:
       Data: "\u5927\u5996\u7CBE"
     - Name: point
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: Rank
       Entry: 3
       Data: 2
@@ -199,7 +199,7 @@ MonoBehaviour:
       Data: "\u6851\u5C3C*\u7F2A\u514B"
     - Name: point
       Entry: 3
-      Data: 9
+      Data: 4
     - Name: Rank
       Entry: 3
       Data: 2
@@ -242,7 +242,7 @@ MonoBehaviour:
       Data: "\u9732\u5A1C"
     - Name: point
       Entry: 3
-      Data: 8
+      Data: 7
     - Name: Rank
       Entry: 3
       Data: 2
@@ -328,7 +328,7 @@ MonoBehaviour:
       Data: "\u4E09\u6708\u7CBE*\u65E5"
     - Name: point
       Entry: 3
-      Data: 8
+      Data: 3
     - Name: Rank
       Entry: 3
       Data: 3
@@ -349,7 +349,7 @@ MonoBehaviour:
       Data: 
     - Name: describe
       Entry: 1
-      Data: "\u53EC\u5524\u6708\uFF0C\u661F\uFF0C\u6D3B\u529B\uFF081\uFF09"
+      Data: "\u53EC\u5524\u6708\uFF0C\u661F\uFF0C\u6D3B\u529B\uFF08{x}\uFF09"
     - Name: 
       Entry: 8
       Data: 
@@ -392,7 +392,7 @@ MonoBehaviour:
       Data: 
     - Name: describe
       Entry: 1
-      Data: "\u53EC\u5524\u65E5\uFF0C\u661F\uFF0C\u6D3B\u529B\uFF081\uFF09"
+      Data: "\u53EC\u5524\u65E5\uFF0C\u661F\uFF0C\u6D3B\u529B\uFF08{x}\uFF09"
     - Name: 
       Entry: 8
       Data: 
@@ -435,7 +435,7 @@ MonoBehaviour:
       Data: 
     - Name: describe
       Entry: 1
-      Data: "\u53EC\u5524\u65E5\uFF0C\u6708\uFF0C\u6D3B\u529B\uFF081\uFF09"
+      Data: "\u53EC\u5524\u65E5\uFF0C\u6708\uFF0C\u6D3B\u529B\uFF08{x}\uFF09"
     - Name: 
       Entry: 8
       Data: 
@@ -500,7 +500,7 @@ MonoBehaviour:
       Data: "\u8389\u8389\u767D"
     - Name: point
       Entry: 3
-      Data: 22
+      Data: 6
     - Name: Rank
       Entry: 3
       Data: 3
@@ -526,248 +526,24 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rankLibraries
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 3
-    - Name: 
-      Entry: 7
-      Data: 16|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+      Data: 15|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
       Data: 11
-    - Name: rank
-      Entry: 3
-      Data: 1
-    - Name: cardModelInfos
-      Entry: 7
-      Data: 17|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 9
-      Data: 5
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 18|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
-        Assembly-CSharp
-    - Name: icon
-      Entry: 10
-      Data: 12
-    - Name: rank
-      Entry: 3
-      Data: 2
-    - Name: cardModelInfos
-      Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 4
-    - Name: 
-      Entry: 9
-      Data: 6
-    - Name: 
-      Entry: 9
-      Data: 7
-    - Name: 
-      Entry: 9
-      Data: 8
-    - Name: 
-      Entry: 9
-      Data: 9
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 20|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
-        Assembly-CSharp
-    - Name: icon
-      Entry: 10
-      Data: 13
-    - Name: rank
-      Entry: 3
-      Data: 3
-    - Name: cardModelInfos
-      Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 5
-    - Name: 
-      Entry: 9
-      Data: 10
-    - Name: 
-      Entry: 9
-      Data: 11
-    - Name: 
-      Entry: 9
-      Data: 12
-    - Name: 
-      Entry: 9
-      Data: 13
-    - Name: 
-      Entry: 9
-      Data: 14
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: cardModelInfos
-      Entry: 7
-      Data: 22|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 10
-    - Name: 
-      Entry: 9
-      Data: 5
-    - Name: 
-      Entry: 9
-      Data: 6
-    - Name: 
-      Entry: 9
-      Data: 7
-    - Name: 
-      Entry: 9
-      Data: 8
-    - Name: 
-      Entry: 9
-      Data: 9
-    - Name: 
-      Entry: 9
-      Data: 10
-    - Name: 
-      Entry: 9
-      Data: 11
-    - Name: 
-      Entry: 9
-      Data: 12
-    - Name: 
-      Entry: 9
-      Data: 13
-    - Name: 
-      Entry: 9
-      Data: 14
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 23|Info.CardInspector.CardLibraryInfo+LevelLibrary, Assembly-CSharp
-    - Name: level
-      Entry: 1
-      Data: 0-1
-    - Name: sectarianCardLibraries
-      Entry: 7
-      Data: 24|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 25|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary,
-        Assembly-CSharp
-    - Name: icon
-      Entry: 10
-      Data: 0
-    - Name: cardNum
-      Entry: 3
-      Data: 0
-    - Name: cardIcon
-      Entry: 6
-      Data: 
-    - Name: sectarian
-      Entry: 3
-      Data: 0
-    - Name: cardName
-      Entry: 6
-      Data: 
-    - Name: point
-      Entry: 3
-      Data: 0
-    - Name: cardModelInfos
-      Entry: 7
-      Data: 26|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 5
-    - Name: 
-      Entry: 7
-      Data: 27|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp
-    - Name: icon
-      Entry: 10
-      Data: 14
     - Name: cardId
       Entry: 3
       Data: 10011
     - Name: level
       Entry: 1
-      Data: 0-1
+      Data: 0-0
     - Name: cardName
       Entry: 1
       Data: "\u7F8E\u56FD\u5C0F\u5996\u7CBE"
     - Name: point
       Entry: 3
-      Data: 2
+      Data: 6
     - Name: Rank
       Entry: 3
       Data: 3
@@ -794,17 +570,17 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 28|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 16|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 15
+      Data: 12
     - Name: cardId
       Entry: 3
       Data: 10012
     - Name: level
       Entry: 1
-      Data: 0-1
+      Data: 0-0
     - Name: cardName
       Entry: 1
       Data: "\u9F13\u821E\u5C0F\u5996\u7CBE"
@@ -819,7 +595,7 @@ MonoBehaviour:
       Data: 0
     - Name: cardProperty
       Entry: 3
-      Data: 4
+      Data: 0
     - Name: cardTerritory
       Entry: 3
       Data: 0
@@ -837,23 +613,23 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 29|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 17|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 16
+      Data: 13
     - Name: cardId
       Entry: 3
       Data: 10013
     - Name: level
       Entry: 1
-      Data: 0-1
+      Data: 0-0
     - Name: cardName
       Entry: 1
       Data: "\u6218\u7565\u8F6C\u79FB"
     - Name: point
       Entry: 3
-      Data: 2
+      Data: 0
     - Name: Rank
       Entry: 3
       Data: 4
@@ -880,23 +656,23 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 30|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 18|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 17
+      Data: 14
     - Name: cardId
       Entry: 3
       Data: 10014
     - Name: level
       Entry: 1
-      Data: 0-1
+      Data: 0-0
     - Name: cardName
       Entry: 1
       Data: "\u5F31\u5C0F\u5996\u7CBE"
     - Name: point
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: Rank
       Entry: 3
       Data: 4
@@ -923,17 +699,17 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 31|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 19|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 18
+      Data: 15
     - Name: cardId
       Entry: 3
       Data: 10015
     - Name: level
       Entry: 1
-      Data: 0-1
+      Data: 0-0
     - Name: cardName
       Entry: 1
       Data: "\u72C2\u5984\u5C0F\u5996\u7CBE"
@@ -965,192 +741,24 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rankLibraries
       Entry: 7
-      Data: 32|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 33|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+      Data: 20|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 13
-    - Name: rank
-      Entry: 3
-      Data: 3
-    - Name: cardModelInfos
-      Entry: 7
-      Data: 34|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 9
-      Data: 27
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 35|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
-        Assembly-CSharp
-    - Name: icon
-      Entry: 10
-      Data: 19
-    - Name: rank
-      Entry: 3
-      Data: 4
-    - Name: cardModelInfos
-      Entry: 7
-      Data: 36|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 4
-    - Name: 
-      Entry: 9
-      Data: 28
-    - Name: 
-      Entry: 9
-      Data: 29
-    - Name: 
-      Entry: 9
-      Data: 30
-    - Name: 
-      Entry: 9
-      Data: 31
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: cardModelInfos
-      Entry: 7
-      Data: 37|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 5
-    - Name: 
-      Entry: 9
-      Data: 27
-    - Name: 
-      Entry: 9
-      Data: 28
-    - Name: 
-      Entry: 9
-      Data: 29
-    - Name: 
-      Entry: 9
-      Data: 30
-    - Name: 
-      Entry: 9
-      Data: 31
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 38|Info.CardInspector.CardLibraryInfo+LevelLibrary, Assembly-CSharp
-    - Name: level
-      Entry: 1
-      Data: "1\u67081\u65E5"
-    - Name: sectarianCardLibraries
-      Entry: 7
-      Data: 39|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 40|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary,
-        Assembly-CSharp
-    - Name: icon
-      Entry: 10
-      Data: 0
-    - Name: cardNum
-      Entry: 3
-      Data: 0
-    - Name: cardIcon
-      Entry: 6
-      Data: 
-    - Name: sectarian
-      Entry: 3
-      Data: 0
-    - Name: cardName
-      Entry: 6
-      Data: 
-    - Name: point
-      Entry: 3
-      Data: 0
-    - Name: cardModelInfos
-      Entry: 7
-      Data: 41|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 42|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp
-    - Name: icon
-      Entry: 10
-      Data: 20
+      Data: 16
     - Name: cardId
       Entry: 3
       Data: 10016
     - Name: level
       Entry: 1
-      Data: "1\u67081\u65E5"
+      Data: 0-0
     - Name: cardName
       Entry: 1
       Data: "\u5996\u7CBE\u7684\u590D\u751F"
     - Name: point
       Entry: 3
-      Data: 2
+      Data: 0
     - Name: Rank
       Entry: 3
       Data: 4
@@ -1165,7 +773,7 @@ MonoBehaviour:
       Data: 0
     - Name: cardTag
       Entry: 1
-      Data: "\u5996\u7CBE \u7269\u4F53"
+      Data: "\u7269\u4F53"
     - Name: introduction
       Entry: 1
       Data: 
@@ -1183,31 +791,154 @@ MonoBehaviour:
       Data: 
     - Name: rankLibraries
       Entry: 7
-      Data: 43|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+      Data: 21|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 22|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+        Assembly-CSharp
+    - Name: icon
+      Entry: 10
+      Data: 17
+    - Name: rank
+      Entry: 3
+      Data: 1
+    - Name: cardModelInfos
+      Entry: 7
+      Data: 23|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
+      Entry: 9
+      Data: 5
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 7
-      Data: 44|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+      Data: 24|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+        Assembly-CSharp
+    - Name: icon
+      Entry: 10
+      Data: 18
+    - Name: rank
+      Entry: 3
+      Data: 2
+    - Name: cardModelInfos
+      Entry: 7
+      Data: 25|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 9
+      Data: 8
+    - Name: 
+      Entry: 9
+      Data: 9
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 26|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
         Assembly-CSharp
     - Name: icon
       Entry: 10
       Data: 19
     - Name: rank
       Entry: 3
+      Data: 3
+    - Name: cardModelInfos
+      Entry: 7
+      Data: 27|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 10
+    - Name: 
+      Entry: 9
+      Data: 11
+    - Name: 
+      Entry: 9
+      Data: 12
+    - Name: 
+      Entry: 9
+      Data: 13
+    - Name: 
+      Entry: 9
+      Data: 14
+    - Name: 
+      Entry: 9
+      Data: 15
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 28|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+        Assembly-CSharp
+    - Name: icon
+      Entry: 10
+      Data: 20
+    - Name: rank
+      Entry: 3
       Data: 4
     - Name: cardModelInfos
       Entry: 7
-      Data: 45|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 29|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 5
     - Name: 
       Entry: 9
-      Data: 42
+      Data: 16
+    - Name: 
+      Entry: 9
+      Data: 17
+    - Name: 
+      Entry: 9
+      Data: 18
+    - Name: 
+      Entry: 9
+      Data: 19
+    - Name: 
+      Entry: 9
+      Data: 20
     - Name: 
       Entry: 13
       Data: 
@@ -1234,14 +965,59 @@ MonoBehaviour:
       Data: 
     - Name: cardModelInfos
       Entry: 7
-      Data: 46|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 30|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 16
     - Name: 
       Entry: 9
-      Data: 42
+      Data: 5
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 9
+      Data: 8
+    - Name: 
+      Entry: 9
+      Data: 9
+    - Name: 
+      Entry: 9
+      Data: 10
+    - Name: 
+      Entry: 9
+      Data: 11
+    - Name: 
+      Entry: 9
+      Data: 12
+    - Name: 
+      Entry: 9
+      Data: 13
+    - Name: 
+      Entry: 9
+      Data: 14
+    - Name: 
+      Entry: 9
+      Data: 15
+    - Name: 
+      Entry: 9
+      Data: 16
+    - Name: 
+      Entry: 9
+      Data: 17
+    - Name: 
+      Entry: 9
+      Data: 18
+    - Name: 
+      Entry: 9
+      Data: 19
+    - Name: 
+      Entry: 9
+      Data: 20
     - Name: 
       Entry: 13
       Data: 
@@ -1253,20 +1029,20 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 47|Info.CardInspector.CardLibraryInfo+LevelLibrary, Assembly-CSharp
+      Data: 31|Info.CardInspector.CardLibraryInfo+LevelLibrary, Assembly-CSharp
     - Name: level
       Entry: 1
       Data: "\u591A\u4EBA"
     - Name: sectarianCardLibraries
       Entry: 7
-      Data: 48|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary,
+      Data: 32|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 49|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary,
+      Data: 33|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary,
         Assembly-CSharp
     - Name: icon
       Entry: 10
@@ -1288,14 +1064,14 @@ MonoBehaviour:
       Data: 0
     - Name: cardModelInfos
       Entry: 7
-      Data: 50|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 34|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 16
     - Name: 
       Entry: 7
-      Data: 51|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 35|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
@@ -1338,7 +1114,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 52|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 36|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
@@ -1381,7 +1157,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 53|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 37|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
@@ -1424,7 +1200,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 54|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 38|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
@@ -1467,7 +1243,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 55|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 39|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
@@ -1510,7 +1286,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 56|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 40|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
@@ -1553,7 +1329,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 57|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 41|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
@@ -1596,7 +1372,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 58|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 42|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
@@ -1639,7 +1415,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 59|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 43|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
@@ -1682,7 +1458,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 60|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 44|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
@@ -1725,11 +1501,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 61|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 45|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 14
+      Data: 11
     - Name: cardId
       Entry: 3
       Data: 20011
@@ -1768,11 +1544,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 62|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 46|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 15
+      Data: 12
     - Name: cardId
       Entry: 3
       Data: 20012
@@ -1811,11 +1587,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 63|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 47|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 16
+      Data: 13
     - Name: cardId
       Entry: 3
       Data: 20013
@@ -1854,11 +1630,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 64|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 48|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 17
+      Data: 14
     - Name: cardId
       Entry: 3
       Data: 20014
@@ -1897,11 +1673,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 65|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 49|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 18
+      Data: 15
     - Name: cardId
       Entry: 3
       Data: 20015
@@ -1940,11 +1716,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 66|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 50|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 20
+      Data: 16
     - Name: cardId
       Entry: 3
       Data: 20016
@@ -1989,31 +1765,31 @@ MonoBehaviour:
       Data: 
     - Name: rankLibraries
       Entry: 7
-      Data: 67|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+      Data: 51|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 4
     - Name: 
       Entry: 7
-      Data: 68|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+      Data: 52|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 11
+      Data: 17
     - Name: rank
       Entry: 3
       Data: 1
     - Name: cardModelInfos
       Entry: 7
-      Data: 69|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 53|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 9
-      Data: 51
+      Data: 35
     - Name: 
       Entry: 13
       Data: 
@@ -2025,33 +1801,33 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 70|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+      Data: 54|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
         Assembly-CSharp
     - Name: icon
       Entry: 10
-      Data: 12
+      Data: 18
     - Name: rank
       Entry: 3
       Data: 2
     - Name: cardModelInfos
       Entry: 7
-      Data: 71|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 55|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 4
     - Name: 
       Entry: 9
-      Data: 52
+      Data: 36
     - Name: 
       Entry: 9
-      Data: 53
+      Data: 37
     - Name: 
       Entry: 9
-      Data: 54
+      Data: 38
     - Name: 
       Entry: 9
-      Data: 55
+      Data: 39
     - Name: 
       Entry: 13
       Data: 
@@ -2063,80 +1839,80 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 72|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
-        Assembly-CSharp
-    - Name: icon
-      Entry: 10
-      Data: 13
-    - Name: rank
-      Entry: 3
-      Data: 3
-    - Name: cardModelInfos
-      Entry: 7
-      Data: 73|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 6
-    - Name: 
-      Entry: 9
-      Data: 56
-    - Name: 
-      Entry: 9
-      Data: 57
-    - Name: 
-      Entry: 9
-      Data: 58
-    - Name: 
-      Entry: 9
-      Data: 59
-    - Name: 
-      Entry: 9
-      Data: 60
-    - Name: 
-      Entry: 9
-      Data: 61
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 74|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+      Data: 56|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
         Assembly-CSharp
     - Name: icon
       Entry: 10
       Data: 19
     - Name: rank
       Entry: 3
+      Data: 3
+    - Name: cardModelInfos
+      Entry: 7
+      Data: 57|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 40
+    - Name: 
+      Entry: 9
+      Data: 41
+    - Name: 
+      Entry: 9
+      Data: 42
+    - Name: 
+      Entry: 9
+      Data: 43
+    - Name: 
+      Entry: 9
+      Data: 44
+    - Name: 
+      Entry: 9
+      Data: 45
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 58|Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary,
+        Assembly-CSharp
+    - Name: icon
+      Entry: 10
+      Data: 20
+    - Name: rank
+      Entry: 3
       Data: 4
     - Name: cardModelInfos
       Entry: 7
-      Data: 75|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 59|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 5
     - Name: 
       Entry: 9
-      Data: 62
+      Data: 46
     - Name: 
       Entry: 9
-      Data: 63
+      Data: 47
     - Name: 
       Entry: 9
-      Data: 64
+      Data: 48
     - Name: 
       Entry: 9
-      Data: 65
+      Data: 49
     - Name: 
       Entry: 9
-      Data: 66
+      Data: 50
     - Name: 
       Entry: 13
       Data: 
@@ -2163,59 +1939,59 @@ MonoBehaviour:
       Data: 
     - Name: cardModelInfos
       Entry: 7
-      Data: 76|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
+      Data: 60|System.Collections.Generic.List`1[[Info.CardInspector.CardLibraryInfo+LevelLibrary+SectarianCardLibrary+RankLibrary+CardModelInfo,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 16
     - Name: 
       Entry: 9
-      Data: 51
+      Data: 35
     - Name: 
       Entry: 9
-      Data: 52
+      Data: 36
     - Name: 
       Entry: 9
-      Data: 53
+      Data: 37
     - Name: 
       Entry: 9
-      Data: 54
+      Data: 38
     - Name: 
       Entry: 9
-      Data: 55
+      Data: 39
     - Name: 
       Entry: 9
-      Data: 56
+      Data: 40
     - Name: 
       Entry: 9
-      Data: 57
+      Data: 41
     - Name: 
       Entry: 9
-      Data: 58
+      Data: 42
     - Name: 
       Entry: 9
-      Data: 59
+      Data: 43
     - Name: 
       Entry: 9
-      Data: 60
+      Data: 44
     - Name: 
       Entry: 9
-      Data: 61
+      Data: 45
     - Name: 
       Entry: 9
-      Data: 62
+      Data: 46
     - Name: 
       Entry: 9
-      Data: 63
+      Data: 47
     - Name: 
       Entry: 9
-      Data: 64
+      Data: 48
     - Name: 
       Entry: 9
-      Data: 65
+      Data: 49
     - Name: 
       Entry: 9
-      Data: 66
+      Data: 50
     - Name: 
       Entry: 13
       Data: 
@@ -2233,11 +2009,11 @@ MonoBehaviour:
       Data: 
     - Name: sectarianIcons
       Entry: 7
-      Data: 77|UnityEngine.Rendering.SerializedDictionary`2[[GameEnum.Sectarian,
+      Data: 61|UnityEngine.Rendering.SerializedDictionary`2[[GameEnum.Sectarian,
         Assembly-CSharp],[UnityEngine.Texture2D, UnityEngine.CoreModule]], Unity.RenderPipelines.Core.Runtime
     - Name: comparer
       Entry: 7
-      Data: 78|System.Collections.Generic.EnumEqualityComparer`1[[GameEnum.Sectarian,
+      Data: 62|System.Collections.Generic.EnumEqualityComparer`1[[GameEnum.Sectarian,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -2319,11 +2095,11 @@ MonoBehaviour:
       Data: 
     - Name: rankIcons
       Entry: 7
-      Data: 79|System.Collections.Generic.Dictionary`2[[GameEnum.CardRank, Assembly-CSharp],[UnityEngine.Texture2D,
+      Data: 63|System.Collections.Generic.Dictionary`2[[GameEnum.CardRank, Assembly-CSharp],[UnityEngine.Texture2D,
         UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 80|System.Collections.Generic.EnumEqualityComparer`1[[GameEnum.CardRank,
+      Data: 64|System.Collections.Generic.EnumEqualityComparer`1[[GameEnum.CardRank,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -2345,7 +2121,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 10
-      Data: 11
+      Data: 17
     - Name: 
       Entry: 8
       Data: 
@@ -2357,7 +2133,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 10
-      Data: 12
+      Data: 18
     - Name: 
       Entry: 8
       Data: 
@@ -2369,7 +2145,7 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 10
-      Data: 13
+      Data: 19
     - Name: 
       Entry: 8
       Data: 
@@ -2381,7 +2157,7 @@ MonoBehaviour:
       Data: 4
     - Name: $v
       Entry: 10
-      Data: 19
+      Data: 20
     - Name: 
       Entry: 8
       Data: 
@@ -2396,19 +2172,19 @@ MonoBehaviour:
     cardId: 10001
     level: 0-0
     cardName: "\u677F\u70E7\u742A\u9732\u8BFA"
-    point: 2
+    point: 9
     Rank: 1
     sectarian: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
     introduction: 
-    describe: "\u573A\u4E0A\u6BCF\u5B58\u5728\u4E00\u4E2A\u5996\u7CBE\u5355\u4F4D\u4FBF\u5BF9\u5BF9\u65B9\u573A\u4E0A\u9020\u62101\u70B9\u4F24\u5BB3\uFF0C\u8870\u90001"
+    describe: "\u6211\u65B9\u573A\u4E0A\u6BCF\u5B58\u5728\u4E00\u4E2A\u5996\u7CBE\u5355\u4F4D\u4E14\u81EA\u8EAB\u70B9\u6570\u5927\u4E8E1\u65F6\u4FBF\u5BF9\u5BF9\u65B9\u573A\u4E0A\u9020\u6210\u4E00\u6B211\u70B9\u4F24\u5BB3\uFF0C\u8870\u90001"
   - icon: {fileID: 2800000, guid: bc9935e38df1b43459a9877ff6288742, type: 3}
     cardId: 10002
     level: 0-0
     cardName: "\u5927\u5996\u7CBE"
-    point: 1
+    point: 2
     Rank: 2
     sectarian: 0
     cardProperty: 2
@@ -2420,7 +2196,7 @@ MonoBehaviour:
     cardId: 10003
     level: 0-0
     cardName: "\u6851\u5C3C*\u7F2A\u514B"
-    point: 9
+    point: 4
     Rank: 2
     sectarian: 0
     cardProperty: 1
@@ -2432,7 +2208,7 @@ MonoBehaviour:
     cardId: 10004
     level: 0-0
     cardName: "\u9732\u5A1C"
-    point: 8
+    point: 7
     Rank: 2
     sectarian: 0
     cardProperty: 2
@@ -2456,14 +2232,14 @@ MonoBehaviour:
     cardId: 10006
     level: 0-0
     cardName: "\u4E09\u6708\u7CBE*\u65E5"
-    point: 8
+    point: 3
     Rank: 3
     sectarian: 0
     cardProperty: 1
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
     introduction: 
-    describe: "\u53EC\u5524\u6708\uFF0C\u661F\uFF0C\u6D3B\u529B\uFF081\uFF09"
+    describe: "\u53EC\u5524\u6708\uFF0C\u661F\uFF0C\u6D3B\u529B\uFF08{x}\uFF09"
   - icon: {fileID: 2800000, guid: d5d7efc4b9e60aa4b8c71c485525f824, type: 3}
     cardId: 10007
     level: 0-0
@@ -2475,7 +2251,7 @@ MonoBehaviour:
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
     introduction: 
-    describe: "\u53EC\u5524\u65E5\uFF0C\u661F\uFF0C\u6D3B\u529B\uFF081\uFF09"
+    describe: "\u53EC\u5524\u65E5\uFF0C\u661F\uFF0C\u6D3B\u529B\uFF08{x}\uFF09"
   - icon: {fileID: 2800000, guid: f7a4df42a218fc344b92903babb445d3, type: 3}
     cardId: 10008
     level: 0-0
@@ -2487,7 +2263,7 @@ MonoBehaviour:
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
     introduction: 
-    describe: "\u53EC\u5524\u65E5\uFF0C\u6708\uFF0C\u6D3B\u529B\uFF081\uFF09"
+    describe: "\u53EC\u5524\u65E5\uFF0C\u6708\uFF0C\u6D3B\u529B\uFF08{x}\uFF09"
   - icon: {fileID: 2800000, guid: adb3fdc43825cf34088182aeff86debb, type: 3}
     cardId: 10009
     level: 0-0
@@ -2504,7 +2280,7 @@ MonoBehaviour:
     cardId: 10010
     level: 0-0
     cardName: "\u8389\u8389\u767D"
-    point: 22
+    point: 6
     Rank: 3
     sectarian: 0
     cardProperty: 0
@@ -2514,9 +2290,9 @@ MonoBehaviour:
     describe: "\u6C38\u4E45\u5F3A\u5316\u6240\u6709\u5996\u7CBE\u724C\u7684\u6D3B\u529B\u70B9\u65701"
   - icon: {fileID: 2800000, guid: d7830024a45bb914080acc73e7f971b9, type: 3}
     cardId: 10011
-    level: 0-1
+    level: 0-0
     cardName: "\u7F8E\u56FD\u5C0F\u5996\u7CBE"
-    point: 2
+    point: 6
     Rank: 3
     sectarian: 0
     cardProperty: 0
@@ -2526,21 +2302,21 @@ MonoBehaviour:
     describe: "\u7FFB\u500D\u4E24\u4E2A\u5996\u7CBE\u5355\u4F4D\u7684\u6D3B\u529B\u503C"
   - icon: {fileID: 2800000, guid: 7b0a55f7976988d44aeda1981ce595ce, type: 3}
     cardId: 10012
-    level: 0-1
+    level: 0-0
     cardName: "\u9F13\u821E\u5C0F\u5996\u7CBE"
     point: 2
     Rank: 4
     sectarian: 0
-    cardProperty: 4
+    cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
     introduction: 
     describe: "\u6CBB\u6108\u4E00\u4E2A\u5996\u7CBE\u5355\u4F4D\uFF0C\u6D3B\u529B2"
   - icon: {fileID: 2800000, guid: a0dd64c89f835c2409dcd8b8507e1ad4, type: 3}
     cardId: 10013
-    level: 0-1
+    level: 0-0
     cardName: "\u6218\u7565\u8F6C\u79FB"
-    point: 2
+    point: 0
     Rank: 4
     sectarian: 0
     cardProperty: 0
@@ -2550,9 +2326,9 @@ MonoBehaviour:
     describe: "\u91CD\u65B0\u6253\u51FA\u4E00\u5F20\u5996\u7CBE\u5355\u4F4D"
   - icon: {fileID: 2800000, guid: 2478b06134676534398def56aaf52edd, type: 3}
     cardId: 10014
-    level: 0-1
+    level: 0-0
     cardName: "\u5F31\u5C0F\u5996\u7CBE"
-    point: 2
+    point: 1
     Rank: 4
     sectarian: 0
     cardProperty: 0
@@ -2562,7 +2338,7 @@ MonoBehaviour:
     describe: "\u4ECE\u5361\u7EC4\u4E2D\u968F\u673A\u6253\u51FA\u4E00\u5F20\u70B9\u6570\u6700\u4F4E\u7684\u5996\u7CBE\u5355\u4F4D\uFF0C\u6D3B\u529B\uFF081\uFF09"
   - icon: {fileID: 2800000, guid: cc833378deb9a504f94395f56bf5596b, type: 3}
     cardId: 10015
-    level: 0-1
+    level: 0-0
     cardName: "\u72C2\u5984\u5C0F\u5996\u7CBE"
     point: 2
     Rank: 4
@@ -2574,14 +2350,14 @@ MonoBehaviour:
     describe: "\u5BF9\u5BF9\u65B9\u968F\u673A\u4E00\u4E2A\u70B9\u6570\u6700\u5927\u7684\u5355\u4F4D\u9020\u62101\u70B9\u4F24\u5BB3\uFF0C\u91CD\u590D1+x\u6B21\uFF0Cx\u4E3A\u4E24\u4FA7\u5355\u4F4D\u7684\u6D3B\u529B\u503C\u603B\u548C"
   - icon: {fileID: 2800000, guid: 586f0656a7e8a294396feeb3acbdbf43, type: 3}
     cardId: 10016
-    level: "1\u67081\u65E5"
+    level: 0-0
     cardName: "\u5996\u7CBE\u7684\u590D\u751F"
-    point: 2
+    point: 0
     Rank: 4
     sectarian: 0
     cardProperty: 0
     cardTerritory: 0
-    cardTag: "\u5996\u7CBE \u7269\u4F53"
+    cardTag: "\u7269\u4F53"
     introduction: 
     describe: "\u590D\u6D3B\u4E00\u4E2A\u94DC\u8272\u5996\u7CBE\u5355\u4F4D"
   multiModeCards:

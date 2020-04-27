@@ -10,18 +10,18 @@ namespace Control
     public class CardControl : MonoBehaviour
     {
         int gap_step = 0;
-        Card ThisCard => GetComponent<Card>();
+        Card thisCard => GetComponent<Card>();
         GameObject gap => transform.GetChild(1).gameObject;
         Material gapMaterial => gap.GetComponent<Renderer>().material;
         Material cardMaterial => GetComponent<Renderer>().material;
         private void OnMouseEnter()
         {
-            PlayerFocusCard = ThisCard;
-            Command.Network.NetCommand.AsyncInfo(NetAcyncType.FocusCard);
+            PlayerFocusCard = thisCard;
+            NetCommand.AsyncInfo(NetAcyncType.FocusCard);
         }
         private void OnMouseExit()
         {
-            if (PlayerFocusCard == ThisCard)
+            if (PlayerFocusCard == thisCard)
             {
                 PlayerFocusCard = null;
                 NetCommand.AsyncInfo(NetAcyncType.FocusCard);
@@ -29,9 +29,9 @@ namespace Control
         }
         private void OnMouseDown()
         {
-            if (ThisCard.isPrepareToPlay)
+            if (thisCard.isPrepareToPlay)
             {
-                PlayerPlayCard = ThisCard;
+                PlayerPlayCard = thisCard;
             }
             //Command.EffectCommand.TheWorldPlay(GetComponent<Card>());
         }
@@ -44,7 +44,7 @@ namespace Control
                 if (PlayerFocusRegion != null && PlayerFocusRegion.name == "下方_墓地")
                 {
                     //print(name + "进入墓地");
-                    _ = Command.CardCommand.DisCard(ThisCard);
+                    _ = Command.CardCommand.DisCard(thisCard);
                 }
                 else if (PlayerFocusRegion != null && (PlayerFocusRegion.name == "下方_领袖" || PlayerFocusRegion.name == "下方_手牌"))
                 {

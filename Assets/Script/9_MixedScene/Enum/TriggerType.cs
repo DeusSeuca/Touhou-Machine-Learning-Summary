@@ -5,6 +5,7 @@
     Deploy,
     Discard,
     Dead,
+    Revive,
     Banish,
     Summon,
 
@@ -14,12 +15,13 @@
     Reset,
     Destory,
     Strengthen,
-    Impair,
+    Weak,
 
     Seal,//封印
     Close,//自闭
     Scout,//侦查
 
+    FieldChange,//当字段值改变
 
     SelectUnite,
 

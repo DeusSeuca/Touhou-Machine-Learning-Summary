@@ -141,7 +141,7 @@ namespace Command
                 Info.GameUI.UiInfo.isNoticeBoardShow = false;
             }
             public void CardBoardClose() => Info.AgainstInfo.IsSelectCardOver = true;
-            public static void SetCardBoardMode(CardBoardMode CardBoardMode) => Info.AgainstInfo.CardBoardMode = CardBoardMode;
+            //public static void SetCardBoardMode(CardBoardMode CardBoardMode) => Info.AgainstInfo.CardBoardMode = CardBoardMode;
             public static void SetCurrentPass()
             {
                 MainThread.Run(() =>

@@ -15,7 +15,7 @@ namespace CardSpace
         {
             base.Init();
 
-            cardEffect[TriggerTime.When][TriggerType.Play] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.Play] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
@@ -24,7 +24,7 @@ namespace CardSpace
                     Debug.LogError("10002打出效果触发完毕！");
                 }
             };
-            cardEffect[TriggerTime.When][TriggerType.Deploy] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.Deploy] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
@@ -54,13 +54,7 @@ namespace CardSpace
                 //}
             };
         }
-        private void OnMouseDown()
-        {
-            //GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this, this)).GetAwaiter().GetResult();
-
-        }
     }
-
 }
 //await Task.Delay(300);
 ////EffectCommand.TheWorldPlay(this);

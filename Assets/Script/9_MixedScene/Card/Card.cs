@@ -68,10 +68,13 @@ namespace CardModel
 
         public Text PointText => transform.GetChild(0).GetChild(0).GetComponent<Text>();
         public string CardName => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).cardName;
-        public string CardIntroduction => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).describe;
+        //卡牌描述中可能会发生变化的值
+        public int replaceDescribeValue = 0;
+        [ShowInInspector]
+        public string CardIntroduction => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).describe.Replace("{x}", replaceDescribeValue.ToString());
 
 
-        public Dictionary<TriggerTime, Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>> cardEffect = new Dictionary<TriggerTime, Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>>();
+        public Dictionary<TriggerTime, Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>> cardAbility = new Dictionary<TriggerTime, Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>>();
 
         private void Update() => RefreshCardUi();
 
@@ -97,27 +100,27 @@ namespace CardModel
 
             foreach (TriggerTime tirggerTime in Enum.GetValues(typeof(TriggerTime)))
             {
-                cardEffect[tirggerTime] = new Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>();
+                cardAbility[tirggerTime] = new Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>();
                 foreach (TriggerType triggerType in Enum.GetValues(typeof(TriggerType)))
                 {
-                    cardEffect[tirggerTime][triggerType] = new List<Func<TriggerInfo, Task>>();
+                    cardAbility[tirggerTime][triggerType] = new List<Func<TriggerInfo, Task>>();
                 }
             }
-            cardEffect[TriggerTime.When][TriggerType.Gain] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.Gain] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
                     await Command.CardCommand.Gain(triggerInfo);
                 }
             };
-            cardEffect[TriggerTime.When][TriggerType.Hurt] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.Hurt] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
                     await Command.CardCommand.Hurt(triggerInfo);
                 }
             };
-            cardEffect[TriggerTime.When][TriggerType.Cure] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.Cure] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
@@ -125,7 +128,7 @@ namespace CardModel
                      await Command.CardCommand.Gain(triggerInfo);
                 }
             };
-            cardEffect[TriggerTime.When][TriggerType.SelectUnite] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.SelectUnite] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
@@ -146,48 +149,60 @@ namespace CardModel
             //     }
             //    }
             //};
-            cardEffect[TriggerTime.When][TriggerType.Banish] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.Banish] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
                   await Command.CardCommand.BanishCard(this);
                 }
             };
-            cardEffect[TriggerTime.When][TriggerType.Summon] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.Summon] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
                   await Command.CardCommand.SummonCard(this);
                 }
             };
-            //卡牌状态变化时效果
-            cardEffect[TriggerTime.When][TriggerType.Seal] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.Revive] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
-                  await Command.CardCommand.SealCard(this);
+                  await Command.CardCommand.ReviveCard(triggerInfo);
+                  //await Command.CardCommand.PlayCard(this);
+                }
+            };
+
+            //卡牌状态变化时效果
+            cardAbility[TriggerTime.When][TriggerType.Seal] = new List<Func<TriggerInfo, Task>>()
+            {
+#pragma warning disable CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
+                async (triggerInfo) =>
+#pragma warning restore CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
+                {
+                    cardStates[CardState.Seal] = true;
+                  //await Command.CardCommand.SealCard(this);
                 }
             };
             //登记卡牌回合状态变化时效果
-            cardEffect[TriggerTime.When][TriggerType.TurnEnd] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.TurnEnd] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
                     //我死啦
                     if (showPoint==0&&AgainstInfo.cardSet[RegionTypes.Battle].CardList.Contains(this))
                     {
-                        await Command.CardCommand.RemoveFromBattle(this);
+                        await Command.CardCommand.MoveToGrave(this);
                     }
                 }
             };
-            cardEffect[TriggerTime.When][TriggerType.RoundEnd] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.RoundEnd] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
                     if (AgainstInfo.cardSet[RegionTypes.Battle].CardList.Contains(this))
                     {
                         Debug.Log("移除啦");
-                        await Command.CardCommand.RemoveFromBattle(this);
+                        await Command.CardCommand.MoveToGrave(this);
                     }
                 }
             };

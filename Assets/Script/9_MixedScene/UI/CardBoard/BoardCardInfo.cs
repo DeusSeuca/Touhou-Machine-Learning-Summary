@@ -7,13 +7,13 @@ namespace GameUI
         public int Rank;
         public void OnMouseClick()
         {
-            if (Info.AgainstInfo.SelectBoardCardIds.Contains(Rank))
+            if (Info.AgainstInfo.selectBoardCardRanks.Contains(Rank))
             {
-                Info.AgainstInfo.SelectBoardCardIds.Remove(Rank);
+                Info.AgainstInfo.selectBoardCardRanks.Remove(Rank);
             }
             else
             {
-                Info.AgainstInfo.SelectBoardCardIds.Add(Rank);
+                Info.AgainstInfo.selectBoardCardRanks.Add(Rank);
             }
         }
     }

@@ -13,7 +13,7 @@ namespace CardSpace
         {
             base.Init();
 
-            cardEffect[TriggerTime.When][TriggerType.Play] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.Play] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
@@ -21,11 +21,15 @@ namespace CardSpace
                     await GameSystem.TransSystem.DeployCard(TriggerInfo.Build(this,this));
                 }
             };
-            cardEffect[TriggerTime.When][TriggerType.Deploy] = new List<Func<TriggerInfo, Task>>()
+            cardAbility[TriggerTime.When][TriggerType.Deploy] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>
                 {
-                    await GameSystem.PointSystem.Cure(TriggerInfo.Build(this,this));
+                    for (int i = 0; i < twoSideVitality+1; i++)
+                    {
+                        await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardFeature.Largest].CardList,1,true);
+                        await GameSystem.PointSystem.Hurt(new TriggerInfo(this,SelectUnits,1));
+                    }
                 }
             };
         }

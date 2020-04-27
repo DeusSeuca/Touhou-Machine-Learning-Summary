@@ -21,7 +21,7 @@ namespace GameSystem
         public static async Task Reset(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Reset]);
         public static async Task Destory(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Destory]);
         public static async Task Strengthen(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Strengthen]);
-        public static async Task Impair(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Impair]);
+        public static async Task Weak(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Weak]);
 
     }
     /// <summary>
@@ -30,15 +30,25 @@ namespace GameSystem
     public class TransSystem
     {
         public static async Task DrawCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Draw]);
-        public static async Task PlayCard(TriggerInfo triggerInfo)
+        public static async Task PlayCard(TriggerInfo triggerInfo, bool isAnsy=true)
         {
-            await Command.CardCommand.PlayCard(triggerInfo.targetCard);
+            await Command.CardCommand.PlayCard(triggerInfo.targetCard, isAnsy);
             await TriggerLogic(triggerInfo[TriggerType.Play]);
         }
-        public static async Task RecycleCard(List<Card> card)
+        public static async Task RecycleCard(TriggerInfo triggerInfo)
         {
 
         }
+        public static async Task ReviveCard(TriggerInfo triggerInfo)
+        {
+            await TriggerLogic(triggerInfo[TriggerType.Revive]);
+        }
+        public static async Task MoveToGrave(TriggerInfo triggerInfo)
+        {
+            await Task.Delay(500);
+            await Command.CardCommand.MoveToGrave(triggerInfo.targetCard);
+        }
+
         public static async Task DeployCard(TriggerInfo triggerInfo)
         {
             //部署效果特殊处理，先部署再触发部署效果
@@ -54,21 +64,37 @@ namespace GameSystem
     }
     public class StateSystem
     {
-        public static async Task SealCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Banish]);
-        public static async Task CloseCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Banish]);
-        public static async Task ScoutCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Banish]);
+        public static async Task SealCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Seal]);
+        public static async Task CloseCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Close]);
+        public static async Task ScoutCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Scout]);
     }
     public class FieldSystem
     {
         //直接改变，不触发机制
+#pragma warning disable CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
         public static async Task Increase(TriggerInfo triggerInfo, CardField cardField)
+#pragma warning restore CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
         {
             foreach (var targetCard in triggerInfo.targetCards)
             {
-                if (targetCard[cardField]!=0)
+
+                if (targetCard[cardField] != 0)
                 {
                     targetCard[cardField]++;
                 }
+            }
+        }
+        //临时方案
+        public static async Task Change(TriggerInfo triggerInfo)
+        {
+            foreach (var targetCard in triggerInfo.targetCards)
+            {
+                await TriggerLogic(triggerInfo[targetCard][TriggerType.FieldChange]);
+                //if (targetCard[cardField] != 0)
+                //{
+                //    targetCard[cardField]=triggerInfo.point;
+                //    targetCard.replaceDescribeValue = triggerInfo.point;
+                //}
             }
         }
     }
@@ -80,7 +106,21 @@ namespace GameSystem
         public static async Task SelectUnite(Card card, List<Card> targetCards, int num, bool isAuto = false) => await Command.StateCommand.WaitForSelecUnit(card, targetCards, num, isAuto);
         // public static async Task SelectUnite(Card card, List<Card> targetCards, int num, bool isAuto = false) => await TriggerLogic(TriggerInfo.Build(card, card, 0, card, targetCards, num, false)[TriggerType.SelectUnite]);
         public static async Task SelectLocation(Card card) => await Command.StateCommand.WaitForSelectLocation(card);
+        public static async Task SelectBoardCard(List<Card> cards, CardBoardMode Mode = CardBoardMode.Select, int num = 1)
+        {
+            if (Mode == GameEnum.CardBoardMode.Select)
+            {
+                await Command.StateCommand.WaitForSelectBoardCard(cards, isMyTurn ? CardBoardMode.Select : CardBoardMode.ShowOnly, num);
+            }
+            else
+            {
+                await Command.StateCommand.WaitForSelectBoardCard(cards, Mode, num);
+            }
+        }
+
+        public static async Task SelectBoardCard(List<int> cardIDs) => await Command.StateCommand.WaitForSelectBoardCard(cardIDs);
     }
+    //由系统触发的状态机制
     public class ProcessSystem
     {
         public static async Task WhenTurnStart() => await TriggerLogic(TriggerInfo.Build(null, targetCard: null)[TriggerType.TurnStart]);
