@@ -39,7 +39,7 @@ namespace Command
         {
             AgainstInfo.cardSet[Orientation.Down][RegionTypes.Leader, RegionTypes.Hand].CardList.ForEach(card => card.isFree = isFree);
         }
-        public static void SetAllRegionSelectable(RegionTypes region, Territory territory = Territory.All)
+        public static void SetRegionSelectable(RegionTypes region, Territory territory = Territory.All)
         {
             if (region == RegionTypes.None)
             {

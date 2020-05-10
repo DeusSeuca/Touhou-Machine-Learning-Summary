@@ -132,7 +132,7 @@ namespace Info
                     [TabGroup("卡片管理")]
                     public List<CardModelInfo> cardModelInfos;
                     public List<RankLibrary> rankLibraries = new List<RankLibrary>();
-                    public List<CardRank> includeRank => cardModelInfos.Select(x => x.Rank).Distinct().ToList();
+                    public List<CardRank> includeRank => cardModelInfos.Select(x => x.cardRank).Distinct().ToList();
 
 
                     public SectarianCardLibrary(List<CardModelInfo> CardsModels, Sectarian sectarian)
@@ -153,7 +153,7 @@ namespace Info
                         {
                             this.rank = rank;
                             icon = CardLibraryCommand.GetLibraryInfo().rankIcons[rank];
-                            cardModelInfos = cardsModels.Where(cards => cards.Rank == rank).ToList();
+                            cardModelInfos = cardsModels.Where(cards => cards.cardRank == rank).ToList();
                         }
                         [Serializable]
                         public class CardModelInfo
@@ -176,8 +176,11 @@ namespace Info
                             public int point;
 
                             [VerticalGroup("Split/Meta")]
+                            [LabelText("卡片类型"), EnumToggleButtons]
+                            public CardType cardType;
+                            [VerticalGroup("Split/Meta")]
                             [LabelText("卡片等级"), EnumToggleButtons]
-                            public CardRank Rank;
+                            public CardRank cardRank;
                             [VerticalGroup("Split/Meta")]
                             [LabelText("所属势力"), EnumToggleButtons]
                             public Sectarian sectarian;
@@ -188,26 +191,28 @@ namespace Info
                             [LabelText("部署所属"), EnumToggleButtons]
                             public Territory cardTerritory = Territory.My;
                             [LabelText("卡片标签"), EnumToggleButtons]
-                            public string cardTag ="";
+                            public string cardTag = "";
                             [LabelText("卡片介绍")]
-                            public string introduction = "";
-                            [LabelText("效果描述")]
                             public string describe = "";
-                            public CardModelInfo(int cardId, string level, string cardName, string describe, string cardTag, Sectarian sectarian, CardRank rank, Region cardProperty, Territory cardTerritory, int point, int ramification, Texture2D icon)
+                            [LabelText("卡牌效果")]
+                            public string ability = "";
+                            public CardModelInfo(int cardId, string level,string cardName, string describe, string ability, string cardTag, CardType cardType, Sectarian sectarian, CardRank rank, Region cardProperty, Territory cardTerritory, int point, int ramification, Texture2D icon)
                             {
                                 this.icon = icon;
                                 this.cardId = cardId;
                                 this.level = level;
                                 this.cardName = cardName;
                                 this.describe = describe;
-                                this.cardTag =String.Join(" ", cardTag.Split(' ').Select(x=>x.TransTag()));
-                                Debug.LogError(cardTag+"--"+ this.cardTag);
+                                this.ability = ability;
+                                this.cardTag = String.Join(" ", cardTag.Split(' ').Select(x => x.TransTag()));
+                                Debug.LogError(cardTag + "--" + this.cardTag);
 
                                 this.point = point;
+                                this.cardType = cardType;
                                 this.sectarian = sectarian;
                                 this.cardProperty = cardProperty;
                                 this.cardTerritory = cardTerritory;
-                                this.Rank = rank;
+                                this.cardRank = rank;
                                 CardLibraryCommand.CreatScript(cardId);
                             }
                             [Button("打开脚本")]

@@ -29,7 +29,6 @@ namespace CardSpace
                     {
                         await GameSystem.SelectSystem.SelectUnite(this,cardSet[RegionTypes.Battle].CardList,1,false);
                         await GameSystem.StateSystem.SealCard(new TriggerInfo(this,SelectUnits,1));
-                        await GameSystem.PointSystem.Hurt(new TriggerInfo(this,SelectUnits,1));
                     }
                 }
             };

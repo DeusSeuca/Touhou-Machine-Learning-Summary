@@ -18,10 +18,9 @@ namespace CardSpace
                 async (triggerInfo) =>
                 {
                     await Task.Delay(1000);
-                    await  GameSystem.SelectSystem.SelectBoardCard(cardSet[Orientation.My][RegionTypes.Grave][CardRank.Copper].CardList);
-                    //await  GameSystem.TransSystem.PlayCard(new TriggerInfo(this,cardBoardList[SelectBoardCardIds[0]]));
-                    await  GameSystem.TransSystem.ReviveCard(new TriggerInfo(this,selectActualCards));
+                    await  GameSystem.SelectSystem.SelectBoardCard(cardSet[Orientation.My][RegionTypes.Grave][CardRank.Copper][CardTag.Fairy][CardType.Unite].CardList);
                     await  GameSystem.TransSystem.MoveToGrave(new TriggerInfo(this,this));
+                    await  GameSystem.TransSystem.ReviveCard(new TriggerInfo(this,selectActualCards));
                 }
             };
         }

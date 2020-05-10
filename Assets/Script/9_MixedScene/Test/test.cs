@@ -26,7 +26,7 @@ public class test : MonoBehaviour
 
     }
     [Button]
-    public void test1(GameEnum.Language language)
+    public void useLanguage(GameEnum.Language language)
     {
         Translate.currentLanguage = language.ToString();
     }

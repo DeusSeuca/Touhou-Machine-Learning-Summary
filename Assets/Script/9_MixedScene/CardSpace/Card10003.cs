@@ -25,9 +25,8 @@ namespace CardSpace
             {
                 async (triggerInfo) =>
                 {
-                    
-                    await GameSystem.SelectSystem.SelectUnite(this,cardSet[RegionTypes.Battle].CardList,1);
-                    await GameSystem.PointSystem.Gain(TriggerInfo.Build(this,SelectUnits,1));
+                    SelectUnits=cardSet[RegionTypes.Battle][CardRank.Copper,CardRank.Silver][CardFeature.Largest].CardList;
+                    await GameSystem.PointSystem.Destory(TriggerInfo.Build(this,SelectUnits));
                 },
             };
         }

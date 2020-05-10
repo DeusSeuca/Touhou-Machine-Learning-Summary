@@ -36,7 +36,21 @@ namespace Command
                 card.region = CardStandardInfo.cardProperty;
                 card.territory = CardStandardInfo.cardTerritory;
                 card.cardTag = CardStandardInfo.cardTag;
+                card.cardRank = CardStandardInfo.cardRank;
+                card.cardType = CardStandardInfo.cardType;
                 card.GetComponent<Renderer>().material.SetTexture("_Front", card.icon);
+                switch (card.cardRank)
+                {
+                    case CardRank.Leader: card.GetComponent<Renderer>().material.SetColor("_side", new Color(0.43f, 0.6f, 1f)); break;
+                    case CardRank.Glod: card.GetComponent<Renderer>().material.SetColor("_side", new Color(0.8f, 0.8f, 0f)); break;
+                    case CardRank.Silver: card.GetComponent<Renderer>().material.SetColor("_side", new Color(0.75f, 0.75f, 0.75f)); break;
+                    case CardRank.Copper: card.GetComponent<Renderer>().material.SetColor("_side", new Color(1, 0.42f, 0.37f)); break;
+                    default: break;
+                }
+                //if (card.cardType== CardType.Special)
+                //{
+                //    card.transform.GetChild(0).GetChild(0).get
+                //}
                 card.Init();
                 NewCardScript = card;
             });
@@ -133,7 +147,7 @@ namespace Command
         }
         public static async Task PlayCard(Card targetCard, bool IsAnsy = true)
         {
-            
+
             AgainstInfo.PlayerPlayCard = targetCard;
             EffectCommand.AudioEffectPlay(0);
             RowCommand.SetPlayCardMoveFree(false);
@@ -168,7 +182,23 @@ namespace Command
 
         public static async Task SealCard(Card card)
         {
-            card.cardStates[CardState.Seal] = true;
+            Debug.Log("锁定卡牌！");
+            if (card.cardStates.ContainsKey(CardState.Seal) && card.cardStates[CardState.Seal])
+            {
+                card.cardStates[CardState.Seal] = false;
+                MainThread.Run(() =>
+                {
+                    card.transform.GetChild(2).gameObject.SetActive(false);
+                });
+            }
+            else
+            {
+                card.cardStates[CardState.Seal] = true;
+                MainThread.Run(() =>
+                {
+                    card.transform.GetChild(2).gameObject.SetActive(true);
+                });
+            }
         }
 
         public static async Task Gain(TriggerInfo triggerInfo)

@@ -38,10 +38,10 @@ namespace Command
                     "gezi", "yaya",
                     new List<CardDeck>
                     {
-                        new CardDeck("gezi", 10014, new List<int>
+                        new CardDeck("gezi", 10001, new List<int>
                         {
                             //10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,10002,
-                            10002, 10008, 10004, 10005, 10007, 10006,10008, 10004,  10012, 10010, 10011, 10012, 10014, 10007,10006, 10016,  10008, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
+                             10015, 10016, 10012, 10013, 10014, 10015, 10016,10002, 10008, 10004, 10005, 10007, 10006,10008, 10004,  10012, 10010, 10011, 10012, 10014, 10007,10006, 10016,  10008, 10014
                             //10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016, 10012, 10013, 10014, 10015, 10016
                             //1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004
 
@@ -59,7 +59,7 @@ namespace Command
                         })
                     });
             }
-            RowCommand.SetAllRegionSelectable(RegionTypes.None);
+            RowCommand.SetRegionSelectable(RegionTypes.None);
             //Debug.LogError("初始双方信息");
             await Task.Run(async () =>
             {
@@ -282,28 +282,35 @@ namespace Command
             await Task.Delay(1000);
             CoinControl.ScaleDown();
         }
-        public static async Task WaitForSelectRegion()
+        public static async Task WaitForSelectRegion(RegionTypes regionTypes,Territory territory)
         {
             AgainstInfo.IsWaitForSelectRegion = true;
-            Info.AgainstInfo.SelectRegion = null;
-            await Task.Run(() =>
+            AgainstInfo.SelectRegion = null;
+            RowCommand.SetRegionSelectable(regionTypes, territory);
+            await Task.Run(async () =>
             {
                 while (Info.AgainstInfo.SelectRegion == null)
                 {
                     StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
+                    if (AgainstInfo.isAIControl)
+                    {
+                        await Task.Delay(1000);
+                        List<SingleRowInfo> rows = AgainstInfo.cardSet.singleRowInfos.Where(row => row.CanBeSelected).ToList();
+                        int rowRank = AiCommand.GetRandom(0, rows.Count());
+                        AgainstInfo.SelectRegion = rows[rowRank];//设置部署区域
+                    }
+                    await Task.Delay(1000);
                 }
             });
-            Command.Network.NetCommand.AsyncInfo(NetAcyncType.SelectRegion);
+            Network.NetCommand.AsyncInfo(NetAcyncType.SelectRegion);
+            RowCommand.SetRegionSelectable(RegionTypes.None);
             AgainstInfo.IsWaitForSelectRegion = false;
         }
         public static async Task WaitForSelectLocation(Card card)
         {
             AgainstInfo.IsWaitForSelectLocation = true;
-            Debug.Log("等待选择部署位置");
-            // RowCommand.SetAllRegionSelectable((RegionTypes)(card.region + 5), card.territory);//去掉+5
-            RowCommand.SetAllRegionSelectable((RegionTypes)card.region, card.territory);
+            RowCommand.SetRegionSelectable((RegionTypes)card.region, card.territory);
             AgainstInfo.SelectLocation = -1;
-            // Debug.Log("开始进入部署位置");
             await Task.Run(async () =>
             {
                 while (AgainstInfo.SelectLocation < 0)
@@ -318,12 +325,11 @@ namespace Command
                         AgainstInfo.SelectLocation = 0;//设置部署次序
                     }
                     await Task.Delay(1000);
-                    Debug.Log("等待选择坐标" + AgainstInfo.SelectLocation);
                 }
             });
             Debug.Log($"选择坐标{AgainstInfo.SelectLocation}");
             Network.NetCommand.AsyncInfo(NetAcyncType.SelectLocation);
-            RowCommand.SetAllRegionSelectable(RegionTypes.None);
+            RowCommand.SetRegionSelectable(RegionTypes.None);
             AgainstInfo.IsWaitForSelectLocation = false;
         }
         public static async Task WaitForSelecUnit(Card OriginCard, List<Card> Cards, int num, bool isAuto)

@@ -24,12 +24,14 @@ namespace CardSpace
             };
             cardAbility[TriggerTime.When][TriggerType.Deploy] = new List<Func<TriggerInfo, Task>>()
             {
-                async (triggerInfo) =>
+                 async (triggerInfo) =>
                 {
-                    for (int i = 0; i < twoSideVitality; i++)
+                    await GameSystem.SelectSystem.SelectRegion( RegionTypes.Battle, Territory.Op);
+                    List<Card> targetCardList= SelectRegion.ThisRowCards;
+                    int hurtMaxValue=twoSideVitality+1;
+                    for (int i = 0; i < Math.Min(targetCardList.Count,hurtMaxValue); i++)
                     {
-                        await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardFeature.Largest].CardList,1,true);
-                        await GameSystem.PointSystem.Hurt(new TriggerInfo(this,SelectUnits,1));
+                        await GameSystem.PointSystem.Hurt(new TriggerInfo(this,targetCardList[i],hurtMaxValue-i));
                     }
                 }
             };

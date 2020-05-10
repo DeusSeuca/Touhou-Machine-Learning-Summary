@@ -20,7 +20,7 @@ public class CardSet
     private List<Card> cardList = null;
     public int count => CardList.Count;
 
-    public List<Card> CardList { get => cardList?? globalCardList.SelectMany(x => x).ToList(); set => cardList = value; }
+    public List<Card> CardList { get => cardList ?? globalCardList.SelectMany(x => x).ToList(); set => cardList = value; }
 
     /// <summary>
     /// 得到触发牌之外的卡牌列表，用于广播触发事件的前后相关事件
@@ -86,7 +86,7 @@ public class CardSet
                     targetRows = singleRowInfos; break;
             }
             //List<Card> filterCardList = cardList ?? globalCardList.SelectMany(x => x).ToList();
-            List<Card> filterCardList = CardList ;
+            List<Card> filterCardList = CardList;
             filterCardList = filterCardList.Intersect(targetRows.SelectMany(x => x.ThisRowCards)).ToList();
             return new CardSet(targetRows, filterCardList);
         }
@@ -125,8 +125,8 @@ public class CardSet
         get
         {
             CardList = CardList ?? globalCardList.SelectMany(x => x).ToList();
-            List<Card> filterCardList = CardList.Where(card => 
-                tags.Any(tag => 
+            List<Card> filterCardList = CardList.Where(card =>
+                tags.Any(tag =>
                     card.cardTag.Contains(tag.TransTag())))
                 .ToList();
             return new CardSet(singleRowInfos, filterCardList);
@@ -137,7 +137,7 @@ public class CardSet
     {
         get
         {
-            List<Card> filterCardList= CardList;
+            List<Card> filterCardList = CardList;
             if (filterCardList.Any())
             {
                 switch (cardFeature)
@@ -157,17 +157,26 @@ public class CardSet
             return new CardSet(singleRowInfos, filterCardList);
         }
     }
-    //待补充
+    //按卡牌阶级筛选
     public CardSet this[params CardRank[] ranks]
     {
         get
         {
-            //List<Card> filterCardList = CardList.Where(card =>
-            //   ranks.Any(tag =>
-            //       card.ran.Contains(tag.TransTag())))
-            //   .ToList();
-            //return new CardSet(singleRowInfos, filterCardList);
-            return new CardSet(singleRowInfos, CardList);
+            List<Card> filterCardList = CardList
+                .Where(card => ranks.Any(rank => card.cardRank == rank))
+                .ToList();
+            return new CardSet(singleRowInfos, filterCardList);
+        }
+    }
+    //按卡牌类型筛选
+    public CardSet this[CardType type]
+    {
+        get
+        {
+            List<Card> filterCardList = CardList
+                .Where(card => card.cardType == type)
+                .ToList();
+            return new CardSet(singleRowInfos, filterCardList);
         }
     }
     public void Add(Card card, int rank = -1)
@@ -191,8 +200,5 @@ public class CardSet
         singleRowInfos[0].ThisRowCards.Remove(card);
     }
     //任意区域排序
-    public void Order()
-    {
-        singleRowInfos.ForEach(x => x.ThisRowCards = x.ThisRowCards.OrderBy(card => card.basePoint).ToList());
-    }
+    public void Order() => singleRowInfos.ForEach(x => x.ThisRowCards = x.ThisRowCards.OrderByDescending(card => card.cardRank).ThenBy(card => card.basePoint).ToList());
 }

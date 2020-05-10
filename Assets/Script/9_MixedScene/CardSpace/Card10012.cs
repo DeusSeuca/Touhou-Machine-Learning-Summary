@@ -13,7 +13,10 @@ namespace CardSpace
         public override void Init()
         {
             base.Init();
-            this[CardField.Vitality] = 2;
+
+            this[CardField.Vitality] = 1;
+            replaceDescribeValue = this[CardField.Vitality];
+
             cardAbility[TriggerTime.When][TriggerType.Play] = new List<Func<TriggerInfo, Task>>()
             {
                 async (triggerInfo) =>

@@ -30,7 +30,7 @@ namespace GameSystem
     public class TransSystem
     {
         public static async Task DrawCard(TriggerInfo triggerInfo) => await TriggerLogic(triggerInfo[TriggerType.Draw]);
-        public static async Task PlayCard(TriggerInfo triggerInfo, bool isAnsy=true)
+        public static async Task PlayCard(TriggerInfo triggerInfo, bool isAnsy = true)
         {
             await Command.CardCommand.PlayCard(triggerInfo.targetCard, isAnsy);
             await TriggerLogic(triggerInfo[TriggerType.Play]);
@@ -39,6 +39,11 @@ namespace GameSystem
         {
 
         }
+        /// <summary>
+        /// 复活卡牌
+        /// </summary>
+        /// <param name="triggerInfo"></param>
+        /// <returns></returns>
         public static async Task ReviveCard(TriggerInfo triggerInfo)
         {
             await TriggerLogic(triggerInfo[TriggerType.Revive]);
@@ -106,6 +111,7 @@ namespace GameSystem
         public static async Task SelectUnite(Card card, List<Card> targetCards, int num, bool isAuto = false) => await Command.StateCommand.WaitForSelecUnit(card, targetCards, num, isAuto);
         // public static async Task SelectUnite(Card card, List<Card> targetCards, int num, bool isAuto = false) => await TriggerLogic(TriggerInfo.Build(card, card, 0, card, targetCards, num, false)[TriggerType.SelectUnite]);
         public static async Task SelectLocation(Card card) => await Command.StateCommand.WaitForSelectLocation(card);
+        public static async Task SelectRegion(RegionTypes regionType= RegionTypes.Battle, Territory territory= Territory.All) => await Command.StateCommand.WaitForSelectRegion(regionType, territory);
         public static async Task SelectBoardCard(List<Card> cards, CardBoardMode Mode = CardBoardMode.Select, int num = 1)
         {
             if (Mode == GameEnum.CardBoardMode.Select)

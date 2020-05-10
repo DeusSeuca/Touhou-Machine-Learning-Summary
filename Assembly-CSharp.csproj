@@ -270,6 +270,7 @@
     <Compile Include="Assets\Script\9_MixedScene\Enum\CardRank.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\CardState.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\CardTag.cs" />
+    <Compile Include="Assets\Script\9_MixedScene\Enum\CardType.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\Language.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\NetAcyncType.cs" />
     <Compile Include="Assets\Script\9_MixedScene\Enum\Orientation.cs" />

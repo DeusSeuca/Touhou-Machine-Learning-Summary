@@ -30,7 +30,6 @@ namespace CardSpace
                     {
                         await  GameSystem.FieldSystem.Change(new TriggerInfo(this,unite,unite[CardField.Vitality]*2));
                     }
-
                 }
             };
         }

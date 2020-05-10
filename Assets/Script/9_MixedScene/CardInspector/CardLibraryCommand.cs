@@ -82,7 +82,9 @@ namespace Command
                             GetCsvData<string>(i, "Level"),
                             GetCsvData<string>(i, "Name-" + useLanguage),
                             GetCsvData<string>(i, "Describe-" + useLanguage),
+                            GetCsvData<string>(i, "Ability-" + useLanguage),
                             GetCsvData<string>(i, "Tag"),
+                            GetCsvData<CardType>(i, "Type"),
                             GetCsvData<Sectarian>(i, "Camp"),
                             GetCsvData<CardRank>(i, "Rank"),
                             GetCsvData<Region>(i, "Region"),
@@ -105,9 +107,11 @@ namespace Command
                             "¶àÈË",
                             GetCsvData<string>(i, "Name-" + useLanguage),
                             GetCsvData<string>(i, "Describe-" + useLanguage),
-                            GetCsvData<string>(i, "Tag-" + useLanguage),
+                            GetCsvData<string>(i, "Ability-" + useLanguage),
+                            GetCsvData<string>(i, "Tag"),
+                            GetCsvData<CardType>(i, "Type"),
                             GetCsvData<Sectarian>(i, "Camp"),
-                            GetCsvData<CardRank>(i, "Level"),
+                            GetCsvData<CardRank>(i, "Rank"),
                             GetCsvData<Region>(i, "Region"),
                             GetCsvData<Territory>(i, "Territory"),
                             GetCsvData<int>(i, "Point"),
@@ -130,11 +134,13 @@ namespace Command
             {
                 try
                 {
+                    //Debug.Log(CsvData[0]);
                     int rank = CsvData[0].Split(',').ToList().IndexOf(item);
                     return (T)Convert.ChangeType(CsvData[i].Split(',')[rank], typeof(T).IsEnum ? typeof(int) : typeof(T));
                 }
                 catch (Exception e)
                 {
+                    Debug.Log(item+i+"³ö´í");
                     Debug.Log(e.ToString());
                     return default;
                 }

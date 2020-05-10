@@ -27,7 +27,7 @@ namespace CardSpace
                 {
                     for (int i = 0; i < twoSideVitality+1; i++)
                     {
-                        await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardFeature.Largest].CardList,1,true);
+                        await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardRank.Copper,CardRank.Silver][CardFeature.Largest].CardList,1,true);
                         await GameSystem.PointSystem.Hurt(new TriggerInfo(this,SelectUnits,1));
                     }
                 }

@@ -59,4 +59,5 @@ Material:
     - _IsRed: 0
     - _IsTemp: 1
     - _gapWidth: 1.5
-    m_Colors: []
+    m_Colors:
+    - _side: {r: 0.41099998, g: 0.25347966, b: 0.195225, a: 0.65882355}

@@ -25,6 +25,8 @@ namespace CardModel
         public Region region;
         public Territory territory;
         public string cardTag;
+        public CardRank cardRank;
+        public CardType cardType;
 
 
         [ShowInInspector]
@@ -64,14 +66,14 @@ namespace CardModel
         //[ShowInInspector]
         public Card RightCard => location.y < belongCardList.Count - 1 ? belongCardList[location.y + 1] : null;
         [ShowInInspector]
-        public int twoSideVitality => (LeftCard == null ? 0 : LeftCard[CardField.Vitality]) + (RightCard == null ? 0 : RightCard[CardField.Vitality]);
+        public int twoSideVitality => (LeftCard == null|| LeftCard[CardState.Seal] ? 0 : LeftCard[CardField.Vitality]) + (RightCard == null || RightCard[CardState.Seal] ? 0 : RightCard[CardField.Vitality]);
 
         public Text PointText => transform.GetChild(0).GetChild(0).GetComponent<Text>();
         public string CardName => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).cardName;
         //卡牌描述中可能会发生变化的值
         public int replaceDescribeValue = 0;
         [ShowInInspector]
-        public string CardIntroduction => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).describe.Replace("{x}", replaceDescribeValue.ToString());
+        public string CardIntroduction => Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardId).ability.Replace("{x}", replaceDescribeValue.ToString());
 
 
         public Dictionary<TriggerTime, Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>> cardAbility = new Dictionary<TriggerTime, Dictionary<TriggerType, List<Func<TriggerInfo, Task>>>>();
@@ -80,7 +82,7 @@ namespace CardModel
 
         public void RefreshCardUi()
         {
-            PointText.text = (basePoint + changePoint).ToString();
+            PointText.text = cardType == CardType.Unite ? showPoint.ToString() : "";
             if (changePoint > 0)
             {
                 PointText.color = Color.green;
@@ -117,6 +119,14 @@ namespace CardModel
             {
                 async (triggerInfo) =>
                 {
+                    await Command.CardCommand.Hurt(triggerInfo);
+                }
+            };
+            cardAbility[TriggerTime.When][TriggerType.Destory] = new List<Func<TriggerInfo, Task>>()
+            {
+                async (triggerInfo) =>
+                {
+                    triggerInfo.point=showPoint;
                     await Command.CardCommand.Hurt(triggerInfo);
                 }
             };
@@ -171,16 +181,12 @@ namespace CardModel
                   //await Command.CardCommand.PlayCard(this);
                 }
             };
-
             //卡牌状态变化时效果
             cardAbility[TriggerTime.When][TriggerType.Seal] = new List<Func<TriggerInfo, Task>>()
             {
-#pragma warning disable CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
                 async (triggerInfo) =>
-#pragma warning restore CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
                 {
-                    cardStates[CardState.Seal] = true;
-                  //await Command.CardCommand.SealCard(this);
+                    await Command.CardCommand.SealCard(this);
                 }
             };
             //登记卡牌回合状态变化时效果
@@ -239,7 +245,7 @@ namespace CardModel
             material.SetFloat("_IsTemp", isGray ? 0 : 1);
             transform.position = Vector3.Lerp(transform.position, targetPosition, moveSpeed);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetQuaternion, Time.deltaTime * 10);
-            PointText.text = basePoint.ToString();
+            PointText.text = cardType == CardType.Unite ? showPoint.ToString() : "";
         }
     }
 }
