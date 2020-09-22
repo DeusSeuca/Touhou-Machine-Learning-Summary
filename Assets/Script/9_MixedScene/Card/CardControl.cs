@@ -61,17 +61,6 @@ namespace Control
                     });
 
                 }
-                //}
-                //else
-                //{
-                //    Debug.Log("2打出一张牌" + Info.AgainstInfo.PlayerPlayCard);
-                //    Task.Run(async () =>
-                //    {
-                //        await GameSystem.TransSystem.PlayCard(TriggerInfo.Build(Info.AgainstInfo.PlayerPlayCard, Info.AgainstInfo.PlayerPlayCard));
-                //        Debug.LogError("我的回合结束啦！");
-                //        Info.AgainstInfo.IsCardEffectCompleted = true;
-                //    });
-                //}
             }
         }
         private void Update()

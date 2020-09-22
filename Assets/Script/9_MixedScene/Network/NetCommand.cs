@@ -18,7 +18,7 @@ namespace Command
     {
         public static class NetCommand
         {
-            static string ip = "127.0.0.1:514";
+            static string ip =>Info.AgainstInfo.isHostNetMode? "127.0.0.1:514":"106.15.38.165:514";
             //static string ip = "106.15.38.165:514";
             static WebSocket AsyncConnect = new WebSocket($"ws://{ip}/AsyncInfo");
             public static void Init()
@@ -115,7 +115,7 @@ namespace Command
                 Debug.Log(Info.AllPlayerInfo.UserInfo.ToJson());
                 Debug.Log("发送完毕");
             }
-
+            //初始化接收响应
             private static void InitAsyncConnection()
             {
                 AsyncConnect = new WebSocket($"ws://{ip}/AsyncInfo");
@@ -125,22 +125,22 @@ namespace Command
                     try
                     {
                         Debug.Log("收到信息" + e.Data);
-                        object[] ReceiveInfo = e.Data.ToObject<GeneralCommand>().Datas;
-                        NetAcyncType Type = (NetAcyncType)int.Parse(ReceiveInfo[0].ToString());
+                        object[] receiveInfo = e.Data.ToObject<GeneralCommand>().Datas;
+                        NetAcyncType Type = (NetAcyncType)int.Parse(receiveInfo[0].ToString());
                         switch (Type)
                         {
                             case NetAcyncType.FocusCard:
                                 {
-                                    int X = int.Parse(ReceiveInfo[2].ToString());
-                                    int Y = int.Parse(ReceiveInfo[3].ToString());
+                                    int X = int.Parse(receiveInfo[2].ToString());
+                                    int Y = int.Parse(receiveInfo[3].ToString());
                                     Info.AgainstInfo.OpponentFocusCard = Info.RowsInfo.GetCard(X, Y);
                                     break;
                                 }
                             case NetAcyncType.PlayCard:
                                 {
                                     //Debug.Log("触发卡牌同步");
-                                    int X = int.Parse(ReceiveInfo[2].ToString());
-                                    int Y = int.Parse(ReceiveInfo[3].ToString());
+                                    int X = int.Parse(receiveInfo[2].ToString());
+                                    int Y = int.Parse(receiveInfo[3].ToString());
                                     //Command.CardCommand.PlayCard(Info.RowsInfo.GetCard(X, Y), false).Wait();
                                     Card targetCard = Info.RowsInfo.GetCard(X, Y);
                                     Task.Run(async () =>
@@ -153,22 +153,22 @@ namespace Command
                             case NetAcyncType.SelectRegion:
                                 {
                                     //Debug.Log("触发区域同步");
-                                    int X = int.Parse(ReceiveInfo[2].ToString());
+                                    int X = int.Parse(receiveInfo[2].ToString());
                                     Info.AgainstInfo.SelectRegion = Info.RowsInfo.GetSingleRowInfoById(X);
                                     break;
                                 }
                             case NetAcyncType.SelectUnites:
                                 {
                                     //Debug.Log("收到同步单位信息为" + rawData);
-                                    List<Location> Locations = ReceiveInfo[2].ToString().ToObject<List<Location>>();
+                                    List<Location> Locations = receiveInfo[2].ToString().ToObject<List<Location>>();
                                     Info.AgainstInfo.SelectUnits.AddRange(Locations.Select(location => Info.RowsInfo.GetCard(location.x, location.y)));
                                     break;
                                 }
                             case NetAcyncType.SelectLocation:
                                 {
                                     Debug.Log("触发坐标同步");
-                                    int X = int.Parse(ReceiveInfo[2].ToString());
-                                    int Y = int.Parse(ReceiveInfo[3].ToString());
+                                    int X = int.Parse(receiveInfo[2].ToString());
+                                    int Y = int.Parse(receiveInfo[3].ToString());
                                     //Info.RowsInfo.SingleRowInfos.First(infos => infos.ThisRowCard == Info.RowsInfo.GlobalCardList[X]);
                                     Info.AgainstInfo.SelectRegion = Info.RowsInfo.GetSingleRowInfoById(X);
                                     Info.AgainstInfo.SelectLocation = Y;
@@ -194,17 +194,34 @@ namespace Command
                                 {
                                     Debug.Log("交换卡牌信息");
                                     // Debug.Log("收到信息" + rawData);
-                                    Location location = ReceiveInfo[2].ToString().ToObject<Location>();
-                                    int RandomRank = int.Parse(ReceiveInfo[3].ToString());
-                                    _ = CardCommand.ExchangeCard(Info.RowsInfo.GetCard(location), false, RandomRank);
+                                    Location location = receiveInfo[2].ToString().ToObject<Location>();
+                                    int randomRank = int.Parse(receiveInfo[3].ToString());
+                                    _ = CardCommand.ExchangeCard(Info.RowsInfo.GetCard(location), false, RandomRank: randomRank);
                                     break;
                                 }
+                            case NetAcyncType.RoundStartExchangeOver:
+                                if (Info.AgainstInfo.isPlayer1)
+                                {
+                                    Info.AgainstInfo.isPlayer2RoundStartExchangeOver=true;
+                                }
+                                else
+                                {
+                                    Info.AgainstInfo.isPlayer1RoundStartExchangeOver = true;
+                                }
+                                break;
                             case NetAcyncType.SelectProperty:
                                 {
-                                    Info.AgainstInfo.SelectProperty = (Region)int.Parse(ReceiveInfo[1].ToString());
+                                    Info.AgainstInfo.SelectProperty = (Region)int.Parse(receiveInfo[2].ToString());
                                     Debug.Log("通过网络同步当前属性为" + Info.AgainstInfo.SelectProperty);
                                     break;
                                 }
+                            case NetAcyncType.SelectBoardCard:
+                                Info.AgainstInfo.selectBoardCardRanks = receiveInfo[2].ToString().ToObject<List<int>>(); ;
+                                Info.AgainstInfo.IsFinishSelectBoardCard = (bool)receiveInfo[3];
+                                break;
+                            case NetAcyncType.Init:
+                                break;
+                            
                             default:
                                 break;
                         }
@@ -225,16 +242,17 @@ namespace Command
                 AsyncConnect.Send(new GeneralCommand(NetAcyncType.Init, Info.AgainstInfo.RoomID, Info.AgainstInfo.isPlayer1).ToJson());
 
             }
+            //数据同步类型
             public static void AsyncInfo(NetAcyncType AcyncType)
             {
-                if (Info.AgainstInfo.isPVP && (Info.AgainstInfo.isMyTurn || AcyncType == NetAcyncType.FocusCard || AcyncType == NetAcyncType.ExchangeCard))
+                if (Info.AgainstInfo.isPVP && (Info.AgainstInfo.isMyTurn || AcyncType == NetAcyncType.FocusCard || AcyncType == NetAcyncType.ExchangeCard || AcyncType == NetAcyncType.RoundStartExchangeOver))
                 {
                     switch (AcyncType)
                     {
                         case NetAcyncType.FocusCard:
                             {
                                 Location TargetCardLocation = Info.AgainstInfo.PlayerFocusCard != null ? Info.AgainstInfo.PlayerFocusCard.location : new Location(-1, -1);
-                                //AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y).ToJson());
+                                AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, (int)TargetCardLocation.x, (int)TargetCardLocation.y).ToJson());
                                 break;
                             }
                         case NetAcyncType.PlayCard:
@@ -277,6 +295,10 @@ namespace Command
                                 AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, Locat.ToJson(), RandomRank).ToJson());
                                 break;
                             }
+                        case NetAcyncType.RoundStartExchangeOver:
+                            Debug.Log("触发回合开始换牌完成信息");
+                            AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID).ToJson());
+                            break;
                         case NetAcyncType.Pass:
                             {
                                 Debug.Log("pass");
@@ -292,9 +314,20 @@ namespace Command
                         case NetAcyncType.SelectProperty:
                             {
                                 Debug.Log("选择场地属性");
-                                AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.SelectProperty).ToJson());
+                                AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, Info.AgainstInfo.SelectProperty).ToJson());
                                 break;
                             }
+
+                        case NetAcyncType.Init:
+                            break;
+                        case NetAcyncType.SelectBoardCard:
+                            Debug.Log("同步面板卡牌数据选择");
+                            AsyncConnect.Send(new GeneralCommand(AcyncType, Info.AgainstInfo.RoomID, Info.AgainstInfo.selectBoardCardRanks, Info.AgainstInfo.IsFinishSelectBoardCard).ToJson());
+
+
+
+                            break;
+                       
                         default:
                             {
                                 Debug.Log("异常同步指令");

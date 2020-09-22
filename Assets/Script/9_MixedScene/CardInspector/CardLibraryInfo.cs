@@ -184,6 +184,7 @@ namespace Info
                             [VerticalGroup("Split/Meta")]
                             [LabelText("所属势力"), EnumToggleButtons]
                             public Sectarian sectarian;
+                            public Sectarian sectarian1;
                             [VerticalGroup("Split/Meta")]
                             [LabelText("部署区域"), EnumToggleButtons]
                             public Region cardProperty = Region.All;
@@ -196,6 +197,7 @@ namespace Info
                             public string describe = "";
                             [LabelText("卡牌效果")]
                             public string ability = "";
+                            
                             public CardModelInfo(int cardId, string level,string cardName, string describe, string ability, string cardTag, CardType cardType, Sectarian sectarian, CardRank rank, Region cardProperty, Territory cardTerritory, int point, int ramification, Texture2D icon)
                             {
                                 this.icon = icon;

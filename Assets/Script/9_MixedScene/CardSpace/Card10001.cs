@@ -26,17 +26,17 @@ namespace CardSpace
             {
                 async (triggerInfo) =>
                 {
-                    //int targetCount=cardSet[Orientation.My][RegionTypes.Battle][CardTag.Fairy].count;
-                    //Debug.Log("场上妖精数量为"+targetCount);
-                    //for (int i = 0; i < targetCount; i++)
-                    //{
-                    //    if (basePoint>1)
-                    //    {
-                    //        await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardRank.Silver,CardRank.Copper].CardList,1,isAuto:true);
-                    //        await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,SelectUnits,1));
-                    //        await GameSystem.PointSystem.Weak(TriggerInfo.Build(this,this,1));
-                    //    }
-                    //}
+                    int targetCount=cardSet[Orientation.My][RegionTypes.Battle][CardTag.Fairy].count;
+                    Debug.Log("场上妖精数量为"+targetCount);
+                    for (int i = 0; i < targetCount; i++)
+                    {
+                        if (basePoint>1)
+                        {
+                            await GameSystem.SelectSystem.SelectUnite(this,cardSet[Orientation.Op][RegionTypes.Battle][CardRank.Silver,CardRank.Copper].CardList,1,isAuto:true);
+                            await GameSystem.PointSystem.Hurt(TriggerInfo.Build(this,SelectUnits,1));
+                            await GameSystem.PointSystem.Weak(TriggerInfo.Build(this,this,1));
+                        }
+                    }
                 }
             };
         }

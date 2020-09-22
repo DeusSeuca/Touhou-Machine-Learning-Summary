@@ -23,8 +23,21 @@ namespace Info
             public Transform ConstantInstance;
             public GameObject CardBoardInstance;
             public GameObject CardIntroductionModel;
-            private void Awake() => Instance = this;
+           
 
+            //卡牌面板进度
+            [ShowInInspector]
+            public  float cardBoardProcess => ConstantInstance.GetComponent<RectTransform>().rect.x;
+            //public  RectOffset cardBoardProcess => ConstantInstance.GetComponent<HorizontalLayoutGroup>();
+            //public static float targetCardBoardProcess=> cardBoardProcess;
+            private void Awake() => Instance = this;
+            private void Update()
+            {
+                if (true)
+                {
+                    //ConstantInstance.GetComponent<RectTransform>().rect.x=>
+                }
+            }
             public static string CardBoardTitle = "";
             public static string NoticeBoardTitle = "";
             [ShowInInspector]
@@ -32,6 +45,7 @@ namespace Info
 
             public static List<GameObject> ShowCardLIstOnBoard = new List<GameObject>();
             public static Dictionary<int, Sprite> CardImage = new Dictionary<int, Sprite>();
+            
 
             public static GameObject Arrow => Instance.Arrow_Model;
             public static GameObject ArrowEndPoint => Instance.ArrowEndPoint_Model;

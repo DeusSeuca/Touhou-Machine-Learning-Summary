@@ -22,6 +22,7 @@ namespace CardInspector
             CardMenu window = GetWindow<CardMenu>();
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(700, 700);
         }
+        //public static void UpdateInspector() { }
         public static void UpdateInspector() => instance.ForceMenuTreeRebuild();
         protected override OdinMenuTree BuildMenuTree()
         {

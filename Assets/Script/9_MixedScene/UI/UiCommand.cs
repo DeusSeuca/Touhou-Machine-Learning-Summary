@@ -58,20 +58,6 @@ namespace Command
             }
             public static void SetCardBoardTitle(string Title) => Info.GameUI.UiInfo.CardBoardTitle = Title;
             public static void SetNoticeBoardTitle(string Title) => Info.GameUI.UiInfo.NoticeBoardTitle = Title;
-            //public static void SetArrowShow()
-            //{
-            //    MainThread.Run(() =>
-            //    {
-            //        bool IsFirst = Info.AgainstInfo.ArrowList.Count == 0;
-            //        GameObject NewArrow = Instantiate(Info.GameUI.UiInfo.Arrow);
-            //        NewArrow.GetComponent<ArrowManager>().InitArrow(
-            //            Info.AgainstInfo.ArrowStartCard.transform,
-            //            IsFirst ? Info.GameUI.UiInfo.ArrowEndPoint.transform :
-            //            Info.AgainstInfo.PlayerFocusCard.transform
-            //            );
-            //        Info.AgainstInfo.ArrowList.Add(NewArrow);
-            //    });
-            //}
             public static void CreatFreeArrow()
             {
                 MainThread.Run(() =>
@@ -164,6 +150,7 @@ namespace Command
                     Info.AgainstInfo.isDownPass = false;
                 });
             }
+           
         }
     }
 

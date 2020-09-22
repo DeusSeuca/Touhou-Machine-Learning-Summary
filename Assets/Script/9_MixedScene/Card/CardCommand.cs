@@ -42,7 +42,7 @@ namespace Command
                 switch (card.cardRank)
                 {
                     case CardRank.Leader: card.GetComponent<Renderer>().material.SetColor("_side", new Color(0.43f, 0.6f, 1f)); break;
-                    case CardRank.Glod: card.GetComponent<Renderer>().material.SetColor("_side", new Color(0.8f, 0.8f, 0f)); break;
+                    case CardRank.Gold: card.GetComponent<Renderer>().material.SetColor("_side", new Color(0.8f, 0.8f, 0f)); break;
                     case CardRank.Silver: card.GetComponent<Renderer>().material.SetColor("_side", new Color(0.75f, 0.75f, 0.75f)); break;
                     case CardRank.Copper: card.GetComponent<Renderer>().material.SetColor("_side", new Color(1, 0.42f, 0.37f)); break;
                     default: break;
@@ -95,14 +95,14 @@ namespace Command
             //targetCard.moveSpeed = 0.1f;
             EffectCommand.AudioEffectPlay(1);
         }
-        public static async Task ExchangeCard(Card targetCard, bool IsPlayerExchange = true, int RandomRank = 0)
+        public static async Task ExchangeCard(Card targetCard, bool IsPlayerExchange = true,bool isRoundStartExchange=false, int RandomRank = 0)
         {
             //Debug.Log("交换卡牌");
             await WashCard(targetCard, IsPlayerExchange, RandomRank);
             await DrawCard(IsPlayerExchange, true);
             if (IsPlayerExchange)
             {
-                GameUI.CardBoardCommand.LoadCardList(AgainstInfo.cardSet[Orientation.My][RegionTypes.Hand].CardList);
+                GameUI.CardBoardCommand.LoadBoardCardList(AgainstInfo.cardSet[isRoundStartExchange? Orientation.Down:Orientation.My][RegionTypes.Hand].CardList);
             }
         }
         internal static Task RebackCard()

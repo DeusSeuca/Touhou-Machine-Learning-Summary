@@ -3,7 +3,7 @@
     public enum CardRank
     {
         Leader = 1,
-        Glod = 2,
+        Gold = 2,
         Silver = 3,
         Copper = 4,
     }

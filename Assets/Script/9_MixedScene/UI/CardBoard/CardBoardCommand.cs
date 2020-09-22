@@ -11,12 +11,12 @@ namespace Command
     {
         public class CardBoardCommand
         {
-            public static void LoadCardList(List<int> cardIds)
+            public static void LoadBoardCardList(List<int> cardIds)
             {
                 Info.AgainstInfo.cardBoardIDList = cardIds;
                 CreatBoardCardVitual();
             }
-            public static void LoadCardList(List<Card> cards)
+            public static void LoadBoardCardList(List<Card> cards)
             {
                 Info.AgainstInfo.cardBoardList = cards;
                 CreatBoardCardActual();
@@ -37,7 +37,20 @@ namespace Command
                     {
                         var CardStandardInfo = Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(Cards[i].CardId);
                         GameObject NewCard = GameObject.Instantiate(Info.GameUI.UiInfo.CardModel);
-                        NewCard.GetComponent<BoardCardInfo>().Rank = i;
+
+                        NewCard.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = CardStandardInfo.ability;
+
+                        //string Title = card.CardName;
+                        //string Text = card.CardIntroduction;
+                        //string Effect = "";
+                        //int Heigh = Text.Length / 13 * 15 + 100;
+                        //Info.GameUI.UiInfo.IntroductionTextBackground.sizeDelta = new Vector2(300, Heigh);
+                        ////修改文本为富文本
+                        //Info.GameUI.UiInfo.IntroductionTitle.text = Title;
+                        //Info.GameUI.UiInfo.IntroductionText.text = Text;
+                        //Info.GameUI.UiInfo.IntroductionEffect.text = Effect;
+
+                        NewCard.GetComponent<BoardCardControl>().Rank = i;
                         NewCard.transform.SetParent(Info.GameUI.UiInfo.Constant);
                         Texture2D texture = CardStandardInfo.icon;
                         NewCard.GetComponent<Image>().sprite = Command.GameUI.UiCommand.GetBoardCardImage(Cards[i].CardId);
@@ -58,7 +71,19 @@ namespace Command
                     {
                         var CardStandardInfo = Command.CardInspector.CardLibraryCommand.GetCardStandardInfo(CardIds[i]);
                         GameObject NewCard = GameObject.Instantiate(Info.GameUI.UiInfo.CardModel);
-                        NewCard.GetComponent<BoardCardInfo>().Rank = i;
+                        NewCard.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = CardStandardInfo.describe;
+
+                        //string Title = card.CardName;
+                        //string Text = card.CardIntroduction;
+                        //string Effect = "";
+                        //int Heigh = Text.Length / 13 * 15 + 100;
+                        //Info.GameUI.UiInfo.IntroductionTextBackground.sizeDelta = new Vector2(300, Heigh);
+                        ////修改文本为富文本
+                        //Info.GameUI.UiInfo.IntroductionTitle.text = Title;
+                        //Info.GameUI.UiInfo.IntroductionText.text = Text;
+                        //Info.GameUI.UiInfo.IntroductionEffect.text = Effect;
+
+                        NewCard.GetComponent<BoardCardControl>().Rank = i;
                         NewCard.transform.SetParent(Info.GameUI.UiInfo.Constant);
                         Texture2D texture = CardStandardInfo.icon;
                         NewCard.GetComponent<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);

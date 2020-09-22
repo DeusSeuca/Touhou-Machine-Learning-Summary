@@ -9,7 +9,9 @@
         SelectUnites,
         SelectLocation,
         SelectProperty,
+        SelectBoardCard,
         ExchangeCard,
+        RoundStartExchangeOver,
         Pass,
         Surrender
     }

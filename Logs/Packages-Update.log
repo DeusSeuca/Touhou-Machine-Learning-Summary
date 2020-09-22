@@ -43,3 +43,13 @@ The following packages were added:
   com.unity.textmeshpro@2.0.1
   com.unity.timeline@1.2.10
   com.unity.ugui@1.0.0
+
+=== Sun Aug 23 23:44:21 2020
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were 已更新:
+  com.unity.ide.vscode 从版本 1.1.4 到 1.2.1
+  com.unity.render-pipelines.universal 从版本 7.1.8 到 7.3.1
+  com.unity.test-framework 从版本 1.1.11 到 1.1.16

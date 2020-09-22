@@ -13,6 +13,7 @@ namespace Info
     public static class AgainstInfo
     {
         //网络同步信息
+        public static bool isHostNetMode=false;//本地测试模式
         public static Card TargetCard;
         public static int RandomRank;
 
@@ -51,6 +52,11 @@ namespace Info
         public static bool IsWaitForSelectLocation;
         public static int SelectLocation = -1;
         //选择的卡牌面板卡片
+        public static bool isRoundStartExchange=false;
+        public static bool isPlayer1RoundStartExchangeOver = false;
+        public static bool isPlayer2RoundStartExchangeOver = false;
+
+        public static CardBoardMode cardBoardMode;
         public static List<int> cardBoardIDList;
         public static List<Card> cardBoardList;
 

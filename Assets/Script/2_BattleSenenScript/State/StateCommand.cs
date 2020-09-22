@@ -130,7 +130,7 @@ namespace Command
                 {
                     case (0):
                         {
-                            Info.AgainstInfo.ExChangeableCardNum = 0;
+                            Info.AgainstInfo.ExChangeableCardNum = 3;
                             Info.GameUI.UiInfo.CardBoardTitle = "剩余抽卡次数为".TransUiText() + Info.AgainstInfo.ExChangeableCardNum;
                             for (int i = 0; i < 10; i++)
                             {
@@ -163,7 +163,9 @@ namespace Command
                         break;
                 }
                 await Task.Delay(2500);
+                AgainstInfo.isRoundStartExchange = true;
                 await WaitForSelectBoardCard(AgainstInfo.cardSet[Orientation.Down][RegionTypes.Hand].CardList, CardBoardMode.ExchangeCard);
+                AgainstInfo.isRoundStartExchange = false;
             });
         }
         public static async Task RoundEnd(int num)
@@ -282,7 +284,7 @@ namespace Command
             await Task.Delay(1000);
             CoinControl.ScaleDown();
         }
-        public static async Task WaitForSelectRegion(RegionTypes regionTypes,Territory territory)
+        public static async Task WaitForSelectRegion(RegionTypes regionTypes, Territory territory)
         {
             AgainstInfo.IsWaitForSelectRegion = true;
             AgainstInfo.SelectRegion = null;
@@ -353,7 +355,7 @@ namespace Command
                 {
                     StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
                     //当pve模式或者pvp中的我方回合时，用自身随机决定，否则等待网络同步
-                    if (AgainstInfo.isAIControl || (isAuto&&AgainstInfo.isMyTurn))
+                    if (AgainstInfo.isAIControl || (isAuto && AgainstInfo.isMyTurn))
                     {
                         Debug.Log("自动选择场上单位");
                         Cards = Cards.OrderBy(x => AiCommand.GetRandom(0, 514)).ToList();
@@ -374,46 +376,76 @@ namespace Command
         public static async Task WaitForSelectBoardCard<T>(List<T> CardIds, CardBoardMode Mode = CardBoardMode.Select, int num = 1)
         {
             AgainstInfo.selectBoardCardRanks = new List<int>();
+            AgainstInfo.IsFinishSelectBoardCard = false;
+            AgainstInfo.cardBoardMode = Mode;
             GameUI.UiCommand.SetCardBoardShow();
             if (typeof(T) == typeof(Card))
             {
-                GameUI.CardBoardCommand.LoadCardList(CardIds.Cast<Card>().ToList());
+                GameUI.CardBoardCommand.LoadBoardCardList(CardIds.Cast<Card>().ToList());
             }
             else
             {
-                GameUI.CardBoardCommand.LoadCardList(CardIds.Cast<int>().ToList());
+                GameUI.CardBoardCommand.LoadBoardCardList(CardIds.Cast<int>().ToList());
             }
             //Debug.Log("进入选择模式");
             await Task.Run(async () =>
             {
+
                 switch (Mode)
                 {
                     case CardBoardMode.Select:
                         while (AgainstInfo.selectBoardCardRanks.Count < Mathf.Min(CardIds.Count, num) && !AgainstInfo.IsFinishSelectBoardCard) { }
+                        GameUI.UiCommand.SetCardBoardHide();
                         break;
                     case CardBoardMode.ExchangeCard:
                         {
+                            AiCommand.RoundStartExchange(false);
                             while (Info.AgainstInfo.ExChangeableCardNum != 0 && !Info.AgainstInfo.IsSelectCardOver)
                             {
+                                StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
                                 if (Info.AgainstInfo.selectBoardCardRanks.Count > 0)
                                 {
-                                    List<Card> CardLists = CardIds.Cast<Card>().ToList();
-                                    await CardCommand.ExchangeCard(CardLists[AgainstInfo.selectBoardCardRanks[0]]);
+                                    //List<Card> CardLists = CardIds.Cast<Card>().ToList();
+                                    List<Card> CardLists = AgainstInfo.cardSet[Orientation.Down][RegionTypes.Hand].CardList;
+                                    await CardCommand.ExchangeCard(CardLists[AgainstInfo.selectBoardCardRanks[0]], isRoundStartExchange: true);
                                     Info.AgainstInfo.ExChangeableCardNum--;
                                     Info.AgainstInfo.selectBoardCardRanks.Clear();
                                     GameUI.UiCommand.SetCardBoardTitle("剩余抽卡次数为" + Info.AgainstInfo.ExChangeableCardNum);
                                 }
                             }
-                            Info.AgainstInfo.IsSelectCardOver = false;
+                            if (AgainstInfo.isPlayer1)
+                            {
+                                AgainstInfo.isPlayer1RoundStartExchangeOver = true;
+                            }
+                            else
+                            {
+                                AgainstInfo.isPlayer2RoundStartExchangeOver = true;
+                            }
+                            GameUI.UiCommand.SetCardBoardHide();
+                            Network.NetCommand.AsyncInfo(NetAcyncType.RoundStartExchangeOver);
+                            while (!(AgainstInfo.isPlayer1RoundStartExchangeOver && AgainstInfo.isPlayer2RoundStartExchangeOver))
+                            {
+                                StateInfo.TaskManager.Token.ThrowIfCancellationRequested();
+                                Debug.Log("等待双方选择完毕");
+                                Debug.Log("等待双方选择完毕" + AgainstInfo.isPlayer1RoundStartExchangeOver + ":" + AgainstInfo.isPlayer2RoundStartExchangeOver);
+                                await Task.Delay(1000);
+                            }
+                            AgainstInfo.isPlayer1RoundStartExchangeOver = false;
+                            AgainstInfo.isPlayer2RoundStartExchangeOver = false;
+                            AgainstInfo.IsSelectCardOver = false;
                             break;
                         }
                     case CardBoardMode.ShowOnly:
+                        while (AgainstInfo.selectBoardCardRanks.Count < Mathf.Min(CardIds.Count, num) && !AgainstInfo.IsFinishSelectBoardCard) { }
+                        GameUI.UiCommand.SetCardBoardHide();
                         break;
                     default:
                         break;
+
                 }
             });
-            GameUI.UiCommand.SetCardBoardHide();
+
+            AgainstInfo.cardBoardMode = CardBoardMode.None;
         }
         public static async Task Surrender()
         {

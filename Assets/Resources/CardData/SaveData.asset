@@ -123,6 +123,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 0
@@ -167,6 +170,9 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -215,6 +221,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 1
@@ -259,6 +268,9 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -307,6 +319,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 0
@@ -351,6 +366,9 @@ MonoBehaviour:
       Entry: 3
       Data: 3
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -399,6 +417,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 2
@@ -443,6 +464,9 @@ MonoBehaviour:
       Entry: 3
       Data: 3
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -491,6 +515,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 0
@@ -535,6 +562,9 @@ MonoBehaviour:
       Entry: 3
       Data: 3
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -583,6 +613,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 1
@@ -627,6 +660,9 @@ MonoBehaviour:
       Entry: 3
       Data: 4
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -675,6 +711,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 4
@@ -719,6 +758,9 @@ MonoBehaviour:
       Entry: 3
       Data: 4
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -767,6 +809,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 4
@@ -811,6 +856,9 @@ MonoBehaviour:
       Entry: 3
       Data: 4
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -1145,6 +1193,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 0
@@ -1189,6 +1240,9 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -1237,6 +1291,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 1
@@ -1281,6 +1338,9 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -1329,6 +1389,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 0
@@ -1373,6 +1436,9 @@ MonoBehaviour:
       Entry: 3
       Data: 3
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -1421,6 +1487,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 2
@@ -1465,6 +1534,9 @@ MonoBehaviour:
       Entry: 3
       Data: 3
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -1513,6 +1585,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 0
@@ -1557,6 +1632,9 @@ MonoBehaviour:
       Entry: 3
       Data: 3
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -1605,6 +1683,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 0
@@ -1649,6 +1730,9 @@ MonoBehaviour:
       Entry: 3
       Data: 4
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -1697,6 +1781,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 0
@@ -1741,6 +1828,9 @@ MonoBehaviour:
       Entry: 3
       Data: 4
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -1789,6 +1879,9 @@ MonoBehaviour:
     - Name: sectarian
       Entry: 3
       Data: 0
+    - Name: sectarian1
+      Entry: 3
+      Data: 0
     - Name: cardProperty
       Entry: 3
       Data: 0
@@ -1833,6 +1926,9 @@ MonoBehaviour:
       Entry: 3
       Data: 4
     - Name: sectarian
+      Entry: 3
+      Data: 0
+    - Name: sectarian1
       Entry: 3
       Data: 0
     - Name: cardProperty
@@ -2272,6 +2368,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 1
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2285,6 +2382,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 2
     sectarian: 0
+    sectarian1: 0
     cardProperty: 2
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2298,6 +2396,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 2
     sectarian: 0
+    sectarian1: 0
     cardProperty: 1
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2311,6 +2410,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 2
     sectarian: 0
+    sectarian1: 0
     cardProperty: 2
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2324,6 +2424,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 2
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2337,6 +2438,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 1
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2350,6 +2452,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 2
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2363,6 +2466,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2376,6 +2480,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2389,6 +2494,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 4
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2402,6 +2508,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 1
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2415,6 +2522,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 4
     sectarian: 0
+    sectarian1: 0
     cardProperty: 4
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2428,6 +2536,7 @@ MonoBehaviour:
     cardType: 1
     cardRank: 4
     sectarian: 0
+    sectarian1: 0
     cardProperty: 4
     cardTerritory: 0
     cardTag: "\u7B56\u7565"
@@ -2441,6 +2550,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 4
     sectarian: 0
+    sectarian1: 0
     cardProperty: 4
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2454,6 +2564,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 4
     sectarian: 0
+    sectarian1: 0
     cardProperty: 4
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2467,6 +2578,7 @@ MonoBehaviour:
     cardType: 1
     cardRank: 4
     sectarian: 0
+    sectarian1: 0
     cardProperty: 4
     cardTerritory: 0
     cardTag: "\u7269\u4F53"
@@ -2481,6 +2593,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 1
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2494,6 +2607,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 2
     sectarian: 0
+    sectarian1: 0
     cardProperty: 2
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2507,6 +2621,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 2
     sectarian: 0
+    sectarian1: 0
     cardProperty: 1
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2520,6 +2635,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 2
     sectarian: 0
+    sectarian1: 0
     cardProperty: 2
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2533,6 +2649,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 2
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2546,6 +2663,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 1
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2559,6 +2677,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 2
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2572,6 +2691,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2585,6 +2705,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2598,6 +2719,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2611,6 +2733,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 3
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2624,6 +2747,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 4
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2637,6 +2761,7 @@ MonoBehaviour:
     cardType: 1
     cardRank: 4
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u7B56\u7565"
@@ -2650,6 +2775,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 4
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2663,6 +2789,7 @@ MonoBehaviour:
     cardType: 0
     cardRank: 4
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u5996\u7CBE"
@@ -2676,6 +2803,7 @@ MonoBehaviour:
     cardType: 1
     cardRank: 4
     sectarian: 0
+    sectarian1: 0
     cardProperty: 0
     cardTerritory: 0
     cardTag: "\u7269\u4F53"

@@ -200,5 +200,5 @@ public class CardSet
         singleRowInfos[0].ThisRowCards.Remove(card);
     }
     //任意区域排序
-    public void Order() => singleRowInfos.ForEach(x => x.ThisRowCards = x.ThisRowCards.OrderByDescending(card => card.cardRank).ThenBy(card => card.basePoint).ToList());
+    public void Order() => singleRowInfos.ForEach(x => x.ThisRowCards = x.ThisRowCards.OrderByDescending(card => card.cardRank).ThenBy(card => card.basePoint).ThenBy(card => card.CardId).ToList());
 }
