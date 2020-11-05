@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class PageControl : MonoBehaviour
+public class PageControl_废弃 : MonoBehaviour
 {
     public GameObject tag_Model;
     public GameObject frontTextModel;
@@ -50,7 +50,7 @@ public class PageControl : MonoBehaviour
         this.transform.localPosition = new Vector3(0, 0.08f, 0) + new Vector3(length * Mathf.Cos(Mathf.PI / 180 * angle), length * Mathf.Sin(Mathf.PI / 180 * angle));
         this.transform.eulerAngles = new Vector3(0, 0, angle);
         //如果该书页在翻开页数之前
-        if (BookControl.openPage > pageIndex)
+        if (BookControl_废弃.openPage > pageIndex)
         {
             //如果是封面
             if (pageIndex == 0)
@@ -61,7 +61,7 @@ public class PageControl : MonoBehaviour
             else
             {
                 //如果是前一张
-                if (BookControl.openPage == pageIndex + 1)
+                if (BookControl_废弃.openPage == pageIndex + 1)
                 {
                     angle = Mathf.Lerp(angle, isOpen ? 180 : 0, Time.deltaTime * 3);
                 }
@@ -82,7 +82,7 @@ public class PageControl : MonoBehaviour
             else
             {
                 //如果是当前页
-                if (BookControl.openPage == pageIndex)
+                if (BookControl_废弃.openPage == pageIndex)
                 {
                     angle = Mathf.Lerp(angle, isOpen ? 180 : 1, Time.deltaTime * 3);
                 }

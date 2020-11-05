@@ -10,6 +10,6 @@ public class PageArrowControl : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("你怎么不说话呀");
-        BookControl.OpenToPage(isNextPageArrow ? targetIndex + 1 : targetIndex - 0);
+        BookControl_废弃.OpenToPage(isNextPageArrow ? targetIndex + 1 : targetIndex - 0);
     }
 }

@@ -13,7 +13,7 @@ namespace Info
     public static class AgainstInfo
     {
         //网络同步信息
-        public static bool isHostNetMode=false;//本地测试模式
+        public static bool isHostNetMode=true;//本地测试模式
         public static Card TargetCard;
         public static int RandomRank;
 

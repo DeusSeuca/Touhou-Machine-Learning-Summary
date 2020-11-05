@@ -76,7 +76,7 @@ namespace Command
                         string playerInfo = e.Data.ToObject<GeneralCommand<string>>().Datas[1];
                         Debug.Log("登录结果" + result);
                         Info.AllPlayerInfo.UserInfo = playerInfo.ToObject<PlayerInfo>();
-                        SceneManager.LoadSceneAsync(1);
+                        //SceneManager.LoadSceneAsync(1);
                     });
                     Debug.Log("收到回应: " + e.Data);
                     client.Close();
@@ -84,6 +84,27 @@ namespace Command
                 client.Connect();
                 Debug.Log("连接完成");
                 client.Send(new GeneralCommand<string>(name, password).ToJson());
+            }
+            public static void UpdateDecks(PlayerInfo playerInfo)
+            {
+                Debug.Log("更新请求");
+                var client = new WebSocket($"ws://{ip}/UpdateDecks");
+                client.OnMessage += (sender, e) =>
+                {
+                    MainThread.Run(() =>
+                    {
+                        //string result = e.Data.ToObject<GeneralCommand<string>>().Datas[0];
+                        //string playerInfo = e.Data.ToObject<GeneralCommand<string>>().Datas[1];
+                        Debug.Log("修改完毕" );
+                        //Info.AllPlayerInfo.UserInfo = playerInfo.ToObject<PlayerInfo>();
+                        //SceneManager.LoadSceneAsync(1);
+                    });
+                    Debug.Log("收到回应: " + e.Data);
+                    client.Close();
+                };
+                client.Connect();
+                Debug.Log("连接完成");
+                client.Send(playerInfo.ToJson());
             }
             public static void JoinRoom()
             {

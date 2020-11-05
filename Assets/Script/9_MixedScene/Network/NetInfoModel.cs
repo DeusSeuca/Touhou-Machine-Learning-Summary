@@ -1,4 +1,5 @@
 ﻿using Model;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 namespace Network
@@ -19,26 +20,28 @@ namespace Network
         public class PlayerInfo
         {
             public string _id;
-            public string Name;
-            public string Password;
-            public int Level;
-            public int Rank;
-            public Dictionary<string, int> Resource { get; set; }
-            public int UseDeckNum;
-            public List<CardDeck> Deck;
-            public CardDeck UseDeck => Deck[UseDeckNum];
+            public string name;
+            public string password;
+            public int level;
+            public int rank;
+            public Dictionary<string, int> resource { get; set; }
+            [ShowInInspector]
+            public Dictionary<string, int> cardLibrary { get; set; }
+            public int useDeckNum;
+            public List<CardDeck> decks;
+            public CardDeck UseDeck => decks[useDeckNum];
 
             public PlayerInfo(string Name, string Password, List<CardDeck> Deck)
             {
-                this.Name = Name;
-                this.Deck = Deck;
-                this.Password = Password;
-                Level = 0;
-                Rank = 0;
-                UseDeckNum = 0;
-                Resource = new Dictionary<string, int>();
-                Resource.Add("faith", 0);
-                Resource.Add("recharge", 0);
+                this.name = Name;
+                this.decks = Deck;
+                this.password = Password;
+                level = 0;
+                rank = 0;
+                useDeckNum = 0;
+                resource = new Dictionary<string, int>();
+                resource.Add("faith", 0);
+                resource.Add("recharge", 0);
             }
 
         }

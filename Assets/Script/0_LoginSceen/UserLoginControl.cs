@@ -10,22 +10,30 @@ namespace Control
         public GameObject loginCanvas;
         public Text UserName;
         public Text Password;
-        void Start() => Command.Network.NetCommand.Init();//Command.Network.NetCommand.Login("", "");//UserLogin();//自动登录
+        void Start()
+        {
+            Command.Network.NetCommand.Init();//Command.Network.NetCommand.Login("", "");
+            UserLogin();//自动登录
+        }
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 //BookControl.ClosePageAll();
+                BookModelControl.SetCoverOpen(false);
                 CameraViewControl.MoveToInitView();
+                BookModelControl.OpenToPage(PageMode.none);
                 loginCanvas.SetActive(true);
             }
         }
         public void UserRegister() => Command.Network.NetCommand.Register(UserName.text, Password.text);
         public void UserLogin()
         {
-            //Command.Network.NetCommand.Login(UserName.text, Password.text);
-            BookControl.OpenToPage(1);
+            Command.Network.NetCommand.Login(UserName.text, Password.text);
+            BookModelControl.SetCoverOpen(true);
             CameraViewControl.MoveToBookView();
+            BookModelControl.OpenToPage(PageMode.single);
             loginCanvas.SetActive(false);
         }
 
